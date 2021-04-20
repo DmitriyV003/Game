@@ -1,0 +1,30 @@
+=bg($url)
+  background-image: url($url)
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  background-position-x: center
+  background-position-y: center
+  background-repeat: no-repeat
+
+=xl
+  @media (max-width: 1200px)
+    @content
+
+=lg
+  @media (max-width: 992px)
+    @content
+
+=md
+  @media (max-width: 768px)
+    @content
+
+=sm
+  @media (max-width: 576px)
+    @content
+
+=media($size)
+  @media (max-width: $size + 'px')
+    @content
+
