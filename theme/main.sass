@@ -1,5 +1,6 @@
 @import "vars"
 @import "mix"
+@import "typography"
 
 .layout
   background: $main-bg
@@ -10,13 +11,24 @@
   font-size: 16px
   line-height: 24px
 
+.button-reboot
+  background: none
+  border: none
+  outline: none
+  font-size: 14px
+  line-height: 16px
+  cursor: pointer
+  font-weight: 500
+  margin: 0
+  padding: 0
+
 .input-reboot
   border: none
   background: none
   border-radius: 0
   outline: none
   font-size: 16px
-  line-height: 20px
+  line-height: 19.4px
 
 body
   background: $main-bg
@@ -28,8 +40,84 @@ h6
   font-weight: bold
   text-transform: uppercase
 
+h3
+  font-weight: 600
+  font-size: 16px
+  line-height: 20px
+  text-transform: uppercase
+  color: white(1)
+
+h4
+  font-weight: 600
+  font-size: 32px
+  line-height: 38px
+  color: white(1)
+  margin: 0
+  padding: 0
+  +md
+    font-size: 20px
+    line-height: 28px
+
+h2
+  font-weight: 600
+  color: white(1)
+  font-size: 24px
+  line-height: 28px
+  margin: 0
+  padding: 0
+  +md
+    font-size: 16px
+    line-height: 20px
+
+p
+  margin: 0
+  padding: 0
+
+button.g-mr-none
+  margin-right: 0
+
+button.g-mr-none-md
+  +md
+    margin-right: 0
+
+button.g-pl-none-sm
+  +sm
+    padding-left: 0
+
+button.g-pr-none-sm
+  +sm
+    padding-right: 0
+
+.text-gray
+  color: white(0.8)
+
+.g-xl-none
+  +xl
+    display: none !important
+
+.text-center
+  text-align: center
+
+.text-normal
+  font-size: 16px
+  line-height: 24px
+
+.text-14
+  font-weight: normal
+  font-size: 14px
+  line-height: 20px
+  letter-spacing: -0.4px
+
+.text-white
+  color: white(1)
+
 a
   text-decoration: none !important
+
+.section
+  padding: 32px 0
+  +md
+    padding: 30px 0
 
 .lg-none
   +lg

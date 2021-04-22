@@ -36,12 +36,15 @@ module.exports = {
   css: [
     '@/theme/main.sass',
     '@/theme/_mix.sass',
-    '@/theme/_vars.sass'
+    '@/theme/_vars.sass',
+    'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
+    'vue-slick-carousel/dist/vue-slick-carousel.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/vue-slick'
   ],
   /*
   ** Nuxt.js dev-modules

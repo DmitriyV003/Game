@@ -107,7 +107,7 @@
 
 <script>
 import CustomIcon from '~/components/CustomIcon'
-import MainButton from "~/components/MainButton";
+import MainButton from "~/components/buttons/MainButton";
 export default {
   name: 'GameInComeFooter',
   components: {MainButton, CustomIcon }
@@ -115,11 +115,12 @@ export default {
 </script>
 
 <style lang="sass">
- @import 'theme/_vars'
- @import 'theme/_mix'
+ @import '../../theme/vars'
+ @import '../../theme/mix'
 .footer
   padding: 40px 0 16px
   background: #292538
+  margin-top: 32px
   &__block
     &_order-10
       +md

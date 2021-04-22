@@ -13,8 +13,8 @@
 </template>
 
 <script>
-  import AuthTopMenu from '~/components/AuthTopMenu'
-  import AuthFooter from '~/components/AuthFooter'
+  import AuthTopMenu from '~/components/menu/AuthTopMenu'
+  import AuthFooter from '~/components/footer/AuthFooter'
   export default {
     components: { AuthFooter, AuthTopMenu }
   }

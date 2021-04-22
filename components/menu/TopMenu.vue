@@ -61,9 +61,9 @@
 
 <script>
 import icons from '~/mixins/icons'
-import Balance from '~/components/Balance'
-import Search from '~/components/Search'
-import Profile from '~/components/Profile'
+import Balance from '~/components/menu/Balance'
+import Search from '~/components/menu/Search'
+import Profile from '~/components/menu/Profile'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -93,14 +93,14 @@ export default {
 </script>
 
 <style lang="sass">
-@import 'theme/_vars'
+@import '../../theme/vars'
 .action
   &__icon
     cursor: pointer
 .topMenu
   background: #282439
 .header
-  padding: 20px 0 28px 0
+  padding: 20px 0
   &__balance
     margin-right: 16px
     flex-shrink: 0
@@ -118,7 +118,7 @@ export default {
     align-items: center
     justify-content: space-between
     &:not(:last-child)
-      margin-bottom: 24px
+      margin-bottom: 20px
   &__logo
     margin-right: 32px
   &__links

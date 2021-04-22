@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import MainButton from '~/components/MainButton'
+import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'AuthTopMenu',
   components: { MainButton },
@@ -28,8 +28,8 @@ export default {
 </script>
 
 <style lang="sass">
-  @import 'theme/_vars'
-  @import 'theme/_mix'
+  @import '../../theme/vars'
+  @import '../../theme/mix'
   .auth-header
     background: rgba(41, 37, 56, 1)
     &__main

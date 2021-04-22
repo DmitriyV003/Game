@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import SocialBtn from '~/components/SocialBtn'
+  import SocialBtn from '~/components/buttons/SocialBtn'
   export default {
     name: 'SignUpPage',
     components: { SocialBtn },

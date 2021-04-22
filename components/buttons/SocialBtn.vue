@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import 'theme/_vars'
+@import '../../theme/vars'
 .social-btn
   display: flex
   align-items: center

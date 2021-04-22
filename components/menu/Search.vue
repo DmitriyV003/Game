@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="sass">
-  @import 'theme/_vars'
+  @import '../../theme/vars'
   .search
     position: relative
     height: 36px
@@ -20,7 +20,7 @@ export default {
       width: 100%
       border: 1px solid $gray
       border-radius: 100px
-      padding: 8px 45px 8px 20px
+      padding: 7px 45px 8px 20px
       color: $white
       &::placeholder
         color: $gray
