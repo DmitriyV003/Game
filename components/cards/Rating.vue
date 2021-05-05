@@ -36,6 +36,7 @@ export default {
   max-width: 50px
   &__value
     line-height: 20px
+    font-size: 14px
     &_sm
       font-size: 12px
       line-height: 14px

@@ -1,15 +1,31 @@
 @import "vars"
 @import "mix"
 @import "typography"
+@import "auth-layout"
+@import "slider"
 
 .layout
   background: $main-bg
 
+.material-design-icon > .material-design-icon__svg
+  bottom: initial
+
 *
   font-family: 'Montserrat', sans-serif
   font-weight: 400
-  font-size: 16px
-  line-height: 24px
+  font-size: inherit
+  line-height: inherit
+  
+h1
+    font-weight: 600
+    color: white(1)
+    font-size: 32px
+    line-height: 38px
+    margin: 0
+    padding: 0
+    +md
+      font-size: 24px
+      line-height: 28px
 
 .button-reboot
   background: none
@@ -29,6 +45,16 @@
   outline: none
   font-size: 16px
   line-height: 19.4px
+
+.g-window
+  background: rgba(40, 36, 57, 1)
+  padding: 48px 56px
+  border-radius: 12px
+  max-width: 472px
+  margin: 88px auto 96px
+  +lg
+    margin: 60px auto 80px
+    padding: 24px 16px
 
 body
   background: $main-bg

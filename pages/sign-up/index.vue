@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <div class="sign-up">
+    <div class="sign-up g-window">
       <h6 class="sign-up__title">Выберите способ регистрации на сайте</h6>
 
       <div class="sign-up__socials">
@@ -28,14 +28,6 @@
 <style lang="sass">
   @import 'theme/_mix'
   .sign-up
-    background: rgba(40, 36, 57, 1)
-    padding: 48px 56px
-    border-radius: 12px
-    max-width: 472px
-    margin: 88px auto 96px
-    +lg
-      margin: 60px auto 80px
-      padding: 24px 16px
     &__social
       &:not(:last-child)
         margin-bottom: 12px

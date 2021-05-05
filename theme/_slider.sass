@@ -1,0 +1,36 @@
+@import 'theme/_vars'
+@import 'theme/_mix'
+.g-slider
+  position: relative
+  &__comment-card
+    padding-right: 20px
+  &__controls
+    +media(1070)
+      display: flex
+      margin-top: 24px
+      align-items: center
+      justify-content: flex-end
+  &__button
+    position: absolute
+    top: 35%
+    +media(1070)
+      position: initial
+    &_left
+      left: 0
+      transform: translateX(calc(-100% - 20px))
+      +media(1240)
+        transform: translateX(calc(-100% - 4px))
+      +xl
+        transform: translateX(calc(-100% - 20px))
+      +media(1070)
+        transform: translateX(0)
+        margin-right: 24px !important
+    &_right
+      right: 0
+      transform: translateX(calc(100% + 20px))
+      +media(1240)
+        transform: translateX(calc(100% + 4px))
+      +xl
+        transform: translateX(calc(100% + 20px))
+      +media(1070)
+        transform: translateX(0)

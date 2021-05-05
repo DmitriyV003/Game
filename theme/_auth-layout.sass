@@ -1,0 +1,49 @@
+@import 'theme/_mix'
+@import 'theme/_vars'
+.auth-layout
+  display: flex
+  justify-content: space-between
+  flex-direction: column
+  min-height: 100vh
+  &__content
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: auto
+    +md
+      margin: 0
+.auth-structure
+  min-width: 472px
+  display: flex
+  flex-direction: column
+  +md
+    min-width: initial
+    width: 100%
+  +sm
+    min-width: initial
+  &__forget
+    align-self: flex-end
+    margin-bottom: 16px
+  &__inputs
+    margin-bottom: 12px
+  &__input
+    &:not(:last-child)
+      margin-bottom: 12px
+  &__title
+    font-weight: 700
+    font-size: 20px
+    line-height: 26px
+    margin-bottom: 32px
+    +md
+      margin-bottom: 24px
+  &__back
+    display: flex
+    align-items: center
+    font-size: 14px
+    line-height: 16px
+    cursor: pointer
+    color: $gray
+    margin-bottom: 14px
+    .icon
+      font-size: 20px
+      margin-right: 4px

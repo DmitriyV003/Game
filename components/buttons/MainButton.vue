@@ -5,13 +5,13 @@
       :to="to"
       :tag="tag"
       class="button button-reboot"
-      :class="['button_' + color, 'button_' + size]"
+      :class="['button_' + color, 'button_' + size, { 'button_full-width': fullWidth }]"
     >{{ label }}</nuxt-link>
 
     <button
       v-if="!to"
       class="button button-reboot"
-      :class="['button_' + color, 'button_' + size]"
+      :class="['button_' + color, 'button_' + size, { 'button_full-width': fullWidth }]"
     >{{ label }}</button>
   </div>
 </template>
@@ -38,6 +38,10 @@ export default {
     tag: {
       type: String,
       default: () => 'button'
+    },
+    fullWidth: {
+      type: Boolean,
+      default: () => false
     }
   }
 }
@@ -74,6 +78,10 @@ export default {
       &:hover
         border: 1px solid #8875FF
         background: rgba(37, 34, 48, 1)
+    &_gray
+      background: rgba(255, 255, 255, 0.04)
+      &:hover
+        background: rgba(255, 255, 255, 0.08)
     &_primary
       background: dark-blue(1)
       transition: all 0.1s

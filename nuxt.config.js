@@ -34,17 +34,21 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    'vue-material-design-icons/styles.css',
+    'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
+    'vue-slick-carousel/dist/vue-slick-carousel.css',
+    'vue-slider-component/dist-css/vue-slider-component.css',
+    'vue-slider-component/theme/default.css',
     '@/theme/main.sass',
     '@/theme/_mix.sass',
-    '@/theme/_vars.sass',
-    'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
-    'vue-slick-carousel/dist/vue-slick-carousel.css'
+    '@/theme/_vars.sass'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vue-slick'
+    '@/plugins/vue-slick',
+    '@/plugins/vue-range-slider'
   ],
   /*
   ** Nuxt.js dev-modules

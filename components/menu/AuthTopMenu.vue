@@ -6,8 +6,10 @@
           <img src="/images/logo.svg" alt="">
         </nuxt-link>
 
-        <main-button to="/sign-up" v-if="isSingIn" tag="a" color="primary" label="Регистрация" />
-        <main-button to="/sign-in" v-if="!isSingIn" tag="a" color="primary" label="Вход" />
+        <div v-if="!empty">
+          <main-button to="/sign-up" v-if="isSingIn" tag="a" color="primary" label="Регистрация" />
+          <main-button to="/sign-in" v-if="!isSingIn" tag="a" color="primary" label="Вход" />
+        </div>
       </div>
     </b-container>
   </header>
@@ -20,6 +22,10 @@ export default {
   components: { MainButton },
   props: {
     isSingIn: {
+      type: Boolean,
+      default: () => false
+    },
+    empty: {
       type: Boolean,
       default: () => false
     }

@@ -121,6 +121,7 @@ export default {
       margin-bottom: 20px
   &__logo
     margin-right: 32px
+    cursor: pointer
   &__links
     display: flex
     align-items: center

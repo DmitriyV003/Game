@@ -1,10 +1,10 @@
 <template>
   <b-container>
-    <div class="sign-in">
+    <div class="sign-in g-window">
       <h6 class="sign-in__title">Выберите способ входа в учетную запись</h6>
 
       <div class="sign-in__socials">
-        <social-btn to="/auth/email" class="sign-in__social" icon-color="#643EFF" icon="/images/gameInComeBtn.svg" label="Через E-mail и пароль" />
+        <social-btn to="/sign-in/email" class="sign-in__social" icon-color="#643EFF" icon="/images/gameInComeBtn.svg" label="Через E-mail и пароль" />
         <social-btn to="/auth/email" class="sign-in__social" icon-color="#3F619E" icon="/images/fb.svg" label="Facebook" />
         <social-btn to="/auth/email" class="sign-in__social" icon-color="#5580BD" icon="/images/vk.svg" label="Вконтакте" />
         <social-btn to="/auth/email" class="sign-in__social" icon-color="#FFFFFF" icon="/images/google.svg" label="Google" />

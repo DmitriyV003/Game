@@ -1,7 +1,7 @@
 <template>
   <div class="auth-layout">
     <!-- Adapted = true -->
-    <auth-top-menu :is-sing-in="false" />
+    <auth-top-menu empty />
 
     <div class="auth-layout__content">
       <nuxt />

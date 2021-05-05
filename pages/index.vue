@@ -104,6 +104,14 @@
       </b-container>
     </section>
 
+    <!-- Reviews  adapted = true -->
+    <section class="section review-section">
+      <b-container>
+        <section-header title="Обзоры" link-label="Все обзоры" />
+        <g-review-slider />
+      </b-container>
+    </section>
+
     <!-- Genres  adapted = true -->
     <section class="section genres">
       <b-container>
@@ -138,29 +146,8 @@
     <section class="section comments">
       <b-container>
         <section-header title="Отзывы" link-label="Все отзывы" />
-
-        <div class="g-slider comments-slider">
-          <vue-slick
-            ref="commentsSlider"
-            :variable-width="false"
-            :slides-to-show="2"
-            :slides-to-scroll="settings.slidesToScroll"
-            :arrows="settings.arrows"
-            :dots="settings.dots"
-            :responsive="commentSliderSettings.responsive"
-          >
-            <comment-card class="g-slider__comment-card" />
-            <comment-card class="g-slider__comment-card" />
-            <comment-card class="g-slider__comment-card" />
-            <comment-card class="g-slider__comment-card" />
-            <comment-card class="g-slider__comment-card" />
-            <comment-card class="g-slider__comment-card" />
-          </vue-slick>
-          <div class="g-slider__controls">
-            <arrow-button @click.native="prev($refs.commentsSlider)" class="g-slider__button g-slider__button_left" left />
-            <arrow-button @click.native="next($refs.commentsSlider)" class="g-slider__button g-slider__button_right" right />
-          </div>
-        </div>
+        
+        <g-comment-slider />
       </b-container>
     </section>
 
@@ -240,9 +227,16 @@ import RoundedButton from '~/components/buttons/RoundedButton'
 import GenreCard from '~/components/cards/GenreCard'
 import CommentCard from '~/components/cards/CommentCard'
 import TabPanel from '~/components/TabPanel'
+import ReviewCard from '~/components/cards/ReviewCard'
+import Dot from '~/components/slider/Dot'
+import GReviewSlider from "~/components/slider/ReviewSlider";
+import GCommentSlider from "~/components/slider/CommentSlider";
 
 export default {
   components: {
+    GCommentSlider,
+    GReviewSlider,
+    ReviewCard,
     TabPanel,
     CommentCard,
     GenreCard,
@@ -251,7 +245,8 @@ export default {
     SliderDot,
     ArrowButton,
     GameCard,
-    Banner
+    Banner,
+    Dot
   },
   methods: {
     next (slider) {
@@ -382,44 +377,11 @@ export default {
     margin-bottom: 24px
     +md
       margin-bottom: 16px
-.g-slider
-  position: relative
-  &__comment-card
-    padding-right: 20px
-  &__controls
-    +media(1070)
-      display: flex
-      margin-top: 24px
-      align-items: center
-      justify-content: flex-end
-  &__button
-    position: absolute
-    top: 35%
-    +media(1070)
-      position: initial
-    &_left
-      left: 0
-      transform: translateX(calc(-100% - 20px))
-      +media(1240)
-        transform: translateX(calc(-100% - 4px))
-      +xl
-        transform: translateX(calc(-100% - 20px))
-      +media(1070)
-        transform: translateX(0)
-        margin-right: 24px
-    &_right
-      right: 0
-      transform: translateX(calc(100% + 20px))
-      +media(1240)
-        transform: translateX(calc(100% + 4px))
-      +xl
-        transform: translateX(calc(100% + 20px))
-      +media(1070)
-        transform: translateX(0)
 .recommend
   &__card
+    width: 282px !important
     padding-right: 20px
 .genres
   &__card
-    margin-right: 16px
+    margin-right: 15px
 </style>

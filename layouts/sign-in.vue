@@ -19,16 +19,3 @@
     components: { AuthFooter, AuthTopMenu }
   }
 </script>
-
-<style lang="sass">
-  .auth-layout
-    display: flex
-    justify-content: space-between
-    flex-direction: column
-    min-height: 100vh
-    &__content
-      display: flex
-      align-items: center
-      justify-content: center
-      margin: auto
-</style>

@@ -1,7 +1,7 @@
 <template>
   <button class="button-reboot arrow-button">
-    <chevron-left-icon v-if="left" />
-    <chevron-right-icon v-if="right" />
+    <chevron-left-icon class="icon" v-if="left" />
+    <chevron-right-icon class="icon" v-if="right" />
   </button>
 </template>
 
@@ -39,4 +39,6 @@ export default {
   +md
     width: 32px
     height: 32px
+  .icon
+    font-size: 25px
 </style>
