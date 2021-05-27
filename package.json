@@ -23,7 +23,8 @@
     "vue-material-design-icons": "^4.11.0",
     "vue-slick-carousel": "^1.0.6",
     "vue-slide-up-down": "^2.0.1",
-    "vue-slider-component": "^3.2.11"
+    "vue-slider-component": "^3.2.11",
+    "vue-star-rating": "^1.7.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.27",

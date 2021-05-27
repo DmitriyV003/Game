@@ -1,23 +1,27 @@
 <template>
-  <div>
-    <nuxt-link v-if="to" :to="to" tag="div" class="show-all__link">
+    <div @click="goTo" class="show-all__link">
+      <chevron-left-icon v-if="icon && reverse" class="show-all__icon" />
       <span>{{ label }}</span>
-      <chevron-right-icon v-if="icon" class="show-all__icon" />
-    </nuxt-link>
-
-    <div v-if="!to" class="show-all__link">
-      <span>{{ label }}</span>
-      <chevron-right-icon v-if="icon" class="show-all__icon" />
+      <chevron-right-icon v-if="icon && !reverse" class="show-all__icon" />
     </div>
-  </div>
 </template>
 
 <script>
 import icons from '~/mixins/icons'
+import { eventBus } from '~/plugins/event-bus'
 
 export default {
   name: 'ShowAll',
   mixins: [icons],
+  methods: {
+    async goTo () {
+      if (this.to !== '') {
+        await this.$router.push(this.to)
+      } else {
+        this.$emit('custom-click')
+      }
+    }
+  },
   props: {
     label: {
       type: String,
@@ -30,6 +34,10 @@ export default {
     icon: {
       type: Boolean,
       default: () => true
+    },
+    reverse: {
+      type: Boolean,
+      default: () => false
     }
   }
 }

@@ -1,0 +1,113 @@
+@import 'vars'
+@import 'mix'
+.g-item
+  padding: 24px 0
+  display: flex
+  justify-content: space-between
+  border-bottom: 1px solid rgba(154, 147, 170, 0.3)
+  +lg
+    flex-direction: column
+  &__line
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
+    &:first-child
+      margin-bottom: 26px
+    &:last-child
+      margin-top: 8px
+    &_center
+      align-items: center
+  &__name
+    +xl
+      max-height: 80px
+      overflow: hidden
+    +lg
+      font-size: 16px
+      line-height: 20px
+      max-width: 45%
+  &__delete
+    margin-top: auto
+    cursor: pointer
+    letter-spacing: -0.4px
+  &__price
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-end
+    .price
+      margin-bottom: auto
+  &__total
+    margin-bottom: 14px
+    +lg
+      font-size: 32px
+      line-height: 38px
+      margin-bottom: 0
+  &__input
+    width: 48px
+    padding: 6px
+    margin: 0 14px
+    display: flex
+    align-items: center
+    justify-content: center
+    text-align: center
+    background: rgba(154, 147, 170, 0.3)
+    border: none !important
+    outline: none !important
+    height: 32px
+    border-radius: 4px
+    font-size: 16px
+    line-height: 24px
+    color: $white
+  &__counter
+    display: flex
+    align-items: center
+    margin: 0 20px
+    +lg
+      margin: 0
+    .icon
+      cursor: pointer
+      color: #7D7D7D
+      font-size: 30px
+  &__delivery
+    letter-spacing: -0.4px
+    padding-top: 10px
+    +lg
+      padding-top: 0
+  &__info
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    max-width: 220px
+  &__content
+    width: 100%
+    display: flex
+    justify-content: space-between
+    &_mobile
+      display: none
+      +lg
+        display: flex
+        flex-direction: column
+    &_desktop
+      +lg
+        display: none
+  &__img
+    max-width: 120px
+    flex-shrink: 0
+    border-radius: 8px
+    margin-right: 24px
+    +lg
+      margin-right: 0
+      max-width: 100%
+      width: 100%
+      height: 250px
+      margin-bottom: 20px
+      background: url("/images/cart-item.png") center center
+      background-size: cover
+    +md
+      margin-bottom: 16px
+    +sm
+      height: 160px
+    img
+      width: 100%
+      +lg
+        display: none

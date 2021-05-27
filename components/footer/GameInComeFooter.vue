@@ -1,4 +1,4 @@
-<template>
+  <template>
   <footer class="footer">
     <b-container>
       <div class="footer__wrapper">
@@ -92,7 +92,7 @@
       <div class="footer__wrapper footer__wrapper_padding-top">
         <span class="footer__text">© Gameincome 2021</span>
         <nuxt-link class="footer__text" tag="span" to="/">Политика конфиденциальности</nuxt-link>
-        <span class="footer__text">made by <span class="footer__text footer__text_white">roob.in</span></span>
+        <span class="footer__made">made by <span class="footer__text footer__roobin">roob.in</span></span>
 
         <div class="footer__payments">
           <img class="footer__payment" src="/images/visa.svg" alt="">
@@ -121,6 +121,15 @@ export default {
   padding: 40px 0 16px
   background: #292538
   margin-top: 32px
+  &__made
+    color: $gray
+    font-size: 14px
+    line-height: 20px
+  &__roobin
+    cursor: pointer
+    color: $white !important
+    &:hover
+      color: white(0.8) !important
   &__block
     &_order-10
       +md
@@ -146,6 +155,9 @@ export default {
     font-size: 14px
     line-height: 20px
     color: $gray
+    cursor: pointer
+    &:hover
+      color: white(0.8)
     +lg
       &:not(:last-child)
         margin-bottom: 8px
@@ -173,6 +185,8 @@ export default {
     font-size: 14px
     color: $gray
     line-height: 20px
+    &:hover
+      color: white(0.8)
     +md
       font-size: 12px
       line-height: 18px
@@ -236,6 +250,8 @@ export default {
     line-height: 24px
     font-weight: 600
     cursor: pointer
+    &:hover
+      color: white(0.8)
     +md
       font-size: 12px
       line-height: 16px

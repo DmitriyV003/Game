@@ -20,7 +20,7 @@
 
 <script>
   import icons from '~/mixins/icons'
-  import GInput from '~/components/form/Input'
+  import GInput from '~/components/form-elements/Input'
   import MainButton from '~/components/buttons/MainButton'
 
   export default {

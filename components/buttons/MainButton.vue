@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'button_full-width': fullWidth }">
     <nuxt-link
       v-if="to"
       :to="to"

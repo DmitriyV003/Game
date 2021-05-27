@@ -69,6 +69,9 @@ export default {
 <style lang="sass">
 @import 'theme/_vars'
 @import 'theme/_mix'  
+.review-section__card
+  +lg
+    margin-right: 16px
 .review-slider
   .slick-dots
     position: initial

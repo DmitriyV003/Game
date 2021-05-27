@@ -93,6 +93,8 @@ export default {
       padding: 12px 0 8px 0
       bottom: 0
       transform: translateY(calc(100% + 8px))
+      +md
+        right: 0
     &__body
       display: flex
       align-items: center
@@ -100,8 +102,10 @@ export default {
     &__arrow
       color: $white
       margin-left: 13px
-      font-size: 14px
+      font-size: 30px
       transition: all 0.1s
+      +md
+        margin-left: 0
       &_active
         transform: rotate(180deg)
     &__main
@@ -132,6 +136,8 @@ export default {
       white-space: nowrap
       overflow: hidden
       position: relative
+      +md
+        display: none
       &::after
         content: ''
         background: linear-gradient(270deg, #352A60 0%, rgba(53, 42, 96, 0) 100%)

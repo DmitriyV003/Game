@@ -39,6 +39,7 @@ module.exports = {
     'vue-slick-carousel/dist/vue-slick-carousel.css',
     'vue-slider-component/dist-css/vue-slider-component.css',
     'vue-slider-component/theme/default.css',
+    '@mdi/font/css/materialdesignicons.min.css',
     '@/theme/main.sass',
     '@/theme/_mix.sass',
     '@/theme/_vars.sass'
@@ -48,7 +49,9 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vue-slick',
-    '@/plugins/vue-range-slider'
+    '@/plugins/vue-range-slider',
+    '@/plugins/event-bus',
+    { src: '@/plugins/rating', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

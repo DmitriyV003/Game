@@ -23,7 +23,7 @@
 
 <script>
 import icons from '~/mixins/icons'
-import GInput from "~/components/form/Input";
+import GInput from "~/components/form-elements/Input";
 import ShowAll from "~/components/buttons/MainLink";
 import MainButton from "~/components/buttons/MainButton";
 
