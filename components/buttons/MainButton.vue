@@ -82,6 +82,12 @@ export default {
       background: rgba(255, 255, 255, 0.04)
       &:hover
         background: rgba(255, 255, 255, 0.08)
+    &_white
+      color: #643EFF
+      font-weight: 500
+      background: white
+      &:hover
+        background: rgba(255, 255, 255, 0.08)    
     &_primary
       background: dark-blue(1)
       transition: all 0.1s

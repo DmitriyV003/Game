@@ -1,13 +1,13 @@
 <template>
-  <div class="g-drop-menu" :class="{ 'g-drop-menu_active': open }">
-    <div @click="open = !open" class="g-drop-menu__active" :class="{ 'g-drop-menu__active_active': open }">
+  <div class="g-drop-menu" :class="[{ 'g-drop-menu_active': open }, 'g-drop-menu_' + size, { 'g-drop-menu_active_sm': open && size === 'sm' }]">
+    <div @click="open = !open" class="g-drop-menu__active" :class="[{ 'g-drop-menu__active_active': open }, { 'g-drop-menu__active_active_sm': open && size === 'sm' }, 'g-drop-menu__active_' + size]">
       <span v-if="currentState === null" class="g-drop-menu__placeholder">{{ placeholder }}</span>
       <span v-if="currentState !== null" class="text">{{ currentState.label }}</span>
-      <chevron-down-icon class="icon" :class="{ 'icon_active': open }" />
+      <chevron-down-icon class="icon" :class="[{ 'icon_active': open }, 'icon_' + size]" />
     </div>
     
-    <div v-if="open" @mouseleave="open = false" class="g-drop-menu__drop">
-      <div 
+    <div v-if="open" @mouseleave="open = false" class="g-drop-menu__drop" :class="['g-drop-menu__drop_' + size]">
+      <div
         v-for="link in links" 
         @click="setActive(link.value)" 
         class="g-drop-menu__drop-link"
@@ -36,13 +36,14 @@ export default {
     placeholder: {
       type: String,
       default: () => 'placeholder'
-    }
-  },
-  data: () => {
-    return {
-      open: false,
-      currentState: null,
-      links: [
+    },
+    size: {
+      type: String,
+      default: () => ''
+    },
+    links: {
+      type: Array,
+      default: () => [
         { label: 'Активные продажи', value: 'active1' },
         { label: 'Неактивные продажи', value: 'nonActive2' },
         { label: 'Активные продажи', value: 'active3' },
@@ -50,6 +51,12 @@ export default {
         { label: 'Активные продажи', value: 'active5' },
         { label: 'Неактивные продажи', value: 'nonActive6' }
       ]
+    }
+  },
+  data: () => {
+    return {
+      open: false,
+      currentState: null
     }
   }
 }
@@ -63,9 +70,14 @@ export default {
   border-radius: 12px
   overflow: hidden
   border: 1px solid transparent
+  &_sm
+    width: 78px
+    border-radius: 5px
   &_active
     overflow: visible
     border-radius: 12px 12px 0 0
+    &_sm
+      border-radius: 5px 5px 0 0
   &__placeholder
     font-weight: 500
     color: $gray
@@ -108,6 +120,8 @@ export default {
     transform: translateY(100%)
     max-height: 180px
     overflow-y: auto
+    &_sm
+      border: none
   &__active
     padding: 12.4px 20px 12px 20px
     display: flex
@@ -122,8 +136,15 @@ export default {
     font-size: 13px
     line-height: 20px
     border-radius: 12px
+    &_sm
+      padding: 6px 12px
+      border: none
+      border-radius: 5px
+      font-weight: 400
     &_active
       border-radius: 12px 12px 0 0
+      &_sm
+        border-radius: 5px 5px 0 0
     .text
       font-weight: inherit
       white-space: nowrap
@@ -135,6 +156,8 @@ export default {
       font-size: 24px
       color: rgba(100, 62, 255, 1)
       transition: all 0.2s
+      &_sm
+        margin-left: 8px
       &_active
         transform: rotate(180deg)
 </style>

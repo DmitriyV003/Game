@@ -1,9 +1,9 @@
 <template>
   <div class="g-popup" v-show="val">
     <div class="g-new-dispute">
-      <div class="g-new-dispute__top">
-        <p class="popup-title">Новый спор</p>
-        <close-icon @click="val = false" class="icon" />
+      <div class="g-popup__top">
+        <p class="g-popup-title">Новый спор</p>
+        <close-icon @click="val = false" class="g-popup__close" />
       </div>
       
       <div class="g-new-dispute__block">
@@ -16,7 +16,7 @@
             <span class="g-new-dispute__price">2 230 ₽</span>
           </div>
           <div class="g-new-dispute__avatar">
-            <p class="g-new-dispute__caption">Продавец:</p>
+            <p class="g-popup__caption">Продавец:</p>
             <avatar />
           </div>
         </div>
@@ -106,12 +106,6 @@ export default {
       line-height: 20px
       color: $gray
       letter-spacing: -0.4px
-  &__caption
-    font-size: 14px
-    margin-bottom: 8px
-    letter-spacing: -0.4px
-    color: $gray
-    line-height: 20px
   &__text
     display: flex
     flex-direction: column
@@ -163,23 +157,4 @@ export default {
       width: 100%
       +sm
         display: none
-  &__top
-    display: flex
-    align-items: center
-    justify-content: space-between
-    padding-bottom: 28px
-    +md
-      padding-bottom: 24px
-    .popup-title
-      font-weight: 600
-      color: $white
-      font-size: 24px
-      line-height: 28px
-      margin: 0
-      +md
-        line-height: 32px
-    .icon
-      color: $gray
-      cursor: pointer
-      font-size: 30px
 </style>

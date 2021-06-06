@@ -21,6 +21,31 @@
   justify-content: center
   z-index: 999999
   background: rgba(18, 18, 18, 0.6)
+  &__top
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding-bottom: 28px
+    +md
+      padding-bottom: 24px
+  &__title
+    font-weight: 600
+    color: $white
+    font-size: 24px
+    line-height: 28px
+    margin: 0
+    +md
+      line-height: 32px
+  &__close
+    color: $gray
+    cursor: pointer
+    font-size: 30px
+  &__caption
+    font-size: 14px
+    margin-bottom: 8px
+    letter-spacing: -0.4px
+    color: $gray
+    line-height: 20px  
 *
   font-family: 'Montserrat', sans-serif
   font-weight: 400
@@ -79,7 +104,11 @@ h6
   line-height: 26px
   font-weight: bold
   text-transform: uppercase
-
+h5
+  color: $white
+  font-size: 20px
+  line-height: 28px
+  font-weight: 600
 h3
   font-weight: 600
   font-size: 16px

@@ -1,5 +1,5 @@
 <template>
-  <div @click="changeMethod" class="g-payment-method" :class="{ 'g-payment-method_active': paymentMethod.id === id }">
+  <div @click="changeMethod" class="g-payment-method" :class="[{ 'g-payment-method_active': paymentMethod.id === id }, 'g-payment-method_' + bg]">
     <div class="g-payment-method__left">
       <div class="g-payment-method__img">
         <img :src="image" alt="">
@@ -29,6 +29,10 @@ export default {
     image: {
       type: String,
       required: true
+    },
+    bg: {
+      type: String,
+      default: () => ''
     },
     id: {
       type: Number,
@@ -61,6 +65,8 @@ export default {
   border-radius: 12px
   cursor: pointer
   transition: background-color 0.1s
+  &_light
+    background: rgba(50, 46, 67, 1)
   &_active
     background: rgba(76, 44, 203, 0.35)
   &:hover
