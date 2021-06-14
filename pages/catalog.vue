@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <!--  Popup filters  -->
+    <!--  Popup filters  adapted = true -->
     <div v-show="showPopup" class="catalog-filters-popup">
       <div class="catalog-filters-popup__body">
         <div class="catalog-filters-popup__title">
