@@ -1,4 +1,5 @@
 <template>
+  <!-- Adapted = true  -->
   <div class="g-popup" v-show="val">
     <div class="g-new-dispute">
       <div class="g-popup__top">

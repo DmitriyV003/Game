@@ -61,7 +61,7 @@ export default {
         { label: 'финансы', to: '/dashboard/finance', name: 'dashboard-finance', icon: 'mdi-currency-usd' },
         { label: 'Профиль', to: '/dashboard/profile', name: 'dashboard-profile', icon: 'mdi-account-outline' },
         { label: 'безопасность', to: '/dashboard/security', name: 'dashboard-security', icon: 'mdi-lock-outline' },
-        { label: 'обращения', to: '/dashboard/purchases4', name: 'dashboard-purchases3', icon: 'mdi-forum-outline' }
+        { label: 'обращения', to: '/dashboard/questions', name: 'dashboard-questions', icon: 'mdi-forum-outline' }
       ]
     }
   }

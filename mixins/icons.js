@@ -15,6 +15,8 @@ import PencilIcon from 'vue-material-design-icons/PencilOutline.vue'
 import TrashIcon from 'vue-material-design-icons/TrashCanOutline.vue'
 import ArchiveIcon from 'vue-material-design-icons/ArchiveOutline.vue'
 import StoreIcon from 'vue-material-design-icons/StoreOutline.vue'
+import EyeIcon from 'vue-material-design-icons/Eye.vue'
+import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue'
 export default {
   components: {
     ChevronDownIcon,
@@ -33,6 +35,8 @@ export default {
     PencilIcon,
     TrashIcon,
     ArchiveIcon,
-    StoreIcon
+    StoreIcon,
+    EyeIcon,
+    EyeOffIcon
   }
 }
