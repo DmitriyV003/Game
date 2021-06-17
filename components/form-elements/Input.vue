@@ -82,7 +82,7 @@ export default {
       color: $white
   &__input
     border-radius: 6px
-    padding: 13px 42px 12px 20px
+    padding: 13.4px 42px 12px 20px
     background: #39354A
     color: white(1)
     font-size: 16px

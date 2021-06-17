@@ -3,8 +3,8 @@
     <div class="g-avatar__image" :class="'g-avatar__image_' + size">
       <img src="" alt="">
     </div>
-    <div class="g-avatar__block">
-      <span class="text-white text-normal text-weight-600">{{ name }}</span>
+    <div v-if="name !== null || caption !== null"  class="g-avatar__block">
+      <span v-if="name !== null" class="text-white text-normal text-weight-600">{{ name }}</span>
       <span v-if="caption !== null" class="caption text-color-gray">{{ caption }}</span>
     </div>
     
@@ -45,6 +45,7 @@ export default {
   &__block
     display: flex
     flex-direction: column
+    margin-left: 13px
     .caption
       margin-top: 2px
       text-transform: uppercase
@@ -54,7 +55,6 @@ export default {
     width: 43px
     height: 43px
     border: 3px solid dark-blue(0.15)
-    margin-right: 13px
     border-radius: 50%
     flex-shrink: 0
     &_xl

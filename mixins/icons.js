@@ -17,6 +17,8 @@ import ArchiveIcon from 'vue-material-design-icons/ArchiveOutline.vue'
 import StoreIcon from 'vue-material-design-icons/StoreOutline.vue'
 import EyeIcon from 'vue-material-design-icons/Eye.vue'
 import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue'
+import VkIcon from 'vue-material-design-icons/Vk.vue'
+import FbIcon from 'vue-material-design-icons/Facebook.vue'
 export default {
   components: {
     ChevronDownIcon,
@@ -37,6 +39,8 @@ export default {
     ArchiveIcon,
     StoreIcon,
     EyeIcon,
-    EyeOffIcon
+    EyeOffIcon,
+    VkIcon,
+    FbIcon
   }
 }

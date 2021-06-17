@@ -31,12 +31,16 @@ export default {
 .g-breadcrumb
   display: flex
   align-items: center
+  +lg
+    align-items: flex-start
   &__item
     letter-spacing: -0.4px
     cursor: pointer
     display: flex
     align-items: center
     color: white(1)
+    +lg
+      align-items: baseline
     &:last-child
       color: white(0.4)
     &:not(:first-child)

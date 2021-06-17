@@ -63,8 +63,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import 'theme/_vars'
-@import 'theme/_mix'
+@import '../../theme/vars'
+@import '../../theme/mix'
 .news
   &__block
     margin-bottom: 40px
