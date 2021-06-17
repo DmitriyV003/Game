@@ -93,4 +93,6 @@ export default {
   &__top
     padding: 41px 0 16px
     border-bottom: 1px solid rgba(154, 147, 170, 0.3)  
+    +md
+      padding: 25px 0 12px
 </style>
