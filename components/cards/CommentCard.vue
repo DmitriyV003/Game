@@ -152,5 +152,5 @@ export default {
         top: 0
         left: 0
         background-size: cover
-        background: url("/images/comment-gradient.svg")
+        background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%)
 </style>
