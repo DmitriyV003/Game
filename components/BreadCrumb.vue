@@ -2,8 +2,7 @@
   <div class="g-breadcrumb">
     <nuxt-link 
       :key="link.label" 
-      v-for="link in links" 
-      tag="div" 
+      v-for="link in links"
       :to="link.to" 
       class="g-breadcrumb__item text-size-14"
     >{{ link.label }}</nuxt-link>
@@ -39,6 +38,8 @@ export default {
     display: flex
     align-items: center
     color: white(1)
+    &:hover
+      color: white(0.8)
     +lg
       align-items: baseline
     &:last-child

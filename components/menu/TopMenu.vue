@@ -3,7 +3,7 @@
     <b-container>
       <header class="header">
         <div class="header__line">
-          <nuxt-link tag="div" class="header__logo" to="/">
+          <nuxt-link class="header__logo" to="/">
             <img src="/images/logo.svg" alt="">
           </nuxt-link>
 
@@ -71,32 +71,32 @@
               </div>
 
               <div class="header__drop-links">
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Игры</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Софт</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Region free</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Обзоры</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Новости</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/" tag="div">
+                <nuxt-link class="header__drop-link" to="/">
                   <span></span>
                   <span class="text">Отзывы</span>
                 </nuxt-link>

@@ -3,7 +3,7 @@
     <b-container>
       <div class="footer__wrapper">
         <div class="footer__column">
-          <nuxt-link tag="div" to="/" class="footer__logo">
+          <nuxt-link to="/" class="footer__logo">
             <img src="/images/logo.svg" alt="">
           </nuxt-link>
 
@@ -30,32 +30,32 @@
 
         <div class="footer__column">
           <div class="footer__links">
-            <nuxt-link class="footer__link" to="/" tag="div">Игры</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">Софт</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">СКИНЫ</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">КЕЙСЫ</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">GiftCard</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">Region free</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">обзоры</nuxt-link>
-            <nuxt-link class="footer__link" to="/" tag="div">Отзывы</nuxt-link>
+            <nuxt-link class="footer__link" to="/">Игры</nuxt-link>
+            <nuxt-link class="footer__link" to="/">Софт</nuxt-link>
+            <nuxt-link class="footer__link" to="/">СКИНЫ</nuxt-link>
+            <nuxt-link class="footer__link" to="/">КЕЙСЫ</nuxt-link>
+            <nuxt-link class="footer__link" to="/">GiftCard</nuxt-link>
+            <nuxt-link class="footer__link" to="/">Region free</nuxt-link>
+            <nuxt-link class="footer__link" to="/">обзоры</nuxt-link>
+            <nuxt-link class="footer__link" to="/">Отзывы</nuxt-link>
           </div>
 
           <div class="footer__line">
             <div class="footer__list">
               <div class="footer__block footer__block_order-10">
-                <nuxt-link tag="div" class="footer__item" to="/">Продавцам</nuxt-link>
-                <nuxt-link tag="div" class="footer__item" to="/">Покупателям</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Продавцам</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Покупателям</nuxt-link>
               </div>
               <div class="footer__block footer__block_order-10">
-                <nuxt-link tag="div" class="footer__item" to="/">Оплата</nuxt-link>
-                <nuxt-link tag="div" class="footer__item" to="/">Гарантии</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Оплата</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Гарантии</nuxt-link>
               </div>
               <div class="footer__block footer__block_order-10 no-md-margin">
-                <nuxt-link tag="div" class="footer__item" to="/">Новости</nuxt-link>
-                <nuxt-link tag="div" class="footer__item" to="/">Стать партнером</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Новости</nuxt-link>
+                <nuxt-link class="footer__item" to="/">Стать партнером</nuxt-link>
               </div>
               <div class="footer__block">
-                <nuxt-link tag="div" class="footer__item footer__item_white" to="/">Личный кабинет</nuxt-link>
+                <nuxt-link class="footer__item footer__item_white" to="/">Личный кабинет</nuxt-link>
               </div>
             </div>
 
@@ -91,7 +91,7 @@
 
       <div class="footer__wrapper footer__wrapper_padding-top">
         <span class="footer__text">© Gameincome 2021</span>
-        <nuxt-link class="footer__text" tag="span" to="/">Политика конфиденциальности</nuxt-link>
+        <nuxt-link class="footer__text" to="/">Политика конфиденциальности</nuxt-link>
         <span class="footer__made">made by <span class="footer__text footer__roobin">roob.in</span></span>
 
         <div class="footer__payments">

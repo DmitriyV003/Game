@@ -3,7 +3,7 @@
     <b-container>
       <div class="footer-auth__wrapper">
         <span class="footer-auth__text">© Gameincome 2021</span>
-        <nuxt-link class="footer-auth__text" tag="span" to="/">Политика конфиденциальности</nuxt-link>
+        <nuxt-link class="footer-auth__text" to="/">Политика конфиденциальности</nuxt-link>
         <span class="footer-auth__text">made by <span class="footer-auth__text footer-auth__text_white">roob.in</span></span>
 
         <div class="footer-auth__socials">
