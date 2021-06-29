@@ -17,14 +17,14 @@
             <img class="news-card__img" src="/images/news-4.png" alt="">
             <h1 class="news-card__title">HITMAN 3</h1>
             <p class="news-card__text">O Interactive</p>
-            
+
             <rating size="sm" class="news-card__rating" :value="4.6" />
           </div>
 
           <div class="news-card__block">
             <div class="news-card__views">
               <avatar name="Blacktea" />
-              
+
               <div class="news-card__stats">
                 <div class="news-card__stat">
                   <eye-icon class="icon" />
@@ -36,7 +36,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div>
               <p class="news-card__text">Команды BIG и Renegades выбыли из борьбы за чемпионский титул ESL Pro League Season 13 по CS:GO.
                 Они заняли пятое и шестое места в группе А и лишились шансов на выход в плей-офф.</p>
@@ -48,39 +48,6 @@
               <p class="news-card__text">ESL Pro League Season 13 проходит с 8 марта по 11 апреля в онлайне. 24 коллектива сражаются за призовой фонд
                 в размере $750 тыс. С 13 по 18 марта пройдут матчи в группе В. Следить за детальным расписанием лиги можно
                 на странице репортажа</p>
-            </div>
-
-            <div class="news-card__share">
-              <div class="news-card__socials">
-                <span class="news-card__caption">Поделиться:</span>
-
-                <span class="news-card__social">
-                  <vk-icon />
-                </span>
-
-                <span class="news-card__social">
-                  <fb-icon />
-                </span>
-              </div>
-
-              <span class="news-card__caption">Опубликовано 2 часа назад</span>
-            </div>
-
-            <div class="news-card__messages">
-              <g-message />
-              <g-message />
-              <g-message />
-            </div>
-
-            <div class="news-card__bottom">
-              <avatar :name="null" :caption="null" />
-
-              <g-input class="news-card__input" placeholder="Оставьте комментарий" />
-
-              <button class="button-reboot news-card__btn button_primary">
-                <span class="text">отправить</span>
-                <img class="icon" src="/images/icons/arrow-up.svg" alt="">
-              </button>
             </div>
 
           </div>
@@ -99,15 +66,15 @@ import GInput from '~/components/form-elements/Input'
 import MainButton from '~/components/buttons/MainButton'
 import Rating from "~/components/cards/Rating";
 export default {
-  name: 'GReviewPage',
+  name: 'GCommentPage',
   mixins: [icons],
   components: {Rating, MainButton, GInput, Avatar, GMessage, BreadCrumb },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/reviews', label: 'Обзоры' },
-        { to: '/reviews/fghjkl', label: 'Blacktea. Hitman 3' }
+        { to: '/comments', label: 'Отзывы' },
+        { to: '/comments/fghjkl', label: 'Blacktea. Hitman 3' }
       ]
     }
   }

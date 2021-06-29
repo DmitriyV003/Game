@@ -19,6 +19,7 @@ import EyeIcon from 'vue-material-design-icons/Eye.vue'
 import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue'
 import VkIcon from 'vue-material-design-icons/Vk.vue'
 import FbIcon from 'vue-material-design-icons/Facebook.vue'
+import MessageIcon from 'vue-material-design-icons/MessageProcessingOutline.vue'
 export default {
   components: {
     ChevronDownIcon,
@@ -41,6 +42,7 @@ export default {
     EyeIcon,
     EyeOffIcon,
     VkIcon,
-    FbIcon
+    FbIcon,
+    MessageIcon
   }
 }
