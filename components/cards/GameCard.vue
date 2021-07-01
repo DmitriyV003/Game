@@ -37,6 +37,7 @@ export default {
   display: flex
   flex-direction: column
   position: relative
+  cursor: pointer
   &__price-block
     display: flex
     align-items: center

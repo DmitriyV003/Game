@@ -30,7 +30,7 @@ export default {
     line-height: 27px
     border: 1px solid #643EFF
     border-radius: 100px
-    padding: 14px 32px
+    padding: 14px 32px 13.4px 32px
     +md
       padding: 12px 32px
       font-size: 16px

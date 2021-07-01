@@ -34,10 +34,7 @@ export default {
       }
     },
     isChecked () {
-      if (this.model.includes(this.val)) {
-        return true
-      }
-      return false
+      return this.model.includes(this.val);
     }
   },
   methods: {

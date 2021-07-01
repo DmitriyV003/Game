@@ -229,8 +229,8 @@ import CommentCard from '~/components/cards/CommentCard'
 import TabPanel from '~/components/TabPanel'
 import ReviewCard from '~/components/cards/ReviewCard'
 import Dot from '~/components/slider/Dot'
-import GReviewSlider from "~/components/slider/ReviewSlider";
-import GCommentSlider from "~/components/slider/CommentSlider";
+import GReviewSlider from '~/components/slider/ReviewSlider'
+import GCommentSlider from '~/components/slider/CommentSlider'
 
 export default {
   components: {

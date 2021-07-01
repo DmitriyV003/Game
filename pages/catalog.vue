@@ -233,12 +233,12 @@ import icons from '~/mixins/icons'
 import ShowAll from '~/components/buttons/MainLink'
 import GameCard from '~/components/cards/GameCard'
 import { mapState } from 'vuex'
-import MainButton from "~/components/buttons/MainButton";
-import GTag from "~/components/Tag";
+import MainButton from '~/components/buttons/MainButton'
+import GTag from '~/components/Tag'
 import GPagination from '~/components/Pagination'
 export default {
   name: 'Catalog',
-  components: {GPagination, GTag, MainButton, GameCard, ShowAll, GCheckBox, DropItems, BreadCrumb },
+  components: { GPagination, GTag, MainButton, GameCard, ShowAll, GCheckBox, DropItems, BreadCrumb },
   mixins: [icons],
   layout: 'default',
   computed: {
