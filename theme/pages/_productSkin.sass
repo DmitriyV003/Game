@@ -1,0 +1,163 @@
+@import 'theme/_mix'
+@import 'theme/_vars'
+.g-product-overview
+  padding-bottom: 60px
+  &__main
+    display: flex
+    justify-content: space-between
+    +md
+      flex-direction: column
+      background: rgba(40, 36, 57, 1)
+      border-radius: 12px
+  &__buttons
+    .button
+      padding: 14px 29px
+      display: flex
+    div
+      max-width: 280px
+      +md
+        max-width: 100%
+        width: 100%
+      &:not(:last-child)
+        margin-bottom: 12px
+  &__wrapper
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: auto
+    padding-bottom: 20px
+    max-width: 80%
+    +lg
+      max-width: 100%
+      flex-direction: column
+      align-items: flex-start
+    .price
+      +lg
+        margin-bottom: 32px
+  &__info
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: calc(70% - 30px)
+    +lg
+      width: calc(50% - 15px)
+    +md
+      width: 100%
+      padding: 24px 16px
+    .current
+      margin-bottom: 8px
+      display: inline-block
+      font-size: 32px
+      line-height: 38px
+      color: white(1)
+      font-weight: 600
+      +md
+        margin-bottom: 14px
+    .title
+      margin-bottom: 20px
+    .text
+      padding-bottom: 20px
+      margin-bottom: auto
+      max-width: 80%
+      +lg
+        max-width: 100%
+      +md
+        font-size: 12px
+        line-height: 18px
+  &__rating
+    position: absolute
+    left: 0
+    top: 20px
+  &__image
+    position: relative
+    width: calc(30% - 30px)
+    +lg
+      width: calc(50% - 15px)
+    +md
+      height: 302px
+      background-size: cover !important
+      background: url("/images/product.jpg") no-repeat center -150px
+      border-radius: 12px 12px 0 0
+      width: 100%
+    img
+      border-radius: 12px
+      width: 100%
+      +xl
+        width: 100%
+      +md
+        display: none
+.g-product-section
+  position: relative
+  border-top: 1px solid rgba(154, 147, 170, 0.5)
+  padding: 64px 0
+  display: flex
+  justify-content: space-between
+  &_block
+    display: block
+  +lg
+    display: block
+  +md
+    padding: 40px 0
+.g-product-title
+  width: calc(30% - 30px)
+  +lg
+    width: 100%
+    margin-bottom: 24px
+.g-product
+  &__slider
+    display: none
+    +lg
+      display: block
+  &__proposal
+    +lg
+      display: none
+    &:not(:last-child)
+      margin-bottom: 12px
+      +lg
+        margin-bottom: 0
+  &__video
+    margin: 32px 0 40px
+    +md
+      margin: 32px 0 16px
+  &__brick
+    width: 30%
+    +md
+      width: 100% !important
+    &:first-child
+      width: 40%
+    &:last-child
+      width: 20%
+    &:not(:last-child)
+      +md
+        margin-bottom: 32px
+    &_w100
+      width: 100% !important
+      &:not(:last-child)
+        margin-bottom: 32px
+  &-info
+    &__line
+      display: flex
+      align-items: flex-start
+      flex-wrap: wrap
+      justify-content: space-between
+      +md
+        flex-direction: column
+      &:not(:last-child)
+        margin-bottom: 40px
+        +md
+          margin-bottom: 32px
+      &_column
+        flex-direction: column
+  &-block
+    flex-wrap: wrap
+    width: calc(70% - 30px)
+    +lg
+      width: 100%
+    .text
+      +md
+        font-size: 12px
+        line-height: 18px
+  &__breadcrumbs
+    padding: 33px 0 40px
+    +md
+      padding: 25px 0

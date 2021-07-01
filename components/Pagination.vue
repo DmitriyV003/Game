@@ -1,6 +1,6 @@
 <template>
   <div class="g-pagination">
-     <span class="g-pagination__arrow" @click="$event('onPrev')">
+     <span class="g-pagination__arrow" @click="$emit('onPrev')">
        <chevron-left-icon :size="20" />
      </span>
     

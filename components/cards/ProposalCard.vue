@@ -62,6 +62,7 @@ export default {
     color: white(1)
     font-size: 24px
     line-height: 28px
+    flex-shrink: 0
     +lg
       order: -1
   &__info
