@@ -1,0 +1,221 @@
+@import 'theme/_vars'
+@import 'theme/_mix'
+.catalog-filters-popup
+  display: none
+  +lg
+    display: flex
+    position: fixed
+    justify-content: center
+    align-items: center
+    top: 0
+    width: 100%
+    height: 100%
+    left: 0
+    z-index: 600
+    background: rgba(18, 18, 18, 0.75)
+    backdrop-filter: blur(8px)
+  &__buttons
+    margin-top: 40px
+    display: flex
+    flex-direction: column
+    align-items: center
+    .reset
+      width: 100%
+      margin-top: 24px
+      cursor: pointer
+    .popup-btn
+      width: 100%
+      button
+        width: 100%
+  &__scroll
+    +lg
+      max-height: calc(100vh - 64px - 40px - 36px - 20px - 28px - 35px - 36px - 40px - 50px - 24px - 48px - 48px)
+      overflow-y: auto
+      margin-right: -16px
+      padding-right: 16px
+  &__drop
+    margin-bottom: 20px
+  &__price
+    margin-bottom: 40px
+    .title
+      margin-bottom: 28px
+  &__title
+    display: flex
+    align-items: baseline
+    justify-content: space-between
+    margin-bottom: 36px
+    p
+      color: white(0.9)
+      font-size: 18px
+      line-height: 24px
+    .icon
+      color: $gray
+      font-size: 25px
+      cursor: pointer
+      margin-left: 11px
+  &__body
+    height: calc(100vh - 64px)
+    width: calc(100vw - 32px)
+    border-radius: 12px
+    background: rgba(40, 36, 57, 1)
+    padding: 24px 16px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+.g-input
+  position: relative
+  &__right-label
+    letter-spacing: -0.4px
+    color: $gray
+    font-weight: 500
+    font-size: 14px
+    line-height: 20px
+    position: absolute
+    right: 7px
+    top: 8px
+  &__input
+    padding: 8px 23px 8px 12px
+    width: 100%
+    background: dark-blue(0.2)
+    color: white(1)
+    border-radius: 4px
+    font-weight: 500
+    font-size: 14px
+    line-height: 20px
+.catalog-filters
+  &__show-all
+    +lg
+      display: none
+  &__input
+    width: calc(50% - 11px)
+    background: $main-bg
+  &__range-inputs
+    display: flex
+    align-items: center
+    justify-content: space-between
+.g-range-slider
+  margin-bottom: 24px
+  .vue-slider-dot
+    width: 16px
+    height: 16px
+    background: dark-blue(1)
+    border-radius: 50%
+    &-tooltip
+      top: 0
+    &-handle
+      width: 16px
+      height: 16px
+      background: dark-blue(1)
+  &__tooltip
+    font-weight: 500
+    font-size: 14px
+    line-height: 20px
+    letter-spacing: -0.4px
+    color: white(1)
+.catalog
+  padding: 40px 0 48px
+  +lg
+    padding-top: 16px
+  &__pagination
+    margin-top: 40px
+    +lg
+      margin-top: 32px
+  &__show-more
+    padding: 14px 48px
+    background: rgba(255, 255, 255, 0.04)
+    width: 100%
+    border-radius: 8px
+    display: flex
+    align-items: center
+    justify-content: center
+    color: white(1)
+    text-transform: uppercase
+    font-weight: 500
+    font-size: 16px
+    line-height: 22px
+    transition: all 0.1s
+    &:hover
+      background: rgba(255, 255, 255, 0.08)
+    +sm
+      margin-top: 12px
+  &__drop
+    &:not(:last-child)
+      margin-bottom: 40px
+  &__tags
+    display: flex
+    flex-wrap: wrap
+    margin-top: 8px
+    margin-bottom: 8px
+  &__tag
+    margin-right: 6px
+    margin-bottom: 6px
+  &__price
+    padding-top: 20px
+  &__category-filter
+    &:not(:last-child)
+      margin-bottom: 16px
+    &:first-child
+      padding-top: 20px
+      +lg
+        padding-top: 12px
+    &:last-child
+      +lg
+        padding-bottom: 12px
+  &__row
+    +sm
+      justify-content: space-between
+      margin: 0
+  &__card
+    margin-bottom: 24px
+    +sm
+      width: calc(50% - 6px)
+      padding: 0
+      margin-bottom: 24px
+  &__filter-group
+    &:not(:last-child)
+      margin-bottom: 40px
+.catalog-top-section
+  padding: 41px 0 0
+  &__column
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
+  &__filters
+    display: none
+    color: white(1)
+    cursor: pointer
+    font-size: 25px
+    margin-left: auto
+    margin-bottom: 18px
+    +lg
+      display: block
+  &__sort
+    cursor: pointer
+    display: flex
+    align-items: center
+    color: white(1)
+    span
+      color: inherit
+      margin-right: 12px
+      letter-spacing: -0.4px
+  &__block
+    display: flex
+    align-items: baseline
+    +lg
+      flex-direction: column
+    span
+      margin-left: 16px
+      letter-spacing: -0.4px
+      +lg
+        margin-left: 0
+        margin-top: 18px
+  &__title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-top: 13px
+  &__content
+    padding-bottom: 16px
+    border-bottom: 1px solid white(0.15)
+    +lg
+      padding-bottom: 9px

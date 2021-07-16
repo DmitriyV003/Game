@@ -8,10 +8,13 @@
       @input="$emit('input', $event.target.value)" 
       :type="type"
       class="input-reboot g-input__input"
-      :class="['g-input__input_' + color, { 'g-input__input_readonly': readonly }]"
+      :class="['g-input__input_' + color, { 'g-input__input_readonly': readonly }, { 'g-input_error': error === true }]"
       :placeholder="placeholder"
       :readonly="readonly"
     >
+    <span v-if="error" class="g-input__error">
+      <slot name="error"></slot>
+    </span>
     <eye-icon @click="type = 'text'" v-if="eye && type === 'password'" class="g-input__eye" />
     <eye-off-icon @click="type = 'password'" v-if="eye && type === 'text'" class="g-input__eye" />
   </div>
@@ -33,6 +36,10 @@ export default {
       default: () => null
     },
     eye: {
+      type: Boolean,
+      default: () => false
+    },
+    error: {
       type: Boolean,
       default: () => false
     },
@@ -60,6 +67,15 @@ export default {
   flex-direction: column
   align-items: flex-start
   position: relative
+  &_error
+    border-color: #F5154B !important
+  &__error
+    font-size: 12px
+    position: absolute
+    bottom: -3px
+    transform: translateY(100%)
+    left: 8px
+    color: #F5154B
   &__eye
     color: $gray
     position: absolute

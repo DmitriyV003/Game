@@ -30,32 +30,32 @@
 
         <div class="footer__column">
           <div class="footer__links">
-            <nuxt-link class="footer__link" to="/">Игры</nuxt-link>
-            <nuxt-link class="footer__link" to="/">Софт</nuxt-link>
-            <nuxt-link class="footer__link" to="/">СКИНЫ</nuxt-link>
+            <nuxt-link class="footer__link" to="/catalog">Игры</nuxt-link>
+            <nuxt-link class="footer__link" to="/soft">Софт</nuxt-link>
+            <nuxt-link class="footer__link" to="/skin">СКИНЫ</nuxt-link>
             <nuxt-link class="footer__link" to="/">КЕЙСЫ</nuxt-link>
             <nuxt-link class="footer__link" to="/">GiftCard</nuxt-link>
-            <nuxt-link class="footer__link" to="/">Region free</nuxt-link>
-            <nuxt-link class="footer__link" to="/">обзоры</nuxt-link>
-            <nuxt-link class="footer__link" to="/">Отзывы</nuxt-link>
+            <nuxt-link class="footer__link" to="/legal">Region free</nuxt-link>
+            <nuxt-link class="footer__link" to="/reviews">обзоры</nuxt-link>
+            <nuxt-link class="footer__link" to="/comments">Отзывы</nuxt-link>
           </div>
 
           <div class="footer__line">
             <div class="footer__list">
               <div class="footer__block footer__block_order-10">
-                <nuxt-link class="footer__item" to="/">Продавцам</nuxt-link>
-                <nuxt-link class="footer__item" to="/">Покупателям</nuxt-link>
+                <nuxt-link class="footer__item" to="/for-sellers">Продавцам</nuxt-link>
+                <nuxt-link class="footer__item" to="/for-customers">Покупателям</nuxt-link>
               </div>
               <div class="footer__block footer__block_order-10">
                 <nuxt-link class="footer__item" to="/">Оплата</nuxt-link>
-                <nuxt-link class="footer__item" to="/">Гарантии</nuxt-link>
+                <nuxt-link class="footer__item" to="/legal">Гарантии</nuxt-link>
               </div>
               <div class="footer__block footer__block_order-10 no-md-margin">
-                <nuxt-link class="footer__item" to="/">Новости</nuxt-link>
+                <nuxt-link class="footer__item" to="/news">Новости</nuxt-link>
                 <nuxt-link class="footer__item" to="/">Стать партнером</nuxt-link>
               </div>
               <div class="footer__block">
-                <nuxt-link class="footer__item footer__item_white" to="/">Личный кабинет</nuxt-link>
+                <nuxt-link class="footer__item footer__item_white" to="/dashboard/profile/dfgh">Личный кабинет</nuxt-link>
               </div>
             </div>
 
@@ -91,7 +91,7 @@
 
       <div class="footer__wrapper footer__wrapper_padding-top">
         <span class="footer__text">© Gameincome 2021</span>
-        <nuxt-link class="footer__text" to="/">Политика конфиденциальности</nuxt-link>
+        <nuxt-link class="footer__text" to="/legal">Политика конфиденциальности</nuxt-link>
         <span class="footer__made">made by <span class="footer__text footer__roobin">roob.in</span></span>
 
         <div class="footer__payments">
@@ -107,10 +107,10 @@
 
 <script>
 import CustomIcon from '~/components/CustomIcon'
-import MainButton from "~/components/buttons/MainButton";
+import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GameInComeFooter',
-  components: {MainButton, CustomIcon }
+  components: { MainButton, CustomIcon }
 }
 </script>
 

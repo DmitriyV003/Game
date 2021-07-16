@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <!--  Popup filters  adapted = true -->
     <div v-show="showPopup" class="catalog-filters-popup">
       <div class="catalog-filters-popup__body">
@@ -8,7 +8,7 @@
           <p class="text-weight-600">Выберите необходимые параметры:</p>
           <close-icon @click="showPopup = false" class="icon" />
         </div>
-        
+
         <div class="catalog-filters-popup__price">
           <p class="title text-weight-600 text-color-white text-uppercase">Цена</p>
           <vue-range-slider
@@ -38,9 +38,9 @@
             </div>
           </div>
         </div>
-        
+
         <div class="catalog-filters-popup__scroll">
-          
+
           <!-- Category filter -->
           <drop-items class="catalog-filters-popup__drop" title="Категории">
             <template v-slot:drop-items>
@@ -87,12 +87,12 @@
             </template>
           </drop-items>
         </div>
-        
+
         <div class="catalog-filters-popup__buttons">
           <main-button class="popup-btn" color="primary" label="подобрать" size="xl" />
           <span class="reset text-size-16 text-color-gray">Сбросить фильтры</span>
         </div>
-        
+
       </div>
     </div>
 
@@ -104,7 +104,7 @@
 
           <div class="catalog-top-section__title">
             <div class="catalog-top-section__block">
-              <h1>Игры</h1>
+              <h1>Софт</h1>
               <span class="text-size-14 text-color-gray">390786 продуктов</span>
             </div>
 
@@ -185,11 +185,11 @@
               <drop-items class="catalog__drop" title="Теги">
                 <template v-slot:drop-items>
                   <div class="catalog__tags">
-                    <g-tag 
-                      v-for="tag in tags.slice(0, tagsToShow)" 
+                    <g-tag
+                      v-for="tag in tags.slice(0, tagsToShow)"
                       :key="tag.val"
                       class="catalog__tag"
-                      :label="tag.label" 
+                      :label="tag.label"
                     />
                   </div>
 
@@ -200,7 +200,7 @@
             </section>
           </b-col>
 
-          <!--  Catalog items adapted = true --> 
+          <!--  Catalog items adapted = true -->
           <b-col xl="9" lg="9">
             <b-row class="catalog__row">
               <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
@@ -213,7 +213,7 @@
                 <game-card adaptive-sm />
               </b-col>
             </b-row>
-            
+
             <button class="button-reboot catalog__show-more">Показать больше</button>
 
             <g-pagination class="catalog__pagination" @onNext="next" />
@@ -303,5 +303,5 @@ export default {
       console.log(1111)
     }
   }
-}
+}  
 </script>

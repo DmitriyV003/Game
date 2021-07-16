@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <!--  Popup filters  adapted = true -->
     <div v-show="showPopup" class="catalog-filters-popup">
       <div class="catalog-filters-popup__body">
@@ -8,7 +8,7 @@
           <p class="text-weight-600">Выберите необходимые параметры:</p>
           <close-icon @click="showPopup = false" class="icon" />
         </div>
-        
+
         <div class="catalog-filters-popup__price">
           <p class="title text-weight-600 text-color-white text-uppercase">Цена</p>
           <vue-range-slider
@@ -38,9 +38,9 @@
             </div>
           </div>
         </div>
-        
+
         <div class="catalog-filters-popup__scroll">
-          
+
           <!-- Category filter -->
           <drop-items class="catalog-filters-popup__drop" title="Категории">
             <template v-slot:drop-items>
@@ -72,27 +72,14 @@
           </drop-items>
 
           <!-- Tag filter -->
-          <drop-items class="catalog-filters-popup__drop" title="Теги">
-            <template v-slot:drop-items>
-              <div class="catalog__tags">
-                <g-tag
-                  v-for="tag in tags.slice(0, tagsToShow)"
-                  class="catalog__tag"
-                  :key="tag.val"
-                  :label="tag.label"
-                />
-              </div>
-
-              <show-all @click.native="showAll('tagsToShow', tags.length)" label="Смотреть все" />
-            </template>
-          </drop-items>
+          <g-search />
         </div>
-        
+
         <div class="catalog-filters-popup__buttons">
           <main-button class="popup-btn" color="primary" label="подобрать" size="xl" />
-          <span class="reset text-size-16 text-color-gray">Сбросить фильтры</span>
+          <button class="button-reboot reset text-size-16 text-color-gray">Сбросить фильтры</button>
         </div>
-        
+
       </div>
     </div>
 
@@ -182,38 +169,34 @@
               </drop-items>
 
               <!-- Tag filter -->
-              <drop-items class="catalog__drop" title="Теги">
+              <drop-items class="catalog__drop" title="Коллекция">
                 <template v-slot:drop-items>
                   <div class="catalog__tags">
-                    <g-tag 
-                      v-for="tag in tags.slice(0, tagsToShow)" 
-                      :key="tag.val"
-                      class="catalog__tag"
-                      :label="tag.label" 
-                    />
+                    <g-search />
                   </div>
-
-                  <show-all @click.native="showAll('tagsToShow', tags.length)" label="Смотреть все" />
                 </template>
               </drop-items>
 
             </section>
           </b-col>
 
-          <!--  Catalog items adapted = true --> 
+          <!--  Catalog items adapted = true -->
           <b-col xl="9" lg="9">
             <b-row class="catalog__row">
               <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                <game-card adaptive-sm />
+                <g-skin-card />
               </b-col>
               <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                <game-card adaptive-sm />
+                <g-skin-card />
               </b-col>
               <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                <game-card adaptive-sm />
+                <g-skin-card />
+              </b-col>
+              <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
+                <g-skin-card />
               </b-col>
             </b-row>
-            
+
             <button class="button-reboot catalog__show-more">Показать больше</button>
 
             <g-pagination class="catalog__pagination" @onNext="next" />
@@ -226,82 +209,84 @@
 </template>
 
 <script>
-import BreadCrumb from '~/components/BreadCrumb'
-import DropItems from '~/components/DropItems'
-import GCheckBox from '~/components/form-elements/GCheckbox'
-import icons from '~/mixins/icons'
-import ShowAll from '~/components/buttons/MainLink'
-import GameCard from '~/components/cards/GameCard'
-import { mapState } from 'vuex'
-import MainButton from '~/components/buttons/MainButton'
-import GTag from '~/components/Tag'
-import GPagination from '~/components/Pagination'
-export default {
-  name: 'Catalog',
-  components: { GPagination, GTag, MainButton, GameCard, ShowAll, GCheckBox, DropItems, BreadCrumb },
-  mixins: [icons],
-  layout: 'default',
-  computed: {
-    ...mapState({
-      windowSize: state => state.common.windowSize
-    })
-  },
-  mounted () {
-    const that = this
-    window.addEventListener('resize', function () {
-      if (that.windowSize <= 992) {
-        that.showAll('categoriesToShow', that.categories.length)
-      } else {
-        that.categoriesToShow = 2
-        that.showPopup = false
-      }
-    })
-  },
-  data: () => {
-    return {
-      showPopup: false,
-      priceRange: [0, 0],
-      checkedCategories: [],
-      categoriesToShow: 2,
-      tagsToShow: 13,
-      tags: [
-        { val: 'val1', label: 'Серии' },
-        { val: 'val2', label: 'онлайн' },
-        { val: 'val3', label: 'военные' },
-        { val: 'val4', label: 'зомби' },
-        { val: 'val15', label: 'атмосфера' },
-        { val: 'val1', label: '3D' },
-        { val: 'val2', label: 'выживание' },
-        { val: 'val3', label: 'открытый мир' },
-        { val: 'val4', label: 'смешная' },
-        { val: 'val15', label: 'фентези' },
-        { val: 'val1', label: 'гонки' },
-        { val: 'val2', label: 'хоррор' },
-        { val: 'val3', label: 'Quick-time events' },
-        { val: 'val4', label: 'зомби' },
-        { val: 'val15', label: 'атмосфера' },
-        { val: 'val1', label: 'Серии' },
-        { val: 'val2', label: 'онлайн' },
-        { val: 'val3', label: 'военные' },
-        { val: 'val4', label: 'зомби' },
-        { val: 'val15', label: 'атмосфера' }
-      ],
-      categories: [
-        { val: 'val1', label: 'Экшн', count: 1254 },
-        { val: 'val2', label: 'Приключения', count: 125 },
-        { val: 'val3', label: 'Стратегии', count: 12544 },
-        { val: 'val4', label: 'Инди', count: 54 },
-        { val: 'val15', label: 'Аниме', count: 12547 }
-      ]
-    }
-  },
-  methods: {
-    showAll (whatToShow, count) {
-      this[whatToShow] = count
+  import BreadCrumb from '~/components/BreadCrumb'
+  import DropItems from '~/components/DropItems'
+  import GCheckBox from '~/components/form-elements/GCheckbox'
+  import icons from '~/mixins/icons'
+  import ShowAll from '~/components/buttons/MainLink'
+  import GameCard from '~/components/cards/GameCard'
+  import { mapState } from 'vuex'
+  import MainButton from '~/components/buttons/MainButton'
+  import GTag from '~/components/Tag'
+  import GPagination from '~/components/Pagination'
+  import GSkinCard from '~/components/cards/SkinCard'
+  import GSearch from "~/components/form-elements/GSearch";
+  export default {
+    name: 'SkinsPage',
+    components: {GSearch, GSkinCard, GPagination, GTag, MainButton, GameCard, ShowAll, GCheckBox, DropItems, BreadCrumb },
+    mixins: [icons],
+    layout: 'default',
+    computed: {
+      ...mapState({
+        windowSize: state => state.common.windowSize
+      })
     },
-    next () {
-      console.log(1111)
+    mounted () {
+      const that = this
+      window.addEventListener('resize', function () {
+        if (that.windowSize <= 992) {
+          that.showAll('categoriesToShow', that.categories.length)
+        } else {
+          that.categoriesToShow = 2
+          that.showPopup = false
+        }
+      })
+    },
+    data: () => {
+      return {
+        showPopup: false,
+        priceRange: [0, 0],
+        checkedCategories: [],
+        categoriesToShow: 2,
+        tagsToShow: 13,
+        tags: [
+          { val: 'val1', label: 'Серии' },
+          { val: 'val2', label: 'онлайн' },
+          { val: 'val3', label: 'военные' },
+          { val: 'val4', label: 'зомби' },
+          { val: 'val15', label: 'атмосфера' },
+          { val: 'val1', label: '3D' },
+          { val: 'val2', label: 'выживание' },
+          { val: 'val3', label: 'открытый мир' },
+          { val: 'val4', label: 'смешная' },
+          { val: 'val15', label: 'фентези' },
+          { val: 'val1', label: 'гонки' },
+          { val: 'val2', label: 'хоррор' },
+          { val: 'val3', label: 'Quick-time events' },
+          { val: 'val4', label: 'зомби' },
+          { val: 'val15', label: 'атмосфера' },
+          { val: 'val1', label: 'Серии' },
+          { val: 'val2', label: 'онлайн' },
+          { val: 'val3', label: 'военные' },
+          { val: 'val4', label: 'зомби' },
+          { val: 'val15', label: 'атмосфера' }
+        ],
+        categories: [
+          { val: 'val1', label: 'Экшн', count: 1254 },
+          { val: 'val2', label: 'Приключения', count: 125 },
+          { val: 'val3', label: 'Стратегии', count: 12544 },
+          { val: 'val4', label: 'Инди', count: 54 },
+          { val: 'val15', label: 'Аниме', count: 12547 }
+        ]
+      }
+    },
+    methods: {
+      showAll (whatToShow, count) {
+        this[whatToShow] = count
+      },
+      next () {
+        console.log(1111)
+      }
     }
   }
-}
 </script>

@@ -1,17 +1,19 @@
 <template>
   <div class="button__wrapper" :class="{ 'button_full-width': fullWidth }">
     <nuxt-link
-      v-if="to"
+      v-if="tag === 'a'"
       :to="to"
       :tag="tag"
-      class="button button-reboot"
       :class="['button_' + color, 'button_' + size, { 'button_full-width': fullWidth }]"
+      class="button"
     >{{ label }}</nuxt-link>
 
     <button
-      v-if="!to"
-      class="button button-reboot"
-      :class="['button_' + color, 'button_' + size, { 'button_full-width': fullWidth }]"
+      v-if="tag === 'button'"
+      class="button"
+      :disabled="disabled"
+      :type="type"
+      :class="['button_' + color, 'button_' + size, { 'button_full-width': fullWidth }, { 'button_disabled': disabled }]"
     >{{ label }}</button>
   </div>
 </template>
@@ -22,6 +24,14 @@ export default {
     color: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      default: () => ''
+    },
+    disabled: {
+      type: Boolean,
+      default: () => false
     },
     label: {
       type: String,
@@ -54,13 +64,19 @@ export default {
     padding: 12px 32px
     border-radius: 6px
     color: $white
-    display: flex
+    display: inline-flex
+    font-weight: 500
     justify-content: center
     align-items: center
     position: relative
+    outline: none !important
+    border: none
     z-index: 5
     +md
       padding: 8px 34px
+    &_disabled
+      background: #9A93AA !important
+      cursor: not-allowed !important
     &_full-width
       width: 100%
     &_xl

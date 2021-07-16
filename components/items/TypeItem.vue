@@ -30,6 +30,10 @@ export default {
   border-radius: 12px
   overflow: hidden
   cursor: pointer
+  &:hover
+    .g-type-item__img
+      &::after
+        opacity: 0
   +lg
     margin-bottom: 16px
   .button
@@ -66,5 +70,5 @@ export default {
       border-radius: 0 12px 12px 0
     img
       width: 100%
-      border-radius: 0 12px 12px 0
+      border-radius: 12px 12px 0   0
 </style>

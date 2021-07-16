@@ -19,7 +19,8 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { name: 'csrf-token' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -51,7 +52,9 @@ module.exports = {
     '@/plugins/vue-slick',
     '@/plugins/vue-range-slider',
     '@/plugins/event-bus',
-    { src: '@/plugins/rating', ssr: false }
+    { src: '@/plugins/rating', ssr: false },
+    '@/plugins/axios',
+    '@/plugins/vuelidate'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -75,6 +78,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'https://148.251.127.197/api'
   },
   /*
   ** Build configuration

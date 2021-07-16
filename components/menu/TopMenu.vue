@@ -8,10 +8,10 @@
           </nuxt-link>
 
           <div class="header__links header__links_gray">
-            <nuxt-link to="/" class="header__link">Продавцам</nuxt-link>
-            <nuxt-link to="/" class="header__link">Покупателям</nuxt-link>
+            <nuxt-link to="/for-sellers" class="header__link">Продавцам</nuxt-link>
+            <nuxt-link to="/for-customers" class="header__link">Покупателям</nuxt-link>
             <nuxt-link to="/" class="header__link">Оплата</nuxt-link>
-            <nuxt-link to="/" class="header__link">Гарантии</nuxt-link>
+            <nuxt-link to="/legal" class="header__link">Гарантии</nuxt-link>
             <nuxt-link to="/" class="header__link">Стать партнером</nuxt-link>
           </div>
 
@@ -39,13 +39,13 @@
 
         <div class="header__line">
           <div class="header__links">
-            <nuxt-link exact to="/" class="header__link header__link_bold">Игры</nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold">Софт</nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold">Скины</nuxt-link>
+            <nuxt-link exact to="/catalog" class="header__link header__link_bold">Игры</nuxt-link>
+            <nuxt-link exact to="/soft" class="header__link header__link_bold">Софт</nuxt-link>
+            <nuxt-link exact to="/skin" class="header__link header__link_bold">Скины</nuxt-link>
             <nuxt-link exact to="/" class="header__link header__link_bold">Кейсы</nuxt-link>
             <nuxt-link exact to="/" class="header__link header__link_bold">GiftCard</nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold">Новости</nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold">Отзывы</nuxt-link>
+            <nuxt-link exact to="/news" class="header__link header__link_bold">Новости</nuxt-link>
+            <nuxt-link exact to="/comments" class="header__link header__link_bold">Отзывы</nuxt-link>
           </div>
 
           <Search class="header__search" />
@@ -71,32 +71,32 @@
               </div>
 
               <div class="header__drop-links">
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/catalog">
                   <span></span>
                   <span class="text">Игры</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/soft">
                   <span></span>
                   <span class="text">Софт</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/legal">
                   <span></span>
                   <span class="text">Region free</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/reviews">
                   <span></span>
                   <span class="text">Обзоры</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/news">
                   <span></span>
                   <span class="text">Новости</span>
                 </nuxt-link>
 
-                <nuxt-link class="header__drop-link" to="/">
+                <nuxt-link class="header__drop-link" to="/comments">
                   <span></span>
                   <span class="text">Отзывы</span>
                 </nuxt-link>

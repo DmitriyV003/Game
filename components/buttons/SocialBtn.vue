@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="to" exact replace class="social-btn">
+  <nuxt-link tag="a" :target="target" :to="to" :href="href" exact class="social-btn">
     <span :style="{ background: iconColor }" class="social-btn__icon">
       <img :src="icon" alt="">
     </span>
@@ -22,13 +22,21 @@ export default {
       type: String,
       required: true
     },
+    target: {
+      type: String,
+      default: () => '_blank'
+    },
+    href: {
+      type: String,
+      default: () => ''
+    },
     iconColor: {
       type: String,
       required: true
     },
     to: {
       type: String,
-      required: true
+      default: () => ''
     }
   }
 }
