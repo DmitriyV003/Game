@@ -1,7 +1,7 @@
 <template>
   <div class="g-avatar">
     <div class="g-avatar__image" :class="'g-avatar__image_' + size">
-      <img src="" alt="">
+      <img :src=image alt="">
     </div>
     <div v-if="name !== null || caption !== null"  class="g-avatar__block">
       <span v-if="name !== null" class="text-white text-normal text-weight-600">{{ name }}</span>

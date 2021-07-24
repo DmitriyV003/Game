@@ -1,6 +1,8 @@
 <template>
   <div class="g-page">
-    <g-new-question-popup />
+    <g-new-question-popup
+      :category="category"
+    />
     <g-question-details />
     
     <b-container>
@@ -28,11 +30,30 @@
                 :dots="false"
                 :infinite="false"
               >
-                <g-sort-button active class="g-sales__btn" label="Обшие вопросы (3)" />
-                <g-sort-button class="g-sales__btn" label="Споры" />
-                <g-sort-button class="g-sales__btn" label="Сотрудничество (1)" />
-                <g-sort-button class="g-sales__btn" label="Тех. поддержка" />
-                <g-sort-button class="g-sales__btn" label="Тех. поддержка" />
+                <g-sort-button 
+                  :active="category.label === questionsCategories.general.label" 
+                  class="g-sales__btn" 
+                  label="Обшие вопросы" 
+                  @click.native="getQuestions(questionsCategories.general)"
+                />
+                <g-sort-button 
+                  :active="category.label === questionsCategories.dispute.label" 
+                  class="g-sales__btn" 
+                  label="Споры"
+                  @click.native="getQuestions(questionsCategories.dispute)"
+                />
+                <g-sort-button 
+                  :active="category.label === questionsCategories.partnership.label" 
+                  class="g-sales__btn" 
+                  label="Сотрудничество"
+                  @click.native="getQuestions(questionsCategories.partnership)"
+                />
+                <g-sort-button 
+                  :active="category.label === questionsCategories.tech.label" 
+                  class="g-sales__btn" 
+                  label="Тех. поддержка"
+                  @click.native="getQuestions(questionsCategories.tech)"
+                />
               </vue-slick>
             </div>
           </div>
@@ -47,17 +68,17 @@
             </div>
             
             <div class="g-questions__lines">
-              <div class="g-questions__line" @click="eventBus.$emit('questionDetailsPopupOpen')">
-                <span class="number"># 4754224543</span>
-                <span class="text">Планируются лиdvfdg drghdrh dthtrdh dth dth  сезонные акции?</span>
-                <span class="status">Ожидает ответа</span>
+              <div 
+                class="g-questions__line" 
+                @click="eventBus.$emit('questionDetailsPopupOpen', item.appealId)"
+                v-for="item in questions"
+                :key="item.appealNumber"
+              >
+                <span class="number"># {{ item.appealNumber }}</span>
+                <span class="text">{{ item.appealTheme }}</span>
+                <span class="status" :style="{ color: detectAnswer(item.appealAnswered).color }">{{ detectAnswer(item.appealAnswered).text }}</span>
               </div>
 
-              <div class="g-questions__line" @click="eventBus.$emit('questionDetailsPopupOpen')">
-                <span class="number"># 4754224543</span>
-                <span class="text">Планируются лиdvfdg drghdrh dthtdzfvds gsd fgdsfgdfs gfdhg dfh dfhdfa hfdh fdhfdh fdhdrrdh dth dth  сезонные акции?</span>
-                <span class="status">Ожидает ответа</span>
-              </div>
             </div>
           </div>
         </b-col>
@@ -71,19 +92,45 @@ import GDashboardNavigation from '~/components/dashboard/Navigation'
 import MainButton from '~/components/buttons/MainButton'
 import icons from '~/mixins/icons'
 import { eventBus } from '~/plugins/event-bus'
-import ShowAll from "~/components/buttons/MainLink";
-import GSortButton from "~/components/dashboard/SortButton";
-import GNewQuestionPopup from "~/components/popups/NewQuestion";
-import GQuestionDetails from "~/components/popups/GQuestionDetails";
+import ShowAll from '~/components/buttons/MainLink'
+import GSortButton from '~/components/dashboard/SortButton'
+import GNewQuestionPopup from '~/components/popups/NewQuestion'
+import GQuestionDetails from '~/components/popups/GQuestionDetails'
+import { mapState } from 'vuex'
+import questionsCategories from '~/plugins/questionsCategories'
+import detectStatus from "~/mixins/detectStatus";
 export default {
-  components: {GQuestionDetails, GNewQuestionPopup, GSortButton, ShowAll, MainButton, GDashboardNavigation },
-  mixins: [icons],
+  components: { GQuestionDetails, GNewQuestionPopup, GSortButton, ShowAll, MainButton, GDashboardNavigation },
+  mixins: [icons, detectStatus],
   name: 'QuestionsPage',
   data: () => {
     return {
-      eventBus
+      eventBus,
+      questionsCategories
     }
-  }    
+  },
+  computed: {
+    ...mapState({
+      questions: state => state.questions.questions,
+      category: state => state.questions.category
+    })
+  },
+  methods: {
+    async getQuestions (category) {
+      try {
+        await this.$store.dispatch('questions/getQuestions', category)
+      } catch (e) {
+        throw e
+      }
+    }
+  },
+  async mounted () {
+    try {
+      await this.getQuestions(questionsCategories.general)
+    } catch (e) {
+      console.log(e.response)
+    }
+  }
 }
 </script>
 

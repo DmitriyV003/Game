@@ -1,24 +1,25 @@
 <template>
-  <div class="user">
+  <div class="user" v-if="user !== null">
     <div class="user__main" @click="balanceDropShow = !balanceDropShow">
       <div class="user__logo">
+        <img :src="user.avatar" alt="">
       </div>
 
       <div class="user__body">
-        <span class="user__name">Konstantin Vinogradov</span>
+        <span class="user__name">{{ user.name }} {{ user.surname }}</span>
         <chevron-down-icon :class="{ 'user__arrow_active': balanceDropShow }" class="user__arrow" />
       </div>
     </div>
 
     <transition>
       <div class="user__drop" @mouseleave="balanceDropShow = false" v-show="balanceDropShow">
-        <span class="user__email">Konstantin_Vinogradov@gmail.com</span>
+        <span class="user__email">{{ user.email }}</span>
         <div class="user__buttons">
-          <nuxt-link to="/account" class="user__button">
+          <nuxt-link :to="'/dashboard/profile/'" class="user__button">
             <img class="user__icon" src="/images/profile.svg" alt="">
             <span class="user__text">Личный кабинет</span>
           </nuxt-link>
-          <button class="user__button">
+          <button class="user__button" @click="logOut">
             <img class="user__icon" src="/images/sign-out.svg" alt="">
             <span class="user__text">Выход</span>
           </button>
@@ -38,6 +39,17 @@ export default {
   mixins: [icons],
   components: {
     VueSlideUpDown
+  },
+  props: {
+    user: {
+      type: Object,
+      default: () => null
+    }
+  },
+  methods: {
+    logOut () {
+      this.$store.dispatch('auth/logOut')
+    }
   },
   data: () => {
     return {
@@ -127,6 +139,11 @@ export default {
       border-radius: 50%
       flex-shrink: 0
       margin-right: 8px
+      overflow: hidden
+      img
+        width: 100%
+        height: 100%
+        border-radius: 50%
     &__name
       font-weight: 500
       line-height: 16px

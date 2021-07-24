@@ -23,17 +23,17 @@
                 :dots="false"
                 :infinite="false"
               >
-                <g-sort-button active class="purchases__btn" label="Игры (5)" />
-                <g-sort-button class="purchases__btn" label="Софт (10)" />
-                <g-sort-button class="purchases__btn" label="Скины (2)" />
-                <g-sort-button class="purchases__btn" label="Кейсы (0)" />
+                <g-sort-button @click.native="activeFilter = 'game'" :active="activeFilter === 'game'" class="purchases__btn" label="Игры (5)" />
+                <g-sort-button @click.native="activeFilter = 'soft'" :active="activeFilter === 'soft'" class="purchases__btn" label="Софт (10)" />
+                <g-sort-button @click.native="activeFilter = 'skin'" :active="activeFilter === 'skin'" class="purchases__btn" label="Скины (2)" />
+                <g-sort-button @click.native="activeFilter = 'case'" :active="activeFilter === 'case'" class="purchases__btn" label="Кейсы (0)" />
               </vue-slick>
             </div>
             
             <div class="purchases__sort_mobile">
               <div>
                 <p class="purchases__mini-title">Мои игры</p>
-                <div class="purchases__sort">
+                <div class="purchases__sort" @click="purchases.sort(sortByDate)">
                   <span>Сначала новые</span>
                   <img src="/images/filter.svg" alt="">
                 </div>
@@ -51,21 +51,24 @@
           </div>
           
           <b-row>
-            <b-col xl="4" lg="4" md="6">
-              <g-purchase-item />
+            <b-col 
+              xl="4" 
+              lg="4" 
+              md="6"
+              v-if="purchases.length > 0 || purchases !== null"
+              v-for="purchase in purchases((el) => el.type.toLowerCase() === activeFilter.toLowerCase())"
+              :key="purchase.purchaseId"
+            >
+              <g-purchase-item 
+                :id="Number(purchase.purchaseId)"
+                :name="purchase.itemName"
+                :code="purchase.key"
+                :type="purchase.type"
+                :platform="purchase.itemPlatform"
+                :picture="purchase.itemBackground"
+              />
             </b-col>
-
-            <b-col xl="4" lg="4" md="6">
-              <g-purchase-item />
-            </b-col>
-
-            <b-col xl="4" lg="4" md="6">
-              <g-purchase-item />
-            </b-col>
-
-            <b-col xl="4" lg="4" md="6">
-              <g-purchase-item />
-            </b-col>
+            
           </b-row>
         </b-col>
       </b-row>
@@ -79,12 +82,32 @@ import GPurchaseItem from '~/components/dashboard/PurchaseItem'
 import RoundedButton from '~/components/buttons/RoundedButton'
 import GSortButton from '~/components/dashboard/SortButton'
 import icons from '~/mixins/icons'
+import { mapGetters } from 'vuex'
 export default {
   name: 'GDashboardPurchasesPage',
   mixins: [icons],
-  components: {GSortButton, RoundedButton, GPurchaseItem, GDashboardNavigation },
-  mounted () {
-    console.log(this.$route)
+  data: () => {
+    return {
+      activeFilter: 'game'
+    }
+  },
+  components: { GSortButton, RoundedButton, GPurchaseItem, GDashboardNavigation },
+  computed: {
+    ...mapGetters({
+      purchases: 'purchases/getPurchases'
+    })
+  },
+  methods: {
+    sortByDate (a, b) {
+      return (new Date(a.createdAt) > new Date(b.createdAt)) ? 1 : (new Date(a.createdAt) < new Date(b.createdAt)) ? -1 : 0
+    }
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch('purchases/getAll')
+    } catch (e) {
+      
+    }
   }
 }
 </script>

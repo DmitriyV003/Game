@@ -1,23 +1,23 @@
 <template>
   <div class="g-purchased">
     <div class="g-purchased__top g-purchased__top_mobile">
-      <h2>HITMAN 3</h2>
+      <h2>{{ name }}</h2>
       <show-all @custom-click="openNewDispute" label="Открыть спор" :icon="false" />
     </div>
     
     <div class="g-purchased__img">
-      <img src="/images/purchased.svg" alt="">
+      <img :src="image" alt="">
     </div>
     
     <div class="g-purchased__block">
       <div class="g-purchased__top g-purchased__top_desktop">
-        <h2>HITMAN 3</h2>
+        <h2>{{ name }}</h2>
         <show-all @custom-click="openNewDispute" label="Открыть спор" :icon="false" />
       </div>
       
-      <p class="text-color-white text-weight-600 g-purchased__price">2 230 ₽</p>
+      <p class="text-color-white text-weight-600 g-purchased__price">{{ price }} ₽</p>
       
-      <g-key adaptive="xl" value="4QA26-BTDKE-XKL43M" />
+      <g-key adaptive="xl" :value="code" />
     </div>
   </div>
 </template>
@@ -32,6 +32,25 @@ export default {
   data: () => {
     return {
       eventBus
+    }
+  },
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    code: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true,
+      default: () => '/images/purchased.svg'
     }
   },
   components: { GKey, ShowAll },

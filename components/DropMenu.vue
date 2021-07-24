@@ -30,6 +30,8 @@ export default {
     setActive(value) {
       this.currentState = this.links.find(x => x.value === value)
       this.open = false
+      
+      this.$emit('input', this.currentState.value)
     }
   },
   props: {

@@ -29,7 +29,7 @@
             </div>
           </div>
 
-          <Profile class="header__user" />
+          <Profile :user="user" class="header__user" />
           
           <div @click="dropMenu = true" class="header__burger">
             <img src="/images/icons/mobile menu.svg" alt="">
@@ -122,7 +122,8 @@ export default {
   mixins: [icons],
   computed: {
     ...mapState({
-      token: state => state.auth.token
+      token: state => state.auth.token,
+      user: state => state.user.user
     })
   },
   data () {

@@ -27,6 +27,7 @@
             class="auth-structure__input"
             placeholder="Пароль *"
             :error="$v.form.password.$error || 'password' in apiErrors"
+            type="password"
           >
             <template v-slot:error>
               <span v-if="!$v.form.password.required && $v.form.password.$error">Пароль обязателен</span>
@@ -82,7 +83,6 @@ export default {
   },
   methods: {
     async signInByEmail () {
-      console.log(this.$v)
       try {
         this.disabled = true
         await this.$store.dispatch('auth/signInByEmail', this.form)
@@ -90,7 +90,6 @@ export default {
         if (e.response.status === 422) {
           this.apiErrors = e.response.data.errors
         }
-        console.log(e.response)
       } finally {
         this.disabled = false
       }

@@ -1,18 +1,18 @@
 <template>
   <div class="g-user-data">
     <div class="g-user-data__title">
-      <h2>Здравствуйте, <br>Константин Виноградов!</h2>
+      <h2>Здравствуйте, <br>{{ name }} {{ surname }}!</h2>
       <settings-icon class="g-user-data__settings" />
     </div>
 
     <div class="g-user-data__block">
       <span class="g-user-data__caption">Отображаемое имя</span>
-      <span class="g-user-data__value">Vino_Costa</span>
+      <span class="g-user-data__value">{{ nickname }}</span>
     </div>
 
     <div class="g-user-data__block">
-      <span class="g-user-data__caption">Отображаемое имя</span>
-      <span class="g-user-data__value">Vino_Costa</span>
+      <span class="g-user-data__caption">Ваш e-mail</span>
+      <span class="g-user-data__value">{{ email }}</span>
     </div>
   </div>
 </template>
@@ -22,7 +22,25 @@ import icons from '~/mixins/icons'
 
 export default {
   name: 'GUserData',
-  mixins: [icons]
+  mixins: [icons],
+  props: {
+    nickname: {
+      type: String,
+      default: () => null
+    },
+    email: {
+      type: String,
+      default: () => null
+    },
+    name: {
+      type: String,
+      default: () => null
+    },
+    surname: {
+      type: String,
+      default: () => null
+    }
+  }
 }
 </script>
 

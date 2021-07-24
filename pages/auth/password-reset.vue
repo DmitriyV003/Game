@@ -48,7 +48,8 @@
           email: null
         },
         apiErrors: {},
-        disabled: false
+        disabled: false,
+        warning: null
       }
     },
     validations: {
@@ -68,6 +69,8 @@
         } catch (e) {
           if (e.response.status === 422) {
             this.apiErrors = e.response.data.errors
+          } else if (e.response.status === 400) {
+            this.warning = e.response.data.warning
           }
         } finally {
           this.disabled = false

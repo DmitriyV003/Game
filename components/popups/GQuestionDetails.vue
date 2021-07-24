@@ -3,34 +3,39 @@
   <div class="g-popup" v-show="val">
     <div class="g-question-details">
       <div class="g-question-details__top">
-        <div class="g-question-details__left">
-          <span class="number"># 475422</span>
-          <h5 class="title">Планируются ли сезонные акции?</h5>
-          <span class="status">Ожидает ответа</span>
+        <div class="g-question-details__left" v-if="question !== null">
+          <span class="number"># {{ question.appealNumber }}</span>
+          <h5 class="title">{{ question.appealTheme }}</h5>
+          <span 
+            class="status"
+            :style="{ color: detectAnswer(question.appealAnswered).color }"
+          >{{ detectAnswer(question.appealAnswered).text }}</span>
         </div>
         <close-icon @click="val = false" class="g-popup__close g-question-details__close" />
       </div>
 
       <div class="g-question-details__messages">
-        <div class="g-question-details__message">
-          <avatar />
+        <div 
+          class="g-question-details__message"
+          v-if="messages !== null || messages.length > 0"
+          v-for="message in messages"
+          :key="message.createdAt"
+          :class="{ 'g-question-details__message_income': message.userName.toLowerCase() === user.name.toLowerCase() }"
+        >
+          <avatar
+            :name="message.userName"
+            :image="message.userAvatar"
+          />
 
-          <div class="g-question-details__text">
-            <p class="text">На днях разработчиками был анонсирован выход игры RaidInvolve 2.0.
-              Я хотел бы уточнить, будете ли вы продавать ключи? Естественно не в день релиза, но в течении хотя бы месяца после выхода будет ли подобная возможность?</p>
-            <span class="date">04.04.2021</span>
+          <div 
+            class="g-question-details__text"
+            :class="{ 'g-question-details__text_income': message.userName.toLowerCase() === user.name.toLowerCase() }"
+          >
+            <p class="text">{{ message.text }}</p>
+            <span class="date">{{ new Date(message.createdAt).toDateString() }}</span>
           </div>
         </div>
-
-        <div class="g-question-details__message g-question-details__message_income">
-          <avatar />
-
-          <div class="g-question-details__text g-question-details__text_income">
-            <p class="text">На днях разработчиками был анонсирован выход игры RaidInvolve 2.0.
-              Я хотел бы уточнить, будете ли вы продавать ключи? Естественно не в день релиза, но в течении хотя бы месяца после выхода будет ли подобная возможность?</p>
-            <span class="date">04.04.2021</span>
-          </div>
-        </div>
+        
       </div>
       
       <div v-show="!showTextarea" class="g-question-details__bottom">
@@ -38,17 +43,23 @@
         <main-button @click.native="showTextarea = true" color="primary" label="Ответить" size="xl" />
       </div>
 
-      <div v-show="showTextarea" class="g-question-details__answer">
+      <form @submit.prevent="postCreateMessage(question.appealId)" v-show="showTextarea" class="g-question-details__answer">
         <div class="g-question-details__cancel-top">
           <span class="text">Текст сообщения:</span>
           <span @click="showTextarea = false" class="g-question-details__cancel">Отменить <close-icon class="icon" /> </span>
         </div>
-        <textarea class="input-reboot g-question-details__textarea"></textarea>
+        <textarea v-model="$v.form.text.$model" class="input-reboot g-question-details__textarea"></textarea>
 
         <div class="g-question-details__bottom g-question-details__bottom_right">
-          <main-button @click.native="showTextarea = true" color="primary" label="Ответить" size="xl" />
+          <main-button
+            :disabled="disabled || $v.$invalid"
+            type="submit" 
+            color="primary" 
+            label="Ответить" 
+            size="xl" 
+          />
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -58,15 +69,64 @@ import {eventBus} from '~/plugins/event-bus'
 import icons from '~/mixins/icons'
 import Avatar from '~/components/Avatar'
 import MainButton from '~/components/buttons/MainButton'
+import { mapState, mapGetters } from 'vuex'
+import detectStatus from '~/mixins/detectStatus'
+import {email, maxLength, minLength, required} from "vuelidate/lib/validators";
 
 export default {
   name: 'GQuestionDetails',
   components: { MainButton, Avatar },
-  mixins: [icons],
+  mixins: [icons, detectStatus],
   data: () => {
     return {
       val: false,
-      showTextarea: false
+      showTextarea: false,
+      question: null,
+      disabled: false,
+      form: {
+        text: null
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      messages: state => state.questionMessages.messages,
+      user: state => state.user.user
+    }),
+    ...mapGetters({
+      questionById: 'questions/getQuestionById'
+    })
+  },
+  validations: {
+    form: {
+      text: {
+        required,
+        maxLength: maxLength(500)
+      },
+    }
+  },
+  methods: {
+    async getQuestionMessages (questionId) {
+      try {
+        await this.$store.dispatch('questionMessages/getQuestionMessages', questionId)
+      } catch (e) {
+        console.log(e.response)
+      }
+    },
+    async postCreateMessage (id) {
+      try {
+        this.disabled = true
+        await this.$store.dispatch('questionMessages/postCreateMessage', { id, data: this.form })
+        this.clearForm()
+      } catch (e) {
+        console.log(e.response)
+      } finally {
+        this.disabled = false
+      }
+    },
+    clearForm () {
+      this.form.text = null
+      this.$v.reset()
     }
   },
   created () {
@@ -74,8 +134,14 @@ export default {
       this.val = false
     })
 
-    eventBus.$on('questionDetailsPopupOpen', () => {
+    eventBus.$on('questionDetailsPopupOpen', async (questionId) => {
       this.val = true
+      this.question = this.questionById(questionId)
+      try {
+        await this.getQuestionMessages(questionId)
+      } catch (e) {
+        
+      }
     })
   }
 }
@@ -183,6 +249,7 @@ export default {
       line-height: 20px
       letter-spacing: -0.4px
       color: $gray
+      margin-right: auto
     .date
       font-size: 12px
       line-height: 16px

@@ -1,9 +1,9 @@
 <template>
-  <div class="g-purchase-item__wrapper">
+  <nuxt-link :to="'/dashboard/purchases/' + id" class="g-purchase-item__wrapper">
     <div class="g-purchase-item">
-      <img class="g-purchase-item__img" src="/images/purchase-1.svg" alt="">
+      <img class="g-purchase-item__img" :src="picture" alt="">
       <div class="g-purchase-item__text">
-        <p class="g-purchase-item__name">Dying Light</p>
+        <p class="g-purchase-item__name">{{ name }}</p>
         <div v-if="isKeyShown" class="g-purchase-item__key g-purchase-item__key_desktop">
           <p class="g-purchase-item__value">{{ code }}</p>
           <button @click="copy" class="button-reboot g-purchase-item__button">
@@ -23,7 +23,7 @@
         <copy-icon class="icon" />
       </button>
     </div>
-  </div>
+  </nuxt-link>
  
 </template>
 
@@ -36,13 +36,41 @@ export default {
   mixins: [icons],
   data: () => {
     return {
-      code: '4QA26-BTDKE-XKL43M',
       isKeyShown: false
     }
   },
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    code: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    platform: {
+      type: String,
+      required: true
+    },
+    picture: {
+      type: String,
+      required: true
+    },
+  },
   methods: {
     async copy () {
-      await navigator.clipboard.writeText(this.code)
+      try {
+        await navigator.clipboard.writeText(this.code)
+      } catch (e) {
+      }
     }
   }
 }

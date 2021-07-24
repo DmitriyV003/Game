@@ -78,7 +78,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'https://148.251.127.197/api'
+    baseURL: 'http://api.gameincome.com/api'
   },
   /*
   ** Build configuration

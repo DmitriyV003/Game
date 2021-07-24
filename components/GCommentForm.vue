@@ -1,27 +1,24 @@
 <template>
   <div class="g-comment-form">
-    <div class="g-comment-form__title">Оставьте отзыв о продавце Kgamestrade</div>
-    <div class="g-comment-form__stars">
-      <span class="text-color-gray text-size-16">Ваша оценка:</span>
-      <div class="g-comment-form__rating">
-        <client-only>
-          <star-rating
-            v-model="rating"
-            active-color="rgba(255, 153, 0, 1)"
-            :star-size="15"
-            :increment="0.01"
-            inactive-color="#9A93AA"
-            :padding="4"
-          />
-        </client-only>
-      </div>
-    </div>
+    <div class="g-comment-form__title">Оставьте отзыв о продавце {{ name }} {{ surname }}</div>
 
     <div class="g-comment-form__comment">
-      <textarea placeholder="Комментарий" class="input-reboot g-comment-form__textarea" name="" id=""></textarea>
+      <textarea 
+        placeholder="Комментарий" 
+        class="input-reboot g-comment-form__textarea" 
+        name="comment" 
+        id="comment"
+        v-model="form.comment"
+      ></textarea>
     </div>
 
-    <main-button class="g-comment-form__button" color="primary" size="xl" label="оставить отзыв" />
+    <main-button 
+      type="submit"
+      class="g-comment-form__button" 
+      color="primary" 
+      size="xl"
+      label="оставить отзыв" 
+    />
   </div>
 </template>
 
@@ -30,9 +27,31 @@ import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GCommentForm',
   components: { MainButton },
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    surname: {
+      type: String,
+      required: true
+    },
+  },
+  methods: {
+    async postFeedback () {
+      try {
+        await this.$store.dispatch('purchases/postFeedback', this.form)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  },
   data: () => {
     return {
-      rating: null
+      form: {
+        comment: null,
+        rate: null
+      }
     }
   }
 }
@@ -85,7 +104,7 @@ export default {
   &__title
     font-weight: 600
     color: $white
-    margin-bottom: 8px
+    margin-bottom: 24px
     font-size: 20px
     line-height: 28px
     +md

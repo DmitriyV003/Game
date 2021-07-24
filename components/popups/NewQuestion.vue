@@ -1,6 +1,6 @@
 <template>
   <!-- Adapted = true  -->
-  <div class="g-popup" v-show="val">
+  <form @submit.prevent="postCreateQuestion" class="g-popup" v-show="val">
     <div class="g-new-question">
       <div class="g-popup__top">
         <p class="g-popup__title">Новый вопрос</p>
@@ -10,35 +10,86 @@
       <div class="g-new-question__content">
         <div class="g-new-question__block">
           <span class="g-new-question__caption">Выберите тему</span>
-          <g-drop-menu class="g-new-question__category" placeholder="Выберите тему" />
+          <g-drop-menu
+            class="g-new-question__category" 
+            placeholder="Выберите тему" 
+            v-if="category !== null"
+            :links="themes[category.label + 'QuestionThemes']"
+            v-model="$v.form.theme.$model"
+          />
         </div>
 
         <div class="g-new-question__block">
           <span class="g-new-question__caption">Текст сообщения:</span>
-          <textarea class="input-reboot g-new-question__textarea"></textarea>
+          <textarea 
+            v-model="$v.form.text.$model" 
+            class="input-reboot g-new-question__textarea"
+          ></textarea>
         </div>
       </div>
       
       <div class="g-new-question__bottom">
-        <main-button color="primary" size="xl" label="отправить" />
+        <main-button :disabled="disabled || $v.$invalid" type="submit" color="primary" size="xl" label="отправить" />
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
 import { eventBus } from '~/plugins/event-bus'
 import icons from '~/mixins/icons'
 import GDropMenu from '~/components/DropMenu'
-import MainButton from "~/components/buttons/MainButton";
+import MainButton from '~/components/buttons/MainButton'
+import { generalQuestionThemes, techQuestionThemes, partnershipQuestionThemes } from '~/types/questionThemes'
+import { maxLength, required} from 'vuelidate/lib/validators'
 
 export default {
   name: 'GNewQuestionPopup',
-  components: {MainButton, GDropMenu},
+  components: { MainButton, GDropMenu },
   mixins: [icons],
   data: () => {
     return {
-      val: false
+      val: false,
+      themes: {
+        generalQuestionThemes,
+        techQuestionThemes,
+        partnershipQuestionThemes
+      },
+      disabled: false,
+      form: {
+        theme: null,
+        text: null
+      }
+    }
+  },
+  props: {
+    category: {
+      type: Object,
+      required: true
+    }
+  },
+  validations: {
+    form: {
+      theme: {
+        required,
+        maxLength: maxLength(250)
+      },
+      text: {
+        required,
+        maxLength: maxLength(250)
+      }
+    }
+  },
+  methods: {
+    async postCreateQuestion () {
+      try {
+        this.disabled = true
+        await this.$store.dispatch('questions/postCreateQuestion', this.form)
+      } catch (e) {
+        console.log(e.response)
+      } finally {
+        this.disabled = false
+      }
     }
   },
   created () {

@@ -20,7 +20,17 @@ import icons from '~/mixins/icons'
 
 export default {
   name: 'GPagination',
-  mixins: [icons]
+  mixins: [icons],
+  props: {
+    currentPage: {
+      type: Number,
+      required: true
+    },
+    totalPages: {
+      type: Number,
+      required: true
+    }
+  }
 }
 </script>
 

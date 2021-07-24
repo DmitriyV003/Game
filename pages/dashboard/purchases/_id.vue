@@ -14,23 +14,37 @@
         </b-col>
 
         <!-- Purchases adapted = true -->
-        <b-col xl="9" lg="9">
+        <b-col xl="9" lg="9" v-if="purchase !== null">
           <div class="purchase__top">
             <show-all to="/dashboard/purchases" reverse label="Назад к списку" />
           </div>
 
           <!-- Item info adapted = true -->
-          <g-purchased class="purchase__purchased" />
+          <g-purchased 
+            class="purchase__purchased" 
+            :name="purchase.itemInfo.itemName"
+            :price="Number(purchase.keyPrice)"
+            :code="purchase.key"
+            :image="purchase.itemInfo.itemBackground"
+          />
           
-          <b-row>
+          <b-row tag="form">
             <!-- Comment form adapted = true -->
             <b-col xl="8" order-xl="0" order-lg="5" order-md="5" order-sm="5" order="5">
-              <g-comment-form class="purchase__comment" />
+              <g-comment-form 
+                class="purchase__comment" 
+                :name="purchase.sellerInfo.sellerName"
+                :surname="purchase.sellerInfo.sellerSurname"
+              />
             </b-col>
 
             <!-- Like/Dislike adapted = true -->
             <b-col xl="4">
-              <g-like-dislike />
+              <g-like-dislike 
+                :name="purchase.sellerInfo.sellerName"
+                :nickname="purchase.sellerInfo.sellerNickname"
+                :surname="purchase.sellerInfo.sellerSurname"
+              />
             </b-col>
             
           </b-row>
@@ -48,9 +62,10 @@
   import icons from '~/mixins/icons'
   import ShowAll from '~/components/buttons/MainLink'
   import GPurchased from '~/components/dashboard/GPurchased'
-  import GCommentForm from "~/components/GCommentForm";
-  import GLikeDislike from "~/components/cart/LikeDislike";
-  import GNewDispute from "~/components/popups/NewDispute";
+  import GCommentForm from '~/components/GCommentForm'
+  import GLikeDislike from '~/components/cart/LikeDislike'
+  import GNewDispute from '~/components/popups/NewDispute'
+  import { mapState } from "vuex";
   export default {
     name: 'GDashboardPurchasePage',
     mixins: [icons],
@@ -58,9 +73,18 @@
       GNewDispute,
       GLikeDislike,
       GCommentForm, GPurchased, ShowAll, GSortButton, RoundedButton, GPurchaseItem, GDashboardNavigation },
-    mounted () {
-      console.log(this.$route)
-    }
+    async mounted () {
+      try {
+        await this.$store.dispatch('purchases/fetchPurchase', this.$route.params.id)
+      } catch (e) {
+        
+      }
+    },
+    computed: {
+      ...mapState({
+        purchase: state => state.purchases.purchase
+      })
+    },
   }
 </script>
 

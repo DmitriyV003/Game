@@ -1,7 +1,11 @@
 <template>
   <div class="g-background">
     <div class="g-like">
-      <avatar class="g-like__avatar" caption="EXCELLENT SELLER" />
+      <avatar 
+        class="g-like__avatar" 
+        :caption="nickname" 
+        :name="name + ' ' + surname"
+      />
       
       <div class="g-like__bottom">
         <span class="text text-color-gray text-weight-500">Оценить продавца:</span>
@@ -24,7 +28,21 @@ import icons from '~/mixins/icons'
 export default {
   name: 'GLikeDislike',
   components: { Avatar },
-  mixins: [icons]
+  mixins: [icons],
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    nickname: {
+      type: String,
+      required: true
+    },
+    surname: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
