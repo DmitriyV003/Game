@@ -1,5 +1,8 @@
 <template>
-  <nuxt-link :to="'/dashboard/purchases/' + id" class="g-purchase-item__wrapper">
+  <div 
+    @click.stop="goToPurchase" 
+    class="g-purchase-item__wrapper"
+  >
     <div class="g-purchase-item">
       <img class="g-purchase-item__img" :src="picture" alt="">
       <div class="g-purchase-item__text">
@@ -11,7 +14,11 @@
           </button>
         </div>
         <div class="g-purchase-item__bottom">
-          <show-all @click.native="isKeyShown = !isKeyShown" :label="!isKeyShown ? 'Показать ключ' : 'Скрыть'" :icon="false" />
+          <show-all 
+            @click.stop.native="isKeyShown = !isKeyShown" 
+            :label="!isKeyShown ? 'Показать ключ' : 'Скрыть'"
+            :icon="false" 
+          />
           <img src="/images/icons/steam-small.svg" alt="">
         </div>
       </div>
@@ -23,7 +30,7 @@
         <copy-icon class="icon" />
       </button>
     </div>
-  </nuxt-link>
+  </div>
  
 </template>
 
@@ -71,6 +78,12 @@ export default {
         await navigator.clipboard.writeText(this.code)
       } catch (e) {
       }
+    },
+    async goToPurchase () {
+      try {
+        await this.$router.push('/dashboard/purchases/' + this.id)
+      } catch (e) {
+      }
     }
   }
 }
@@ -86,25 +99,26 @@ export default {
   height: 380px
   display: flex
   flex-direction: column
-  margin-bottom: 20px
   justify-content: space-between
   +md
     flex-direction: row
     padding: 0
     max-height: 208px
     background: none
-    margin-bottom: 0
   &:hover
     cursor: pointer
     background: rgba(100, 62, 255, 0.25)
     +md
       background: none
+  &__col
+    margin-bottom: 20px
+    +md
+      margin-bottom: 16px
   &__wrapper
     +md
       background: rgba(100, 62, 255, 0.1)
       cursor: pointer
       border-radius: 8px
-      margin-bottom: 16px
       &:hover
         background: rgba(100, 62, 255, 0.25)
   &__text

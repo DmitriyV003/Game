@@ -12,6 +12,10 @@ export const mutations = {
     if (state.profile !== null) {
       state.profile.data.avatar = avatar
     }
+  },
+  SET_PROFILE_FIELD (state, payload) {
+    console.log(payload)
+    state.profile.data[payload.field] = payload.value
   }
 }
 
@@ -24,9 +28,26 @@ export const actions = {
       throw e
     }
   },
+  editProfileField ({ commit }, payload) {
+    commit('SET_PROFILE_FIELD', payload)
+  },
   setAvatar ({ commit }, avatar) {
     commit('SET_USER_AVATAR', avatar)
     commit('user/SET_USER_AVATAR', avatar, { root: true })
+  },
+  async postEditProfile ({ state }) {
+    try {
+      const res = await this.$axios.$post(
+        apiRoutes.postEditProfile, 
+        JSON.stringify({
+          name: state.profile.data.name,
+          surname: state.profile.data.surname,
+          nickname: state.profile.data.nickname
+        })
+      )
+    } catch (e) {
+      throw e
+    }
   },
   async postChangeAvatar (ctx, data) {
     try {

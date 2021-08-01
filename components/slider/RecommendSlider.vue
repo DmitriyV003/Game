@@ -1,36 +1,36 @@
 <template>
-  <div>
+  <div class="g-slider game-slider" v-if="data !== null || data !== []">
     <vue-slick
-      ref="gameNewsSlider"
+      ref="recommendSlider"
       :variable-width="settings.variableWidth"
       :slides-to-show="settings.slidesToShow"
       :slides-to-scroll="settings.slidesToScroll"
+      :center-padding="settings.centerPadding"
       :arrows="settings.arrows"
       :dots="settings.dots"
     >
-      <g-game-news
+      <game-card 
         v-for="item in data"
-        :key="item.newsId"
-        :id="item.newsId"
-        :name="item.newsName"
-        :image="item.newsSmallBackground"
-        :desc3="item.newsDescriptionOn3Words"
-        :desc="item.newsSmallDescription"
+        :key="item.itemId"
+        :title="item.itemName"
+        :developer="item.itemDeveloper"
+        :image="item.itemBackground"
+        class="recommend__card" 
       />
     </vue-slick>
     <div class="g-slider__controls">
-      <arrow-button @click.native="prev($refs.gameNewsSlider)" class="g-slider__button g-slider__button_left" left />
-      <arrow-button @click.native="next($refs.gameNewsSlider)" class="g-slider__button g-slider__button_right" right />
+      <arrow-button @click.native="prev($refs.recommendSlider)" class="g-slider__button g-slider__button_left" left />
+      <arrow-button @click.native="next($refs.recommendSlider)" class="g-slider__button g-slider__button_right" right />
     </div>
   </div>
 </template>
 
 <script>
+import GameCard from '~/components/cards/GameCard'
 import ArrowButton from '~/components/slider/ArrowButton'
-import GGameNews from '~/components/cards/GameNews'
 export default {
-  name: 'GGameNewsSlider',
-  components: { GGameNews, ArrowButton },
+  name: 'GRecommendSlider',
+  components: { GameCard, ArrowButton },
   data: () => {
     return {
       settings: {
@@ -45,7 +45,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => null
+      required: true
     }
   },
   methods: {
@@ -55,6 +55,6 @@ export default {
     prev (slider) {
       slider.prev()
     }
-  }   
+  }    
 }
 </script>

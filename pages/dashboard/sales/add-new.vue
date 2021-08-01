@@ -1,5 +1,6 @@
 <template>
   <div class="g-page">
+    <g-add-keys-popup />
     <b-container>
       <h1 class="title">Личный кабинет</h1>
       
@@ -171,8 +172,9 @@ import MainButton from '~/components/buttons/MainButton'
 import GDropMenu from '~/components/DropMenu'
 import GDropContent from '~/components/DropContent'
 import icons from '~/mixins/icons'
+import GAddKeysPopup from "~/components/popups/AddKeysPopup";
 export default {
-  components: {GDropContent, GDropMenu, MainButton, GInput, ShowAll, GDashboardNavigation },
+  components: {GAddKeysPopup, GDropContent, GDropMenu, MainButton, GInput, ShowAll, GDashboardNavigation },
   mixins: [icons],
   mounted () {
   }

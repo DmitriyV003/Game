@@ -1,8 +1,8 @@
 <template>
   <div class="game-card">
-    <img src="/images/card-1.svg" alt="" class="game-card__img">
-    <p class="game-card__title" :class="{ 'game-card__title_sm': adaptiveSm }">Rocket League</p>
-    <p class="game-card__text" :class="{ 'game-card__text_sm': adaptiveSm }">Psyonix, Panic Button Games</p>
+    <img :src="image" alt="" class="game-card__img">
+    <p class="game-card__title" :class="{ 'game-card__title_sm': adaptiveSm }">{{ title }}</p>
+    <p class="game-card__text" :class="{ 'game-card__text_sm': adaptiveSm }">{{ developer }}</p>
 
     <rating class="game-card__rating" :value="4.9" />
 
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Rating from "~/components/cards/Rating";
+import Rating from '~/components/cards/Rating'
 export default {
   name: 'GameCard',
   components: { Rating },
@@ -25,6 +25,18 @@ export default {
     adaptiveSm: {
       type: Boolean,
       default: () => false
+    },
+    title: {
+      type: String,
+      default: () => ''
+    },
+    developer: {
+      type: String,
+      default: () => ''
+    },
+    image: {
+      type: String,
+      default: () => ''
     }
   }
 }

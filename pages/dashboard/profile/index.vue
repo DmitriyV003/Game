@@ -1,5 +1,6 @@
 <template>
   <div class="g-page">
+    <g-change-profile-popup v-if="profile !== null" />
     <b-container>
       <h1 class="title">Личный кабинет</h1>
 
@@ -131,8 +132,9 @@
   import GBecomeSeller from '~/components/dashboard/BecomeSeller'
   import {mapState} from "vuex";
   import GLoader from "~/components/Loader";
+  import GChangeProfilePopup from "~/components/popups/ChangeProfilePopup";
   export default {
-    components: { GLoader, GBecomeSeller, GUserData, GUserAvatar, MainButton, GDashboardNavigation },
+    components: {GChangeProfilePopup, GLoader, GBecomeSeller, GUserData, GUserAvatar, MainButton, GDashboardNavigation },
     mixins: [icons],
     name: 'ProfilePage',
     data: () => {

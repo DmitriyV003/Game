@@ -19,7 +19,10 @@
         </div>
         
         <div class="news__games">
-          <g-game-news-slider />
+          <g-game-news-slider 
+            v-if="sliderNews !== null" 
+            :data="sliderNews"
+          />
         </div>
       </b-container>
     </section>
@@ -27,11 +30,16 @@
     <!-- News  adapted = true  -->
     <section class="news__news">
       <b-container>
-        <div class="news__block">
-          <g-news-card />
-          <g-news-card />
-          <g-news-card />
-          <g-news-card />
+        <div class="news__block" v-if="cardNews !== null">
+          <g-news-card 
+            v-for="item in cardNews"
+            :key="item.newsId"
+            :id="item.newsId"
+            :name="item.newsName"
+            :desc="item.newsSmallDescription"
+            :created-at="item.newsCreatedAt"
+            :image="item.newsSmallBackground"
+          />
         </div>
         
         <main-button color="gray" label="еще новости" size="xl" full-width />
@@ -45,10 +53,11 @@ import BreadCrumb from '~/components/BreadCrumb'
 import ShowAll from '~/components/buttons/MainLink'
 import GGameNews from '~/components/cards/GameNews'
 import GGameNewsSlider from '~/components/slider/GameNews'
-import GNewsCard from "~/components/cards/NewsCard";
-import MainButton from "~/components/buttons/MainButton";
+import GNewsCard from '~/components/cards/NewsCard'
+import MainButton from '~/components/buttons/MainButton'
+import { mapState } from 'vuex'
 export default {
-  components: {MainButton, GNewsCard, GGameNewsSlider, GGameNews, ShowAll, BreadCrumb },
+  components: { MainButton, GNewsCard, GGameNewsSlider, GGameNews, ShowAll, BreadCrumb },
   name: 'GNewsPage',
   layout: 'default',
   data: () => {
@@ -57,6 +66,20 @@ export default {
         { to: '/', label: 'Главная' },
         { to: '/news', label: 'Новости' }
       ]
+    }
+  },
+  computed: {
+    ...mapState({
+      sliderNews: state => state.news.sliderNews,
+      cardNews: state => state.news.cardNews
+    })
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch('news/getSliderNews')
+      await this.$store.dispatch('news/getCardNews')
+    } catch (e) {
+      
     }
   }
 }

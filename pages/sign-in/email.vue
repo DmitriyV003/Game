@@ -86,6 +86,7 @@ export default {
       try {
         this.disabled = true
         await this.$store.dispatch('auth/signInByEmail', this.form)
+        await this.$router.push('/')
       } catch (e) {
         if (e.response.status === 422) {
           this.apiErrors = e.response.data.errors

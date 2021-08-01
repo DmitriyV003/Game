@@ -4,15 +4,15 @@
     
     <div class="g-news__block">
       <div class="g-news__top">
-        <p class="g-news__title">BIG покинули ESL Pro League Season 13</p>
-        <span class="g-news__date">2 часа назад</span>
+        <p class="g-news__title">{{ name }}</p>
+        <span class="g-news__date">{{ new Date(createdAt).toDateString() }}</span>
       </div>
       
-      <p class="g-news__text">Команды BIG и Renegades выбыли из борьбы за чемпионский титул ESL Pro League Season 13 по CS:GO. Они заняли пятое и шестое места в группе А и лишились шансов на выход в плей-офф.</p>
+      <p class="g-news__text">{{ desc }}</p>
       
       <div class="g-news__bottom">
-        <show-all class="g-news__read" label="Читать новость" />
-        <span class="g-news__date g-news__date_mobile">2 часа назад</span>
+        <show-all :to="'/news/' + id" class="g-news__read" label="Читать новость" />
+        <span class="g-news__date g-news__date_mobile">{{ new Date(createdAt).toDateString() }}</span>
       </div>
     </div>
   </div>
@@ -22,7 +22,29 @@
 import ShowAll from '~/components/buttons/MainLink'
 export default {
   name: 'GNewsCard',
-  components: {ShowAll}
+  components: { ShowAll },
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    desc: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
@@ -62,6 +84,7 @@ export default {
     color: $gray
     letter-spacing: -0.4px
     line-height: 20px
+    flex-shrink: 0
     +lg
       display: none
     &_mobile

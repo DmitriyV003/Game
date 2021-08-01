@@ -52,6 +52,14 @@
           </div>
           
           <b-row>
+
+            <b-col class="g-sales__item" xl="4" lg="4" md="4">
+              <g-add-item 
+                @click.native="goTo"
+                label="Добавить игру на продажу"
+              />
+            </b-col>
+            
             <b-col class="g-sales__item" xl="4" lg="4" md="4">
               <g-sale-item />
             </b-col>
@@ -72,9 +80,20 @@ import GSortButton from '~/components/dashboard/SortButton'
 import GDropMenu from "~/components/DropMenu";
 import icons from '~/mixins/icons'
 import GSaleItem from "~/components/dashboard/SaleItem";
+import GAddItem from "~/components/AddItem";
+import GAddKeysPopup from "~/components/popups/AddKeysPopup";
 export default {
-  components: {GSaleItem, GDropMenu, GSortButton, GDashboardNavigation },
-  mixins: [icons]
+  components: {GAddKeysPopup, GAddItem, GSaleItem, GDropMenu, GSortButton, GDashboardNavigation },
+  mixins: [icons],
+  methods: {
+    async goTo () {
+      try {
+        await this.$router.push('/dashboard/sales/add-new')
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  }
 }
 </script>
 

@@ -23,7 +23,7 @@
 
 <script>
 import GProposalCard from '~/components/cards/ProposalCard'
-import ArrowButton from "~/components/slider/ArrowButton";
+import ArrowButton from '~/components/slider/ArrowButton'
 export default {
   name: 'GProposalSlider',
   components: {ArrowButton, GProposalCard },

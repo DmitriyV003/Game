@@ -1,82 +1,79 @@
 <template>
   <div>
 
-    <!-- Hot adapted = true -->
+    <!-- Hot adapted = true // integrate = true-->
     <section class="section hot">
       <b-container>
         <div class="hot-tabs">
-          <tab-panel />
+          <tab-panel v-if="mainPage !== null" :data="mainPage.slider" />
         </div>
       </b-container>
     </section>
 
-    <!-- Recommend slider  adapted = true   -->
+    <!-- Recommend slider  adapted = true // integrate = true   -->
     <section class="section recommend">
       <b-container>
-        <section-header link-label="Смотреть все" icon="/images/recommend.svg" title="Рекомендуем" />
-        <div class="g-slider game-slider">
-          <vue-slick
-            ref="recommendSlider"
-            :variable-width="settings.variableWidth"
-            :slides-to-show="settings.slidesToShow"
-            :slides-to-scroll="settings.slidesToScroll"
-            :center-padding="settings.centerPadding"
-            :arrows="settings.arrows"
-            :dots="settings.dots"
-          >
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-          </vue-slick>
-          <div class="g-slider__controls">
-            <arrow-button @click.native="prev($refs.recommendSlider)" class="g-slider__button g-slider__button_left" left />
-            <arrow-button @click.native="next($refs.recommendSlider)" class="g-slider__button g-slider__button_right" right />
-          </div>
-        </div>
-      </b-container>
-    </section>
-
-    <!-- Banner 1  adapted = true   -->
-    <section class="section">
-      <b-container >
-        <section-header title-style="text-h3" title="Fortnite" />
-        <banner
-          title="Лисица-охотница присоединится к отряду Fortnite в феврале"
-          text="В попытке обогнать само время к отряду Fortnite присоединяется новая хитроумная воительница."
-          image="/images/banner-1.png"
+        <section-header 
+          link-label="Смотреть все" 
+          icon="/images/recommend.svg" 
+          title="Рекомендуем" 
+        />
+        
+        <g-recommend-slider 
+          v-if="mainPage !== null" 
+          :data="mainPage.recommendations" 
         />
       </b-container>
     </section>
 
-    <!-- Fire Slider  adapted = true  -->
+    <!-- Banner 1  adapted = true // integrate = true  -->
     <section class="section">
       <b-container >
-        <section-header link-label="Смотреть все" icon="/images/fire.svg" title="Хиты продаж" />
+        <section-header 
+          title-style="text-h3" 
+          :title="mainPage.inserts[0].overInsert"
+          v-if="mainPage !== null && mainPage.inserts.length > 0"
+        />
+        <banner
+          v-if="mainPage !== null && mainPage.inserts.length > 0"
+          :title="mainPage.inserts[0].smallDescription"
+          :text="mainPage.inserts[0].description"
+          :image="mainPage.inserts[0].background"
+          :button-label="mainPage.inserts[0].textOnButton"
+        />
       </b-container>
     </section>
 
-    <!-- Banner 2  adapted = true   -->
+    <!-- Fire Slider  adapted = true // integrate = false -->
     <section class="section">
       <b-container >
-        <section-header title-style="text-h3" title="CYBERPUNK 2077" />
+        <section-header 
+          link-label="Смотреть все" 
+          icon="/images/fire.svg" 
+          title="Хиты продаж" 
+        />
+        <g-recommend-slider 
+          v-if="mainPage !== null" 
+          :data="mainPage.recommendations"
+        />
+      </b-container>
+    </section>
+
+    <!-- Banner 2  adapted = true // integrate = true  -->
+    <section 
+      class="section"
+      v-if="mainPage !== null && mainPage.inserts.length > 1"
+    >
+      <b-container >
+        <section-header
+          title-style="text-h3"
+          :title="mainPage.inserts[1].overInsert"
+        />
         <banner
-          title="Cyberpunk 2077"
-          text="Приключенческая ролевая игра, действие которой происходит в мегаполисе Найт-Сити, где власть, роскошь и модификации тела ценятся выше всего."
-          button-label="узнать больше"
-          image="/images/banner-2.png"
+          :title="mainPage.inserts[1].smallDescription"
+          :text="mainPage.inserts[1].description"
+          :image="mainPage.inserts[1].background"
+          :button-label="mainPage.inserts[1].textOnButton"
         />
       </b-container>
     </section>
@@ -112,37 +109,19 @@
       </b-container>
     </section>
 
-    <!-- Genres  adapted = true -->
+    <!-- Genres  adapted = true // integrate = true -->
     <section class="section genres">
       <b-container>
         <section-header title="Игры по жанрам" link-label="Все жанры" />
-
-        <div class="g-slider genre-slider">
-          <vue-slick
-            ref="genresSlider"
-            :variable-width="settings.variableWidth"
-            :slides-to-show="settings.slidesToShow"
-            :slides-to-scroll="settings.slidesToScroll"
-            :center-padding="settings.centerPadding"
-            :arrows="settings.arrows"
-            :dots="settings.dots"
-          >
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-            <genre-card class="genres__card" name="action" image="/images/genre-1.svg" />
-          </vue-slick>
-          <div class="g-slider__controls">
-            <arrow-button @click.native="prev($refs.genresSlider)" class="g-slider__button g-slider__button_left" left />
-            <arrow-button @click.native="next($refs.genresSlider)" class="g-slider__button g-slider__button_right" right />
-          </div>
-        </div>
+  
+        <g-genre-slider
+          v-if="mainPage !== null"
+          :data="mainPage.categories" 
+        />
       </b-container>
     </section>
 
-    <!-- Comments  adapted = true -->
+    <!-- Comments  adapted = true // integrate = false -->
     <section class="section comments">
       <b-container>
         <section-header title="Отзывы" link-label="Все отзывы" />
@@ -154,57 +133,21 @@
     <!-- Platforms  adapted = true -->
     <section class="section platforms">
       <b-container>
-        <div class="platforms__content">
+        <div 
+          class="platforms__content"
+        >
           <h2>Платформы</h2>
-          <div class="platforms__list">
-            <div class="platforms__wrapper">
+          <div 
+            class="platforms__list"
+            v-if="mainPage !== null && mainPage.services !== null"
+          >
+            <div 
+              class="platforms__wrapper"
+              v-for="item in mainPage.services"
+              :key="item.id"
+            >
               <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper g-xl-none">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
-              </div>
-            </div>
-            <div class="platforms__wrapper g-xl-none">
-              <div class="platforms__platform">
-                <img src="/images/steam.svg" alt="">
+                <img :src="item.background" alt="">
               </div>
             </div>
             <div class="platforms__wrapper">
@@ -231,9 +174,14 @@ import ReviewCard from '~/components/cards/ReviewCard'
 import Dot from '~/components/slider/Dot'
 import GReviewSlider from '~/components/slider/ReviewSlider'
 import GCommentSlider from '~/components/slider/CommentSlider'
+import { mapState } from 'vuex'
+import GRecommendSlider from "~/components/slider/RecommendSlider";
+import GGenreSlider from "~/components/slider/GenreSlider";
 
 export default {
   components: {
+    GGenreSlider,
+    GRecommendSlider,
     GCommentSlider,
     GReviewSlider,
     ReviewCard,
@@ -255,6 +203,18 @@ export default {
     prev (slider) {
       slider.prev()
     }
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch('getMainPage')
+    } catch (e) {
+      
+    }
+  },
+  computed: {
+    ...mapState({
+      mainPage: state => state.mainPage
+    })
   },
   data: () => {
     return {

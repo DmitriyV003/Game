@@ -1,25 +1,47 @@
 <template>
   <div class="g-game-news__wrapper">
     <div class="g-game-news">
-      <img class="g-game-news__image" src="/images/news-1.png" alt="">
+      <img class="g-game-news__image" :src="image" alt="">
 
       <div class="g-game-news__block">
-        <p class="g-game-news__title">Rocket League</p>
+        <p class="g-game-news__title">{{ name }}</p>
         <div>
-          <p class="g-game-news__text">2 сезон продлен.</p>
-          <p class="g-game-news__text">Призовые награды дождалис...</p>
+          <p class="g-game-news__text">{{ desc3 }}</p>
+          <p class="g-game-news__text">{{ desc }}</p>
         </div>
-        <show-all label="Читать " />
+        <show-all :to="'/news/' + id" label="Читать " />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ShowAll from "~/components/buttons/MainLink";
+import ShowAll from '~/components/buttons/MainLink'
 export default {
   name: 'GGameNews',
-  components: {ShowAll}
+  components: { ShowAll },
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    desc3: {
+      type: String,
+      required: true
+    },
+    desc: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

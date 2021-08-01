@@ -1,20 +1,23 @@
 <template>
   <div class="g-tabs">
-    <div class="g-tabs__panel">
+    <div 
+      class="g-tabs__panel" 
+         :style="{'backgroundImage': 'url(' + currentTab.background + ')'}"
+    >
       <div class="g-tabs__main">
         <p class="g-tabs__title text-h4">{{ currentTab.name }}</p>
-        <p class="g-tabs__text text-size-16">Half Life — легендарная серия игр. Миллионы проданных копий, сотни наград, и конечно фанаты, которые косплеят Гордона Фримена год за годом.</p>
+        <p class="g-tabs__text text-size-16">{{ currentTab.smallDescription }}.</p>
         <main-button size="xl" color="primary" label="Подробнее" />
       </div>
     </div>
 
     <div class="g-tabs__tabs">
-      <div v-for="tab in gameTabs" @click="changeTab(tab)" class="g-tab" :class="{ 'g-tab_active': currentTab.name === tab.name }">
+      <div v-for="tab in data" @click="changeTab(tab)" class="g-tab" :class="{ 'g-tab_active': currentTab.name === tab.name }">
         <span class="g-tab__line">
           <span class="g-tab__progress"></span>
         </span>
         <div class="g-tab__image-wrapper">
-          <img src="/images/tab-1.svg" alt="" class="g-tab__image">
+          <img :src="tab.previewBackground" alt="" class="g-tab__image">
         </div>
         <span class="g-tab__name text-weight-600">{{ tab.name }}</span>
       </div>
@@ -29,25 +32,31 @@ export default {
   components: { MainButton },
   data: () => {
     return {
-      currentTab: { name: 'Ghost of Tsushima' },
-      gameTabs: [
-        { name: 'Ghost of Tsushima' },
-        { name: 'first1' },
-        { name: 'first2' },
-        { name: 'first3' }
-      ],
+      currentTab: { 
+        name: '', 
+        smallDescription: '',
+        background: '',
+        previewBackground: ''
+      },
       time: 5000,
       tabInterval: null,
       tabCount: 0
     }
   },
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
   mounted () {
+    this.currentTab = this.data[0]
     this.cycleAnimation()
   },
   methods: {
     changeTab(tabName) {
-      if (this.tabCount !== this.gameTabs.indexOf(tabName)) {
-        this.tabCount = this.gameTabs.indexOf(tabName)
+      if (this.tabCount !== this.data.indexOf(tabName)) {
+        this.tabCount = this.data.indexOf(tabName)
         this.currentTab = tabName
         clearInterval(this.tabInterval)
         this.tabInterval = null
@@ -61,7 +70,7 @@ export default {
         } else {
           this.tabCount++
         }
-        this.currentTab = this.gameTabs[this.tabCount]
+        this.currentTab = this.data[this.tabCount]
       }, this.time)
     }
   }
@@ -138,6 +147,8 @@ export default {
       height: 4px
       transition: all 0.1s
     &__image-wrapper
+      width: 74px
+      height: 100%
       +md
         background-size: cover !important
         background: url("/images/banner-1-1.svg") no-repeat center center
@@ -145,6 +156,8 @@ export default {
         width: 100%
         border-radius: 12px
     &__image
+      width: 100%
+      height: 100%
       +md
         width: 100%
         max-height: 100px
@@ -179,7 +192,6 @@ export default {
         margin-bottom: 16px
         max-width: 90%
     &__title
-      max-width: 55%
       position: relative
       z-index: 10
       margin-bottom: 16px
@@ -195,9 +207,10 @@ export default {
       display: flex
       padding: 86px 48px
       position: relative
-      //background-size: cover
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center center
       border-radius: 12px 0px 0px 12px
-      background: url("/images/panel-1.svg") no-repeat center center
       +md
         padding: 136px 16px 16px 16px
         min-height: 358px

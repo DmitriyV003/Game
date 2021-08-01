@@ -10,26 +10,17 @@
     </section>
 
     <!-- News card  adapted =  true  -->
-    <section>
+    <section v-if="news !== null">
       <b-container>
         <div class="news-card__content">
           <div class="news-card__image">
-            <img class="news-card__img" src="/images/news-4.png" alt="">
-            <h1 class="news-card__title">BIG покинули ESL Pro League Season 13</h1>
+            <img class="news-card__img" :src="news.newsBackground" alt="">
+            <h1 class="news-card__title">{{ news.newsName }}</h1>
           </div>
           
           <div class="news-card__block">
             <div>
-              <p class="news-card__text">Команды BIG и Renegades выбыли из борьбы за чемпионский титул ESL Pro League Season 13 по CS:GO.
-                Они заняли пятое и шестое места в группе А и лишились шансов на выход в плей-офф.</p>
-
-              <p class="news-card__text">Обе команды провели по четыре матча. BIG победила Complexity Gaming, но уступила OG, Heroic и FPX Esports, а Renegades
-                проиграли четыре серии подряд против Heroic, FPX Esports, OG и Complexity Gaming. В последнем туре BIG и Renegades
-                сыграют друг с другом. Встреча начнется 12 марта в 17:30 мск.</p>
-
-              <p class="news-card__text">ESL Pro League Season 13 проходит с 8 марта по 11 апреля в онлайне. 24 коллектива сражаются за призовой фонд
-                в размере $750 тыс. С 13 по 18 марта пройдут матчи в группе В. Следить за детальным расписанием лиги можно
-                на странице репортажа</p>
+              <p class="news-card__text">{{ news.newsDescription }}</p>
             </div>
             
             <div class="news-card__share">
@@ -45,7 +36,7 @@
                 </span>
               </div>
 
-              <span class="news-card__caption">Опубликовано 2 часа назад</span>
+              <span class="news-card__caption">Опубликовано {{ new Date(news.newsUpdatedAt).toDateString() }}</span>
             </div>
             
             <div class="news-card__messages">
@@ -79,6 +70,7 @@ import GMessage from '~/components/Message'
 import Avatar from '~/components/Avatar'
 import GInput from '~/components/form-elements/Input'
 import MainButton from '~/components/buttons/MainButton'
+import {mapGetters, mapState} from "vuex";
 export default {
   name: 'NewsPage',
   mixins: [icons],
@@ -87,9 +79,24 @@ export default {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/news', label: 'Новости' },
-        { to: '/news/fghjkl', label: 'Big покинули ESL Pro League Season 13' }
+        { to: '/news', label: 'Новости' }
       ]
+    }
+  },
+  computed: {
+    ...mapState({
+      news: state => state.news.news
+    })
+  },
+  async mounted () {
+    try {
+      await this.$store.dispatch('news/getNewsById', this.$route.params.id)
+      this.links.push({
+        to: '/news/' + this.news.newsId,
+        label: this.news.newsName
+      })
+    } catch (e) {
+      
     }
   }
 }

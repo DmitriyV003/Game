@@ -20,11 +20,10 @@ import icons from '~/mixins/icons'
 import { eventBus } from '~/plugins/event-bus'
 import GInput from '~/components/form-elements/Input'
 import MainButton from '~/components/buttons/MainButton'
-import GPaymentMethod from '~/components/cart/PaymetMethod'
 
 export default {
   name: 'GPasswordRecoveryPopup',
-  components: { GPaymentMethod, MainButton, GInput },
+  components: { MainButton, GInput },
   mixins: [icons],
   data: () => {
     return {

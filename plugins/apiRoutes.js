@@ -12,5 +12,10 @@ export default {
   getAppeals: (category) => '/personal-area/appeals/' + category,
   getQuestionMessages: (category, id) => '/personal-area/appeals/' + category + '/to/' + id,
   postCreateQuestion: (category) => '/personal-area/appeals/' + category + '/create',
-  postCreateMessage: (id) => '/personal-area/appeals/general/create-message/' + id 
+  postCreateMessage: (id) => '/personal-area/appeals/general/create-message/' + id,
+  getSliderNews: '/news/small',
+  getCardNews: '/news/big',
+  getNewsById: (id) => '/news/' + id,
+  getMainPage: '/main-page ',
+  postEditProfile: '/personal-area/profile/edit-info'
 }

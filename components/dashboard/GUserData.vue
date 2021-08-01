@@ -2,7 +2,10 @@
   <div class="g-user-data">
     <div class="g-user-data__title">
       <h2>Здравствуйте, <br>{{ name }} {{ surname }}!</h2>
-      <settings-icon class="g-user-data__settings" />
+      <settings-icon
+        @click="eventBus.$emit('changeProfilePopupOpen')"
+        class="g-user-data__settings" 
+      />
     </div>
 
     <div class="g-user-data__block">
@@ -12,17 +15,23 @@
 
     <div class="g-user-data__block">
       <span class="g-user-data__caption">Ваш e-mail</span>
-      <span class="g-user-data__value">{{ email }}</span>
+      <span class="g-user-data__value">{{ email.substring(0, 3) }}******{{ email.substring(email.length - 7) }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import icons from '~/mixins/icons'
+import { eventBus } from '~/plugins/event-bus'
 
 export default {
   name: 'GUserData',
   mixins: [icons],
+  data: () => {
+    return {
+      eventBus
+    }
+  },
   props: {
     nickname: {
       type: String,

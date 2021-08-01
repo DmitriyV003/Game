@@ -15,7 +15,7 @@
             <nuxt-link to="/" class="header__link">Стать партнером</nuxt-link>
           </div>
 
-          <div class="header__actions">
+          <div v-if="user !== null" class="header__actions">
             <div class="action header__action">
               <div class="action__icon">
                 <img src="/images/email.svg" alt="">
@@ -30,6 +30,8 @@
           </div>
 
           <Profile :user="user" class="header__user" />
+          
+          <nuxt-link v-if="user === null" class="header__signin" to="/sign-up">Вход  /  Регистрация</nuxt-link>
           
           <div @click="dropMenu = true" class="header__burger">
             <img src="/images/icons/mobile menu.svg" alt="">
@@ -50,7 +52,7 @@
 
           <Search class="header__search" />
 
-          <Balance class="header__balance" :balance="500000" />
+          <Balance v-if="user !== null" class="header__balance" :balance="500000" />
 
           <nuxt-link to="/cart" tag="div" class="custom-icon">
             <div class="custom-icon__main">
@@ -158,6 +160,18 @@ export default {
   background: #282439
 .header
   padding: 20px 0
+  &__signin
+    padding: 6px 16px
+    color: $white
+    font-weight: 500
+    background: #643EFF
+    border-radius: 100px
+    font-size: 14px
+    line-height: 24px
+    flex-shrink: 0
+    &:hover
+      color: $white
+      background: rgba(136, 117, 255, 1)
   &__drop-wrapper
     height: 100%
     display: flex
@@ -244,6 +258,7 @@ export default {
       width: 100%
     +md
       max-width: 120px
+      margin-right: 19px
   &__links
     display: flex
     align-items: center

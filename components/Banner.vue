@@ -1,6 +1,6 @@
 <template>
   <div :style="{ 'background-image': 'url(' + image + ')' }" class="banner">
-    <img src="" alt="" class="banner__bg">
+    <img :src="image" alt="" class="banner__bg">
     <div class="banner__block">
       <p class="banner__title">{{ title }}</p>
       <p class="banner__text">{{ text }}</p>
@@ -75,6 +75,8 @@ export default {
     position: absolute
     left: 0
     width: 100%
+    height: 100%
+    top: 0
   &__block
     width: 100%
     z-index: 10
@@ -116,7 +118,7 @@ export default {
     font-size: 16px
     line-height: 24px
     color: white(0.7)
-    max-width: 40%
+    max-width: 50%
     +md
       font-size: 12px
       line-height: 18px

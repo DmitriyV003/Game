@@ -6,17 +6,26 @@
     </div>
     <input 
       @input="$emit('input', $event.target.value)" 
-      :type="type"
+      :type="originType"
       class="input-reboot g-input__input"
       :class="['g-input__input_' + color, { 'g-input__input_readonly': readonly }, { 'g-input_error': error === true }]"
       :placeholder="placeholder"
       :readonly="readonly"
+      :value="value"
     >
     <span v-if="error" class="g-input__error">
       <slot name="error"></slot>
     </span>
-    <eye-icon @click="type = 'text'" v-if="eye && type === 'password'" class="g-input__eye" />
-    <eye-off-icon @click="type = 'password'" v-if="eye && type === 'text'" class="g-input__eye" />
+    <eye-icon 
+      @click="originType = 'text'" 
+      v-if="eye && originType === 'password'" 
+      class="g-input__eye" 
+    />
+    <eye-off-icon 
+      @click="originType = 'password'" 
+      v-if="eye && originType === 'text'" 
+      class="g-input__eye" 
+    />
   </div>
 </template>
 
@@ -26,10 +35,19 @@ import icons from '~/mixins/icons'
 export default {
   name: 'GInput',
   mixins: [icons],
+  data () {
+    return {
+      originType: this.type  
+    }
+  },
   props: {
     placeholder: {
       type: String,
       default: () => ''
+    },
+    value: {
+      type: String,
+      default: () => null
     },
     caption: {
       type: String,
