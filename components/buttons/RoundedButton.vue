@@ -28,11 +28,11 @@ export default {
     font-weight: 400
     font-size: 20px
     line-height: 27px
-    border: 1px solid #643EFF
-    border-radius: 100px
-    padding: 14px 32px 13.4px 32px
+    border: 1px solid #643EFF !important
+    border-radius: 100px !important
+    padding: 14px 32px 13.4px 32px !important
     +md
-      padding: 12px 32px
+      padding: 12px 32px !important
       font-size: 16px
       line-height: 24px
 </style>

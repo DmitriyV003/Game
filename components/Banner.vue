@@ -77,6 +77,7 @@ export default {
     width: 100%
     height: 100%
     top: 0
+    border-radius: 12px
   &__block
     width: 100%
     z-index: 10
