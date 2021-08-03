@@ -16,6 +16,9 @@
         :developer="item.itemDeveloper"
         :image="item.itemBackground"
         class="recommend__card" 
+        :sale="item.itemPrice.sale"
+        :old-price="item.itemPrice.old"
+        :new-price="item.itemPrice.new"
       />
     </vue-slick>
     <div class="g-slider__controls">

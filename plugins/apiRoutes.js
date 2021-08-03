@@ -17,5 +17,7 @@ export default {
   getCardNews: '/news/big',
   getNewsById: (id) => '/news/' + id,
   getMainPage: '/main-page ',
-  postEditProfile: '/personal-area/profile/edit-info'
+  postEditProfile: '/personal-area/profile/edit-info',
+  getSearchItems: (query) => '/personal-area/sale/add-key/search-items?' + query,
+  getSaleItem: (query) => '/personal-area/sale/add-key/get-item?' + query 
 }

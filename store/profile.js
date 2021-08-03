@@ -1,4 +1,4 @@
-import apiRoutes from "~/plugins/apiRoutes";
+import apiRoutes from '~/plugins/apiRoutes'
 
 export const state = () => ({
   profile: null

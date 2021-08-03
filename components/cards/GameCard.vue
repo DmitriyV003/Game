@@ -1,16 +1,43 @@
 <template>
   <div class="game-card">
-    <img :src="image" alt="" class="game-card__img">
-    <p class="game-card__title" :class="{ 'game-card__title_sm': adaptiveSm }">{{ title }}</p>
-    <p class="game-card__text" :class="{ 'game-card__text_sm': adaptiveSm }">{{ developer }}</p>
+    <img 
+      :src="image"
+      alt="" 
+      class="game-card__img"
+    >
+    <p 
+      class="game-card__title" 
+      :class="{ 'game-card__title_sm': adaptiveSm }"
+    >{{ title }}</p>
+    <p 
+      class="game-card__text" 
+      :class="{ 'game-card__text_sm': adaptiveSm }"
+    >{{ developer }}</p>
 
     <rating class="game-card__rating" :value="4.9" />
 
     <div class="game-card__prices">
-      <span class="game-card__sale" :class="{ 'game-card__sale_sm': adaptiveSm }">-15%</span>
-      <div class="game-card__price-block" :class="{ 'game-card__price-block_sm': adaptiveSm }">
-        <span class="game-card__price game-card__price_old" :class="{ 'game-card__price_old_sm': adaptiveSm }">2860 ₽</span>
-        <span class="game-card__price game-card__price_new" :class="{ 'game-card__price_new_sm': adaptiveSm }">2 585 ₽</span>
+      <span 
+        class="game-card__sale" 
+        :class="{ 'game-card__sale_sm': adaptiveSm }"
+        v-if="sale !== null"
+      >-{{ sale }}%</span>
+      <div 
+        class="game-card__price-block" 
+        :class="{ 
+        'game-card__price-block_sm': adaptiveSm, 
+        'game-card__price-block_pl': sale !== null 
+      }"
+      >
+        <span 
+          class="game-card__price game-card__price_old" 
+          :class="{ 'game-card__price_old_sm': adaptiveSm }"
+          v-if="oldPrice !== null"
+        >{{ oldPrice }} ₽</span>
+        <span 
+          class="game-card__price game-card__price_new" 
+          :class="{ 'game-card__price_new_sm': adaptiveSm }"
+        >{{ newPrice }} ₽</span>
       </div>
     </div>
   </div>
@@ -25,6 +52,18 @@ export default {
     adaptiveSm: {
       type: Boolean,
       default: () => false
+    },
+    sale: {
+      type: Number,
+      default: () => null
+    },
+    oldPrice: {
+      type: Number,
+      default: () => null
+    },
+    newPrice: {
+      type: Number,
+      default: () => null
     },
     title: {
       type: String,
@@ -53,8 +92,12 @@ export default {
   &__price-block
     display: flex
     align-items: center
-    padding: 6px 6px 4px 21px
+    padding: 6px 6px 4px 6px
     background: rgba(0, 0, 0, 1)
+    &_pl
+      padding-left: 21px
+      +sm
+        padding-left: 15px
     &_sm
       +sm
         padding: 7px 6px 5px 15px

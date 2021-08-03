@@ -54,7 +54,7 @@
         />
         <g-recommend-slider 
           v-if="mainPage !== null" 
-          :data="mainPage.recommendations"
+          :data="mainPage.hits"
         />
       </b-container>
     </section>
@@ -74,6 +74,55 @@
           :text="mainPage.inserts[1].description"
           :image="mainPage.inserts[1].background"
           :button-label="mainPage.inserts[1].textOnButton"
+        />
+      </b-container>
+    </section>
+
+    <!-- New Games Slider  adapted = true // integrate = true -->
+    <section class="section">
+      <b-container >
+        <section-header
+          link-label="Смотреть все"
+          icon="/images/icons/new-items.svg"
+          title="Новинки"
+        />
+        <g-recommend-slider
+          v-if="mainPage !== null"
+          :data="mainPage.novelties"
+        />
+      </b-container>
+    </section>
+
+    <!-- Banner 3  adapted = true // integrate = true  -->
+    <section
+      class="section"
+      v-if="mainPage !== null && mainPage.inserts.length > 1"
+    >
+      <b-container >
+        <section-header
+          title-style="text-h3"
+          :title="mainPage.inserts[1].overInsert"
+        />
+        <banner
+          :title="mainPage.inserts[1].smallDescription"
+          :text="mainPage.inserts[1].description"
+          :image="mainPage.inserts[1].background"
+          :button-label="mainPage.inserts[1].textOnButton"
+        />
+      </b-container>
+    </section>
+
+    <!-- Sales Slider  adapted = true // integrate = true -->
+    <section class="section">
+      <b-container >
+        <section-header
+          link-label="Смотреть все"
+          icon="/images/icons/sale.svg"
+          title="Распродажа"
+        />
+        <g-recommend-slider
+          v-if="mainPage !== null"
+          :data="mainPage.saleOuts"
         />
       </b-container>
     </section>
