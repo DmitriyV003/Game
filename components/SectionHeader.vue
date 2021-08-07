@@ -57,7 +57,7 @@ export default {
   position: relative
   z-index: 10
   +md
-    padding-bottom: 12px
+    padding-bottom: 20px
   &__icon
     margin-right: 12px
   &__title

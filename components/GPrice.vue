@@ -1,9 +1,28 @@
 <template>
-  <div class="g-price__prices" :class="{ 'g-price__prices_disabled': disabled }">
-    <span class="g-price__sale" :class="{ 'g-price__sale_sm': adaptiveSm }">-15%</span>
-    <div class="g-price__price-block" :class="{ 'g-price__price-block_sm': adaptiveSm }">
-      <span class="g-price__price g-price__price_old" :class="{ 'g-price__price_old_sm': adaptiveSm }">2860</span>
-      <span v-if="showCurrentPrice" class="g-price__price g-price__price_new" :class="{ 'g-price__price_new_sm': adaptiveSm }">2 585</span>
+  <div 
+    class="g-price__prices" 
+    :class="{ 'g-price__prices_disabled': disabled }"
+    v-if="oldPrice !== 0 && newPrice !== 0"
+  >
+    <span 
+      class="g-price__sale" 
+      :class="{ 'g-price__sale_sm': adaptiveSm }"
+      v-if="sale !== 0"
+    >{{ sale }}</span>
+    <div 
+      class="g-price__price-block" 
+      :class="{ 'g-price__price-block_sm': adaptiveSm, 'g-price__price-block_pl': sale === 0 }"
+    >
+      <span 
+        class="g-price__price g-price__price_old" 
+        :class="{ 'g-price__price_old_sm': adaptiveSm }"
+        v-if="oldPrice !== 0 && newPrice !== 0"
+      >{{ oldPrice }}</span>
+      <span 
+        v-if="showCurrentPrice && newPrice !== 0" 
+        class="g-price__price g-price__price_new" 
+        :class="{ 'g-price__price_new_sm': adaptiveSm }"
+      >{{ newPrice }}</span>
     </div>
   </div>
 </template>
@@ -23,6 +42,18 @@ export default {
     showCurrentPrice: {
       type: Boolean,
       default: () => true
+    },
+    oldPrice: {
+      type: Number,
+      default: () => 0
+    },
+    newPrice: {
+      type: Number,
+      default: () => 0
+    },
+    sale: {
+      type: Number,
+      default: () => 0
     }
   }
 }
@@ -37,6 +68,10 @@ export default {
     align-items: center
     padding: 6px 6px 4px 21px
     background: rgba(0, 0, 0, 1)
+    &_pl
+      padding-left: 6px
+      +sm
+        padding-left: 6px
     &_sm
       +sm
         padding: 7px 6px 5px 15px
@@ -70,7 +105,6 @@ export default {
       color: $gray
       font-size: 13px
       line-height: 18px
-      margin-right: 8px
       text-decoration-line: line-through
       &_sm
         +sm
@@ -81,6 +115,7 @@ export default {
       font-weight: 500
       font-size: 16px
       line-height: 20px
+      margin-left: 8px
       &_sm
         +sm
           font-size: 13px

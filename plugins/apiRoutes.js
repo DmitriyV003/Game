@@ -19,5 +19,9 @@ export default {
   getMainPage: '/main-page ',
   postEditProfile: '/personal-area/profile/edit-info',
   getSearchItems: (query) => '/personal-area/sale/add-key/search-items?' + query,
-  getSaleItem: (query) => '/personal-area/sale/add-key/get-item?' + query 
+  getSaleItem: (query) => '/personal-area/sale/add-key/get-item?' + query,
+  getItem: (id) => '/to-item/' + id,
+  getItemProposals: (itemId, keyId) => '/to-item/' + itemId + '/' + keyId + '/more-sellers',
+  postKeysFile: '/personal-area/sale/add-key/process-file',
+  postNewSale: '/personal-area/sale/add-key'
 }

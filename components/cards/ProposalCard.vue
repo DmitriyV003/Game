@@ -4,21 +4,32 @@
       <div class="g-proposal-card__avatar">
         <div class="g-proposal-card__bg">
           <div class="g-proposal-card__image">
-            <span>KG</span>
+            <img 
+              :src="avatar" 
+              alt=""
+              v-if="avatar !== null"
+            >
+            <span v-else>{{ name.slice(0, 1) }}{{ surname.slice(0, 1) }}</span>
           </div>
         </div>
 
         <div class="g-proposal-card__text">
-          <p class="text-color-white text-size-16 text-weight-600">Premiumseller</p>
-          <p class="g-proposal-card__caption text-uppercase">EXCELLENT SELLER</p>
-          <p class="g-proposal-card__caption">97% положительных отзывов</p>
+          <p class="text-color-white text-size-16 text-weight-600">{{ name }} {{ surname }}</p>
+          <p class="g-proposal-card__caption text-uppercase">{{ nickname }}</p>
+          <p class="g-proposal-card__caption">{{ (likes + dislikes) === 0 ? 'Нет отзывов' : (likes / (likes + dislikes).toFixed(2)) +  ' положительных отзывов'}}</p>
         </div>
       </div>
 
       <div class="g-proposal-card__info">
-        <g-price class="g-proposal-card__price" :show-current-price="false" />
+        <g-price 
+          class="g-proposal-card__price" 
+          :show-current-price="false"
+          :sale="sale"
+          :old-price="oldPrice"
+          :new-price="newPrice"
+        />
 
-        <span class="g-proposal-card__new">4385.15 ₽</span>
+        <span class="g-proposal-card__new">{{ newPrice === 0 ? oldPrice : newPrice }} ₽</span>
 
         <main-button class="g-proposal-card__btn" full-width size="xl" color="primary" label="в корзину" />
       </div>
@@ -32,7 +43,45 @@ import GPrice from "~/components/GPrice";
 import MainButton from "~/components/buttons/MainButton";
 export default {
   name: 'GProposalCard',
-  components: {MainButton, GPrice, Avatar}
+  components: {MainButton, GPrice, Avatar},
+  props: {
+    nickname: {
+      type: String,
+      default: () => null
+    },
+    name: {
+      type: String,
+      default: () => null
+    },
+    surname: {
+      type: String,
+      default: () => null
+    },
+    likes: {
+      type: Number,
+      default: () => 0
+    },
+    dislikes: {
+      type: Number,
+      default: () => 0
+    },
+    oldPrice: {
+      type: Number,
+      default: () => 0
+    },
+    newPrice: {
+      type: Number,
+      default: () => 0
+    },
+    sale: {
+      type: Number,
+      default: () => 0
+    },
+    avatar: {
+      type: String,
+      default: () => null
+    }
+  }
 }
 </script>
 
@@ -74,9 +123,10 @@ export default {
   &__price
     margin-right: 48px
     +lg
-      margin: 8px 0 24px
+      margin: 8px 0 0
   &__btn
     +lg
+      margin-top: 24px
       width: 100%
   &__text
     p
@@ -114,6 +164,11 @@ export default {
     align-items: center
     justify-content: center
     background: rgba(39, 126, 255)
+    img
+      width: 100%
+      height: 100%
+      flex-shrink: 0
+      border-radius: 50%
     span
       font-size: 28px
       font-weight: 600

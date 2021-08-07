@@ -1,20 +1,41 @@
 <template>
-  <div class="g-drop-menu" :class="[{ 'g-drop-menu_active': open }, 'g-drop-menu_' + size, { 'g-drop-menu_active_sm': open && size === 'sm' }]">
-    <div @click="open = !open" class="g-drop-menu__active" :class="[{ 'g-drop-menu__active_active': open }, { 'g-drop-menu__active_active_sm': open && size === 'sm' }, 'g-drop-menu__active_' + size]">
-      <span v-if="currentState === null" class="g-drop-menu__placeholder">{{ placeholder }}</span>
-      <span v-if="currentState !== null" class="text">{{ currentState.label }}</span>
-      <chevron-down-icon class="icon" :class="[{ 'icon_active': open }, 'icon_' + size]" />
+  <div 
+    class="g-drop-menu" 
+    :class="[{ 'g-drop-menu_active': open }, 'g-drop-menu_' + size, { 'g-drop-menu_active_sm': open && size === 'sm' }]"
+  >
+    <div 
+      @click="open = !open" 
+      class="g-drop-menu__active" 
+      :class="[{ 'g-drop-menu__active_active': open }, { 'g-drop-menu__active_active_sm': open && size === 'sm' }, 'g-drop-menu__active_' + size]"
+    >
+      <span 
+        v-if="currentState === null" 
+        class="g-drop-menu__placeholder"
+      >{{ placeholder }}</span>
+      <span 
+        v-if="currentState !== null" 
+        class="text"
+      >{{ currentState[labelValue] }}</span>
+      <chevron-down-icon 
+        class="icon" 
+        :class="[{ 'icon_active': open }, 'icon_' + size]" 
+      />
     </div>
     
-    <div v-if="open" @mouseleave="open = false" class="g-drop-menu__drop" :class="['g-drop-menu__drop_' + size]">
+    <div 
+      v-if="open" 
+      @mouseleave="open = false" 
+      class="g-drop-menu__drop" 
+      :class="['g-drop-menu__drop_' + size]"
+    >
       <div
         v-for="link in links" 
-        @click="setActive(link.value)" 
+        @click="setActive(link[idValue])" 
         class="g-drop-menu__drop-link"
-        :key="link.value"
-        :class="{ 'g-drop-menu__drop-link_active': currentState !== null && currentState.value === link.value }"
+        :key="link[idValue]"
+        :class="{ 'g-drop-menu__drop-link_active': currentState !== null && currentState[idValue] === link[idValue] }"
       >
-        <span class="text">{{ link.label }}</span>
+        <span class="text">{{ link[labelValue] }}</span>
       </div>
     </div>
   </div>
@@ -28,16 +49,24 @@ export default {
   mixins: [icons],
   methods: {
     setActive(value) {
-      this.currentState = this.links.find(x => x.value === value)
+      this.currentState = this.links.find(x => x[this.idValue] === value)
       this.open = false
       
-      this.$emit('input', this.currentState.value)
+      this.$emit('input', this.currentState[this.idValue])
     }
   },
   props: {
     placeholder: {
       type: String,
       default: () => 'placeholder'
+    },
+    idValue: {
+      type: String,
+      default: () => 'value'
+    },
+    labelValue: {
+      type: String,
+      default: () => 'label'
     },
     size: {
       type: String,

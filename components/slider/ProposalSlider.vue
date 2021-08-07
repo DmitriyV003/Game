@@ -8,11 +8,19 @@
       :arrows="settings.arrows"
       :dots="settings.dots"
     >
-      <g-proposal-card />
-      <g-proposal-card />
-      <g-proposal-card />
-      <g-proposal-card />
-      <g-proposal-card />
+      <g-proposal-card
+        v-for="item in data"
+        :key="item.keyId"
+        :nickname="item.sellerNickname"
+        :name="item.sellerName"
+        :surname="item.sellerSurname"
+        :avatar="item.sellerAvatar"
+        :likes="Number(item.likes)"
+        :dislikes="Number(item.dislikes)"
+        :sale="Number(item.itemPrice.sale)"
+        :old-price="Number(item.itemPrice.old)"
+        :new-price="Number(item.itemPrice.new)"
+      />
     </vue-slick>
     <div class="g-slider__controls">
       <arrow-button @click.native="prev($refs.proposalSlider)" class="g-slider__button g-slider__button_left" left />
@@ -37,6 +45,10 @@ export default {
         dots: false
       }
     }
+  },
+  props: {
+    data: Array,
+    required: true
   },
   methods: {
     next (slider) {

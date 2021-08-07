@@ -51,10 +51,11 @@ export const actions = {
   },
   async postChangeAvatar (ctx, data) {
     try {
-      await this.$axios.$post(this.$axios.defaults.baseURL + apiRoutes.postChangeAvatar, 
-        data, 
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-        )
+      await this.$axios.$post(this.$axios.defaults.baseURL + apiRoutes.postChangeAvatar, data, { 
+          headers: { 
+          'Content-Type': 'multipart/form-data' 
+          } 
+        })
     } catch (e) {
       throw e
     }

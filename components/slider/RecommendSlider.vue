@@ -19,6 +19,8 @@
         :sale="item.itemPrice.sale"
         :old-price="item.itemPrice.old"
         :new-price="item.itemPrice.new"
+        :rating="Number(item.itemScore)"
+        :id="item.itemId"
       />
     </vue-slick>
     <div class="g-slider__controls">

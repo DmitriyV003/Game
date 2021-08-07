@@ -1,6 +1,8 @@
 <template>
   <div class="g-page">
-    <g-add-keys-popup />
+    <g-add-keys-popup 
+      :keys="keys"
+    />
     <b-container>
       <h1 class="title">Личный кабинет</h1>
       
@@ -17,28 +19,34 @@
             <h2 class="g-new-product__title">Добавить новую игру на продажу</h2>
           </div>
           
-          <div class="g-product-search">
-            <g-input class="g-product-search__input" color="white" />
-            
-            <main-button class="g-product-search__btn" size="xl" color="primary" label="выбрать" />
-          </div>
+          <g-search-games-for-sell />
           
-          <div class="g-new-product__product">
+          <div 
+            class="g-new-product__product"
+            v-if="item !== null"
+          >
             <section class="g-new-product__section">
               <div class="g-new-product__block g-new-product__block_row">
                 <div class="g-new-product__left g-new-product__left_row">
-                  <img class="g-new-product__img" src="/images/new-product.jpg" alt="">
+                  <img 
+                    class="g-new-product__img" 
+                    :src="item.headerImage" 
+                    alt=""
+                  >
                 </div>
                 
                 <div class="g-new-product__right g-new-product__right_row">
-                  <p class="g-new-product__name">HITMAN 3</p>
-                  <p class="g-new-product__text">HITMAN™ 3 — восьмая часть легендарной серии Hitman и третий сезон HITMAN™, завершающий трилогию «World of Assassinations». Релиз игры состоялся 20 января 2021 года. Это первая часть во всей серии Hitman, которую IO Interactive издала самостоятельно.  восьмая часть легендарной серии Hitman и третий сезон HITMAN™, завершающий трилогию «World of Assassinations». Релиз игры состоялся 20 января 2021 года. </p>
+                  <p class="g-new-product__name">{{ item.name }}</p>
+                  <p class="g-new-product__text">{{ item.detailedDescription }}</p>
                 </div>
               </div>
             </section>
 
             <!--  Sales settings  adapted = true -->
-            <section class="g-new-product__section">
+            <form 
+              @submit.prevent="postNewSale"
+              class="g-new-product__section"
+            >
               <div class="g-new-product__block">
                 <div class="g-new-product__left">
                   <p class="g-new-product__subtitle">Настройки продажи</p>
@@ -47,34 +55,62 @@
                 <div class="g-new-product__right">
                   <div class="g-new-product__line">
                     <div class="g-new-product__subblock">
-                      <main-button label="Добавить ключи" color="secondary" full-width size="xl" />
+                      <main-button 
+                        label="Добавить ключи" 
+                        color="secondary" 
+                        full-width 
+                        size="xl" 
+                        @click.native="eventBus.$emit('addKeysPopupOpen')"
+                      />
                     </div>
 
                     <div class="g-new-product__subblock">
-                      <p class="g-new-product__added">Добавлено: <span>45 ключей</span></p>
+                      <p class="g-new-product__added">Добавлено: <span>{{ keys.length }} ключей</span></p>
                     </div>
 
                     <div class="g-new-product__subblock">
-                      <g-drop-menu />
+                      <g-drop-menu
+                        :links="item.regions"
+                        id-value="id"
+                        label-value="name"
+                        placeholder="Регион"
+                        v-model="form.regionId"
+                      />
                     </div>
 
                     <div class="g-new-product__subblock">
-                      <g-drop-menu />
+                      <g-input 
+                        readonly 
+                        :value="item.platforms"
+                      />
                     </div>
 
                     <div class="g-new-product__subblock">
-                      <g-input readonly caption="Цена продажи с учетом комиссии" />
+                      <g-input 
+                        color="white" 
+                        caption="Ваша цена" 
+                        v-model="form.price"
+                      />
                     </div>
 
                     <div class="g-new-product__subblock">
-                      <g-input color="white" caption="Ваша цена" />
+                      <g-input 
+                        readonly 
+                        caption="Цена продажи с учетом комиссии" 
+                      />
                     </div>
 
-                    <main-button class="g-new-product__sale" label="Выставить на продажу" color="primary" full-width size="xl" />
+                    <main-button 
+                      class="g-new-product__sale" 
+                      label="Выставить на продажу" 
+                      color="primary" 
+                      full-width 
+                      size="xl" 
+                    />
                   </div>
                 </div>
               </div>
-            </section>
+            </form>
 
             <!--  About game  adapted = true -->
             <section class="g-new-product__section g-new-product__section_no-mb g-new-product__section_no-pt">
@@ -90,26 +126,26 @@
                       </div>
                       <div class="g-new-product__subblock">
                         <div class="g-new-product__tag">
-                          <span class="caption">Теги</span>
-                          <span class="value">Экшен, Одиночная игра, Стелс</span>
+                          <span class="caption">Разработчик</span>
+                          <span class="value">{{ item.developer }}</span>
                         </div>
                       </div>
                       <div class="g-new-product__subblock">
                         <div class="g-new-product__tag">
-                          <span class="caption">Теги</span>
-                          <span class="value">Экшен, Одиночная игра, Стелс</span>
+                          <span class="caption">ОС</span>
+                          <span class="value">{{ item.platforms }}</span>
                         </div>
                       </div>
                       <div class="g-new-product__subblock">
                         <div class="g-new-product__tag">
-                          <span class="caption">Теги</span>
-                          <span class="value">Экшен, Одиночная игра, Стелс</span>
+                          <span class="caption">Дата выхода</span>
+                          <span class="value">{{ item.releaseDate }}</span>
                         </div>
                       </div>
                       <div class="g-new-product__subblock">
                         <div class="g-new-product__tag">
-                          <span class="caption">Теги</span>
-                          <span class="value">Экшен, Одиночная игра, Стелс</span>
+                          <span class="caption">Рейтинг</span>
+                          <span class="value">{{ item.metacritic }}</span>
                         </div>
                       </div>
                     </div>
@@ -124,8 +160,12 @@
                 <g-drop-content title="Описание игры">
                   <template v-slot:dropContent>
                     <div class="g-new-product__desc">
-                      <p class="g-new-product__text">HITMAN™ 3 — восьмая часть легендарной серии Hitman и третий сезон HITMAN™, завершающий трилогию «World of Assassinations». Релиз игры состоялся 20 января 2021 года. Это первая часть во всей серии Hitman, которую IO Interactive издала самостоятельно.  восьмая часть легендарной серии Hitman и третий сезон HITMAN™, завершающий трилогию «World of Assassinations». Релиз игры состоялся 20 января 2021 года. </p>
-                      <img class="g-new-product__video" src="/images/new-product-video.svg" alt="">
+                      <p class="g-new-product__text">{{ item.detailedDescription }}</p>
+                      <img 
+                        class="g-new-product__video"
+                        :src="item.linkToMedia" 
+                        alt=""
+                      >
                     </div>
                   </template>
                 </g-drop-content>
@@ -172,11 +212,63 @@ import MainButton from '~/components/buttons/MainButton'
 import GDropMenu from '~/components/DropMenu'
 import GDropContent from '~/components/DropContent'
 import icons from '~/mixins/icons'
-import GAddKeysPopup from "~/components/popups/AddKeysPopup";
+import GAddKeysPopup from '~/components/popups/AddKeysPopup'
+import GSearchGamesForSell from '~/components/dashboard/SearchGamesForSell'
+import { mapState } from 'vuex'
+import { eventBus } from '~/plugins/event-bus'
 export default {
-  components: {GAddKeysPopup, GDropContent, GDropMenu, MainButton, GInput, ShowAll, GDashboardNavigation },
+  components: {
+    GSearchGamesForSell,
+    GAddKeysPopup, 
+    GDropContent, 
+    GDropMenu, 
+    MainButton, 
+    GInput, 
+    ShowAll, 
+    GDashboardNavigation 
+  },
   mixins: [icons],
-  mounted () {
+  computed: {
+    ...mapState({
+      item: state => state.sales.saleItem,
+      keys: state => state.key.keys
+    })
+  },
+  methods: {
+    async postNewSale () {
+      try {
+        await this.$store.dispatch('sales/postNewSale', this.form)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async getItemFromQueryString (query) {
+      if (Object.keys(query).length === 0) {
+        return
+      }
+
+      try {
+        await this.$store.dispatch('sales/getSaleItem', query.itemId)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  },
+  async mounted () {
+    const query = this.$route.query
+    
+    await this.getItemFromQueryString(query)
+  },
+  data () {
+    return {
+      eventBus,
+      form: {
+        regionId: null,
+        price: null,
+        itemId: null,
+        keys: null
+      }
+    }
   }
 }
 </script>
@@ -184,27 +276,6 @@ export default {
 <style lang="sass">
 @import 'theme/_vars'
 @import 'theme/_mix'  
-.g-product-search
-  padding: 20px 24px
-  background: #282439
-  border-radius: 12px
-  display: flex
-  align-items: center
-  justify-content: space-between
-  +md
-    flex-direction: column
-    padding: 20px 16px
-  &__btn
-    +md
-      width: 100%
-      .button
-        width: 100%
-  &__input
-    margin-right: 20px
-    width: 100%
-    +md
-      margin-right: 0
-      margin-bottom: 24px
 .g-new-product
   &__video
     width: 100%

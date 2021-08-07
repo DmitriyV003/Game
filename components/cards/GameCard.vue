@@ -1,5 +1,5 @@
 <template>
-  <div class="game-card">
+  <nuxt-link :to="'/product/' + id" class="game-card">
     <img 
       :src="image"
       alt="" 
@@ -14,7 +14,11 @@
       :class="{ 'game-card__text_sm': adaptiveSm }"
     >{{ developer }}</p>
 
-    <rating class="game-card__rating" :value="4.9" />
+    <rating 
+      class="game-card__rating" 
+      :value="rating" 
+      v-if="rating !== null && rating !== 0"
+    />
 
     <div class="game-card__prices">
       <span 
@@ -32,15 +36,15 @@
         <span 
           class="game-card__price game-card__price_old" 
           :class="{ 'game-card__price_old_sm': adaptiveSm }"
-          v-if="oldPrice !== null"
+          v-if="(oldPrice !== null) && (newPrice !== null)"
         >{{ oldPrice }} ₽</span>
         <span 
           class="game-card__price game-card__price_new" 
           :class="{ 'game-card__price_new_sm': adaptiveSm }"
-        >{{ newPrice }} ₽</span>
+        >{{ newPrice === null ? oldPrice : newPrice }} ₽</span>
       </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -57,9 +61,17 @@ export default {
       type: Number,
       default: () => null
     },
+    rating: {
+      type: Number,
+      default: () => null
+    },
     oldPrice: {
       type: Number,
       default: () => null
+    },
+    id: {
+      type: String,
+      required: true
     },
     newPrice: {
       type: Number,

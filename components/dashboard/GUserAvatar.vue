@@ -1,6 +1,9 @@
 <template>
   <div class="g-user-avatar">
-    <img :src="avatar === null ? '/images/avatar.png' : avatar" alt="" class="g-user-avatar__avatar">
+    <img 
+      :src="avatar === null ? '/images/avatar.png' : avatar" alt=""
+      class="g-user-avatar__avatar"
+    >
 
     <input 
       class="g-user-avatar__file" 
@@ -9,7 +12,10 @@
       ref="avatar"
       @change="handleFileUpload"
     >
-    <label class="g-user-avatar__label" for="file">Загрузить фото</label>
+    <label 
+      class="g-user-avatar__label" 
+      for="file"
+    >Загрузить фото</label>
   </div>
 </template>
 

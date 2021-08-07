@@ -11,17 +11,17 @@
         <h1 class="for-sellers__title">Поможем справиться с игровым бременем!</h1>
 
         <!-- Banner  adapted = true -->
-        <div class="g-banner">
-          <img src="/images/for-sellers-img.png" alt="" class="g-banner__image">
-          <div class="g-banner__content">
+        <div class="g-sellers-banner">
+          <img src="/images/for-sellers-img.png" alt="" class="g-sellers-banner__image">
+          <div class="g-sellers-banner__content">
             <h2>Gameincome</h2>
-            <p class="g-banner__text">Надёжный маркетплейс с каталогом, в котором более 5000 ключей для игр, 300 видов авторских софтов, публичной и часто посещаемой вертелкой для кейсов и скинов из игр DOTA 2 и CS GO</p>
-            <div class="g-banner__items">
+            <p class="g-sellers-banner__text">Надёжный маркетплейс с каталогом, в котором более 5000 ключей для игр, 300 видов авторских софтов, публичной и часто посещаемой вертелкой для кейсов и скинов из игр DOTA 2 и CS GO</p>
+            <div class="g-sellers-banner__items">
               <g-info-item />
               <g-info-item />
               <g-info-item />
             </div>
-            <main-button class="g-banner__btn" color="primary" label="стать продавцом" size="xl" />
+            <main-button class="g-sellers-banner__btn" color="primary" label="стать продавцом" size="xl" />
           </div>
         </div>
       </b-container>
@@ -208,12 +208,12 @@ export default {
     img
       width: 100%
       height: 100%
-.g-banner
+.g-sellers-banner
   padding: 70px 24px 20px 24px
   background: linear-gradient(95.48deg, #120F28 -4.94%, #691E66 116.71%) no-repeat
   position: relative
   border-radius: 12px
-  margin-bottom: 40px
+  margin-bottom: 30px
   z-index: 7
   +lg
     padding: 24px 16px

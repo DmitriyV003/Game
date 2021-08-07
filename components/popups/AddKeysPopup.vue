@@ -1,40 +1,66 @@
 <template>
   <!-- Adapted = true  -->
   <form
-    @submit.prevent="postEditProfile"
+    @submit.prevent="addKey"
     class="g-popup"
     v-show="val"
   >
     <div class="g-add-keys">
       <div class="g-popup__top">
         <p class="g-popup__title">Добавить ключи</p>
-        <close-icon @click="val = false" class="g-popup__close" />
+        <close-icon 
+          @click="val = false" 
+          class="g-popup__close" 
+        />
       </div>
 
       <div class="g-add-keys__options">
        <span 
          class="g-add-keys__option"
          :class="{ 'g-add-keys__option_active': mode === 'hand' }"
-         @click="changeMode('hand', 'text')"
+         @click="changeMode('hand')"
        >Ручной ввод</span>
         <span 
           class="g-add-keys__option"
           :class="{ 'g-add-keys__option_active': mode === 'file' }"
-          @click="changeMode('file', 'file')"
+          @click="changeMode('file')"
         >Загрузить из файла</span>
       </div>
       
       <div class="g-add-keys__block">
         <g-input
+          v-if="mode === 'hand'"
           placeholder="Введите Ключ продукта"
           color="white"
           class="g-add-keys__input"
-          :type="type"
+          v-model="form.key"
+          key="fileInput"
+        />
+
+        <g-input
+          type="file"
+          placeholder="Введите Ключ продукта"
+          v-if="mode === 'file'"
+          color="white"
+          class="g-add-keys__input"
+          @change.native="handleFileUpload"
+          key="keyInput"
         />
 
         <main-button
           :disabled="disabled || $v.$invalid"
+          v-show="mode === 'hand'"
           type="submit"
+          color="primary"
+          size="xl"
+          label="проверить"
+          class="g-add-keys__check"
+        />
+
+        <main-button
+          :disabled="form.file === null"
+          @click.native="uploadFile"
+          v-show="mode === 'file'"
           color="primary"
           size="xl"
           label="проверить"
@@ -43,61 +69,38 @@
       </div>
       
       <div class="g-add-keys__result">
-        <span>Добавлено: 0 ключей</span>
+        <span>Добавлено: {{ keys.length }} ключей</span>
       </div>
       
       <div class="g-add-keys__keys">
         
-        <div class="g-add-keys__keys-wrapper">
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
-          </div>
-          <div class="g-add-keys__key">
-            <span class="value">hdA26-BTDKE-XKL43-vbn47</span>
-            <close-icon class="close" />
+        <div 
+          class="g-add-keys__keys-wrapper"
+        >
+          <div
+            class="g-add-keys__key"
+            v-for="key in keys"
+            :key="key"
+          >
+            <span class="value">{{ key }}</span>
+            <close-icon 
+              class="close"
+              @click="deleteKey(key)"
+            />
           </div>
         </div>
       </div>
 
-      <div class="g-add-keys__bottom" v-if="keys.length > 0">
+      <div 
+        class="g-add-keys__bottom" 
+        v-if="keys.length > 0"
+      >
         <main-button
-          type="submit"
+          type="button"
           color="primary"
           size="xl"
           label="Добавить ключи"
+          @click.native="val = false"
         />
       </div>
     </div>
@@ -108,9 +111,8 @@
   import { eventBus } from '~/plugins/event-bus'
   import icons from '~/mixins/icons'
   import MainButton from '~/components/buttons/MainButton'
-  import { maxLength, required, minLength } from 'vuelidate/lib/validators'
+  import { required } from 'vuelidate/lib/validators'
   import GInput from '~/components/form-elements/Input'
-  import { mapState } from 'vuex'
 
   export default {
     name: 'GAddKeysPopup',
@@ -118,52 +120,59 @@
     mixins: [icons],
     data: () => {
       return {
-        val: true,
+        val: false,
         disabled: false,
         mode: 'hand',
-        keys: [1],
-        type: 'text'
+        form: {
+          key: null,
+          file: null
+        }
+      }
+    },
+    props: {
+      keys: {
+        type: Array,
+        default: () => []
       }
     },
     validations: {
-      name: {
-        required,
-        maxLength: maxLength(100)
-      },
-      surname: {
-        required,
-        maxLength: maxLength(100)
-      },
-      nickname: {
-        required,
-        maxLength: maxLength(100),
-        minLength: minLength(2)
+      form: {
+        key: {
+          required
+        }
       }
     },
-    computed: {
-      ...mapState({
-        profile: state => state.profile.profile
-      })
-    },
     methods: {
-      async postEditProfile () {
+      async uploadFile () {
+        this.disabled = true
         try {
-          this.disabled = true
-          await this.$store.dispatch('profile/postEditProfile')
-
-          this.val = false
+          const data = new FormData()
+          data.append('file', this.form.file)
+          await this.$store.dispatch('key/postKeysFile', data)
         } catch (e) {
           console.log(e.response)
         } finally {
           this.disabled = false
         }
       },
-      changeMode (mode, type) {
-        this.mode = mode
-        this.type = type
+      deleteKey (key) {
+        this.$store.dispatch('key/deleteKey', key)
       },
-      editProfileField (payload) {
-        this.$store.dispatch('profile/editProfileField', payload)
+      addKey () {
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          this.$store.dispatch('key/addKey', this.form.key)
+        }
+      },
+      handleFileUpload (e) {
+        console.log(e)
+        this.form.file = e.target.files[0]
+      },
+      changeMode (mode) {
+        this.form.key = null
+        this.form.file = null
+        
+        this.mode = mode
       }
     },
     created () {

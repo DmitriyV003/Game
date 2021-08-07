@@ -37,7 +37,17 @@ export default {
   mixins: [icons],
   data () {
     return {
-      originType: this.type  
+      inputType: this.type  
+    }
+  },
+  computed: {
+    originType: {
+      get () {
+        return this.type
+      },
+      set (value) {
+        this.inputType = value
+      }
     }
   },
   props: {
@@ -46,7 +56,7 @@ export default {
       default: () => ''
     },
     value: {
-      type: String,
+      type: null,
       default: () => null
     },
     caption: {
