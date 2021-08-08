@@ -71,39 +71,39 @@
                                     <img class="header__drop-logo" src="/images/logo.svg" alt="">
                                 </nuxt-link>
 
-                                <span class="header__drop-close">
-                <close-icon @click="dropMenu = false"/>
-              </span>
+                                <span class="header__drop-close">               
+                                    <close-icon @click="dropMenu = false"/>
+                                </span>
                             </div>
 
                             <div class="header__drop-links">
                                 <nuxt-link class="header__drop-link" to="/catalog">
-                                    <game-icon class="icon" />
+                                    <game-icon class="icon"/>
                                     <span class="text">Игры</span>
                                 </nuxt-link>
 
                                 <nuxt-link class="header__drop-link" to="/soft">
-                                    <code-icon class="icon" />
+                                    <code-icon class="icon"/>
                                     <span class="text">Софт</span>
                                 </nuxt-link>
 
                                 <nuxt-link class="header__drop-link" to="/legal">
-                                    <region-icon class="icon" />
+                                    <region-icon class="icon"/>
                                     <span class="text">Region free</span>
                                 </nuxt-link>
 
                                 <nuxt-link class="header__drop-link" to="/reviews">
-                                    <text-icon class="icon" />
+                                    <text-icon class="icon"/>
                                     <span class="text">Обзоры</span>
                                 </nuxt-link>
 
                                 <nuxt-link class="header__drop-link" to="/news">
-                                    <news-icon class="icon" />
+                                    <news-icon class="icon"/>
                                     <span class="text">Новости</span>
                                 </nuxt-link>
 
                                 <nuxt-link class="header__drop-link" to="/comments">
-                                    <comment-icon class="icon" />
+                                    <comment-icon class="icon"/>
                                     <span class="text">Отзывы</span>
                                 </nuxt-link>
                             </div>
@@ -153,8 +153,8 @@
             ...mapMutations ({
                 setWindowSize: 'common/setWindowSize'
             }),
-            async goToSearch () {
-                await this.$router.push({ path: '/search', query: { name: this.form.searchValue } })
+            async goToSearch() {
+                await this.$router.push ({ path: '/search', query: { name: this.form.searchValue } })
             }
         }
     }
@@ -210,6 +210,7 @@
 
             .text
                 margin-left: 16px
+
             .icon
                 font-size: 28px
 
