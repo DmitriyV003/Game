@@ -131,6 +131,8 @@ export default {
     &:hover
       color: white(0.8) !important
   &__block
+    display: flex
+    flex-direction: column
     &_order-10
       +md
         order: 10
@@ -175,6 +177,7 @@ export default {
     justify-content: space-between
     width: 100%
     margin-right: 70px
+    flex-wrap: wrap
     +lg
       margin-right: 0
     +md

@@ -37,11 +37,11 @@
           class="game-card__price game-card__price_old" 
           :class="{ 'game-card__price_old_sm': adaptiveSm }"
           v-if="(oldPrice !== null) && (newPrice !== null)"
-        >{{ oldPrice }} ₽</span>
+        >{{ oldPrice / 100 }} ₽</span>
         <span 
           class="game-card__price game-card__price_new" 
           :class="{ 'game-card__price_new_sm': adaptiveSm }"
-        >{{ newPrice === null ? oldPrice : newPrice }} ₽</span>
+        >{{ newPrice === null ? oldPrice / 100 : newPrice / 100 }} ₽</span>
       </div>
     </div>
   </nuxt-link>

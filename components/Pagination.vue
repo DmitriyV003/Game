@@ -67,4 +67,6 @@ export default {
     color: $gray
     cursor: pointer
     font-size: 25px
+    &:hover
+        color: $white
 </style>

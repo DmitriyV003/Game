@@ -42,9 +42,10 @@
               </div>
               
               <avatar 
-                :caption="item.sellerNickname" 
-                :name="item.sellerName + ' ' + item.sellerSurname"
+                :caption="item.sellerName + ' ' + item.sellerSurname" 
+                :nickname="item.sellerNickname"
                 :image="item.sellerAvatar"
+                v-if="item.sellerNickname !== null"
               />
             </div>
 

@@ -1,11 +1,22 @@
 <template>
-  <div class="g-avatar">
+  <div 
+      class="g-avatar"
+  >
     <div class="g-avatar__image" :class="'g-avatar__image_' + size">
       <img :src=image alt="">
     </div>
-    <div v-if="name !== null || caption !== null"  class="g-avatar__block">
-      <span v-if="name !== null" class="text-white text-normal text-weight-600">{{ name }}</span>
-      <span v-if="caption !== null" class="caption text-color-gray">{{ caption }}</span>
+    <div 
+        v-if="nickname !== null || caption !== null" 
+        class="g-avatar__block"
+    >
+      <span 
+          v-if="nickname !== null" 
+          class="text-white text-normal text-weight-600"
+      >{{ nickname }}</span>
+      <span 
+          v-if="caption !== null" 
+          class="caption text-color-gray"
+      >{{ caption }}</span>
     </div>
     
   </div>
@@ -19,9 +30,9 @@ export default {
       type: String,
       default: () => ''
     },
-    name: {
+    nickname: {
       type: String,
-      default: () => 'Some user name'
+      default: () => null
     },
     caption: {
       type: String,

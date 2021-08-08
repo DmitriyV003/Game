@@ -1,7 +1,10 @@
 <template>
   <div class="g-input">
     <div v-if="caption" class="g-input__caption-wrapper">
-      <span class="g-input__caption" :class="['g-input__caption_' + color]" v-if="caption !== null">{{ caption }}</span>
+      <span 
+          class="g-input__caption" 
+          :class="['g-input__caption_' + color]" v-if="caption !== null"
+      >{{ caption }}</span>
       <slot name="link"></slot>
     </div>
     <input 
