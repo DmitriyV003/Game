@@ -1,319 +1,389 @@
 <template>
-  <div>
-    
-    <!-- Cart top adapted = true   -->
-    <section class="cart-top">
-      <b-container>
-        <div class="stepper">
-          <div class="stepper__item stepper__item_active">
-            <span class="stepper__num">1</span>
-            <span class="stepper__text">Корзина</span>
-          </div>
-          
-          <span class="stepper__line"></span>
-          
-          <div class="stepper__item" :class="{ 'stepper__item_active': step !== 1 }">
-            <span class="stepper__num">2</span>
-            <span class="stepper__text">Оплата</span>
-          </div>
+    <div>
 
-          <span class="stepper__line"></span>
+        <!-- Cart top adapted = true   -->
+        <section class="cart-top">
+            <b-container>
+                <div class="stepper">
+                    <div class="stepper__item stepper__item_active">
+                        <span class="stepper__num">1</span>
+                        <span class="stepper__text">Корзина</span>
+                    </div>
 
-          <div class="stepper__item" :class="{ 'stepper__item_active': step !== 2 && step !== 1 }">
-            <span class="stepper__num">3</span>
-            <span class="stepper__text">Получение заказа</span>
-          </div>
-        </div>
-      </b-container>
-    </section>
+                    <span class="stepper__line"></span>
 
-    <!-- Order adapted =  true  -->
-    <section v-if="step === 1" class="cart-main">
-      <b-container>
+                    <div class="stepper__item" :class="{ 'stepper__item_active': step !== 1 }">
+                        <span class="stepper__num">2</span>
+                        <span class="stepper__text">Оплата</span>
+                    </div>
 
-        <div class="cart__title">
-          <h1>Ваш заказ</h1>
-          <span> (3 товара)</span>
-        </div>
-        
-        <div class="cart-container">
-          <div class="g-col-8">
-            <div class="g-background g-seller">
-              <div class="g-seller__top">
-                <div class="g-seller__name">Продавец: <span>Kgamestrade</span></div>
-                <show-all to="/catalog?seller=someseller" label="Больше товаров этого продавца" :icon="false" />
-              </div>
-              
-              <g-cart-item />
-              <g-cart-item />
-            </div>
-          </div>
-          <div class="g-col-4">
-            <div class="g-background g-cart-total">
-              <div class="g-cart-total__line">
-                <span>Товары</span>
-                <span>8 965 ₽</span>
-              </div>
-              <div class="g-cart-total__line">
-                <span>Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+                    <span class="stepper__line"></span>
 
-              <div class="g-cart-total__sum">
-                <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">7 865 ₽</span>
-              </div>
-              
-              <main-button @click.native="step = 2" class="g-cart-total__btn" color="primary" label="перейти к оплате" full-width size="xl" />
-            </div>
-          </div>
-        </div>
-      </b-container>
-    </section>
+                    <div class="stepper__item" :class="{ 'stepper__item_active': step !== 2 && step !== 1 }">
+                        <span class="stepper__num">3</span>
+                        <span class="stepper__text">Получение заказа</span>
+                    </div>
+                </div>
+            </b-container>
+        </section>
 
-    <!-- Payment content adapted = true -->
-    <section v-if="step === 2" class="cart-main">
-      <b-container>
+        <!-- Order adapted =  true  -->
+        <section v-if="step === 1" class="cart-main">
+            <b-container>
 
-        <div class="cart__title">
-          <h1>Способ оплаты</h1>
-        </div>
+                <div class="cart__title">
+                    <h1>Ваш заказ</h1>
+                    <span> (3 товара)</span>
+                </div>
 
-        <div class="cart-container">
-          <div class="g-col-8">
-            <div class="g-payments">
-              <g-payment-method :id="1" image="/images/payment-1.svg" name="Банковская карта" class="g-payments__method" />
-              <g-payment-method :id="2" image="/images/payment-1.svg" name="Сбербанк Онлайн" class="g-payments__method" />
-              <g-payment-method :id="3" image="/images/payment-1.svg" name="Qiwi" class="g-payments__method" />
-              <g-payment-method :id="4" image="/images/payment-1.svg" name="Мобильные платежи" class="g-payments__method" />
-            </div>
-          </div>
-          <div class="g-col-4">
-            <div class="g-wrapper g-cart-total">
-              <div class="g-cart-total__line">
-                <span>Товары</span>
-                <span>8 965 ₽</span>
-              </div>
-              <div class="g-cart-total__line">
-                <span>Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+                <b-row>
+                    <b-col 
+                        xl="8"
+                        lg="7"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-background g-seller">
+                            <div class="g-seller__top">
+                                <div class="g-seller__name">Продавец: <span>Kgamestrade</span></div>
+                                <show-all to="/catalog?seller=someseller" label="Больше товаров этого продавца"
+                                          :icon="false"/>
+                            </div>
 
-              <div class="g-cart-total__sum">
-                <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">7 865 ₽</span>
-              </div>
+                            <g-cart-item/>
+                            <g-cart-item/>
+                        </div>
+                    </b-col>
 
-              <main-button @click.native="step = 2" class="g-cart-total__btn" color="primary" label="перейти к оплате" full-width size="xl" />
-            </div>
-          </div>
-        </div>
-      </b-container>
-    </section>
+                    <b-col 
+                        xl="4"
+                        lg="5"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-background g-cart-total">
+                            <div class="g-cart-total__line">
+                                <span>Товары</span>
+                                <span>8 965 ₽</span>
+                            </div>
+                            <div class="g-cart-total__line">
+                                <span>Сумма скидок</span>
+                                <span class="sale">- 1 100 ₽</span>
+                            </div>
 
-    <!-- Receive Order adapted = true -->
-    <section v-if="step === 3" class="cart-main">
-      <b-container>
+                            <div class="g-cart-total__sum">
+                                <span class="text-weight-600">Итого к оплате</span>
+                                <span class="text-weight-600 text-size-24">7 865 ₽</span>
+                            </div>
 
-        <div class="cart__title">
-          <h1>Ваш заказ</h1>
-          <span> (3 товара)</span>
-        </div>
+                            <main-button @click.native="step = 2" class="g-cart-total__btn" color="primary"
+                                         label="перейти к оплате" full-width size="xl"/>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
 
-        <div class="cart-container">
-          <div class="g-col-8">
-            <div class="g-wrapper g-seller">
-              <div class="g-seller__top">
-                <div class="g-seller__name">Продавец: <span>Kgamestrade</span></div>
-              </div>
+        <!-- Payment content adapted = true -->
+        <section v-if="step === 2" class="cart-main">
+            <b-container>
 
-              <g-receive-cart-item />
-              <g-receive-cart-item />
-            </div>
-          </div>
-          <div class="g-col-4">
-            <div class="g-wrapper g-cart-total">
-              <div class="g-cart-total__line">
-                <span class="name">Товары</span>
-                <span>8 965 ₽</span>
-              </div>
-              <div class="g-cart-total__line">
-                <span class="name">Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
-              <div class="g-cart-total__line">
-                <span class="name">McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+                <div class="cart__title">
+                    <h1>Способ оплаты</h1>
+                </div>
 
-              <div class="g-cart-total__line g-cart-total__line_total">
-                <span class="name">Итого</span>
-                <span>7 965 ₽</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-container>
-    </section>
-    
-  </div>
+                <b-row>
+                    <b-col 
+                        xl="8"
+                        lg="7"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-payments">
+                            <g-payment-method :id="1" image="/images/payment-1.svg" name="Банковская карта"
+                                              class="g-payments__method"/>
+                            <g-payment-method :id="2" image="/images/payment-1.svg" name="Сбербанк Онлайн"
+                                              class="g-payments__method"/>
+                            <g-payment-method :id="3" image="/images/payment-1.svg" name="Qiwi"
+                                              class="g-payments__method"/>
+                            <g-payment-method :id="4" image="/images/payment-1.svg" name="Мобильные платежи"
+                                              class="g-payments__method"/>
+                        </div>
+                    </b-col>
+                    <b-col 
+                        xl="4"
+                        lg="5"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-wrapper g-cart-total">
+                            <div class="g-cart-total__line">
+                                <span>Товары</span>
+                                <span>8 965 ₽</span>
+                            </div>
+                            <div class="g-cart-total__line">
+                                <span>Сумма скидок</span>
+                                <span class="sale">- 1 100 ₽</span>
+                            </div>
+
+                            <div class="g-cart-total__sum">
+                                <span class="text-weight-600">Итого к оплате</span>
+                                <span class="text-weight-600 text-size-24">7 865 ₽</span>
+                            </div>
+
+                            <main-button 
+                                @click.native="step = 3" 
+                                class="g-cart-total__btn" 
+                                color="primary"
+                                label="перейти к оплате" 
+                                full-width 
+                                size="xl"
+                            />
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+        <!-- Receive Order adapted = true -->
+        <section v-if="step === 3" class="cart-main">
+            <b-container>
+
+                <div class="cart__title">
+                    <h1>Ваш заказ</h1>
+                    <span> (3 товара)</span>
+                </div>
+
+                <b-row>
+                    <b-col 
+                        xl="8"
+                        lg="7"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-wrapper g-seller">
+                            <div class="g-seller__top">
+                                <div class="g-seller__name">Продавец: <span>Kgamestrade</span></div>
+                            </div>
+
+                            <g-receive-cart-item/>
+                            <g-receive-cart-item/>
+                        </div>
+                    </b-col>
+                    <b-col 
+                        xl="4"
+                        lg="5"
+                        md="10"
+                        class="m-xl-0 m-lg-0 m-md-auto"
+                    >
+                        <div class="g-wrapper g-cart-total">
+                            <div class="g-cart-total__line">
+                                <span class="name">Товары</span>
+                                <span>8 965 ₽</span>
+                            </div>
+                            <div class="g-cart-total__line">
+                                <span class="name">Сумма скидок</span>
+                                <span class="sale">- 1 100 ₽</span>
+                            </div>
+                            <div class="g-cart-total__line">
+                                <span class="name">McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span>
+                                <span class="sale">- 1 100 ₽</span>
+                            </div>
+
+                            <div class="g-cart-total__line g-cart-total__line_total">
+                                <span class="name">Итого</span>
+                                <span>7 965 ₽</span>
+                            </div>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </section>
+
+    </div>
 </template>
 
 <script>
-import ShowAll from '~/components/buttons/MainLink'
-import GCartItem from '~/components/cart/Item'
-import MainButton from '~/components/buttons/MainButton'
-import GPaymentMethod from '~/components/cart/PaymetMethod'
-import GReceiveCartItem from '~/components/cart/ReceiveItem'
-export default {
-  components: { GReceiveCartItem, GPaymentMethod, MainButton, GCartItem, ShowAll },
-  layout: 'default',
-  data () {
-    return {
-      step: 1
+    import ShowAll          from '~/components/buttons/MainLink'
+    import GCartItem        from '~/components/cart/Item'
+    import MainButton       from '~/components/buttons/MainButton'
+    import GPaymentMethod   from '~/components/cart/PaymetMethod'
+    import GReceiveCartItem from '~/components/cart/ReceiveItem'
+
+    export default {
+        components: { GReceiveCartItem, GPaymentMethod, MainButton, GCartItem, ShowAll },
+        layout: 'default',
+        data() {
+            return {
+                step: 1
+            }
+        }
     }
-  }
-}
 </script>
 
 <style lang="sass">
-@import 'theme/_vars'
-@import 'theme/_mix'
-.g-payments
-  &__method
-    &:not(:last-child)
-      margin-bottom: 20px
-.g-cart-total
-  +lg
-    margin-top: 20px
-  &__btn
-    margin-bottom: 28px
-  &__sum
-    display: flex
-    align-items: center
-    justify-content: space-between
-    color: $white
-    font-size: 16px
-    line-height: 20px
-    text-transform: uppercase
-    padding: 22px 0
-    border-top: 1px solid rgba(154, 147, 170, 0.3)
-  &__line
-    display: flex
-    align-items: center
-    justify-content: space-between
-    color: $gray
-    font-size: 16px
-    line-height: 24px
-    &:not(:last-child)
-      margin-bottom: 20px
-    &_total
-      text-transform: uppercase
-      border-top: 1px solid rgba(154, 147, 170, 0.3)
-      span
-        color: $white
-        font-weight: 600
-        padding-top: 44px
-        font-size: 20px
-        line-height: 28px
-    .name
-      max-width: 193px
-    .sale
-      color: rgba(227, 88, 88, 1)
-      flex-shrink: 0
-.g-seller
-  &__more
-    color: dark-blue(1)
-    font-size: 14px
-    line-height: 24px
-  &__name
-    font-size: 14px
-    line-height: 20px
-    color: $gray
-    span
-      color: $white
-      line-height: 24px
-      font-weight: 600
-  &__top
-    display: flex
-    align-items: center
-    justify-content: space-between
-    padding-bottom: 16px
-    border-bottom: 1px solid rgba(154, 147, 170, 0.2)
-    +md
-      padding-bottom: 12px
-.cart-top
-  padding: 40px 0
-  +md
-    padding: 24px 0
-.cart-container
-  display: flex
-  justify-content: space-between
-  +lg
-    flex-direction: column
-.cart
-  &__title
-    display: flex
-    align-items: baseline
-    margin-bottom: 24px
-    span
-      font-size: 14px
-      line-height: 20px
-      color: $gray
-      margin-left: 16px
-.stepper
-  display: flex
-  align-items: center
-  justify-content: space-between
-  &__line
-    margin: 0 24px
-    height: 1px
-    width: 100%
-    background: rgba(154, 147, 170, 0.2)
-    +md
-      margin: 0 12px
-  &__item
-    display: flex
-    align-items: center
-    flex-shrink: 0
-    opacity: 0.5
-    +lg
-      flex-direction: column
-      justify-content: center
-    +md
-      flex-shrink: 1
-    &_active
-      opacity: 1
-  &__text
-    text-transform: uppercase
-    font-weight: 600
-    font-size: 16px
-    line-height: 20px
-    color: white(1)
-    +md
-      font-size: 12px
-      line-height: 16px
-      text-align: center
-  &__num
-    width: 64px
-    height: 64px
-    flex-shrink: 0
-    margin-right: 12px
-    display: flex
-    color: white(1)
-    align-items: center
-    justify-content: center
-    background: dark-blue(1)
-    border-radius: 50%
-    font-weight: 500
-    font-size: 28px
-    line-height: 36px
-    +lg
-      margin-right: 0
-      margin-bottom: 8px
-    +md
-      width: 40px
-      height: 40px
-      font-size: 16px
-      line-height: 24px
+    @import 'theme/_vars'
+    @import 'theme/_mix'
+    .cart-main
+        padding-bottom: 48px
+    .g-payments
+        &__method
+            &:not(:last-child)
+                margin-bottom: 20px
+
+    .g-cart-total
+        +lg
+            margin-top: 20px
+
+        &__btn
+            margin-bottom: 28px
+
+        &__sum
+            display: flex
+            align-items: center
+            justify-content: space-between
+            color: $white
+            font-size: 16px
+            line-height: 20px
+            text-transform: uppercase
+            padding: 22px 0
+            border-top: 1px solid rgba(154, 147, 170, 0.3)
+
+        &__line
+            display: flex
+            align-items: center
+            justify-content: space-between
+            color: $gray
+            font-size: 16px
+            line-height: 24px
+
+            &:not(:last-child)
+                margin-bottom: 20px
+
+            &_total
+                text-transform: uppercase
+                border-top: 1px solid rgba(154, 147, 170, 0.3)
+
+                span
+                    color: $white
+                    font-weight: 600
+                    padding-top: 44px
+                    font-size: 20px
+                    line-height: 28px
+
+            .name
+                max-width: 193px
+
+            .sale
+                color: rgba(227, 88, 88, 1)
+                flex-shrink: 0
+
+    .g-seller
+        &__more
+            color: dark-blue(1)
+            font-size: 14px
+            line-height: 24px
+
+        &__name
+            font-size: 14px
+            line-height: 20px
+            color: $gray
+
+            span
+                color: $white
+                line-height: 24px
+                font-weight: 600
+
+        &__top
+            display: flex
+            align-items: center
+            justify-content: space-between
+            padding-bottom: 16px
+            border-bottom: 1px solid rgba(154, 147, 170, 0.2)
+            +md
+                padding-bottom: 12px
+
+    .cart-top
+        padding: 40px 0
+        +md
+            padding: 24px 0
+
+    .cart-container
+        display: flex
+        justify-content: space-between
+        +lg
+            flex-direction: column
+
+    .cart
+        &__title
+            display: flex
+            align-items: baseline
+            margin-bottom: 24px
+
+            span
+                font-size: 14px
+                line-height: 20px
+                color: $gray
+                margin-left: 16px
+
+    .stepper
+        display: flex
+        align-items: center
+        justify-content: space-between
+
+        &__line
+            margin: 0 24px
+            height: 1px
+            width: 100%
+            background: rgba(154, 147, 170, 0.2)
+            +md
+                margin: 0 12px
+
+        &__item
+            display: flex
+            align-items: center
+            flex-shrink: 0
+            opacity: 0.5
+            +lg
+                flex-direction: column
+                justify-content: center
+            +md
+                flex-shrink: 1
+
+            &_active
+                opacity: 1
+
+        &__text
+            text-transform: uppercase
+            font-weight: 600
+            font-size: 16px
+            line-height: 20px
+            color: white(1)
+            +md
+                font-size: 12px
+                line-height: 16px
+                text-align: center
+
+        &__num
+            width: 64px
+            height: 64px
+            flex-shrink: 0
+            margin-right: 12px
+            display: flex
+            color: white(1)
+            align-items: center
+            justify-content: center
+            background: dark-blue(1)
+            border-radius: 50%
+            font-weight: 500
+            font-size: 28px
+            line-height: 36px
+            +lg
+                margin-right: 0
+                margin-bottom: 8px
+            +md
+                width: 40px
+                height: 40px
+                font-size: 16px
+                line-height: 24px
 </style>
