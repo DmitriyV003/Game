@@ -22,7 +22,7 @@ export const actions = {
   async getQuestions ({ commit, state }, category) {
     try {
       commit('SET_CATEGORY', category)
-      const res = await this.$axios.$get(this.$axios.defaults.baseURL + apiRoutes.getAppeals(state.category.value))
+      const res = await this.$axios.$get(apiRoutes.getAppeals(state.category.value))
       commit('SET_QUESTIONS', res.data)
     } catch (e) {
       throw e
@@ -30,7 +30,7 @@ export const actions = {
   },
   async postCreateQuestion ({ commit, state }, data) {
     try {
-      const res = await this.$axios.$post(this.$axios.defaults.baseURL + apiRoutes.postCreateQuestion(state.category.value), JSON.stringify(data))
+      const res = await this.$axios.$post(apiRoutes.postCreateQuestion(state.category.value), JSON.stringify(data))
       //commit('ADD_QUESTION', res.data)
       console.log(res.data)
     } catch (e) {

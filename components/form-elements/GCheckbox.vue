@@ -1,8 +1,17 @@
 <template>
   <div class="g-checkbox">
-    <label :for="val" class="g-checkbox__box">
-      <span class="g-checkbox__square" :class="{ 'g-checkbox__square_active': isChecked }">
-        <check-icon class="text-color-white g-checkbox__check" v-if="isChecked" />
+    <label 
+        :for="val" 
+        class="g-checkbox__box"
+    >
+      <span 
+          class="g-checkbox__square" 
+          :class="{ 'g-checkbox__square_active': isChecked }"
+      >
+        <check-icon 
+            class="text-color-white g-checkbox__check" 
+            v-if="isChecked" 
+        />
       </span>
       <span class="g-checkbox__label text-size-16 ">{{ label }}</span>
       <span class="g-checkbox__text text-color-gray">{{ count }}</span>

@@ -10,20 +10,26 @@
     </section>
 
     <!-- News card  adapted =  true  -->
-    <section>
+    <section v-if="comment !== null">
       <b-container>
         <div class="news-card__content">
           <div class="news-card__image">
             <img class="news-card__img" src="/images/news-4.png" alt="">
-            <h1 class="news-card__title">HITMAN 3</h1>
+            <h1 class="news-card__title">{{ comment.itemName }}</h1>
             <p class="news-card__text">O Interactive</p>
 
-            <rating size="sm" class="news-card__rating" :value="4.6" />
+            <rating 
+                size="sm" 
+                class="news-card__rating" 
+                :value="Number(comment.itemRate)" />
           </div>
 
           <div class="news-card__block">
             <div class="news-card__views">
-              <avatar name="Blacktea" />
+              <avatar 
+                  :nickname="comment.userNickname" 
+                  :image="comment.userAvatar"
+              />
 
               <div class="news-card__stats">
                 <div class="news-card__stat">
@@ -38,16 +44,7 @@
             </div>
 
             <div>
-              <p class="news-card__text">Команды BIG и Renegades выбыли из борьбы за чемпионский титул ESL Pro League Season 13 по CS:GO.
-                Они заняли пятое и шестое места в группе А и лишились шансов на выход в плей-офф.</p>
-
-              <p class="news-card__text">Обе команды провели по четыре матча. BIG победила Complexity Gaming, но уступила OG, Heroic и FPX Esports, а Renegades
-                проиграли четыре серии подряд против Heroic, FPX Esports, OG и Complexity Gaming. В последнем туре BIG и Renegades
-                сыграют друг с другом. Встреча начнется 12 марта в 17:30 мск.</p>
-
-              <p class="news-card__text">ESL Pro League Season 13 проходит с 8 марта по 11 апреля в онлайне. 24 коллектива сражаются за призовой фонд
-                в размере $750 тыс. С 13 по 18 марта пройдут матчи в группе В. Следить за детальным расписанием лиги можно
-                на странице репортажа</p>
+              <p class="news-card__text">{{ comment.userFeedbackText }}</p>
             </div>
 
           </div>
@@ -58,23 +55,37 @@
 </template>
 
 <script>
-import BreadCrumb from '~/components/BreadCrumb'
-import icons from '~/mixins/icons'
-import GMessage from '~/components/Message'
-import Avatar from '~/components/Avatar'
-import GInput from '~/components/form-elements/Input'
-import MainButton from '~/components/buttons/MainButton'
-import Rating from "~/components/cards/Rating";
+import BreadCrumb   from '~/components/BreadCrumb'
+import icons        from '~/mixins/icons'
+import GMessage     from '~/components/Message'
+import Avatar       from '~/components/Avatar'
+import GInput       from '~/components/form-elements/Input'
+import MainButton   from '~/components/buttons/MainButton'
+import Rating       from "~/components/cards/Rating";
+import { mapState } from 'vuex'
 export default {
   name: 'GCommentPage',
   mixins: [icons],
   components: {Rating, MainButton, GInput, Avatar, GMessage, BreadCrumb },
+    async mounted () {
+        try {
+            await this.$store.dispatch('comments/getCommentById', this.$route.params.id)
+            
+            this.links.push({ to: `/comments/${this.$route.params.id}`, label: this.comment.itemName })
+        } catch (e) {
+            // TODO notification
+        }
+    },
+    computed: {
+        ...mapState({
+            comment: state => state.comments.comment
+        })
+    },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/comments', label: 'Отзывы' },
-        { to: '/comments/fghjkl', label: 'Blacktea. Hitman 3' }
+        { to: '/comments', label: 'Отзывы' }
       ]
     }
   }

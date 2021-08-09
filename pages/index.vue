@@ -5,7 +5,10 @@
     <section class="section hot">
       <b-container>
         <div class="hot-tabs">
-          <tab-panel v-if="mainPage !== null" :data="mainPage.slider" />
+          <tab-panel 
+              v-if="mainPage !== null" 
+              :data="mainPage.slider" 
+          />
         </div>
       </b-container>
     </section>
@@ -17,6 +20,7 @@
           link-label="Смотреть все" 
           icon="/images/recommend.svg" 
           title="Рекомендуем" 
+          to="/catalog"
         />
         
         <g-recommend-slider 
@@ -27,15 +31,16 @@
     </section>
 
     <!-- Banner 1  adapted = true // integrate = true  -->
-    <section class="section">
+    <section 
+        class="section"
+        v-if="mainPage !== null && mainPage.inserts.length > 0"
+    >
       <b-container >
         <section-header 
           title-style="text-h3" 
           :title="mainPage.inserts[0].overInsert"
-          v-if="mainPage !== null && mainPage.inserts.length > 0"
         />
         <banner
-          v-if="mainPage !== null && mainPage.inserts.length > 0"
           :title="mainPage.inserts[0].smallDescription"
           :text="mainPage.inserts[0].description"
           :image="mainPage.inserts[0].background"
@@ -51,6 +56,7 @@
           link-label="Смотреть все" 
           icon="/images/fire.svg" 
           title="Хиты продаж" 
+          to="/catalog"
         />
         <g-recommend-slider 
           v-if="mainPage !== null" 
@@ -85,6 +91,7 @@
           link-label="Смотреть все"
           icon="/images/icons/new-items.svg"
           title="Новинки"
+          to="catalog"
         />
         <g-recommend-slider
           v-if="mainPage !== null"
@@ -119,6 +126,7 @@
           link-label="Смотреть все"
           icon="/images/icons/sale.svg"
           title="Распродажа"
+          to="/catalog"
         />
         <g-recommend-slider
           v-if="mainPage !== null"
@@ -137,14 +145,46 @@
           </div>
 
           <div class="sales-section__buttons">
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 100 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 200 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 300 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none" to="/" label="до 500 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 600 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 800 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm" to="/" label="до 900 ₽"/>
-            <rounded-button class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none" to="/" label="до 1000 ₽"/>
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm" 
+                to="/catalog?minPrice=0&maxPrice=10000" 
+                label="до 100 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm"
+                to="/catalog?minPrice=0&maxPrice=20000"
+                label="до 200 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm"
+                to="/catalog?minPrice=0&maxPrice=30000"
+                label="до 300 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none"
+                to="/catalog?minPrice=0&maxPrice=50000"
+                label="до 500 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm"
+                to="/catalog?minPrice=0&maxPrice=60000"
+                label="до 600 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm"
+                to="/catalog?minPrice=0&maxPrice=80000"
+                label="до 800 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm"
+                to="/catalog?minPrice=0&maxPrice=90000"
+                label="до 900 ₽"
+            />
+            <rounded-button 
+                class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none"
+                to="/catalog?minPrice=0&maxPrice=100000"
+                label="до 1000 ₽"
+            />
           </div>
         </div>
       </b-container>
@@ -161,7 +201,11 @@
     <!-- Genres  adapted = true // integrate = true -->
     <section class="section genres">
       <b-container>
-        <section-header title="Игры по жанрам" link-label="Все жанры" />
+        <section-header 
+            title="Игры по жанрам" 
+            link-label="Все жанры" 
+            to="/catalog"
+        />
   
         <g-genre-slider
           v-if="mainPage !== null"
@@ -171,11 +215,14 @@
     </section>
 
     <!-- Comments  adapted = true // integrate = false -->
-    <section class="section comments">
+    <section 
+        class="section comments"
+        v-if="comments !== null"
+    >
       <b-container>
         <section-header title="Отзывы" link-label="Все отзывы" />
         
-        <g-comment-slider />
+        <g-comment-slider :data="comments" />
       </b-container>
     </section>
 
@@ -256,13 +303,15 @@ export default {
   async mounted () {
     try {
       await this.$store.dispatch('getMainPage')
+        await this.$store.dispatch('comments/getComments')
     } catch (e) {
       
     }
   },
   computed: {
     ...mapState({
-      mainPage: state => state.mainPage
+      mainPage: state => state.mainPage,
+        comments: state => state.comments.comments
     })
   },
   data: () => {

@@ -1,5 +1,8 @@
 <template>
-    <div @click="goTo" class="show-all__link">
+    <div 
+        @click="goTo" 
+        class="show-all__link"
+    >
       <chevron-left-icon v-if="icon && reverse" class="show-all__icon" />
       <span>{{ label }}</span>
       <chevron-right-icon v-if="icon && !reverse" class="show-all__icon" />

@@ -15,7 +15,10 @@
     <section>
       <b-container>
         <div class="reviews__games-top">
-          <show-all label="Все жанры игр" />
+          <show-all 
+              label="Все жанры игр" 
+              to="/catalog" 
+          />
         </div>
 
         <div class="reviews__cards">
@@ -25,30 +28,62 @@
     </section>
 
     <!-- Comments cards  adapted = true  -->
-    <section class="reviews__block">
+    <section 
+        class="reviews__block"
+        v-if="comments !== null"
+    >
       <b-container>
         <div class="reviews__comments">
-          <comment-card class="reviews__comment" />
-          <comment-card class="reviews__comment" />
-          <comment-card class="reviews__comment" />
-          <comment-card class="reviews__comment" />
+            <comment-card
+                v-for="item in comments"
+                class="reviews__comment"
+                :id="item.id"
+                :key="item.id"
+                :name="item.itemName"
+                :image="item.itemHeaderImage"
+                :rating="Number(item.itemRate)"
+                :avatar="item.userAvatar"
+                :nickname="item.userNickname"
+                :text="item.userFeedbackText"
+                :date="item.createdAt"
+            />
         </div>
 
-        <main-button color="gray" label="больше отзывов" size="xl" full-width />
+        <main-button 
+            color="gray" 
+            label="больше отзывов" 
+            to="/comments"
+            size="xl" 
+            full-width 
+        />
       </b-container>
     </section>
   </div>
 </template>
 <script>
-import BreadCrumb from '~/components/BreadCrumb'
-import ShowAll from '~/components/buttons/MainLink'
+import BreadCrumb         from '~/components/BreadCrumb'
+import ShowAll            from '~/components/buttons/MainLink'
 import GReviewsPageSlider from '~/components/slider/ReviewsPageSlider'
-import ReviewCard from '~/components/cards/ReviewCard'
-import MainButton from '~/components/buttons/MainButton'
-import CommentCard from "~/components/cards/CommentCard";
+import ReviewCard         from '~/components/cards/ReviewCard'
+import MainButton         from '~/components/buttons/MainButton'
+import CommentCard        from "~/components/cards/CommentCard";
+import { mapState }       from 'vuex'
 export default {
   components: {CommentCard, MainButton, ReviewCard, GReviewsPageSlider, ShowAll, BreadCrumb},
   name: 'CommentsPage',
+    async mounted () {
+        try {
+            await this.$store.dispatch('getMainPage')
+            await this.$store.dispatch('comments/getComments')
+        } catch (e) {
+
+        }
+    },
+    computed: {
+        ...mapState({
+            comments: state => state.comments.comments
+        })
+    },
   data: () => {
     return {
       links: [

@@ -32,7 +32,7 @@
 
             <div class="g-product-overview__wrapper">
               <div class="price">
-                <span class="current text-h1">{{ item.itemPrice.new === null ? item.itemPrice.old : item.itemPrice.new }}</span>
+                <span class="current text-h1">{{ item.itemPrice.new === null ? item.itemPrice.old / 100 : item.itemPrice.new / 100 }} ₽</span>
                 <g-price 
                   :show-current-price="false" 
                   :sale="Number(item.itemPrice.sale)"

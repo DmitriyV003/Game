@@ -5,7 +5,11 @@
       <h2 :class="[titleStyle, 'section-header__title_' + size]">{{ title }}</h2>
     </div>
 
-    <show-all v-if="linkLabel" :label="linkLabel" :to="to" />
+    <show-all 
+        v-if="linkLabel" 
+        :label="linkLabel" 
+        :to="to" 
+    />
   </div>
 </template>
 

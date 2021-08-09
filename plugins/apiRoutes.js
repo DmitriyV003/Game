@@ -28,5 +28,8 @@ export default {
     getSellerGames: (id) => '/seller/profile/' + id +'/games',
     getSearch: (name) => '/search?name=' + name,
     getGameCatalog: '/catalog/games',
-    getGameCatalogFilters: '/catalog/games/filters'
+    getGameCatalogFilters: '/catalog/games/filters',
+    getFilteredGameCatalog: (query) => '/catalog/games/after-filters?' + query,
+    getComments: '/feedbacks',
+    getCommentById: (id) => `/feedbacks/${id}`
 }

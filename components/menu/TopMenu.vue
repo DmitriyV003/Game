@@ -41,13 +41,41 @@
 
                 <div class="header__line">
                     <div class="header__links">
-                        <nuxt-link exact to="/catalog" class="header__link header__link_bold">Игры</nuxt-link>
-                        <nuxt-link exact to="/soft" class="header__link header__link_bold">Софт</nuxt-link>
-                        <nuxt-link exact to="/skin" class="header__link header__link_bold">Скины</nuxt-link>
-                        <nuxt-link exact to="/" class="header__link header__link_bold">Кейсы</nuxt-link>
-                        <nuxt-link exact to="/" class="header__link header__link_bold">GiftCard</nuxt-link>
-                        <nuxt-link exact to="/news" class="header__link header__link_bold">Новости</nuxt-link>
-                        <nuxt-link exact to="/comments" class="header__link header__link_bold">Отзывы</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/catalog" 
+                            class="header__link header__link_bold"
+                        >Игры</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/soft" 
+                            class="header__link header__link_bold"
+                        >Софт</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/skin" 
+                            class="header__link header__link_bold"
+                        >Скины</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/" 
+                            class="header__link header__link_bold"
+                        >Кейсы</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/" 
+                            class="header__link header__link_bold"
+                        >GiftCard</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/news" 
+                            class="header__link header__link_bold"
+                        >Новости</nuxt-link>
+                        <nuxt-link 
+                            exact 
+                            to="/comments" 
+                            class="header__link header__link_bold"
+                        >Отзывы</nuxt-link>
                     </div>
 
                     <Search

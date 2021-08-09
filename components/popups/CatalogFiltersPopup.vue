@@ -16,22 +16,22 @@
                 <p class="title text-weight-600 text-color-white text-uppercase">Цена</p>
                 <vue-range-slider
                     class="g-range-slider"
-                    v-model="priceRange"
+                    v-model="prices"
                     :tooltip="'always'"
-                    :min="filters.price.minPrice"
-                    :max="filters.price.maxPrice"
+                    :min="Number(filters.price.minPrice)"
+                    :max="Number(filters.price.maxPrice)"
                     :height="1"
                     :contained="true"
                     :process-style="{ backgroundColor: 'rgba(100, 62, 255, 1)' }"
                 >
                     <template v-slot:tooltip="{ value, focus }">
-                        <div :class="['g-range-slider__tooltip', { focus }]">{{ priceRange[1] }}</div>
+                        <div :class="['g-range-slider__tooltip', { focus }]">{{ value / 100 }}</div>
                     </template>
                 </vue-range-slider>
 
                 <div class="catalog-filters__range-inputs">
                     <div class="catalog-filters__input g-input">
-                        <input v-model="priceRange[0]" type="text" class="input-reboot g-input__input">
+                        <input v-model="minPrice" type="text" class="input-reboot g-input__input">
                         <span class="g-input__right-label">₽</span>
                     </div>
 
@@ -39,7 +39,7 @@
 
                     <div class="catalog-filters__input g-input">
                         <input 
-                            v-model="priceRange[1]" 
+                            v-model="maxPrice" 
                             type="text" 
                             class="input-reboot g-input__input"
                         >
@@ -84,7 +84,7 @@
                             :val="item.id"
                             :count="25"
                             :key="item.id"
-                            v-model="checkedCategories"
+                            v-model="checkedServices"
                             class="catalog__category-filter"
                         />
                     </template>
@@ -104,7 +104,7 @@
                             :val="item.id"
                             :count="25"
                             :key="item.id"
-                            v-model="checkedCategories"
+                            v-model="checkedPlatforms"
                             class="catalog__category-filter"
                         />
                     </template>
@@ -124,7 +124,7 @@
                             :val="item.id"
                             :count="25"
                             :key="item.id"
-                            v-model="checkedCategories"
+                            v-model="checkedGenres"
                             class="catalog__category-filter"
                         />
                     </template>
@@ -154,8 +154,12 @@
                     color="primary" 
                     label="подобрать" 
                     size="xl" 
+                    @click.native="acceptFilters"
                 />
-                <span class="reset text-size-16 text-color-gray">Сбросить фильтры</span>
+                <span 
+                    class="reset text-size-16 text-color-gray"
+                    @click="clearFilters"
+                >Сбросить фильтры</span>
             </div>
 
         </div>
@@ -169,7 +173,7 @@
     import ShowAll      from '~/components/buttons/MainLink'
     import GTag         from '~/components/Tag'
     import GCheckBox    from '~/components/form-elements/GCheckbox'
-    import { mapState } from 'vuex'
+    import { mapState, mapGetters } from 'vuex'
     import icons        from '~/mixins/icons'
 
     export default {
@@ -179,19 +183,90 @@
         methods: {
             showAll (whatToShow, count) {
                 this[whatToShow] = count
+            },
+            async clearFilters () {
+                try {
+                    await this.$store.dispatch('catalog/clearFilters')
+                    await this.$store.dispatch('catalog/getCatalogGames')
+                } catch (e) {
+                    console.log(e)
+                }
+            },
+            async acceptFilters () {
+                try {
+                    await this.$store.dispatch('catalog/getFilteredItems')
+                    this.val = false
+                } catch (e) {
+                    console.log(e)
+                }
             }
         },
         computed: {
             ...mapState ({
-                meta: state => state.catalog.meta,
-                filters: state => state.catalog.filters
-            })
+                windowSize: state => state.common.windowSize,
+                filters: state => state.catalog.filters,
+                acceptedFilters: state => state.catalog.acceptedFilters
+            }),
+            checkedCategories: {
+                get () {
+                    return this.acceptedFilters.categories
+                },
+                async set (val) {
+                    await this.$store.dispatch('catalog/addFilter', { filterType: 'categories', filter: val })
+                }
+            },
+            checkedPlatforms: {
+                get () {
+                    return this.acceptedFilters.platforms
+                },
+                async set (val) {
+                    await this.$store.dispatch('catalog/addFilter', { filterType: 'platforms', filter: val })
+                }
+            },
+            checkedGenres: {
+                get () {
+                    return this.acceptedFilters.genres
+                },
+                async set (val) {
+                    await this.$store.dispatch('catalog/addFilter', { filterType: 'genres', filter: val })
+                }
+            },
+            checkedServices: {
+                get () {
+                    return this.acceptedFilters.services
+                },
+                async set (val) {
+                    await this.$store.dispatch('catalog/addFilter', { filterType: 'services', filter: val })
+                }
+            },
+            prices: {
+                get () {
+                    return [this.minPrice, this.maxPrice]
+                },
+                set (val) {
+                    this.$store.dispatch('catalog/changePriceFilter', { minPrice: Number(val[0]), maxPrice: Number(val[1]) })
+                }
+            },
+            minPrice: {
+                get () {
+                    return this.acceptedFilters.minPrice / 100
+                },
+                set (val) {
+                    this.$store.dispatch('catalog/changePriceFilter', { minPrice: Number(val) * 100, maxPrice: null })
+                }
+            },
+            maxPrice: {
+                get () {
+                    return this.acceptedFilters.maxPrice / 100
+                },
+                set (val) {
+                    this.$store.dispatch('catalog/changePriceFilter', { minPrice: null, maxPrice: Number(val) * 100 })
+                }
+            }
         },
         data () {
 		    return {
                 val: false,
-                priceRange: [0, 0],
-                checkedCategories: [],
                 categoriesToShow: 2,
                 tagsToShow: 5,
                 tags: [
@@ -212,7 +287,7 @@
             const that = this
             window.addEventListener('resize', function () {
                 if (that.windowSize <= 992) {
-                    that.showAll('categoriesToShow', that.categories.length)
+                    that.showAll('categoriesToShow', that.filters.categories.length)
                 } else {
                     that.categoriesToShow = 2
                     that.showPopup = false

@@ -26,6 +26,7 @@ import TextIcon         from 'vue-material-design-icons/TextBoxSearchOutline.vue
 import NewsIcon         from 'vue-material-design-icons/NewspaperVariantMultipleOutline.vue'
 import CommentIcon         from 'vue-material-design-icons/CommentQuoteOutline.vue'
 import RegionIcon         from 'vue-material-design-icons/VectorSquare.vue'
+import UserIcon         from 'vue-material-design-icons/AccountOutline.vue'
 
 export default {
     components: {
@@ -56,6 +57,7 @@ export default {
         TextIcon,
         NewsIcon,
         CommentIcon,
-        RegionIcon
+        RegionIcon,
+        UserIcon
     }
 }
