@@ -1,43 +1,44 @@
 <template>
-    <div>
+    <div class="g-slider">
         <vue-slick
-            ref="reviewsPageSlider"
+            ref="additionalCommentsSlider"
             :variable-width="settings.variableWidth"
             :slides-to-show="settings.slidesToShow"
             :slides-to-scroll="settings.slidesToScroll"
             :arrows="settings.arrows"
             :dots="settings.dots"
         >
-            <g-review-page-card
+            <g-another-comment-card
                 v-for="item in data"
-                :key="item.itemId"
+                :key="item.itemName"
+                :id="item.itemName"
+                :item-name="item.itemName"
+                :user-nickname="item.userNickname"
+                :text="item.userFeedbackText"
                 :image="item.itemHeaderImage"
-                :id="item.itemId"
             />
         </vue-slick>
         <div class="g-slider__controls">
             <arrow-button 
-                @click.native="prev($refs.reviewsPageSlider)" 
+                @click.native="prev($refs.additionalCommentsSlider)"
                 class="g-slider__button g-slider__button_left"
                 left
             />
             <arrow-button 
-                @click.native="next($refs.reviewsPageSlider)" 
+                @click.native="next($refs.additionalCommentsSlider)"
                 class="g-slider__button g-slider__button_right"
-                right
+                right 
             />
         </div>
     </div>
 </template>
 
 <script>
-    import ArrowButton     from '~/components/slider/ArrowButton'
-    import Dot             from '~/components/slider/Dot'
-    import GReviewPageCard from '~/components/cards/ReviewPageCard'
-
+    import ArrowButton         from '~/components/slider/ArrowButton'
+    import GAnotherCommentCard from '~/components/cards/AnotherCommentCard'
     export default {
-        name: 'GReviewsPageSlider',
-        components: { GReviewPageCard, ArrowButton, Dot },
+        name: 'GAdditionalCommentsSlider',
+        components: { GAnotherCommentCard, ArrowButton },
         data: () => {
             return {
                 settings: {
@@ -52,17 +53,16 @@
         props: {
             data: {
                 type: Array,
-                required: true
+                default: () => null
             }
         },
         methods: {
-            next(slider) {
-                slider.next ()
+            next (slider) {
+                slider.next()
             },
-            prev(slider) {
-                slider.prev ()
+            prev (slider) {
+                slider.prev()
             }
         }
     }
-
 </script>

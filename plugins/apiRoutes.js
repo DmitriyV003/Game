@@ -31,5 +31,8 @@ export default {
     getGameCatalogFilters: '/catalog/games/filters',
     getFilteredGameCatalog: (query) => '/catalog/games/after-filters?' + query,
     getComments: '/feedbacks',
-    getCommentById: (id) => `/feedbacks/${id}`
+    getCommentById: (id) => `/feedbacks/${id}`,
+    getCommentRecommendedGames: '/feedbacks/games',
+    getAdditionalComments: (id) => `/feedbacks/${id}/more-feedbacks`,
+    postCreateNewsComment: '/news/create-comment'
 }

@@ -54,14 +54,12 @@
                         :class="'comment-card__text_' + adaptiveSize"
                     >{{ text }}</p>
 
-                    <nuxt-link
-                        tag="button"
-                        to="/comments" class="button-reboot comment-card__link text-weight-500"
+                    <show-all
+                        to="/comments"
+                        class="button-reboot comment-card__link text-weight-500"
                         :class="'comment-card__link_' + adaptiveSize"
-                    >
-                        <span>Смотреть все</span>
-                        <chevron-right-icon/>
-                    </nuxt-link>
+                        label="Смотреть все"
+                    />
 
                     <div
                         class="comment-card__footer"
@@ -77,12 +75,13 @@
 </template>
 
 <script>
-    import Rating from '~/components/cards/Rating'
-    import Avatar from '~/components/Avatar'
-    import icons  from '~/mixins/icons'
+    import Rating  from '~/components/cards/Rating'
+    import Avatar  from '~/components/Avatar'
+    import icons   from '~/mixins/icons'
+    import ShowAll from '~/components/buttons/MainLink'
 
     export default {
-        components: { Avatar, Rating },
+        components: { ShowAll, Avatar, Rating },
         mixins: [icons],
         props: {
             id: {

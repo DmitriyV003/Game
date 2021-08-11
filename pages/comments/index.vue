@@ -12,7 +12,7 @@
     </section>
 
     <!-- Comments slider  adapted = true  -->
-    <section>
+    <section v-if="games !== null">
       <b-container>
         <div class="reviews__games-top">
           <show-all 
@@ -22,7 +22,9 @@
         </div>
 
         <div class="reviews__cards">
-          <g-reviews-page-slider />
+          <g-reviews-page-slider
+              :data="games"
+          />
         </div>
       </b-container>
     </section>
@@ -73,15 +75,16 @@ export default {
   name: 'CommentsPage',
     async mounted () {
         try {
-            await this.$store.dispatch('getMainPage')
             await this.$store.dispatch('comments/getComments')
+            await this.$store.dispatch('comments/getCommentRecommendedGames')
         } catch (e) {
 
         }
     },
     computed: {
         ...mapState({
-            comments: state => state.comments.comments
+            comments: state => state.comments.comments,
+            games: state => state.comments.recommendedGames
         })
     },
   data: () => {
