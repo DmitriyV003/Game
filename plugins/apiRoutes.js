@@ -34,5 +34,6 @@ export default {
     getCommentById: (id) => `/feedbacks/${id}`,
     getCommentRecommendedGames: '/feedbacks/games',
     getAdditionalComments: (id) => `/feedbacks/${id}/more-feedbacks`,
-    postCreateNewsComment: '/news/create-comment'
+    postCreateNewsComment: '/news/create-comment',
+    postBecomeSeller: '/be-seller'
 }

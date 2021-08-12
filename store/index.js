@@ -2,7 +2,8 @@ import apiRoutes from '~/plugins/apiRoutes'
 
 export const state = () => ({
     mainPage: null,
-    sellerPage: null
+    sellerPage: null,
+    warning: null
 })
 
 export const mutations = {
@@ -11,6 +12,11 @@ export const mutations = {
     },
     SET_SELLER_PAGE(state, page) {
         state.sellerPage = page
+    },
+    SET_WARNING(state, data) {
+        if ('warning' in data) {
+            state.warning = data.warning
+        }
     }
 }
 

@@ -46,6 +46,7 @@
                                             :height="1"
                                             :contained="true"
                                             :process-style="{ backgroundColor: 'rgba(100, 62, 255, 1)' }"
+                                            @drag-end="getFilteredItems"
                                         >
                                             <template v-slot:tooltip="{ value, focus }">
                                                 <div :class="['g-range-slider__tooltip', { focus }]">{{ value / 100 
@@ -268,12 +269,14 @@
 
 <!--                        <button class="button-reboot catalog__show-more">Показать больше</button>-->
 
-<!--                        <g-pagination -->
-<!--                            v-if="meta !== null"-->
-<!--                            class="catalog__pagination"-->
-<!--                            @onNext="next"-->
-<!--                            :total-pages="meta.last_page"-->
-<!--                        />-->
+                        <g-pagination 
+                            v-if="meta !== null"
+                            class="catalog__pagination"
+                            @onNext="toPage"
+                            @onPrev="toPage"
+                            @toPage="toPage"
+                            :total-pages="meta.last_page"
+                        />
                     </b-col>
                 </b-row>
             </b-container>
@@ -320,14 +323,19 @@
                 const query = await this.checkQueryString()
 
                 if (query) {
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 } else {
                     await this.$store.dispatch('catalog/getCatalogGames')
                 }
 
                 await this.$router.push({ path: '/catalog', query: { page: this.meta.current_page, ...this.$route.query } })
             } catch (e) {
-                console.log(e)
+                this.$bvToast.toast ('Ошибка загрузки страницы!', {
+                    title: 'Что-то пошло не так(',
+                    variant: 'danger',
+                    solid: true,
+                    appendToast: true
+                })
             }
         },
         computed: {
@@ -359,7 +367,7 @@
                 },
                 async set (val) {
                     await this.$store.dispatch('catalog/addFilter', { filterType: 'categories', filter: val })
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 }
             },
             checkedPlatforms: {
@@ -368,7 +376,7 @@
                 },
                 async set (val) {
                     await this.$store.dispatch('catalog/addFilter', { filterType: 'platforms', filter: val })
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 }
             },
             checkedGenres: {
@@ -377,7 +385,7 @@
                 },
                 async set (val) {
                     await this.$store.dispatch('catalog/addFilter', { filterType: 'genres', filter: val })
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 }
             },
             checkedServices: {
@@ -386,7 +394,7 @@
                 },
                 async set (val) {
                     await this.$store.dispatch('catalog/addFilter', { filterType: 'services', filter: val })
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 }
             },
             prices: {
@@ -441,6 +449,21 @@
             }
         },
         methods: {
+            dfg (e) {
+                console.log(e)
+            },
+            async getFilteredItems () {
+                try {
+                    await this.$store.dispatch('catalog/getFilteredItems')
+                } catch (e) {
+                    this.$bvToast.toast ('Что-то пошло не так(', {
+                        title: 'Ошибка!',
+                        variant: 'danger',
+                        solid: true,
+                        appendToast: true
+                    })
+                }
+            },
             async clearFilters () {
                 try {
                     await this.$store.dispatch('catalog/clearFilters')
@@ -452,7 +475,7 @@
             async deleteFilter ({ filterType, value }) {
                 try {
                     await this.$store.dispatch('catalog/deleteFilter', { filterType, filter: value })
-                    await this.$store.dispatch('catalog/getFilteredItems')
+                    await this.getFilteredItems()
                 } catch (e) {
                     console.log(e)
                 }
@@ -474,8 +497,12 @@
             showAll (whatToShow, count) {
                 this[whatToShow] = count
             },
-            next() {
-                console.log (1111)
+            async toPage (page) {
+                try {
+                    await this.$store.dispatch('catalog/getCatalogGamesByPage', page)
+                } catch (e) {
+                    console.log(e)
+                }
             }
         }
     }

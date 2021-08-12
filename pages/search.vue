@@ -81,7 +81,7 @@
                 try {
                     await this.$store.dispatch('search/getSearch', query.name)
                 } catch (e) {
-                    console.log(e)
+                    throw  e
                 }
             },
             async getSearch () {
@@ -97,7 +97,12 @@
                 const query = this.$route.query
                 await this.getSearchFromQueryString(query)
             } catch (e) {
-                console.log(e)
+                this.$bvToast.toast ('Ошибка загрузки страницы!', {
+                    title: 'Что-то пошло не так(',
+                    variant: 'danger',
+                    solid: true,
+                    appendToast: true
+                })
             }
         }
     }

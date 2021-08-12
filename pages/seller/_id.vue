@@ -145,7 +145,12 @@ export default {
             await this.$store.dispatch('getSellerPage', this.$route.params.id)
             await this.$store.dispatch('seller/getSellerGames', this.$route.params.id)
         } catch (e) {
-            console.log(e)
+            this.$bvToast.toast ('Ошибка загрузки страницы!', {
+                title: 'Что-то пошло не так(',
+                variant: 'danger',
+                solid: true,
+                appendToast: true
+            })
         }
     }
 }

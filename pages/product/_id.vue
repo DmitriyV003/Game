@@ -254,7 +254,12 @@
                     keyId: this.item.keyId
                 })
             } catch (e) {
-
+                this.$bvToast.toast ('Ошибка загрузки страницы!', {
+                    title: 'Что-то пошло не так(',
+                    variant: 'danger',
+                    solid: true,
+                    appendToast: true
+                })
             }
         },
         computed: {

@@ -104,6 +104,16 @@ export const actions = {
         } catch (e) {
             throw e
         }
+    },
+    async getCatalogGamesByPage ({ commit }, page) {
+        try {
+            const res = await this.$axios.$get(apiRoutes.getGameCatalog + `?page=${page}`)
+            commit('SET_GAMES', res.data)
+            res.meta.links = res.links
+            commit('SET_META', res.meta)
+        } catch (e) {
+            throw e
+        }
     }
 }
 

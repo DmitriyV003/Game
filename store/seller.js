@@ -18,5 +18,14 @@ export const actions = {
         } catch (e) {
             throw e
         }
-    }
+    },
+    async postBecomeSeller ({ commit }) {
+        try {
+            const res = await this.$axios.$post(apiRoutes.postBecomeSeller)
+            // console.log(res)
+        } catch (e) {
+            commit('SET_WARNING', e.response.data, { root: true })
+            throw e
+        }
+    },
 }

@@ -96,9 +96,14 @@
                 await this.$store.dispatch ('comments/getCommentById', this.$route.params.id)
                 await this.$store.dispatch ('comments/getAdditionalComments', this.$route.params.id)
 
-                this.links.push ({ to: `/comments/${this.$route.params.id}`, label: this.comment.itemName })
+                this.links.push({ to: `/comments/${this.$route.params.id}`, label: this.comment.itemName })
             } catch (e) {
-                // TODO notification
+                this.$bvToast.toast('Ошибка загрузки страницы!', {
+                    title: 'Что-то пошло не так(',
+                    variant: 'danger',
+                    solid: true,
+                    appendToast: true
+                })
             }
         },
         computed: {

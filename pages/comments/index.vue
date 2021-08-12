@@ -78,7 +78,12 @@ export default {
             await this.$store.dispatch('comments/getComments')
             await this.$store.dispatch('comments/getCommentRecommendedGames')
         } catch (e) {
-
+            this.$bvToast.toast('Ошибка загрузки страницы!', {
+                title: 'Что-то пошло не так(',
+                variant: 'danger',
+                solid: true,
+                appendToast: true
+            })
         }
     },
     computed: {
