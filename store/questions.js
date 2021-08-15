@@ -23,7 +23,10 @@ export const mutations = {
 
 export const actions = {
   // TODO delete this shit
-  async getRetry({ commit }) {
+  async getRetry({ commit, rootState }) {
+    if (rootState.auth.token == null) {
+      return
+    }
     try {
       let newAnswer = false
       const data = await this.$axios.$get(
