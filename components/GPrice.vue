@@ -1,28 +1,34 @@
 <template>
-  <div 
-    class="g-price__prices" 
+  <div
+    class="g-price__prices"
     :class="{ 'g-price__prices_disabled': disabled }"
     v-if="oldPrice !== 0 && newPrice !== 0"
   >
-    <span 
-      class="g-price__sale" 
+    <span
+      class="g-price__sale"
       :class="{ 'g-price__sale_sm': adaptiveSm }"
       v-if="sale !== 0"
-    >{{ sale }}</span>
-    <div 
-      class="g-price__price-block" 
-      :class="{ 'g-price__price-block_sm': adaptiveSm, 'g-price__price-block_pl': sale === 0 }"
+      >{{ sale }}</span
     >
-      <span 
-        class="g-price__price g-price__price_old" 
+    <div
+      class="g-price__price-block"
+      :class="{
+        'g-price__price-block_sm': adaptiveSm,
+        'g-price__price-block_pl': sale === 0,
+      }"
+    >
+      <span
+        class="g-price__price g-price__price_old"
         :class="{ 'g-price__price_old_sm': adaptiveSm }"
         v-if="oldPrice !== 0 && newPrice !== 0"
-      >{{ oldPrice }}</span>
-      <span 
-        v-if="showCurrentPrice && newPrice !== 0" 
-        class="g-price__price g-price__price_new" 
+        >{{ oldPrice }}</span
+      >
+      <span
+        v-if="showCurrentPrice && newPrice !== 0"
+        class="g-price__price g-price__price_new"
         :class="{ 'g-price__price_new_sm': adaptiveSm }"
-      >{{ newPrice }}</span>
+        >{{ newPrice }}</span
+      >
     </div>
   </div>
 </template>
@@ -33,29 +39,29 @@ export default {
   props: {
     adaptiveSm: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     disabled: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     showCurrentPrice: {
       type: Boolean,
-      default: () => true
+      default: () => true,
     },
     oldPrice: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     newPrice: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     sale: {
       type: Number,
-      default: () => 0
-    }
-  }
+      default: () => 0,
+    },
+  },
 }
 </script>
 

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <button class="button-reboot g-sort-button" :class="{ 'g-sort-button_active': active }">
+    <button
+      class="button-reboot g-sort-button"
+      :class="{ 'g-sort-button_active': active }"
+    >
       {{ label }}
     </button>
   </div>
@@ -12,19 +15,19 @@ export default {
   props: {
     label: {
       type: String,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-sort-button
   padding: 12px 32px
   border-radius: 100px

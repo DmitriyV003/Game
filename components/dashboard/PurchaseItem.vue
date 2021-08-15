@@ -1,37 +1,39 @@
 <template>
-  <div 
-    @click.stop="goToPurchase" 
-    class="g-purchase-item__wrapper"
-  >
+  <div @click.stop="goToPurchase" class="g-purchase-item__wrapper">
     <div class="g-purchase-item">
-      <img class="g-purchase-item__img" :src="picture" alt="">
+      <img class="g-purchase-item__img" :src="picture" alt="" />
       <div class="g-purchase-item__text">
         <p class="g-purchase-item__name">{{ name }}</p>
-        <div v-if="isKeyShown" class="g-purchase-item__key g-purchase-item__key_desktop">
+        <div
+          v-if="isKeyShown"
+          class="g-purchase-item__key g-purchase-item__key_desktop"
+        >
           <p class="g-purchase-item__value">{{ code }}</p>
           <button @click="copy" class="button-reboot g-purchase-item__button">
             <copy-icon class="icon" />
           </button>
         </div>
         <div class="g-purchase-item__bottom">
-          <show-all 
-            @click.stop.native="isKeyShown = !isKeyShown" 
+          <show-all
+            @click.stop.native="isKeyShown = !isKeyShown"
             :label="!isKeyShown ? 'Показать ключ' : 'Скрыть'"
-            :icon="false" 
+            :icon="false"
           />
-          <img src="/images/icons/steam-small.svg" alt="">
+          <img src="/images/icons/steam-small.svg" alt="" />
         </div>
       </div>
     </div>
 
-    <div v-if="isKeyShown" class="g-purchase-item__key g-purchase-item__key_mobile">
+    <div
+      v-if="isKeyShown"
+      class="g-purchase-item__key g-purchase-item__key_mobile"
+    >
       <p class="g-purchase-item__value">{{ code }}</p>
       <button @click="copy" class="button-reboot g-purchase-item__button">
         <copy-icon class="icon" />
       </button>
     </div>
   </div>
- 
 </template>
 
 <script>
@@ -43,49 +45,47 @@ export default {
   mixins: [icons],
   data: () => {
     return {
-      isKeyShown: false
+      isKeyShown: false,
     }
   },
   props: {
     id: {
       type: Number,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     code: {
       type: String,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      required: true
+      required: true,
     },
     platform: {
       type: String,
-      required: true
+      required: true,
     },
     picture: {
       type: String,
-      required: true
+      required: true,
     },
   },
   methods: {
-    async copy () {
+    async copy() {
       try {
         await navigator.clipboard.writeText(this.code)
-      } catch (e) {
-      }
+      } catch (e) {}
     },
-    async goToPurchase () {
+    async goToPurchase() {
       try {
         await this.$router.push('/dashboard/purchases/' + this.id)
-      } catch (e) {
-      }
-    }
-  }
+      } catch (e) {}
+    },
+  },
 }
 </script>
 

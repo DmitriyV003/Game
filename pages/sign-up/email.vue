@@ -7,18 +7,25 @@
           <span class="text-weight-500">Назад</span>
         </nuxt-link>
 
-        <p class="auth-structure__title text-color-white text-uppercase">Зарегистрироваться</p>
+        <p class="auth-structure__title text-color-white text-uppercase">
+          Зарегистрироваться
+        </p>
 
         <div class="auth-structure__inputs">
-          <g-input 
-            v-model="$v.form.name.$model" 
-            class="auth-structure__input" 
+          <g-input
+            v-model="$v.form.name.$model"
+            class="auth-structure__input"
             placeholder="Имя *"
             :error="$v.form.name.$error || 'name' in apiErrors"
           >
             <template v-slot:error>
-              <span v-if="!$v.form.name.required && $v.form.name.$error">Имя обязателено</span>
-              <span v-if="!$v.form.name.maxLength && $v.form.name.$error">Максимальная длина имени {{ $v.form.name.$params.maxLength.max }} символов</span>
+              <span v-if="!$v.form.name.required && $v.form.name.$error"
+                >Имя обязателено</span
+              >
+              <span v-if="!$v.form.name.maxLength && $v.form.name.$error"
+                >Максимальная длина имени
+                {{ $v.form.name.$params.maxLength.max }} символов</span
+              >
             </template>
           </g-input>
 
@@ -29,8 +36,13 @@
             :error="$v.form.surname.$error || 'surname' in apiErrors"
           >
             <template v-slot:error>
-              <span v-if="!$v.form.surname.required && $v.form.surname.$error">Фамилия обязателена</span>
-              <span v-if="!$v.form.surname.maxLength && $v.form.surname.$error">Максимальная длина фамилии {{ $v.form.surname.$params.maxLength.max }} символов</span>
+              <span v-if="!$v.form.surname.required && $v.form.surname.$error"
+                >Фамилия обязателена</span
+              >
+              <span v-if="!$v.form.surname.maxLength && $v.form.surname.$error"
+                >Максимальная длина фамилии
+                {{ $v.form.surname.$params.maxLength.max }} символов</span
+              >
             </template>
           </g-input>
 
@@ -41,9 +53,16 @@
             :error="$v.form.email.$error || 'email' in apiErrors"
           >
             <template v-slot:error>
-              <span v-if="!$v.form.email.required && $v.form.email.$error">Email обязателен</span>
-              <span v-if="!$v.form.email.email && $v.form.email.$error">Email должен быть валидным</span>
-              <span v-if="!$v.form.email.maxLength && $v.form.email.$error">Максимальная длина Email {{ $v.form.email.$params.maxLength.max }} символов</span>
+              <span v-if="!$v.form.email.required && $v.form.email.$error"
+                >Email обязателен</span
+              >
+              <span v-if="!$v.form.email.email && $v.form.email.$error"
+                >Email должен быть валидным</span
+              >
+              <span v-if="!$v.form.email.maxLength && $v.form.email.$error"
+                >Максимальная длина Email
+                {{ $v.form.email.$params.maxLength.max }} символов</span
+              >
             </template>
           </g-input>
 
@@ -55,21 +74,43 @@
             :error="$v.form.password.$error || 'password' in apiErrors"
           >
             <template v-slot:error>
-              <span v-if="!$v.form.password.required && $v.form.password.$error">Пароль обязателен</span>
-              <span v-if="!$v.form.password.minLength && $v.form.password.$error">Минимальная длина пароля {{ $v.form.password.$params.minLength.min }} символов</span>
-              <span v-if="!$v.form.password.maxLength && $v.form.password.$error">Максимальная длина пароля {{ $v.form.password.$params.maxLength.max }} символов</span>
+              <span v-if="!$v.form.password.required && $v.form.password.$error"
+                >Пароль обязателен</span
+              >
+              <span
+                v-if="!$v.form.password.minLength && $v.form.password.$error"
+                >Минимальная длина пароля
+                {{ $v.form.password.$params.minLength.min }} символов</span
+              >
+              <span
+                v-if="!$v.form.password.maxLength && $v.form.password.$error"
+                >Максимальная длина пароля
+                {{ $v.form.password.$params.maxLength.max }} символов</span
+              >
             </template>
           </g-input>
         </div>
 
-        <show-all class="auth-structure__forget" to="/auth/password-reset" label="Забыли пароль?" :icon="false" />
+        <show-all
+          class="auth-structure__forget"
+          to="/auth/password-reset"
+          label="Забыли пароль?"
+          :icon="false"
+        />
 
-        <main-button :disabled="disabled || $v.$invalid" tag="button" type="submit" full-width size="xl" color="primary" label="зарегистрироваться" />
+        <main-button
+          :disabled="disabled || $v.$invalid"
+          tag="button"
+          type="submit"
+          full-width
+          size="xl"
+          color="primary"
+          label="зарегистрироваться"
+        />
       </div>
     </form>
   </b-container>
 </template>
-
 
 <script>
 import icons from '~/mixins/icons'
@@ -87,38 +128,38 @@ export default {
         name: null,
         surname: null,
         email: null,
-        password: null
+        password: null,
       },
       disabled: false,
-      apiErrors: {}
+      apiErrors: {},
     }
   },
   validations: {
     form: {
       name: {
         required,
-        maxLength: maxLength(100)
+        maxLength: maxLength(100),
       },
       surname: {
         required,
-        maxLength: maxLength(100)
+        maxLength: maxLength(100),
       },
       email: {
         required,
         email,
-        maxLength: maxLength(255)
+        maxLength: maxLength(255),
       },
       password: {
         required,
         minLength: minLength(8),
-        maxLength: maxLength(255)
-      }
-    }
+        maxLength: maxLength(255),
+      },
+    },
   },
   layout: 'sign-up',
   mixins: [icons],
   methods: {
-    async signUpByEmail () {
+    async signUpByEmail() {
       try {
         const data = this.form
         this.disabled = true
@@ -130,7 +171,7 @@ export default {
       } finally {
         this.disabled = false
       }
-    }
-  }
+    },
+  },
 }
 </script>

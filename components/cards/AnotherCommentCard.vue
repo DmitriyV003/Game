@@ -1,64 +1,61 @@
 <template>
-    <div>
-        <div class="g-another-comment-card">
-            <img 
-                :src="image" 
-                alt="" class="g-another-comment-card__image"
-            >
-            
-            <div class="g-another-comment-card__block">
-                <h3 class="g-another-comment-card__title">{{ itemName }}</h3>
+  <div>
+    <div class="g-another-comment-card">
+      <img :src="image" alt="" class="g-another-comment-card__image" />
 
-                <div class="g-another-comment-card__text">{{ text }}</div>
+      <div class="g-another-comment-card__block">
+        <h3 class="g-another-comment-card__title">{{ itemName }}</h3>
 
-                <div class="g-another-comment-card__bottom">
-                    <span class="g-another-comment-card__name">{{ userNickname }}</span>
+        <div class="g-another-comment-card__text">{{ text }}</div>
 
-                    <div class="g-another-comment-card__stats">
-                        <div class="g-another-comment-card__stat">
-                            <eye-icon class="icon"/>
-                            <span class="text">8</span>
-                        </div>
-                        <div class="g-another-comment-card__stat">
-                            <message-icon class="icon"/>
-                            <span class="text">24</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="g-another-comment-card__bottom">
+          <span class="g-another-comment-card__name">{{ userNickname }}</span>
+
+          <div class="g-another-comment-card__stats">
+            <div class="g-another-comment-card__stat">
+              <eye-icon class="icon" />
+              <span class="text">8</span>
             </div>
+            <div class="g-another-comment-card__stat">
+              <message-icon class="icon" />
+              <span class="text">24</span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import icons from '~/mixins/icons'
 
 export default {
-    name: 'GAnotherCommentCard',
-    mixins: [icons],
-    props: {
-        id: {
-            type: String,
-            required: true
-        },
-        itemName: {
-            type: String,
-            required: true
-        },
-        userNickname: {
-            type: String,
-            required: true
-        },
-        text: {
-            type: String,
-            required: true
-        },
-        image: {
-            type: String,
-            required: true
-        }
-    }
-}  
+  name: 'GAnotherCommentCard',
+  mixins: [icons],
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    itemName: {
+      type: String,
+      required: true,
+    },
+    userNickname: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+  },
+}
 </script>
 
 <style lang="sass">

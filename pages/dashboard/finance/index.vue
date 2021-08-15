@@ -1,48 +1,84 @@
 <template>
   <div class="g-page">
     <g-change-balance-popup />
-    
+
     <b-container>
       <h1 class="title">Личный кабинет</h1>
 
       <b-row>
         <b-col xl="3" lg="3">
-
           <!-- Dashboard navigation  adapted = true -->
           <g-dashboard-navigation />
         </b-col>
 
-        
         <b-col xl="9" lg="9">
           <!--  Manage balance  adapted = true  -->
           <div class="g-balance-change">
             <div class="g-balance-change__line g-balance-change__line_current">
               <div class="g-balance-change__text">
-                <span class="text-color-white text-weight-600 caption">Ваш баланс:</span>
-                <span class="text-color-white text-weight-600 value">$ 500 000</span>
+                <span class="text-color-white text-weight-600 caption"
+                  >Ваш баланс:</span
+                >
+                <span class="text-color-white text-weight-600 value"
+                  >$ 500 000</span
+                >
               </div>
-              <main-button @click.native="eventBus.$emit('changeBalancePopupOpen', 'deposit')" class="g-balance-change__btn_desktop" color="primary" label="пополнить" size="xl" />
+              <main-button
+                @click.native="
+                  eventBus.$emit('changeBalancePopupOpen', 'deposit')
+                "
+                class="g-balance-change__btn_desktop"
+                color="primary"
+                label="пополнить"
+                size="xl"
+              />
             </div>
 
             <div class="g-balance-change__line g-balance-change__line_freeze">
               <div class="g-balance-change__text">
-                <span class="text-color-gray text-weight-400 caption_small">Заморожено:</span>
-                <span class="text-color-gray text-weight-600 value_small">$ 12 450</span>
+                <span class="text-color-gray text-weight-400 caption_small"
+                  >Заморожено:</span
+                >
+                <span class="text-color-gray text-weight-600 value_small"
+                  >$ 12 450</span
+                >
               </div>
-              <main-button @click.native="eventBus.$emit('changeBalancePopupOpen', 'deposit')" class="g-balance-change__btn g-balance-change__btn_mobile" color="primary" label="пополнить" size="xl" />
+              <main-button
+                @click.native="
+                  eventBus.$emit('changeBalancePopupOpen', 'deposit')
+                "
+                class="g-balance-change__btn g-balance-change__btn_mobile"
+                color="primary"
+                label="пополнить"
+                size="xl"
+              />
             </div>
 
-            <div class="g-balance-change__line g-balance-change__line_available">
+            <div
+              class="g-balance-change__line g-balance-change__line_available"
+            >
               <div class="g-balance-change__text">
-                <span class="text-color-gray text-weight-400 caption_small">Доступно к выводу:</span>
-                <span class="text-color-white text-weight-600 value_small">$ 450 000</span>
+                <span class="text-color-gray text-weight-400 caption_small"
+                  >Доступно к выводу:</span
+                >
+                <span class="text-color-white text-weight-600 value_small"
+                  >$ 450 000</span
+                >
               </div>
-              <main-button @click.native="eventBus.$emit('changeBalancePopupOpen', 'withdraw')" class="g-balance-change__btn" color="secondary" label="Вывести себе" size="xl" />
+              <main-button
+                @click.native="
+                  eventBus.$emit('changeBalancePopupOpen', 'withdraw')
+                "
+                class="g-balance-change__btn"
+                color="secondary"
+                label="Вывести себе"
+                size="xl"
+              />
             </div>
           </div>
 
           <!--  Promo code  adapted = true  -->
-         <g-promo />
+          <g-promo />
 
           <!--  Transactions  adapted = true -->
           <section>
@@ -52,71 +88,246 @@
               </div>
 
               <div class="g-transactions__titles">
-                <span class="g-transactions__title g-transactions__cell">Дата</span>
-                <span class="g-transactions__title g-transactions__cell g-transactions__cell_long">Продукт</span>
-                <span class="g-transactions__title g-transactions__cell">Операция</span>
-                <span class="g-transactions__title g-transactions__cell g-transactions__cell_right">Сумма</span>
+                <span class="g-transactions__title g-transactions__cell"
+                  >Дата</span
+                >
+                <span
+                  class="
+                    g-transactions__title
+                    g-transactions__cell
+                    g-transactions__cell_long
+                  "
+                  >Продукт</span
+                >
+                <span class="g-transactions__title g-transactions__cell"
+                  >Операция</span
+                >
+                <span
+                  class="
+                    g-transactions__title
+                    g-transactions__cell
+                    g-transactions__cell_right
+                  "
+                  >Сумма</span
+                >
               </div>
-              
+
               <div class="g-transactions__content">
                 <div class="g-transactions__line">
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_date">06.04.2021</span>
-                  <span class="g-transactions__cell g-transactions__cell_long g-transactions__cell_name">GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh sgsgdsf</span>
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_action">Покупка игры </span>
-                  <span class="g-transactions__cell g-transactions__cell_right g-transactions__cell_price">- $80</span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_date
+                    "
+                    >06.04.2021</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_long
+                      g-transactions__cell_name
+                    "
+                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
+                    sgsgdsf</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_action
+                    "
+                    >Покупка игры
+                  </span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_right
+                      g-transactions__cell_price
+                    "
+                    >- $80</span
+                  >
                 </div>
 
                 <div class="g-transactions__line">
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_date">06.04.2021</span>
-                  <span class="g-transactions__cell g-transactions__cell_long g-transactions__cell_name">GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh sgsgdsf</span>
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_action">Покупка игры </span>
-                  <span class="g-transactions__cell g-transactions__cell_right g-transactions__cell_price">- $80</span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_date
+                    "
+                    >06.04.2021</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_long
+                      g-transactions__cell_name
+                    "
+                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
+                    sgsgdsf</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_action
+                    "
+                    >Покупка игры
+                  </span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_right
+                      g-transactions__cell_price
+                    "
+                    >- $80</span
+                  >
                 </div>
 
                 <div class="g-transactions__line">
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_date">06.04.2021</span>
-                  <span class="g-transactions__cell g-transactions__cell_long g-transactions__cell_name">GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh sgsgdsf</span>
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_action">Покупка игры </span>
-                  <span class="g-transactions__cell g-transactions__cell_right g-transactions__cell_price">- $80</span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_date
+                    "
+                    >06.04.2021</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_long
+                      g-transactions__cell_name
+                    "
+                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
+                    sgsgdsf</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_action
+                    "
+                    >Покупка игры
+                  </span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_right
+                      g-transactions__cell_price
+                    "
+                    >- $80</span
+                  >
                 </div>
 
                 <div class="g-transactions__line">
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_date">06.04.2021</span>
-                  <span class="g-transactions__cell g-transactions__cell_long g-transactions__cell_name">GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh sgsgdsf</span>
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_action">Покупка игры </span>
-                  <span class="g-transactions__cell g-transactions__cell_right g-transactions__cell_price">- $80</span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_date
+                    "
+                    >06.04.2021</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_long
+                      g-transactions__cell_name
+                    "
+                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
+                    sgsgdsf</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_action
+                    "
+                    >Покупка игры
+                  </span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_right
+                      g-transactions__cell_price
+                    "
+                    >- $80</span
+                  >
                 </div>
 
                 <div class="g-transactions__line">
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_date">06.04.2021</span>
-                  <span class="g-transactions__cell g-transactions__cell_long g-transactions__cell_name">GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh sgsgdsf</span>
-                  <span class="g-transactions__cell g-transactions__cell_14 g-transactions__cell_action">Покупка игры </span>
-                  <span class="g-transactions__cell g-transactions__cell_right g-transactions__cell_price">- $80</span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_date
+                    "
+                    >06.04.2021</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_long
+                      g-transactions__cell_name
+                    "
+                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
+                    sgsgdsf</span
+                  >
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_14
+                      g-transactions__cell_action
+                    "
+                    >Покупка игры
+                  </span>
+                  <span
+                    class="
+                      g-transactions__cell
+                      g-transactions__cell_right
+                      g-transactions__cell_price
+                    "
+                    >- $80</span
+                  >
                 </div>
               </div>
-              
+
               <div class="g-transactions__bottom">
                 <div class="g-transactions__per-page">
                   <span class="caption">Rows per page:</span>
-                  <g-drop-menu :links="[{ label: 10, value: 10 }, { label: 20, value: 20 }]" placeholder="" size="sm" />
+                  <g-drop-menu
+                    :links="[
+                      { label: 10, value: 10 },
+                      { label: 20, value: 20 },
+                    ]"
+                    placeholder=""
+                    size="sm"
+                  />
                 </div>
-                
+
                 <div class="g-transactions__nav">
                   <span class="text"><span>1</span> of 5</span>
-                  <div class="g-transactions__arrows g-transactions__arrows_desktop">
+                  <div
+                    class="
+                      g-transactions__arrows g-transactions__arrows_desktop
+                    "
+                  >
                     <chevron-left-icon class="icon" />
                     <chevron-right-icon class="icon" />
                   </div>
                 </div>
 
-                <div class="g-transactions__arrows g-transactions__arrows_mobile">
+                <div
+                  class="g-transactions__arrows g-transactions__arrows_mobile"
+                >
                   <chevron-left-icon class="icon" />
                   <chevron-right-icon class="icon" />
                 </div>
               </div>
             </div>
           </section>
-          
         </b-col>
       </b-row>
     </b-container>
@@ -124,23 +335,30 @@
 </template>
 
 <script>
-  import GDashboardNavigation from '~/components/dashboard/Navigation'
-  import MainButton from '~/components/buttons/MainButton'
-  import GInput from '~/components/form-elements/Input'
-  import GPromo from '~/components/dashboard/PromoCode'
-  import GDropMenu from '~/components/DropMenu'
-  import icons from '~/mixins/icons'
-  import GChangeBalancePopup from "~/components/popups/ChangeBalance";
-  import { eventBus } from '~/plugins/event-bus'
-  export default {
-    components: {GChangeBalancePopup, GDropMenu, GPromo, GInput, MainButton, GDashboardNavigation },
-    mixins: [icons],
-    data: () => {
-      return {
-        eventBus
-      }
+import GDashboardNavigation from '~/components/dashboard/Navigation'
+import MainButton from '~/components/buttons/MainButton'
+import GInput from '~/components/form-elements/Input'
+import GPromo from '~/components/dashboard/PromoCode'
+import GDropMenu from '~/components/DropMenu'
+import icons from '~/mixins/icons'
+import GChangeBalancePopup from '~/components/popups/ChangeBalance'
+import { eventBus } from '~/plugins/event-bus'
+export default {
+  components: {
+    GChangeBalancePopup,
+    GDropMenu,
+    GPromo,
+    GInput,
+    MainButton,
+    GDashboardNavigation,
+  },
+  mixins: [icons],
+  data: () => {
+    return {
+      eventBus,
     }
-  }
+  },
+}
 </script>
 
 <style lang="sass">

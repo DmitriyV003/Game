@@ -19,8 +19,16 @@
       </template>
     </vue-slick>
     <div class="g-slider__controls">
-      <arrow-button @click.native="prev($refs.reviewsSlider)" class="g-slider__button g-slider__button_left" left />
-      <arrow-button @click.native="next($refs.reviewsSlider)" class="g-slider__button g-slider__button_right" right />
+      <arrow-button
+        @click.native="prev($refs.reviewsSlider)"
+        class="g-slider__button g-slider__button_left"
+        left
+      />
+      <arrow-button
+        @click.native="next($refs.reviewsSlider)"
+        class="g-slider__button g-slider__button_right"
+        right
+      />
     </div>
   </div>
 </template>
@@ -42,33 +50,33 @@ export default {
               slidesToShow: 1,
               slidesToScroll: 1,
               variableWidth: true,
-              dots: false
-            }
+              dots: false,
+            },
           },
           {
             breakpoint: 1200,
             settings: {
-              dots: false
-            }
-          }
-        ]
-      }
+              dots: false,
+            },
+          },
+        ],
+      },
     }
   },
   methods: {
-    next (slider) {
+    next(slider) {
       slider.next()
     },
-    prev (slider) {
+    prev(slider) {
       slider.prev()
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .review-section__card
   +lg
     margin-right: 16px

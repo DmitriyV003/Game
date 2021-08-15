@@ -2,12 +2,16 @@
   <div>
     <div class="g-item">
       <div class="g-item__img">
-        <img src="/images/cart-item.png" alt="">
+        <img src="/images/cart-item.png" alt="" />
       </div>
 
       <div class="g-item__content g-item__content_desktop">
         <div class="g-item__info">
-          <div class="g-item__name text-size-20 text-color-white text-weight-600">HITMAN 3</div>
+          <div
+            class="g-item__name text-size-20 text-color-white text-weight-600"
+          >
+            HITMAN 3
+          </div>
         </div>
 
         <div>
@@ -19,14 +23,18 @@
 
       <div class="g-item__content g-item__content_mobile">
         <div class="g-item__line g-item__line_title">
-          <div class="g-item__name text-size-20 text-color-white text-weight-600">HITMAN 3</div>
+          <div
+            class="g-item__name text-size-20 text-color-white text-weight-600"
+          >
+            HITMAN 3
+          </div>
           <div class="g-item__counter">
             <show-all :icon="false" label="Открыть спор" />
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="g-keys">
       <g-key value="4QA26-BTDKE-XKL43M" />
     </div>
@@ -36,24 +44,23 @@
 <script>
 import icons from '~/mixins/icons'
 import GPrice from '~/components/GPrice'
-import ShowAll from "~/components/buttons/MainLink";
-import MainButton from "~/components/buttons/MainButton";
-import GKey from "~/components/Key";
+import ShowAll from '~/components/buttons/MainLink'
+import MainButton from '~/components/buttons/MainButton'
+import GKey from '~/components/Key'
 export default {
   name: 'GKeyItem',
-  components: {GKey, MainButton, ShowAll, GPrice },
+  components: { GKey, MainButton, ShowAll, GPrice },
   mixins: [icons],
   props: {
     quantity: {
       type: Number,
-      default: () => 1
-    }
+      default: () => 1,
+    },
   },
   methods: {
-    changeQuantity (number) {
-    }
-  }
-}  
+    changeQuantity(number) {},
+  },
+}
 </script>
 
 <style lang="sass" scoped>

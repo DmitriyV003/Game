@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="g-case">
-      <img class="g-case__img" src="/images/case-1.png" alt="">
+      <img class="g-case__img" src="/images/case-1.png" alt="" />
       <p class="g-case__name">case-1</p>
       <p class="g-case__caption">★ 31 предмет</p>
       <g-price class="g-case__sale" :show-current-price="false" />
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import GPrice from "~/components/GPrice";
+import GPrice from '~/components/GPrice'
 export default {
   name: 'GCase',
-  components: {GPrice}
+  components: { GPrice },
 }
 </script>
 

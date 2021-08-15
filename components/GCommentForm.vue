@@ -1,23 +1,25 @@
 <template>
   <div class="g-comment-form">
-    <div class="g-comment-form__title">Оставьте отзыв о продавце {{ name }} {{ surname }}</div>
+    <div class="g-comment-form__title">
+      Оставьте отзыв о продавце {{ name }} {{ surname }}
+    </div>
 
     <div class="g-comment-form__comment">
-      <textarea 
-        placeholder="Комментарий" 
-        class="input-reboot g-comment-form__textarea" 
-        name="comment" 
+      <textarea
+        placeholder="Комментарий"
+        class="input-reboot g-comment-form__textarea"
+        name="comment"
         id="comment"
         v-model="form.comment"
       ></textarea>
     </div>
 
-    <main-button 
+    <main-button
       type="submit"
-      class="g-comment-form__button" 
-      color="primary" 
+      class="g-comment-form__button"
+      color="primary"
       size="xl"
-      label="оставить отзыв" 
+      label="оставить отзыв"
     />
   </div>
 </template>
@@ -30,30 +32,30 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     surname: {
       type: String,
-      required: true
+      required: true,
     },
   },
   methods: {
-    async postFeedback () {
+    async postFeedback() {
       try {
         await this.$store.dispatch('purchases/postFeedback', this.form)
       } catch (e) {
         console.log(e)
       }
-    }
+    },
   },
   data: () => {
     return {
       form: {
         comment: null,
-        rate: null
-      }
+        rate: null,
+      },
     }
-  }
+  },
 }
 </script>
 

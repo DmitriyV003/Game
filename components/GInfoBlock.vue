@@ -1,7 +1,13 @@
 <template>
   <div class="g-info">
-    <span class="g-info__title text-color-gray text-size-14 text-weight-400">{{ title }}</span>
-    <span v-if="text !== null" class="g-info__text text-color-white text-size-16 text-weight-400">{{ text }}</span>
+    <span class="g-info__title text-color-gray text-size-14 text-weight-400">{{
+      title
+    }}</span>
+    <span
+      v-if="text !== null"
+      class="g-info__text text-color-white text-size-16 text-weight-400"
+      >{{ text }}</span
+    >
   </div>
 </template>
 
@@ -11,13 +17,13 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     text: {
       type: String,
-      default: () => null
-    }
-  }
+      default: () => null,
+    },
+  },
 }
 </script>
 
@@ -32,5 +38,5 @@ export default {
     align-items: flex-end
   &__title
     margin-bottom: 4px
-    letter-spacing: -0.4px  
+    letter-spacing: -0.4px
 </style>

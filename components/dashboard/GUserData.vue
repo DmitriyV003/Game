@@ -1,10 +1,10 @@
 <template>
   <div class="g-user-data">
     <div class="g-user-data__title">
-      <h2>Здравствуйте, <br>{{ name }} {{ surname }}!</h2>
+      <h2>Здравствуйте, <br />{{ name }} {{ surname }}!</h2>
       <settings-icon
         @click="eventBus.$emit('changeProfilePopupOpen')"
-        class="g-user-data__settings" 
+        class="g-user-data__settings"
       />
     </div>
 
@@ -15,7 +15,11 @@
 
     <div class="g-user-data__block">
       <span class="g-user-data__caption">Ваш e-mail</span>
-      <span class="g-user-data__value">{{ email.substring(0, 3) }}******{{ email.substring(email.length - 7) }}</span>
+      <span class="g-user-data__value"
+        >{{ email.substring(0, 3) }}******{{
+          email.substring(email.length - 7)
+        }}</span
+      >
     </div>
   </div>
 </template>
@@ -29,27 +33,27 @@ export default {
   mixins: [icons],
   data: () => {
     return {
-      eventBus
+      eventBus,
     }
   },
   props: {
     nickname: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     email: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     name: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     surname: {
       type: String,
-      default: () => null
-    }
-  }
+      default: () => null,
+    },
+  },
 }
 </script>
 
@@ -85,5 +89,5 @@ export default {
     display: flex
     flex-direction: column
     &:not(:last-child)
-      margin-bottom: 24px  
+      margin-bottom: 24px
 </style>

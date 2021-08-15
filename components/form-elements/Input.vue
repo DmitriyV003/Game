@@ -1,33 +1,39 @@
 <template>
   <div class="g-input">
     <div v-if="caption" class="g-input__caption-wrapper">
-      <span 
-          class="g-input__caption" 
-          :class="['g-input__caption_' + color]" v-if="caption !== null"
-      >{{ caption }}</span>
+      <span
+        class="g-input__caption"
+        :class="['g-input__caption_' + color]"
+        v-if="caption !== null"
+        >{{ caption }}</span
+      >
       <slot name="link"></slot>
     </div>
-    <input 
-      @input="$emit('input', $event.target.value)" 
+    <input
+      @input="$emit('input', $event.target.value)"
       :type="originType"
       class="input-reboot g-input__input"
-      :class="['g-input__input_' + color, { 'g-input__input_readonly': readonly }, { 'g-input_error': error === true }]"
+      :class="[
+        'g-input__input_' + color,
+        { 'g-input__input_readonly': readonly },
+        { 'g-input_error': error === true },
+      ]"
       :placeholder="placeholder"
       :readonly="readonly"
       :value="value"
-    >
+    />
     <span v-if="error" class="g-input__error">
       <slot name="error"></slot>
     </span>
-    <eye-icon 
-      @click="originType = 'text'" 
-      v-if="eye && originType === 'password'" 
-      class="g-input__eye" 
+    <eye-icon
+      @click="originType = 'text'"
+      v-if="eye && originType === 'password'"
+      class="g-input__eye"
     />
-    <eye-off-icon 
-      @click="originType = 'password'" 
-      v-if="eye && originType === 'text'" 
-      class="g-input__eye" 
+    <eye-off-icon
+      @click="originType = 'password'"
+      v-if="eye && originType === 'text'"
+      class="g-input__eye"
     />
   </div>
 </template>
@@ -38,55 +44,55 @@ import icons from '~/mixins/icons'
 export default {
   name: 'GInput',
   mixins: [icons],
-  data () {
+  data() {
     return {
-      inputType: this.type  
+      inputType: this.type,
     }
   },
   computed: {
     originType: {
-      get () {
+      get() {
         return this.type
       },
-      set (value) {
+      set(value) {
         this.inputType = value
-      }
-    }
+      },
+    },
   },
   props: {
     placeholder: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     value: {
       type: null,
-      default: () => null
+      default: () => null,
     },
     caption: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     eye: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     error: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     type: {
       type: String,
-      default: () => 'text'
+      default: () => 'text',
     },
     readonly: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     color: {
       type: String,
-      default: () => ''
-    }
-  }
+      default: () => '',
+    },
+  },
 }
 </script>
 

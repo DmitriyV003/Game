@@ -5,23 +5,59 @@
         <p class="g-popup__title">Пополнить баланс</p>
         <close-icon @click="val = false" class="g-popup__close" />
       </div>
-      
+
       <div class="g-change-balance__input">
         <p class="g-popup__caption">Сумма пополнения:</p>
         <div class="g-change-balance__block">
           <g-input class="g-change-balance__value" placeholder="100" />
-          <main-button v-if="type === 'deposit'" full-width color="primary" size="xl" label="Пополнить" />
-          <main-button v-if="type === 'withdraw'" full-width color="primary" size="xl" label="Вывести" />
+          <main-button
+            v-if="type === 'deposit'"
+            full-width
+            color="primary"
+            size="xl"
+            label="Пополнить"
+          />
+          <main-button
+            v-if="type === 'withdraw'"
+            full-width
+            color="primary"
+            size="xl"
+            label="Вывести"
+          />
         </div>
-        
+
         <div class="g-change-balance__methods">
           <p class="g-popup__caption">Выберите способ пополнения</p>
-          
+
           <div class="g-change-balance__lines">
-            <g-payment-method bg="light" class="g-change-balance__method" name="Банковская карта" :id="1" image="dd" />
-            <g-payment-method bg="light" class="g-change-balance__method" name="Банковская карта" :id="2" image="dd" />
-            <g-payment-method bg="light" class="g-change-balance__method" name="Банковская карта" :id="3" image="dd" />
-            <g-payment-method bg="light" class="g-change-balance__method" name="Банковская карта" :id="4" image="dd" />
+            <g-payment-method
+              bg="light"
+              class="g-change-balance__method"
+              name="Банковская карта"
+              :id="1"
+              image="dd"
+            />
+            <g-payment-method
+              bg="light"
+              class="g-change-balance__method"
+              name="Банковская карта"
+              :id="2"
+              image="dd"
+            />
+            <g-payment-method
+              bg="light"
+              class="g-change-balance__method"
+              name="Банковская карта"
+              :id="3"
+              image="dd"
+            />
+            <g-payment-method
+              bg="light"
+              class="g-change-balance__method"
+              name="Банковская карта"
+              :id="4"
+              image="dd"
+            />
           </div>
         </div>
       </div>
@@ -43,10 +79,10 @@ export default {
   data: () => {
     return {
       val: false,
-      type: 'deposit'
+      type: 'deposit',
     }
   },
-  created () {
+  created() {
     eventBus.$on('popupClose', () => {
       this.val = false
     })
@@ -56,7 +92,7 @@ export default {
       this.type = type
       this.val = true
     })
-  }
+  },
 }
 </script>
 

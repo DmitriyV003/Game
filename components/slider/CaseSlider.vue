@@ -14,8 +14,16 @@
       <g-case class="case-slider__card" />
     </vue-slick>
     <div class="g-slider__controls">
-      <arrow-button @click.native="prev($refs.caseSlider)" class="g-slider__button g-slider__button_left" left />
-      <arrow-button @click.native="next($refs.caseSlider)" class="g-slider__button g-slider__button_right" right />
+      <arrow-button
+        @click.native="prev($refs.caseSlider)"
+        class="g-slider__button g-slider__button_left"
+        left
+      />
+      <arrow-button
+        @click.native="next($refs.caseSlider)"
+        class="g-slider__button g-slider__button_right"
+        right
+      />
     </div>
   </div>
 </template>
@@ -33,18 +41,18 @@ export default {
         slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        dots: false
-      }
+        dots: false,
+      },
     }
   },
   methods: {
-    next (slider) {
+    next(slider) {
       slider.next()
     },
-    prev (slider) {
+    prev(slider) {
       slider.prev()
-    }
-  }
+    },
+  },
 }
 </script>
 

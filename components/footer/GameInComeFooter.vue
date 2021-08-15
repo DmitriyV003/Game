@@ -1,28 +1,43 @@
-  <template>
+<template>
   <footer class="footer">
     <b-container>
       <div class="footer__wrapper">
         <div class="footer__column">
           <nuxt-link to="/" class="footer__logo">
-            <img src="/images/logo.svg" alt="">
+            <img src="/images/logo.svg" alt="" />
           </nuxt-link>
 
           <div class="footer__socials lg-none">
-            <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+            <CustomIcon
+              :size="40"
+              class="footer__social"
+              :is-link="true"
+              to="/"
+            >
               <template slot="icon">
-                <img src="/images/vk.svg" alt="">
+                <img src="/images/vk.svg" alt="" />
               </template>
             </CustomIcon>
 
-            <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+            <CustomIcon
+              :size="40"
+              class="footer__social"
+              :is-link="true"
+              to="/"
+            >
               <template slot="icon">
-                <img src="/images/fb.svg" alt="">
+                <img src="/images/fb.svg" alt="" />
               </template>
             </CustomIcon>
 
-            <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+            <CustomIcon
+              :size="40"
+              class="footer__social"
+              :is-link="true"
+              to="/"
+            >
               <template slot="icon">
-                <img src="/images/inst.svg" alt="">
+                <img src="/images/inst.svg" alt="" />
               </template>
             </CustomIcon>
           </div>
@@ -43,8 +58,12 @@
           <div class="footer__line">
             <div class="footer__list">
               <div class="footer__block footer__block_order-10">
-                <nuxt-link class="footer__item" to="/for-sellers">Продавцам</nuxt-link>
-                <nuxt-link class="footer__item" to="/for-customers">Покупателям</nuxt-link>
+                <nuxt-link class="footer__item" to="/for-sellers"
+                  >Продавцам</nuxt-link
+                >
+                <nuxt-link class="footer__item" to="/for-customers"
+                  >Покупателям</nuxt-link
+                >
               </div>
               <div class="footer__block footer__block_order-10">
                 <nuxt-link class="footer__item" to="/">Оплата</nuxt-link>
@@ -52,36 +71,49 @@
               </div>
               <div class="footer__block footer__block_order-10 no-md-margin">
                 <nuxt-link class="footer__item" to="/news">Новости</nuxt-link>
-                <nuxt-link class="footer__item" to="/">Стать партнером</nuxt-link>
+                <nuxt-link class="footer__item" to="/"
+                  >Стать партнером</nuxt-link
+                >
               </div>
               <div class="footer__block">
-                <nuxt-link class="footer__item footer__item_white" to="/dashboard/profile/dfgh">Личный кабинет</nuxt-link>
+                <nuxt-link
+                  class="footer__item footer__item_white"
+                  to="/dashboard/profile/dfgh"
+                  >Личный кабинет</nuxt-link
+                >
               </div>
             </div>
 
-            <MainButton color="primary" class="footer__btn lg-none" label="Задать вопрос" />
+            <MainButton
+              color="primary"
+              class="footer__btn lg-none"
+              label="Задать вопрос"
+            />
           </div>
-
         </div>
       </div>
 
-      <div class="footer__wrapper footer__wrapper_padding-top footer__wrapper_mobile">
+      <div
+        class="
+          footer__wrapper footer__wrapper_padding-top footer__wrapper_mobile
+        "
+      >
         <div class="footer__socials">
-          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/">
             <template slot="icon">
-              <img src="/images/vk.svg" alt="">
+              <img src="/images/vk.svg" alt="" />
             </template>
           </CustomIcon>
 
-          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/">
             <template slot="icon">
-              <img src="/images/fb.svg" alt="">
+              <img src="/images/fb.svg" alt="" />
             </template>
           </CustomIcon>
 
-          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/" >
+          <CustomIcon :size="40" class="footer__social" :is-link="true" to="/">
             <template slot="icon">
-              <img src="/images/inst.svg" alt="">
+              <img src="/images/inst.svg" alt="" />
             </template>
           </CustomIcon>
         </div>
@@ -91,14 +123,19 @@
 
       <div class="footer__wrapper footer__wrapper_padding-top">
         <span class="footer__text">© Gameincome 2021</span>
-        <nuxt-link class="footer__text" to="/legal">Политика конфиденциальности</nuxt-link>
-        <span class="footer__made">made by <span class="footer__text footer__roobin">roob.in</span></span>
+        <nuxt-link class="footer__text" to="/legal"
+          >Политика конфиденциальности</nuxt-link
+        >
+        <span class="footer__made"
+          >made by
+          <span class="footer__text footer__roobin">roob.in</span></span
+        >
 
         <div class="footer__payments">
-          <img class="footer__payment" src="/images/visa.svg" alt="">
-          <img class="footer__payment" src="/images/mastercard.svg" alt="">
-          <img class="footer__payment" src="/images/qiwi.svg" alt="">
-          <img class="footer__payment" src="/images/yandex.svg" alt="">
+          <img class="footer__payment" src="/images/visa.svg" alt="" />
+          <img class="footer__payment" src="/images/mastercard.svg" alt="" />
+          <img class="footer__payment" src="/images/qiwi.svg" alt="" />
+          <img class="footer__payment" src="/images/yandex.svg" alt="" />
         </div>
       </div>
     </b-container>
@@ -110,7 +147,7 @@ import CustomIcon from '~/components/CustomIcon'
 import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GameInComeFooter',
-  components: { MainButton, CustomIcon }
+  components: { MainButton, CustomIcon },
 }
 </script>
 

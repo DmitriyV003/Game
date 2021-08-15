@@ -1,46 +1,49 @@
 <template>
   <div class="g-skin-card">
-    
     <div class="g-skin-card__wrapper">
       <div class="g-skin-card__top">
         <div class="g-skin-card__progress">
           <span class="g-skin-card__fn">FN | 0.0312591</span>
           <span class="g-skin-card__line">
-          <span></span>
-        </span>
+            <span></span>
+          </span>
         </div>
 
         <div class="g-skin-card__label">
-          <img src="/images/icons/ruby.svg" alt="">
+          <img src="/images/icons/ruby.svg" alt="" />
           <span>Sapphire</span>
         </div>
       </div>
 
       <button class="button-reboot g-skin-card__cart g-skin-card__cart_mobile">
-        <img src="/images/icons/cart.svg" alt="">
+        <img src="/images/icons/cart.svg" alt="" />
       </button>
     </div>
-    
-    
+
     <div class="g-skin-card__image">
-      <img src="/images/skin.png" alt="">
+      <img src="/images/skin.png" alt="" />
     </div>
-    
+
     <span class="g-skin-card__desc">★ M9 Bayonet</span>
-    
+
     <h5 class="g-skin-card__title">Doppler</h5>
-    
+
     <span class="g-skin-card__color">Covert</span>
-    
+
     <g-price :show-current-price="false" class="g-skin-card__price" />
-    
+
     <span class="g-skin-card__current">6 348 ₽</span>
-    
+
     <div class="g-skin-card__bottom">
-      <main-button class="g-skin-card__buy" size="lg" color="primary" label="Купить" />
-      
+      <main-button
+        class="g-skin-card__buy"
+        size="lg"
+        color="primary"
+        label="Купить"
+      />
+
       <button class="button-reboot g-skin-card__cart g-skin-card__cart_desktop">
-        <img src="/images/icons/cart.svg" alt="">
+        <img src="/images/icons/cart.svg" alt="" />
       </button>
     </div>
   </div>
@@ -48,10 +51,10 @@
 
 <script>
 import GPrice from '~/components/GPrice'
-import MainButton from "~/components/buttons/MainButton";
+import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GSkinCard',
-  components: {MainButton, GPrice }
+  components: { MainButton, GPrice },
 }
 </script>
 
@@ -153,7 +156,7 @@ export default {
     align-items: center
     justify-content: center
     margin: 0 auto 8px
-  &__cart 
+  &__cart
     display: flex
     align-items: center
     justify-content: center

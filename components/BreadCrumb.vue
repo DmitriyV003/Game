@@ -1,11 +1,12 @@
 <template>
   <div class="g-breadcrumb">
-    <nuxt-link 
-      :key="link.label" 
+    <nuxt-link
+      :key="link.label"
       v-for="link in links"
-      :to="link.to" 
+      :to="link.to"
       class="g-breadcrumb__item text-size-14"
-    >{{ link.label }}</nuxt-link>
+      >{{ link.label }}</nuxt-link
+    >
   </div>
 </template>
 
@@ -17,10 +18,10 @@ export default {
       type: Array,
       default: () => [
         { to: '/', label: 'Главная' },
-        { to: '/catalog', label: 'Игры' }
-      ]
-    }
-  }
+        { to: '/catalog', label: 'Игры' },
+      ],
+    },
+  },
 }
 </script>
 

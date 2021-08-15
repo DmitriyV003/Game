@@ -1,38 +1,38 @@
 <template>
-    <div>
-        <div class="g-seller-game-card">
-            <rating
-                class="g-seller-game-card__rating"
-                :value="rating"
-                v-if="rating !== null && rating !== 0"
-            />
-            <img :src="image" alt="" class="g-seller-game-card__img">
+  <div>
+    <div class="g-seller-game-card">
+      <rating
+        class="g-seller-game-card__rating"
+        :value="rating"
+        v-if="rating !== null && rating !== 0"
+      />
+      <img :src="image" alt="" class="g-seller-game-card__img" />
 
-            <span class="g-seller-game-card__name">{{ name }}</span>
-        </div>
+      <span class="g-seller-game-card__name">{{ name }}</span>
     </div>
+  </div>
 </template>
 
 <script>
-	import Rating from '~/components/cards/Rating'
-    export default {
-		name: 'GSellerGameCard',
-        components: { Rating },
-        props: {
-            name: {
-                type: String,
-                default: () => 'Name'
-            },
-            image: {
-                type: String,
-                required: true
-            },
-            rating: {
-                type: Number,
-                default: () => null
-            }
-        }
-	}
+import Rating from '~/components/cards/Rating'
+export default {
+  name: 'GSellerGameCard',
+  components: { Rating },
+  props: {
+    name: {
+      type: String,
+      default: () => 'Name',
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      default: () => null,
+    },
+  },
+}
 </script>
 
 <style lang="sass">
@@ -59,5 +59,4 @@
         border-radius: 12px
         margin-bottom: 16px
         width: 100%
-
 </style>

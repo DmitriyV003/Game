@@ -1,7 +1,9 @@
 <template>
   <div class="rating">
-    <img src="/images/star.svg" alt="" class="rating__img">
-    <span class="rating__value" :class="'rating__value_' + size">{{ value }}</span>
+    <img src="/images/star.svg" alt="" class="rating__img" />
+    <span class="rating__value" :class="'rating__value_' + size">{{
+      value
+    }}</span>
   </div>
 </template>
 
@@ -11,13 +13,13 @@ export default {
   props: {
     value: {
       type: Number,
-      required: true
+      required: true,
     },
     size: {
       type: String,
-      default: () => ''
-    }
-  }
+      default: () => '',
+    },
+  },
 }
 </script>
 

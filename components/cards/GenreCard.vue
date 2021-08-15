@@ -1,7 +1,7 @@
 <template>
   <div class="genre-card">
     <div class="genre-card__img">
-      <img :src="image" alt="">
+      <img :src="image" alt="" />
     </div>
     <div class="genre-card__title">{{ name }}</div>
   </div>
@@ -13,13 +13,13 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

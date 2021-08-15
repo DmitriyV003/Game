@@ -2,26 +2,35 @@
   <div class="g-purchased">
     <div class="g-purchased__top g-purchased__top_mobile">
       <h2>{{ name }}</h2>
-      <show-all @custom-click="openNewDispute" label="Открыть спор" :icon="false" />
+      <show-all
+        @custom-click="openNewDispute"
+        label="Открыть спор"
+        :icon="false"
+      />
     </div>
-    
+
     <div class="g-purchased__img">
-      <img :src="image" alt="">
+      <img :src="image" alt="" />
     </div>
-    
+
     <div class="g-purchased__block">
       <div class="g-purchased__top g-purchased__top_desktop">
         <h2>{{ name }}</h2>
-        <show-all @custom-click="openNewDispute" label="Открыть спор" :icon="false" />
+        <show-all
+          @custom-click="openNewDispute"
+          label="Открыть спор"
+          :icon="false"
+        />
       </div>
-      
-      <p class="text-color-white text-weight-600 g-purchased__price">{{ price }} ₽</p>
-      
+
+      <p class="text-color-white text-weight-600 g-purchased__price">
+        {{ price }} ₽
+      </p>
+
       <g-key adaptive="xl" :value="code" />
     </div>
   </div>
 </template>
-
 
 <script>
 import ShowAll from '~/components/buttons/MainLink'
@@ -31,34 +40,34 @@ export default {
   name: 'GPurchased',
   data: () => {
     return {
-      eventBus
+      eventBus,
     }
   },
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     price: {
       type: Number,
-      required: true
+      required: true,
     },
     code: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
       required: true,
-      default: () => '/images/purchased.svg'
-    }
+      default: () => '/images/purchased.svg',
+    },
   },
   components: { GKey, ShowAll },
   methods: {
-    openNewDispute () {
+    openNewDispute() {
       eventBus.$emit('newDisputePopupOpen')
-    }
-  }
+    },
+  },
 }
 </script>
 

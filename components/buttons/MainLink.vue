@@ -1,12 +1,9 @@
 <template>
-    <div 
-        @click="goTo" 
-        class="show-all__link"
-    >
-      <chevron-left-icon v-if="icon && reverse" class="show-all__icon" />
-      <span>{{ label }}</span>
-      <chevron-right-icon v-if="icon && !reverse" class="show-all__icon" />
-    </div>
+  <div @click="goTo" class="show-all__link">
+    <chevron-left-icon v-if="icon && reverse" class="show-all__icon" />
+    <span>{{ label }}</span>
+    <chevron-right-icon v-if="icon && !reverse" class="show-all__icon" />
+  </div>
 </template>
 
 <script>
@@ -17,32 +14,32 @@ export default {
   name: 'ShowAll',
   mixins: [icons],
   methods: {
-    async goTo () {
+    async goTo() {
       if (this.to !== '') {
         await this.$router.push(this.to)
       } else {
         this.$emit('custom-click')
       }
-    }
+    },
   },
   props: {
     label: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     to: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     icon: {
       type: Boolean,
-      default: () => true
+      default: () => true,
     },
     reverse: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 }
 </script>
 

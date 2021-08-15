@@ -6,13 +6,16 @@
         <div class="news-card__top">
           <bread-crumb :links="links" />
         </div>
-        
+
         <g-promo-banner />
       </b-container>
     </section>
 
     <!-- Game categories  adapted = true -->
-    <section class="section for-customers__section">
+    <section
+      class="section for-customers__section"
+      v-if="pageFilters.games !== null && pageFilters.gamePrices !== null"
+    >
       <b-container>
         <div class="for-customers__wrapper">
           <b-row>
@@ -22,18 +25,13 @@
 
             <b-col xl="9" lg="9">
               <div class="for-customers__buttons">
-                <rounded-button class="for-customers__button" to="/" label="Экшн"/>
-                <rounded-button class="for-customers__button" to="/" label="Приключения"/>
-                <rounded-button class="for-customers__button" to="/" label="Стратегии"/>
-                <rounded-button class="for-customers__button" to="/" label="Инди"/>
-                <rounded-button class="for-customers__button" to="/" label="Аниме"/>
-                <rounded-button class="for-customers__button" to="/" label="Ролевые"/>
-                <rounded-button class="for-customers__button" to="/" label="Симуляторы"/>
-                <rounded-button class="for-customers__button" to="/" label="Казуальные игры"/>
-                <rounded-button class="for-customers__button" to="/" label="Гонки"/>
-                <rounded-button class="for-customers__button" to="/" label="Спорт"/>
-                <rounded-button class="for-customers__button" to="/" label="Онлайн-игры"/>
-
+                <rounded-button
+                  v-for="item in pageFilters.games"
+                  :key="item.id"
+                  class="for-customers__button"
+                  :to="`/catalog?type=games&minPrice=${pageFilters.gamePrices.minPrice}&maxPrice=${pageFilters.gamePrices.maxPrice}&categories=${item.id}`"
+                  :label="item.name"
+                />
               </div>
             </b-col>
           </b-row>
@@ -42,40 +40,9 @@
     </section>
 
     <!-- Games slider  adapted = true -->
-    <section class="section">
+    <section class="section" v-if="mainPage !== null">
       <b-container>
-        <div class="g-slider game-slider">
-          <vue-slick
-            ref="recommendSlider"
-            :variable-width="settings.variableWidth"
-            :slides-to-show="settings.slidesToShow"
-            :slides-to-scroll="settings.slidesToScroll"
-            :center-padding="settings.centerPadding"
-            :arrows="settings.arrows"
-            :dots="settings.dots"
-          >
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-          </vue-slick>
-          <div class="g-slider__controls">
-            <arrow-button @click.native="prev($refs.recommendSlider)" class="g-slider__button g-slider__button_left" left />
-            <arrow-button @click.native="next($refs.recommendSlider)" class="g-slider__button g-slider__button_right" right />
-          </div>
-        </div>
+        <g-recommend-slider :data="mainPage.recommendations" />
       </b-container>
     </section>
 
@@ -90,18 +57,61 @@
 
             <b-col xl="9" lg="9">
               <div class="for-customers__buttons">
-                <rounded-button class="for-customers__button" to="/" label="Экшн"/>
-                <rounded-button class="for-customers__button" to="/" label="Приключения"/>
-                <rounded-button class="for-customers__button" to="/" label="Стратегии"/>
-                <rounded-button class="for-customers__button" to="/" label="Инди"/>
-                <rounded-button class="for-customers__button" to="/" label="Аниме"/>
-                <rounded-button class="for-customers__button" to="/" label="Ролевые"/>
-                <rounded-button class="for-customers__button" to="/" label="Симуляторы"/>
-                <rounded-button class="for-customers__button" to="/" label="Казуальные игры"/>
-                <rounded-button class="for-customers__button" to="/" label="Гонки"/>
-                <rounded-button class="for-customers__button" to="/" label="Спорт"/>
-                <rounded-button class="for-customers__button" to="/" label="Онлайн-игры"/>
-
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Экшн"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Приключения"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Стратегии"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Инди"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Аниме"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Ролевые"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Симуляторы"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Казуальные игры"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Гонки"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Спорт"
+                />
+                <rounded-button
+                  class="for-customers__button"
+                  to="/"
+                  label="Онлайн-игры"
+                />
               </div>
             </b-col>
           </b-row>
@@ -110,40 +120,9 @@
     </section>
 
     <!-- Games slider  adapted = true -->
-    <section class="section">
+    <section class="section" v-if="mainPage !== null">
       <b-container>
-        <div class="g-slider game-slider">
-          <vue-slick
-            ref="recommendSlider"
-            :variable-width="settings.variableWidth"
-            :slides-to-show="settings.slidesToShow"
-            :slides-to-scroll="settings.slidesToScroll"
-            :center-padding="settings.centerPadding"
-            :arrows="settings.arrows"
-            :dots="settings.dots"
-          >
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-            <game-card class="recommend__card" />
-          </vue-slick>
-          <div class="g-slider__controls">
-            <arrow-button @click.native="prev($refs.recommendSlider)" class="g-slider__button g-slider__button_left" left />
-            <arrow-button @click.native="next($refs.recommendSlider)" class="g-slider__button g-slider__button_right" right />
-          </div>
-        </div>
+        <g-recommend-slider :data="mainPage.hits" />
       </b-container>
     </section>
 
@@ -152,7 +131,7 @@
       <b-container>
         <section-header title="Огромное количество ключей" />
         <div class="for-customers__genres">
-          <g-reviews-page-slider />
+          <!--          <g-reviews-page-slider />-->
         </div>
       </b-container>
     </section>
@@ -189,19 +168,28 @@
         <section-header title="Довольные клиенты" />
         <div class="for-customers__clients" v-if="windowSize >= 1200">
           <b-row>
-            <b-col xl="6">
-              <comment-card adaptive-size="md" class="for-customers__comment" />
-            </b-col>
-            <b-col xl="6">
-              <comment-card adaptive-size="md" class="for-customers__comment" />
-            </b-col>
-            <b-col xl="6">
-              <comment-card adaptive-size="md" class="for-customers__comment" />
+            <b-col xl="6" v-for="item in comments" :key="item.id">
+              <comment-card
+                adaptive-size="md"
+                class="for-customers__comment"
+                :id="item.id"
+                :key="item.id"
+                :name="item.itemName"
+                :image="item.itemHeaderImage"
+                :rating="Number(item.itemRate)"
+                :avatar="item.userAvatar"
+                :nickname="item.userNickname"
+                :text="item.userFeedbackText"
+                :date="item.createdAt"
+              />
             </b-col>
           </b-row>
         </div>
-        <div class="for-customers__clients" v-else>
-          <g-comment-slider />
+        <div
+          class="for-customers__clients"
+          v-if="windowSize < 1200 && comments !== null"
+        >
+          <g-comment-slider :data="comments" />
         </div>
       </b-container>
     </section>
@@ -242,59 +230,93 @@
 </template>
 
 <script>
-import BreadCrumb from "~/components/BreadCrumb";
-import GPromoBanner from "~/components/banners/PromoBanner";
-import RoundedButton from "~/components/buttons/RoundedButton";
-import GameCard from "~/components/cards/GameCard";
-import ArrowButton from "~/components/slider/ArrowButton";
-import GReviewsPageSlider from "~/components/slider/ReviewsPageSlider";
-import SectionHeader from "~/components/SectionHeader";
-import GCommentSlider from "~/components/slider/CommentSlider";
+import BreadCrumb from '~/components/BreadCrumb'
+import GPromoBanner from '~/components/banners/PromoBanner'
+import RoundedButton from '~/components/buttons/RoundedButton'
+import GameCard from '~/components/cards/GameCard'
+import ArrowButton from '~/components/slider/ArrowButton'
+import GReviewsPageSlider from '~/components/slider/ReviewsPageSlider'
+import SectionHeader from '~/components/SectionHeader'
+import GCommentSlider from '~/components/slider/CommentSlider'
 import CommentCard from '~/components/cards/CommentCard'
 import { mapState } from 'vuex'
 import ReviewCard from '~/components/cards/ReviewCard'
 import GReviewSlider from '~/components/slider/ReviewSlider'
 import GCase from '~/components/cards/CaseCard'
-import GCaseSlider from "~/components/slider/CaseSlider";
+import GCaseSlider from '~/components/slider/CaseSlider'
+import GRecommendSlider from '~/components/slider/RecommendSlider'
 export default {
   name: 'ForCustomersPage',
   components: {
+    GRecommendSlider,
     GCaseSlider,
     GCase,
     GReviewSlider,
     ReviewCard,
     CommentCard,
     GCommentSlider,
-    SectionHeader, GReviewsPageSlider, ArrowButton, GameCard, RoundedButton, GPromoBanner, BreadCrumb},
+    SectionHeader,
+    GReviewsPageSlider,
+    ArrowButton,
+    GameCard,
+    RoundedButton,
+    GPromoBanner,
+    BreadCrumb,
+  },
   layout: 'default',
   computed: {
     ...mapState({
-      windowSize: state => state.common.windowSize
-    })
+      windowSize: (state) => state.common.windowSize,
+      comments: (state) => state.comments.comments,
+      mainPage: (state) => state.mainPage,
+      filters: (state) => state.catalog.filters,
+    }),
+  },
+  async mounted() {
+    try {
+      await this.$store.dispatch('getMainPage')
+      await this.$store.dispatch('comments/getComments')
+      await this.$store.dispatch('catalog/getCatalogFilters', 'games')
+      this.pageFilters.games = this.filters.categories.slice()
+      this.pageFilters.gamePrices = Object.assign({}, this.filters.price)
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
   },
   methods: {
-    next (slider) {
+    next(slider) {
       slider.next()
     },
-    prev (slider) {
+    prev(slider) {
       slider.prev()
-    }
+    },
   },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/for-customers', label: 'Покупателям' }
+        { to: '/for-customers', label: 'Покупателям' },
       ],
+      pageFilters: {
+        games: null,
+        software: null,
+        gamePrices: null,
+        softwarePrices: null,
+      },
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        dots: false
-      }
+        dots: false,
+      },
     }
-  }
+  },
 }
 </script>
 
@@ -341,7 +363,7 @@ export default {
   &_customer
     background-image: url("/images/customer.png")
   &_seller
-    background-image: url("/images/seller-1.png")  
+    background-image: url("/images/seller-1.png")
 .for-customers
   &__who
     +lg

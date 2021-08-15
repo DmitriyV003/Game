@@ -1,10 +1,10 @@
 export const state = () => ({
   paymentMethod: {},
-  items: []
+  items: [],
 })
 
 export const mutations = {
-  setPaymentMethod (state, method) {
+  setPaymentMethod(state, method) {
     state.paymentMethod = method
-  }
+  },
 }

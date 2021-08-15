@@ -2,7 +2,12 @@
   <div class="g-drop-content">
     <div @click="open = !open" class="g-drop-content__top">
       <span class="g-drop-content__title">{{ title }}</span>
-      <img class="g-drop-content__icon" :class="{ 'g-drop-content__icon_active': open }" src="/images/icons/arrow-down.svg" alt="">
+      <img
+        class="g-drop-content__icon"
+        :class="{ 'g-drop-content__icon_active': open }"
+        src="/images/icons/arrow-down.svg"
+        alt=""
+      />
     </div>
 
     <div v-show="open" class="g-drop-content__content">
@@ -19,15 +24,15 @@ export default {
   name: 'GDropContent',
   data: () => {
     return {
-      open: false  
+      open: false,
     }
   },
   props: {
     title: {
       type: String,
-      default: () => 'Some Title'
-    }
-  }
+      default: () => 'Some Title',
+    },
+  },
 }
 </script>
 

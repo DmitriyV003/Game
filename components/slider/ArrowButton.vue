@@ -14,13 +14,13 @@ export default {
   props: {
     left: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     right: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 }
 </script>
 

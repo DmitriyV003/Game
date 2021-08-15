@@ -1,47 +1,47 @@
 <template>
-    <div class="catalog-top-section__title">
-        <div class="catalog-top-section__block">
-            <h1>{{ title }}</h1>
-            <span class="text-size-14 text-color-gray">{{ caption }}</span>
-        </div>
-
-        <div class="catalog-top-section__column">
-            <tune-icon 
-                @click="eventBus.$emit('catalogFiltersPopupOpen')" 
-                class="catalog-top-section__filters" 
-            />
-
-            <div class="catalog-top-section__sort">
-                <span class="text-size-14">Сначала популярные</span>
-                <img src="/images/icons/filter.svg" alt="">
-            </div>
-        </div>
+  <div class="catalog-top-section__title">
+    <div class="catalog-top-section__block">
+      <h1>{{ title }}</h1>
+      <span class="text-size-14 text-color-gray">{{ caption }}</span>
     </div>
+
+    <div class="catalog-top-section__column">
+      <tune-icon
+        @click="eventBus.$emit('catalogFiltersPopupOpen')"
+        class="catalog-top-section__filters"
+      />
+
+      <div class="catalog-top-section__sort">
+        <span class="text-size-14">Сначала популярные</span>
+        <img src="/images/icons/filter.svg" alt="" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-	import icons        from '~/mixins/icons'
-    import { eventBus } from '~/plugins/event-bus'
+import icons from '~/mixins/icons'
+import { eventBus } from '~/plugins/event-bus'
 
-    export default {
-		name: 'GCatalogSectionHeader',
-        mixins: [icons],
-        data () {
-		  return {
-		      eventBus
-          }  
-        },
-        props: {
-		    title: {
-		        type: String,
-                default: () => 'Title'
-            },
-            caption: {
-                type: String,
-                default: () => 'Caption'
-            }
-        }
-	}
+export default {
+  name: 'GCatalogSectionHeader',
+  mixins: [icons],
+  data() {
+    return {
+      eventBus,
+    }
+  },
+  props: {
+    title: {
+      type: String,
+      default: () => 'Title',
+    },
+    caption: {
+      type: String,
+      default: () => 'Caption',
+    },
+  },
+}
 </script>
 
 <style lang="sass">

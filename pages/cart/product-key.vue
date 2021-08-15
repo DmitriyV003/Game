@@ -1,13 +1,17 @@
 <template>
   <div class="g-product-key">
-    
     <section class="g-product-key__top">
       <b-container>
-        <show-all reverse to="/cart" class="g-product-key__back" label="Назад" />
-        <h1>Ключ товара </h1>
+        <show-all
+          reverse
+          to="/cart"
+          class="g-product-key__back"
+          label="Назад"
+        />
+        <h1>Ключ товара</h1>
       </b-container>
     </section>
-    
+
     <section>
       <b-container>
         <b-row>
@@ -41,18 +45,18 @@
 
 <script>
 import ShowAll from '~/components/buttons/MainLink'
-import GKeyItem from "~/components/cart/KeyItem";
-import MainButton from "~/components/buttons/MainButton";
-import GLikeDislike from "~/components/cart/LikeDislike";
-import GCommentForm from "~/components/GCommentForm";
+import GKeyItem from '~/components/cart/KeyItem'
+import MainButton from '~/components/buttons/MainButton'
+import GLikeDislike from '~/components/cart/LikeDislike'
+import GCommentForm from '~/components/GCommentForm'
 export default {
   name: 'ProductKeyPage',
-  components: {GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
+  components: { GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
   data: () => {
     return {
-      rating: 0
+      rating: 0,
     }
-  }
+  },
 }
 </script>
 

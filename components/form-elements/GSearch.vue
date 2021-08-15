@@ -1,21 +1,25 @@
 <template>
   <div class="g-search">
-    <input placeholder="Коллекция" type="text" class="input-reboot g-search__input">
+    <input
+      placeholder="Коллекция"
+      type="text"
+      class="input-reboot g-search__input"
+    />
     <button class="button-reboot g-search__btn">
-      <img src="/images/icons/search.svg" alt="">
+      <img src="/images/icons/search.svg" alt="" />
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'GSearch'
+  name: 'GSearch',
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-search
   width: 100%
   position: relative

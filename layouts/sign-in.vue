@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  import AuthTopMenu from '~/components/menu/AuthTopMenu'
-  import AuthFooter from '~/components/footer/AuthFooter'
-  export default {
-    components: { AuthFooter, AuthTopMenu }
-  }
+import AuthTopMenu from '~/components/menu/AuthTopMenu'
+import AuthFooter from '~/components/footer/AuthFooter'
+export default {
+  components: { AuthFooter, AuthTopMenu },
+}
 </script>

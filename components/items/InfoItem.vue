@@ -1,8 +1,10 @@
 <template>
   <div class="g-info-item">
-    <img class="g-info-item__img" src="/images/icons/key.svg" alt="">
+    <img class="g-info-item__img" src="/images/icons/key.svg" alt="" />
     <div class="g-info-item__block">
-      <span style="color: rgba(255, 92, 0, 1)" class="g-info-item__num">5 000 +</span>
+      <span style="color: rgba(255, 92, 0, 1)" class="g-info-item__num"
+        >5 000 +</span
+      >
       <span class="g-info-item__caption">Ключей для игр</span>
     </div>
   </div>
@@ -10,7 +12,7 @@
 
 <script>
 export default {
-  name: 'GInfoItem'
+  name: 'GInfoItem',
 }
 </script>
 

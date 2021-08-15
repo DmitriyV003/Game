@@ -1,16 +1,28 @@
 <template>
-  <div @click="changeMethod" class="g-payment-method" :class="[{ 'g-payment-method_active': paymentMethod.id === id }, 'g-payment-method_' + bg]">
+  <div
+    @click="changeMethod"
+    class="g-payment-method"
+    :class="[
+      { 'g-payment-method_active': paymentMethod.id === id },
+      'g-payment-method_' + bg,
+    ]"
+  >
     <div class="g-payment-method__left">
       <div class="g-payment-method__img">
-        <img :src="image" alt="">
+        <img :src="image" alt="" />
       </div>
-      <span class="g-payment-method__name text-size-16 text-weight-500">{{ name }}</span>
+      <span class="g-payment-method__name text-size-16 text-weight-500">{{
+        name
+      }}</span>
     </div>
-   <div class="g-payment-method__right">
-     <div class="g-payment-method__check" :class="{ 'g-payment-method__check_active': paymentMethod.id === id }">
-       <check-icon class="icon" />
-     </div>
-   </div>
+    <div class="g-payment-method__right">
+      <div
+        class="g-payment-method__check"
+        :class="{ 'g-payment-method__check_active': paymentMethod.id === id }"
+      >
+        <check-icon class="icon" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -24,31 +36,34 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
-      required: true
+      required: true,
     },
     bg: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     id: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     ...mapState({
-      paymentMethod: state => state.cart.paymentMethod
-    })
+      paymentMethod: (state) => state.cart.paymentMethod,
+    }),
   },
   methods: {
-    changeMethod () {
-      this.$store.commit('cart/setPaymentMethod', { name: this.name, id: this.id })
-    }
-  }
+    changeMethod() {
+      this.$store.commit('cart/setPaymentMethod', {
+        name: this.name,
+        id: this.id,
+      })
+    },
+  },
 }
 </script>
 

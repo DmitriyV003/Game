@@ -1,14 +1,16 @@
 <template>
   <div class="g-background">
     <div class="g-like">
-      <avatar 
-        class="g-like__avatar" 
-        :caption="nickname" 
+      <avatar
+        class="g-like__avatar"
+        :caption="nickname"
         :name="name + ' ' + surname"
       />
-      
+
       <div class="g-like__bottom">
-        <span class="text text-color-gray text-weight-500">Оценить продавца:</span>
+        <span class="text text-color-gray text-weight-500"
+          >Оценить продавца:</span
+        >
         <div class="g-like__actions">
           <button @click="$emit('like')" class="g-like__action">
             <like-icon />
@@ -32,23 +34,23 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     nickname: {
       type: String,
-      required: true
+      required: true,
     },
     surname: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-like
   &__action
     border: 1px solid #643EFF

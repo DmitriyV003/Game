@@ -1,22 +1,24 @@
 <template>
   <div class="g-type-item">
     <div class="g-type-item__img">
-      <img src="/images/type-1.png" alt="" class="g-type-item__img">
+      <img src="/images/type-1.png" alt="" class="g-type-item__img" />
     </div>
-    
+
     <div class="g-type-item__block">
       <p class="g-type-item__title">Команда разработчиков</p>
-      <p class="g-type-item__text">и желаете сопроводить раздачей ключей анонс вашей игры?</p>
-      <main-button color="primary" label="Анонсировать" size="xl" /> 
+      <p class="g-type-item__text">
+        и желаете сопроводить раздачей ключей анонс вашей игры?
+      </p>
+      <main-button color="primary" label="Анонсировать" size="xl" />
     </div>
   </div>
 </template>
 
 <script>
-import MainButton from "~/components/buttons/MainButton";
+import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GTypeItem',
-  components: {MainButton}
+  components: { MainButton },
 }
 </script>
 

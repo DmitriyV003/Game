@@ -9,13 +9,13 @@
       :arrows="settings.arrows"
       :dots="settings.dots"
     >
-      <game-card 
+      <game-card
         v-for="item in data"
         :key="item.itemId"
         :title="item.itemName"
         :developer="item.itemDeveloper"
         :image="item.itemBackground"
-        class="recommend__card" 
+        class="recommend__card"
         :sale="item.itemPrice.sale"
         :old-price="item.itemPrice.old"
         :new-price="item.itemPrice.new"
@@ -24,8 +24,16 @@
       />
     </vue-slick>
     <div class="g-slider__controls">
-      <arrow-button @click.native="prev($refs.recommendSlider)" class="g-slider__button g-slider__button_left" left />
-      <arrow-button @click.native="next($refs.recommendSlider)" class="g-slider__button g-slider__button_right" right />
+      <arrow-button
+        @click.native="prev($refs.recommendSlider)"
+        class="g-slider__button g-slider__button_left"
+        left
+      />
+      <arrow-button
+        @click.native="next($refs.recommendSlider)"
+        class="g-slider__button g-slider__button_right"
+        right
+      />
     </div>
   </div>
 </template>
@@ -43,23 +51,23 @@ export default {
         slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        dots: false
-      }
+        dots: false,
+      },
     }
   },
   props: {
     data: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    next (slider) {
+    next(slider) {
       slider.next()
     },
-    prev (slider) {
+    prev(slider) {
       slider.prev()
-    }
-  }    
+    },
+  },
 }
 </script>

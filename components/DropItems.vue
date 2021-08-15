@@ -1,27 +1,21 @@
 <template>
-  <div 
-      class="g-drop-component" 
-      :class="{ 'g-drop-component_active': active }"
-  >
-    <div 
-        class="g-drop-component__title" 
-        :class="{ 'g-drop-component__title_active': active }" 
-        @click="active = !active"
+  <div class="g-drop-component" :class="{ 'g-drop-component_active': active }">
+    <div
+      class="g-drop-component__title"
+      :class="{ 'g-drop-component__title_active': active }"
+      @click="active = !active"
     >
       <p class="text-weight-600 text-size-20">{{ title }}</p>
-      <chevron-down-icon 
-          class="g-drop-component__arrow" 
-          :class="{ 'g-drop-component__arrow_active': active }" 
+      <chevron-down-icon
+        class="g-drop-component__arrow"
+        :class="{ 'g-drop-component__arrow_active': active }"
       />
     </div>
 
-    <slide-up-down 
-        :active="active" 
-        :duration="200"
-    >
-      <div 
-          class="g-drop-component__drops" 
-          :class="{ 'g-drop-component__drops_lg-scrollable': lgScrollableDrops }"
+    <slide-up-down :active="active" :duration="200">
+      <div
+        class="g-drop-component__drops"
+        :class="{ 'g-drop-component__drops_lg-scrollable': lgScrollableDrops }"
       >
         <slot name="drop-items"></slot>
       </div>
@@ -37,23 +31,23 @@ export default {
   name: 'DropItems',
   mixins: [icons],
   components: {
-    SlideUpDown
+    SlideUpDown,
   },
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     lgScrollableDrops: {
       type: Boolean,
-      default: () => false
-    }
+      default: () => false,
+    },
   },
   data: () => {
     return {
-      active: true
+      active: true,
     }
-  }
+  },
 }
 </script>
 

@@ -1,52 +1,50 @@
 <template>
   <div class="section-header">
     <div class="section-header__title">
-      <img v-if="icon" class="section-header__icon" :src="icon" alt="">
-      <h2 :class="[titleStyle, 'section-header__title_' + size]">{{ title }}</h2>
+      <img v-if="icon" class="section-header__icon" :src="icon" alt="" />
+      <h2 :class="[titleStyle, 'section-header__title_' + size]">
+        {{ title }}
+      </h2>
     </div>
 
-    <show-all 
-        v-if="linkLabel" 
-        :label="linkLabel" 
-        :to="to" 
-    />
+    <show-all v-if="linkLabel" :label="linkLabel" :to="to" />
   </div>
 </template>
 
 <script>
 import icons from '~/mixins/icons'
-import ShowAll from "~/components/buttons/MainLink";
+import ShowAll from '~/components/buttons/MainLink'
 
 export default {
   name: 'SectionHeader',
-  components: {ShowAll},
+  components: { ShowAll },
   mixins: [icons],
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     icon: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     titleStyle: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     linkLabel: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     to: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     size: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
-  }
+  },
 }
 </script>
 

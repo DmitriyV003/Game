@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!--  Popup filters  adapted = true -->
     <div v-show="showPopup" class="catalog-filters-popup">
       <div class="catalog-filters-popup__body">
@@ -10,7 +9,9 @@
         </div>
 
         <div class="catalog-filters-popup__price">
-          <p class="title text-weight-600 text-color-white text-uppercase">Цена</p>
+          <p class="title text-weight-600 text-color-white text-uppercase">
+            Цена
+          </p>
           <vue-range-slider
             class="g-range-slider"
             v-model="priceRange"
@@ -20,27 +21,36 @@
             :process-style="{ backgroundColor: 'rgba(100, 62, 255, 1)' }"
           >
             <template v-slot:tooltip="{ value, focus }">
-              <div :class="['g-range-slider__tooltip', { focus }]">{{ priceRange[1] }}</div>
+              <div :class="['g-range-slider__tooltip', { focus }]">
+                {{ priceRange[1] }}
+              </div>
             </template>
           </vue-range-slider>
 
           <div class="catalog-filters__range-inputs">
             <div class="catalog-filters__input g-input">
-              <input v-model="priceRange[0]" type="text" class="input-reboot g-input__input">
+              <input
+                v-model="priceRange[0]"
+                type="text"
+                class="input-reboot g-input__input"
+              />
               <span class="g-input__right-label">₽</span>
             </div>
 
             <span class="text-color-gray text-weight-600 text-size-14">-</span>
 
             <div class="catalog-filters__input g-input">
-              <input v-model="priceRange[1]" type="text" class="input-reboot g-input__input">
+              <input
+                v-model="priceRange[1]"
+                type="text"
+                class="input-reboot g-input__input"
+              />
               <span class="g-input__right-label">₽</span>
             </div>
           </div>
         </div>
 
         <div class="catalog-filters-popup__scroll">
-
           <!-- Category filter -->
           <drop-items class="catalog-filters-popup__drop" title="Категории">
             <template v-slot:drop-items>
@@ -83,16 +93,25 @@
                 />
               </div>
 
-              <show-all @click.native="showAll('tagsToShow', tags.length)" label="Смотреть все" />
+              <show-all
+                @click.native="showAll('tagsToShow', tags.length)"
+                label="Смотреть все"
+              />
             </template>
           </drop-items>
         </div>
 
         <div class="catalog-filters-popup__buttons">
-          <main-button class="popup-btn" color="primary" label="подобрать" size="xl" />
-          <span class="reset text-size-16 text-color-gray">Сбросить фильтры</span>
+          <main-button
+            class="popup-btn"
+            color="primary"
+            label="подобрать"
+            size="xl"
+          />
+          <span class="reset text-size-16 text-color-gray"
+            >Сбросить фильтры</span
+          >
         </div>
-
       </div>
     </div>
 
@@ -109,11 +128,14 @@
             </div>
 
             <div class="catalog-top-section__column">
-              <tune-icon @click="showPopup = true" class="catalog-top-section__filters" />
+              <tune-icon
+                @click="showPopup = true"
+                class="catalog-top-section__filters"
+              />
 
               <div class="catalog-top-section__sort">
                 <span class="text-size-14">Сначала популярные</span>
-                <img src="/images/icons/filter.svg" alt="">
+                <img src="/images/icons/filter.svg" alt="" />
               </div>
             </div>
           </div>
@@ -125,13 +147,15 @@
     <section class="catalog">
       <b-container>
         <b-row>
-
           <!--  Catalog filters -->
-          <b-col xl="3" lg="3" class="d-xl-block d-lg-block d-md-none d-sm-none d-none">
+          <b-col
+            xl="3"
+            lg="3"
+            class="d-xl-block d-lg-block d-md-none d-sm-none d-none"
+          >
             <section class="catalog-filters">
-
               <!--  Price filter  -->
-              <drop-items title="Цена" class="catalog__drop" >
+              <drop-items title="Цена" class="catalog__drop">
                 <template v-slot:drop-items>
                   <div class="catalog__price">
                     <vue-range-slider
@@ -140,24 +164,38 @@
                       :tooltip="'always'"
                       :height="1"
                       :contained="true"
-                      :process-style="{ backgroundColor: 'rgba(100, 62, 255, 1)' }"
+                      :process-style="{
+                        backgroundColor: 'rgba(100, 62, 255, 1)',
+                      }"
                     >
                       <template v-slot:tooltip="{ value, focus }">
-                        <div :class="['g-range-slider__tooltip', { focus }]">{{ priceRange[1] }}</div>
+                        <div :class="['g-range-slider__tooltip', { focus }]">
+                          {{ priceRange[1] }}
+                        </div>
                       </template>
                     </vue-range-slider>
                   </div>
 
                   <div class="catalog-filters__range-inputs">
                     <div class="catalog-filters__input g-input">
-                      <input v-model="priceRange[0]" type="text" class="input-reboot g-input__input">
+                      <input
+                        v-model="priceRange[0]"
+                        type="text"
+                        class="input-reboot g-input__input"
+                      />
                       <span class="g-input__right-label">₽</span>
                     </div>
 
-                    <span class="text-color-gray text-weight-600 text-size-14">-</span>
+                    <span class="text-color-gray text-weight-600 text-size-14"
+                      >-</span
+                    >
 
                     <div class="catalog-filters__input g-input">
-                      <input v-model="priceRange[1]" type="text" class="input-reboot g-input__input">
+                      <input
+                        v-model="priceRange[1]"
+                        type="text"
+                        class="input-reboot g-input__input"
+                      />
                       <span class="g-input__right-label">₽</span>
                     </div>
                   </div>
@@ -177,7 +215,12 @@
                     class="catalog__category-filter"
                   />
 
-                  <show-all @click.native="showAll('categoriesToShow', categories.length)" label="Смотреть все" />
+                  <show-all
+                    @click.native="
+                      showAll('categoriesToShow', categories.length)
+                    "
+                    label="Смотреть все"
+                  />
                 </template>
               </drop-items>
 
@@ -193,10 +236,12 @@
                     />
                   </div>
 
-                  <show-all @click.native="showAll('tagsToShow', tags.length)" label="Смотреть все" />
+                  <show-all
+                    @click.native="showAll('tagsToShow', tags.length)"
+                    label="Смотреть все"
+                  />
                 </template>
               </drop-items>
-
             </section>
           </b-col>
 
@@ -214,14 +259,15 @@
               </b-col>
             </b-row>
 
-            <button class="button-reboot catalog__show-more">Показать больше</button>
+            <button class="button-reboot catalog__show-more">
+              Показать больше
+            </button>
 
             <g-pagination class="catalog__pagination" @onNext="next" />
           </b-col>
         </b-row>
       </b-container>
     </section>
-
   </div>
 </template>
 
@@ -238,15 +284,24 @@ import GTag from '~/components/Tag'
 import GPagination from '~/components/Pagination'
 export default {
   name: 'Catalog',
-  components: { GPagination, GTag, MainButton, GameCard, ShowAll, GCheckBox, DropItems, BreadCrumb },
+  components: {
+    GPagination,
+    GTag,
+    MainButton,
+    GameCard,
+    ShowAll,
+    GCheckBox,
+    DropItems,
+    BreadCrumb,
+  },
   mixins: [icons],
   layout: 'default',
   computed: {
     ...mapState({
-      windowSize: state => state.common.windowSize
-    })
+      windowSize: (state) => state.common.windowSize,
+    }),
   },
-  mounted () {
+  mounted() {
     const that = this
     window.addEventListener('resize', function () {
       if (that.windowSize <= 992) {
@@ -284,24 +339,24 @@ export default {
         { val: 'val2', label: 'онлайн' },
         { val: 'val3', label: 'военные' },
         { val: 'val4', label: 'зомби' },
-        { val: 'val15', label: 'атмосфера' }
+        { val: 'val15', label: 'атмосфера' },
       ],
       categories: [
         { val: 'val1', label: 'Экшн', count: 1254 },
         { val: 'val2', label: 'Приключения', count: 125 },
         { val: 'val3', label: 'Стратегии', count: 12544 },
         { val: 'val4', label: 'Инди', count: 54 },
-        { val: 'val15', label: 'Аниме', count: 12547 }
-      ]
+        { val: 'val15', label: 'Аниме', count: 12547 },
+      ],
     }
   },
   methods: {
-    showAll (whatToShow, count) {
+    showAll(whatToShow, count) {
       this[whatToShow] = count
     },
-    next () {
+    next() {
       console.log(1111)
-    }
-  }
-}  
+    },
+  },
+}
 </script>

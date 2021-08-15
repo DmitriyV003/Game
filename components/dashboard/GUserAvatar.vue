@@ -1,21 +1,19 @@
 <template>
   <div class="g-user-avatar">
-    <img 
-      :src="avatar === null ? '/images/avatar.png' : avatar" alt=""
+    <img
+      :src="avatar === null ? '/images/avatar.png' : avatar"
+      alt=""
       class="g-user-avatar__avatar"
-    >
+    />
 
-    <input 
-      class="g-user-avatar__file" 
-      type="file" 
+    <input
+      class="g-user-avatar__file"
+      type="file"
       id="file"
       ref="avatar"
       @change="handleFileUpload"
-    >
-    <label 
-      class="g-user-avatar__label" 
-      for="file"
-    >Загрузить фото</label>
+    />
+    <label class="g-user-avatar__label" for="file">Загрузить фото</label>
   </div>
 </template>
 
@@ -25,17 +23,17 @@ export default {
   props: {
     avatar: {
       type: String,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
   data: () => {
     return {
       photo: null,
-      disabled: true
+      disabled: true,
     }
   },
   methods: {
-    async handleFileUpload () {
+    async handleFileUpload() {
       this.photo = this.$refs.avatar.files[0]
       this.readFile()
       try {
@@ -44,20 +42,24 @@ export default {
         console.log(e)
       }
     },
-    readFile () {
-      const reader  = new FileReader()
+    readFile() {
+      const reader = new FileReader()
       const that = this
-      reader.addEventListener('load', function () {
-        that.$store.dispatch('profile/setAvatar', reader.result)
-      }.bind(this), false)
+      reader.addEventListener(
+        'load',
+        function () {
+          that.$store.dispatch('profile/setAvatar', reader.result)
+        }.bind(this),
+        false
+      )
 
-      if(this.photo){
-        if ( /\.(jpe?g|png|gif)$/i.test(this.photo.name) ) {
+      if (this.photo) {
+        if (/\.(jpe?g|png|gif)$/i.test(this.photo.name)) {
           reader.readAsDataURL(this.photo)
         }
       }
     },
-    async changePhoto () {
+    async changePhoto() {
       this.disabled = true
       const data = new FormData()
       data.append('avatar', this.photo)
@@ -69,8 +71,8 @@ export default {
       } finally {
         this.disabled = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -106,5 +108,5 @@ export default {
     height: 200px
     border-radius: 50%
     margin-bottom: 12px
-    flex-shrink: 0  
+    flex-shrink: 0
 </style>

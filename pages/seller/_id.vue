@@ -1,158 +1,158 @@
 <template>
-    <div>
-        <!-- For sellers top  adapted = true -->
-        <section class="for-sellers__top">
-            <b-container>
+  <div>
+    <!-- For sellers top  adapted = true -->
+    <section class="for-sellers__top">
+      <b-container>
+        <!-- Banner  adapted = true -->
+        <g-seller-banner
+          v-if="sellerPage !== null"
+          :name="sellerPage.name"
+          :surname="sellerPage.surname"
+          :nickname="sellerPage.nickname"
+          :likes="sellerPage.feedbacks.likes"
+          :dislikes="sellerPage.feedbacks.dislikes"
+          :items="sellerPage.items"
+          :purchases="sellerPage.purchases"
+          :feedback="sellerPage.feedbacks.countFeedbacks"
+        />
+      </b-container>
+    </section>
 
-                <!-- Banner  adapted = true -->
-                <g-seller-banner
-                    v-if="sellerPage !== null"
-                    :name="sellerPage.name"
-                    :surname="sellerPage.surname"
-                    :nickname="sellerPage.nickname"
-                    :likes="sellerPage.feedbacks.likes"
-                    :dislikes="sellerPage.feedbacks.dislikes"
-                    :items="sellerPage.items"
-                    :purchases="sellerPage.purchases"
-                    :feedback="sellerPage.feedbacks.countFeedbacks"
-                />
-            </b-container>
-        </section>
+    <!-- Seller comments  adapted = true -->
+    <section
+      class="section"
+      v-if="sellerPage !== null && sellerPage.feedbacks.userComments.length > 0"
+    >
+      <b-container>
+        <section-header title="Отзывы о продавце" />
 
-        <!-- Seller comments  adapted = true -->
-        <section 
-            class="section"
-            v-if="sellerPage !== null"
-        >
-            <b-container>
-                <section-header title="Отзывы о продавце"/>
+        <div class="g-comments">
+          <b-row>
+            <b-col
+              xl="4"
+              lg="4"
+              md="6"
+              v-for="item in sellerPage.feedbacks.userComments"
+              :key="item.commentId"
+            >
+              <g-seller-comment
+                :nickname="item.nickname"
+                :text="item.comment"
+                :date="item.time"
+                :avatar="item.avatar"
+              />
+            </b-col>
+          </b-row>
+        </div>
+      </b-container>
+    </section>
 
-                <div class="g-comments">
-                    <b-row>
-                        <b-col 
-                            xl="4" 
-                            lg="4" 
-                            md="6"
-                            v-for="item in sellerPage.feedbacks.userComments"
-                            :key="item.commentId"
-                        >
-                            <g-seller-comment
-                                :nickname="item.nickname"
-                                :text="item.comment"
-                                :date="item.time"
-                                :avatar="item.avatar"
-                            />
-                        </b-col>
-                    </b-row>
-                </div>
-            </b-container>
-        </section>
+    <!-- Seller catalog  adapted = true -->
+    <section class="section">
+      <b-container>
+        <div class="catalog-top-section__content">
+          <g-catalog-section-header title="Игры" caption="16786 продуктов" />
+        </div>
 
-        <!-- Seller catalog  adapted = true -->
-        <section class="section">
-            <b-container>
-                <div class="catalog-top-section__content">
-                    <g-catalog-section-header
-                        title="Игры"
-                        caption="16786 продуктов"
-                    />
-                </div>
-                
-                <div class="g-seller-games">
-                    <b-row>
-                        <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                            <game-card adaptive-sm/>
-                        </b-col>
-                        <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                            <game-card adaptive-sm/>
-                        </b-col>
-                        <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-                            <game-card adaptive-sm/>
-                        </b-col>
-                    </b-row>
-                    
-                    <button class="button-reboot g-seller-games__all">все игры</button>
-                </div>
-            </b-container>
-        </section>
+        <div class="g-seller-games">
+          <b-row>
+            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
+              <game-card adaptive-sm />
+            </b-col>
+            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
+              <game-card adaptive-sm />
+            </b-col>
+            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
+              <game-card adaptive-sm />
+            </b-col>
+          </b-row>
 
-        <!-- Achievements  adapted = true -->
-        <section class="section">
-            <b-container>
-                <section-header title="Достижения"/>
+          <button class="button-reboot g-seller-games__all">все игры</button>
+        </div>
+      </b-container>
+    </section>
 
-                <div class="g-comments">
-                    <g-achievement-slider :data="[{  }]" />
-                </div>
-            </b-container>
-        </section>
+    <!-- Achievements  adapted = true -->
+    <section class="section">
+      <b-container>
+        <section-header title="Достижения" />
 
-        <!-- Seller games  adapted = true -->
-        <section class="section">
-            <b-container>
-                <section-header title="Игры"/>
+        <div class="g-comments">
+          <g-achievement-slider :data="[{}]" />
+        </div>
+      </b-container>
+    </section>
 
-                <g-seller-game-slider 
-                    v-if="sellerGames !== null"
-                    :data="sellerGames" 
-                />
-            </b-container>
-        </section>
+    <!-- Seller games  adapted = true -->
+    <section class="section">
+      <b-container>
+        <section-header title="Игры" />
 
-        <!-- Seller reviews  adapted = true -->
-        <section class="section">
-            <b-container>
-                <section-header title="Обзоры"/>
+        <g-seller-game-slider v-if="sellerGames !== null" :data="sellerGames" />
+      </b-container>
+    </section>
 
-                <g-seller-review-slider :data="[{  }]" />
-            </b-container>
-        </section>
+    <!-- Seller reviews  adapted = true -->
+    <section class="section">
+      <b-container>
+        <section-header title="Обзоры" />
 
-    </div>
+        <g-seller-review-slider :data="[{}]" />
+      </b-container>
+    </section>
+  </div>
 </template>
 
 <script>
-import SectionHeader         from '~/components/SectionHeader'
-import GSellerComment        from '~/components/items/CommentItem'
-import icons                 from '~/mixins/icons'
-import GSellerBanner         from '~/components/banners/seller-banner/GSellerBanner'
+import SectionHeader from '~/components/SectionHeader'
+import GSellerComment from '~/components/items/CommentItem'
+import icons from '~/mixins/icons'
+import GSellerBanner from '~/components/banners/seller-banner/GSellerBanner'
 import GCatalogSectionHeader from '~/components/catalog/CatalogSectionHeader'
-import GameCard              from '~/components/cards/GameCard'
-import GAchievementCard      from '~/components/cards/AchievementCard'
-import GAchievementSlider    from '~/components/slider/AchievementSlider'
-import GSellerGameSlider     from '~/components/slider/SellerGameSlider'
-import GSellerReviewSlider   from '~/components/slider/SellerReviewSlider'
-import { mapState }          from 'vuex'
+import GameCard from '~/components/cards/GameCard'
+import GAchievementCard from '~/components/cards/AchievementCard'
+import GAchievementSlider from '~/components/slider/AchievementSlider'
+import GSellerGameSlider from '~/components/slider/SellerGameSlider'
+import GSellerReviewSlider from '~/components/slider/SellerReviewSlider'
+import { mapState } from 'vuex'
 
 export default {
-    name: 'GForSellers',
-    components: { GSellerReviewSlider, GSellerGameSlider, GAchievementSlider, GAchievementCard, GameCard, GCatalogSectionHeader, GSellerBanner, GSellerComment, SectionHeader},
-    mixins: [icons],
-    layout: 'default',
-    data: () => {
-        return {
-            
-        }
-    },
-    computed: {
-        ...mapState({
-            sellerPage: state => state.sellerPage,
-            sellerGames: state => state.seller.sellerGames
-        })
-    },
-    async mounted () {
-        try {
-            await this.$store.dispatch('getSellerPage', this.$route.params.id)
-            await this.$store.dispatch('seller/getSellerGames', this.$route.params.id)
-        } catch (e) {
-            this.$bvToast.toast ('Ошибка загрузки страницы!', {
-                title: 'Что-то пошло не так(',
-                variant: 'danger',
-                solid: true,
-                appendToast: true
-            })
-        }
+  name: 'GForSellers',
+  components: {
+    GSellerReviewSlider,
+    GSellerGameSlider,
+    GAchievementSlider,
+    GAchievementCard,
+    GameCard,
+    GCatalogSectionHeader,
+    GSellerBanner,
+    GSellerComment,
+    SectionHeader,
+  },
+  mixins: [icons],
+  layout: 'default',
+  data: () => {
+    return {}
+  },
+  computed: {
+    ...mapState({
+      sellerPage: (state) => state.sellerPage,
+      sellerGames: (state) => state.seller.sellerGames,
+    }),
+  },
+  async mounted() {
+    try {
+      await this.$store.dispatch('getSellerPage', this.$route.params.id)
+      await this.$store.dispatch('seller/getSellerGames', this.$route.params.id)
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
     }
+  },
 }
 </script>
 
@@ -178,5 +178,4 @@ export default {
         cursor: pointer
         &:hover
             background: rgba(255, 255, 255, 0.1)
-        
 </style>

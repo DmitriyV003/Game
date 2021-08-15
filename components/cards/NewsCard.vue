@@ -1,18 +1,26 @@
 <template>
   <div class="g-news">
-    <img src="/images/news-2.png" alt="" class="g-news__image">
-    
+    <img src="/images/news-2.png" alt="" class="g-news__image" />
+
     <div class="g-news__block">
       <div class="g-news__top">
         <p class="g-news__title">{{ name }}</p>
-        <span class="g-news__date">{{ new Date(createdAt).toDateString() }}</span>
+        <span class="g-news__date">{{
+          new Date(createdAt).toDateString()
+        }}</span>
       </div>
-      
+
       <p class="g-news__text">{{ desc }}</p>
-      
+
       <div class="g-news__bottom">
-        <show-all :to="'/news/' + id" class="g-news__read" label="Читать новость" />
-        <span class="g-news__date g-news__date_mobile">{{ new Date(createdAt).toDateString() }}</span>
+        <show-all
+          :to="'/news/' + id"
+          class="g-news__read"
+          label="Читать новость"
+        />
+        <span class="g-news__date g-news__date_mobile">{{
+          new Date(createdAt).toDateString()
+        }}</span>
       </div>
     </div>
   </div>
@@ -26,31 +34,31 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     desc: {
       type: String,
-      required: true
+      required: true,
     },
     createdAt: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-news
   display: flex
   background: #282439

@@ -1,200 +1,230 @@
 <template>
-    <div class="g-page">
-        <b-container>
-            <h1 class="title">Личный кабинет</h1>
+  <div class="g-page">
+    <b-container>
+      <h1 class="title">Личный кабинет</h1>
 
-            <b-row>
-                <b-col xl="3" lg="3">
+      <b-row>
+        <b-col xl="3" lg="3">
+          <!-- Dashboard navigation  adapted =  -->
+          <g-dashboard-navigation />
+        </b-col>
 
-                    <!-- Dashboard navigation  adapted =  -->
-                    <g-dashboard-navigation/>
-                </b-col>
+        <!-- Purchases adapted = true -->
+        <b-col xl="9" lg="9">
+          <div class="purchases__top">
+            <div class="purchases__filter">
+              <vue-slick
+                ref="sortSlider"
+                :variable-width="true"
+                :slides-to-show="1"
+                :slides-to-scroll="1"
+                :arrows="false"
+                :dots="false"
+                :infinite="false"
+              >
+                <g-sort-button
+                  @click.native="activeFilter = 'game'"
+                  :active="activeFilter === 'game'"
+                  class="purchases__btn"
+                  label="Игры"
+                />
+                <g-sort-button
+                  @click.native="activeFilter = 'soft'"
+                  :active="activeFilter === 'soft'"
+                  class="purchases__btn"
+                  label="Софт"
+                />
+                <g-sort-button
+                  @click.native="activeFilter = 'skin'"
+                  :active="activeFilter === 'skin'"
+                  class="purchases__btn"
+                  label="Скины"
+                />
+                <g-sort-button
+                  @click.native="activeFilter = 'case'"
+                  :active="activeFilter === 'case'"
+                  class="purchases__btn"
+                  label="Кейсы"
+                />
+              </vue-slick>
+            </div>
 
-                <!-- Purchases adapted = true -->
-                <b-col xl="9" lg="9">
-                    <div class="purchases__top">
-                        <div class="purchases__filter">
-                            <vue-slick
-                                ref="sortSlider"
-                                :variable-width="true"
-                                :slides-to-show="1"
-                                :slides-to-scroll="1"
-                                :arrows="false"
-                                :dots="false"
-                                :infinite="false"
-                            >
-                                <g-sort-button @click.native="activeFilter = 'game'" :active="activeFilter === 'game'"
-                                               class="purchases__btn" label="Игры"/>
-                                <g-sort-button @click.native="activeFilter = 'soft'" :active="activeFilter === 'soft'"
-                                               class="purchases__btn" label="Софт"/>
-                                <g-sort-button @click.native="activeFilter = 'skin'" :active="activeFilter === 'skin'"
-                                               class="purchases__btn" label="Скины"/>
-                                <g-sort-button @click.native="activeFilter = 'case'" :active="activeFilter === 'case'"
-                                               class="purchases__btn" label="Кейсы"/>
-                            </vue-slick>
-                        </div>
+            <div class="purchases__sort_mobile">
+              <div>
+                <p class="purchases__mini-title">Мои игры</p>
+                <div
+                  class="purchases__sort"
+                  @click="purchases.sort(sortByDate)"
+                >
+                  <span>Сначала новые</span>
+                  <img src="/images/filter.svg" alt="" />
+                </div>
+              </div>
 
-                        <div class="purchases__sort_mobile">
-                            <div>
-                                <p class="purchases__mini-title">Мои игры</p>
-                                <div class="purchases__sort" @click="purchases.sort(sortByDate)">
-                                    <span>Сначала новые</span>
-                                    <img src="/images/filter.svg" alt="">
-                                </div>
-                            </div>
+              <button class="button-reboot purchases__add">
+                <plus-icon class="icon" />
+              </button>
+            </div>
 
-                            <button class="button-reboot purchases__add">
-                                <plus-icon class="icon"/>
-                            </button>
-                        </div>
+            <div class="purchases__sort purchases__sort_desktop">
+              <span>Сначала новые</span>
+              <img src="/images/filter.svg" alt="" />
+            </div>
+          </div>
 
-                        <div class="purchases__sort purchases__sort_desktop">
-                            <span>Сначала новые</span>
-                            <img src="/images/filter.svg" alt="">
-                        </div>
-                    </div>
-
-                    <b-row>
-                        <b-col
-                            xl="4"
-                            lg="4"
-                            md="6"
-                            class="g-purchase-item__col d-xl-block d-lg-block d-md-none d-sm-none"
-                        >
-                            <g-add-item/>
-                        </b-col>
-                        <b-col
-                            xl="4"
-                            lg="4"
-                            md="6"
-                            class="g-purchase-item__col"
-                            v-if="purchases.length > 0 || purchases !== null"
-                            v-for="purchase in purchases((el) => el.type.toLowerCase() === activeFilter.toLowerCase())"
-                            :key="purchase.purchaseId"
-                        >
-                            <g-purchase-item
-                                :id="Number(purchase.purchaseId)"
-                                :name="purchase.itemName"
-                                :code="purchase.key"
-                                :type="purchase.type"
-                                :platform="purchase.itemPlatform"
-                                :picture="purchase.itemBackground"
-                            />
-                        </b-col>
-
-                    </b-row>
-
-
-                </b-col>
-            </b-row>
-        </b-container>
-    </div>
+          <b-row>
+            <b-col
+              xl="4"
+              lg="4"
+              md="6"
+              class="
+                g-purchase-item__col
+                d-xl-block d-lg-block d-md-none d-sm-none
+              "
+            >
+              <g-add-item />
+            </b-col>
+            <b-col
+              xl="4"
+              lg="4"
+              md="6"
+              class="g-purchase-item__col"
+              v-if="purchases.length > 0 || purchases !== null"
+              v-for="purchase in purchases(
+                (el) => el.type.toLowerCase() === activeFilter.toLowerCase()
+              )"
+              :key="purchase.purchaseId"
+            >
+              <g-purchase-item
+                :id="Number(purchase.purchaseId)"
+                :name="purchase.itemName"
+                :code="purchase.key"
+                :type="purchase.type"
+                :platform="purchase.itemPlatform"
+                :picture="purchase.itemBackground"
+              />
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
-    import GDashboardNavigation from '~/components/dashboard/Navigation'
-    import GPurchaseItem        from '~/components/dashboard/PurchaseItem'
-    import RoundedButton        from '~/components/buttons/RoundedButton'
-    import GSortButton          from '~/components/dashboard/SortButton'
-    import icons                from '~/mixins/icons'
-    import { mapGetters }       from 'vuex'
-    import GAddItem             from '~/components/AddItem'
+import GDashboardNavigation from '~/components/dashboard/Navigation'
+import GPurchaseItem from '~/components/dashboard/PurchaseItem'
+import RoundedButton from '~/components/buttons/RoundedButton'
+import GSortButton from '~/components/dashboard/SortButton'
+import icons from '~/mixins/icons'
+import { mapGetters } from 'vuex'
+import GAddItem from '~/components/AddItem'
 
-    export default {
-        name: 'GDashboardPurchasesPage',
-        mixins: [icons],
-        data: () => {
-            return {
-                activeFilter: 'game'
-            }
-        },
-        components: { GAddItem, GSortButton, RoundedButton, GPurchaseItem, GDashboardNavigation },
-        computed: {
-            ...mapGetters ({
-                purchases: 'purchases/getPurchases'
-            })
-        },
-        methods: {
-            sortByDate(a, b) {
-                return (new Date (a.createdAt) > new Date (b.createdAt)) ? 1 : (new Date (a.createdAt) < new Date (b.createdAt)) ? -1 : 0
-            }
-        },
-        async mounted() {
-            try {
-                await this.$store.dispatch ('purchases/getAll')
-            } catch (e) {
-                this.$bvToast.toast ('Ошибка загрузки страницы!', {
-                    title: 'Что-то пошло не так(',
-                    variant: 'danger',
-                    solid: true,
-                    appendToast: true
-                })
-            }
-        }
+export default {
+  name: 'GDashboardPurchasesPage',
+  mixins: [icons],
+  data: () => {
+    return {
+      activeFilter: 'game',
     }
+  },
+  components: {
+    GAddItem,
+    GSortButton,
+    RoundedButton,
+    GPurchaseItem,
+    GDashboardNavigation,
+  },
+  computed: {
+    ...mapGetters({
+      purchases: 'purchases/getPurchases',
+    }),
+  },
+  methods: {
+    sortByDate(a, b) {
+      return new Date(a.createdAt) > new Date(b.createdAt)
+        ? 1
+        : new Date(a.createdAt) < new Date(b.createdAt)
+        ? -1
+        : 0
+    },
+  },
+  async mounted() {
+    try {
+      await this.$store.dispatch('purchases/getAll')
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
+  },
+}
 </script>
 
 <style lang="sass">
-    @import 'theme/_vars'
-    @import 'theme/_mix'
-    .purchases
-        &__add
-            display: flex
-            align-items: center
-            justify-content: center
-            flex-shrink: 0
-            border-radius: 50%
-            width: 56px
-            height: 56px
-            color: $white
-            font-size: 30px
-            background: #643EFF
+@import 'theme/_vars'
+@import 'theme/_mix'
+.purchases
+    &__add
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-shrink: 0
+        border-radius: 50%
+        width: 56px
+        height: 56px
+        color: $white
+        font-size: 30px
+        background: #643EFF
 
-        &__mini-title
-            color: $white
-            margin-bottom: 8px
-            font-weight: 600
-            font-size: 20px
-            line-height: 28px
+    &__mini-title
+        color: $white
+        margin-bottom: 8px
+        font-weight: 600
+        font-size: 20px
+        line-height: 28px
 
-        &__filter
-            width: calc(100% - 150px)
+    &__filter
+        width: calc(100% - 150px)
+        +lg
+            width: 100%
+
+    &__sort
+        display: flex
+        align-items: center
+        flex-shrink: 0
+        cursor: pointer
+
+        &_desktop
             +lg
-                width: 100%
-
-        &__sort
-            display: flex
-            align-items: center
-            flex-shrink: 0
-            cursor: pointer
-
-            &_desktop
-                +lg
-                    display: none
-
-            &_mobile
                 display: none
-                +lg
-                    display: flex
-                    align-items: center
-                    justify-content: space-between
-                    margin-top: 24px
 
-            span
-                color: $white
-                font-size: 14px
-                line-height: 20px
-                margin-right: 12px
-
-        &__btn
-            padding-right: 16px
-
-        &__top
-            margin-bottom: 24px
-            display: flex
-            justify-content: space-between
-            align-items: center
+        &_mobile
+            display: none
             +lg
-                display: block
+                display: flex
+                align-items: center
+                justify-content: space-between
                 margin-top: 24px
+
+        span
+            color: $white
+            font-size: 14px
+            line-height: 20px
+            margin-right: 12px
+
+    &__btn
+        padding-right: 16px
+
+    &__top
+        margin-bottom: 24px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        +lg
+            display: block
+            margin-top: 24px
 </style>

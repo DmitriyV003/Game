@@ -6,10 +6,10 @@
         <p class="g-popup-title">Новый спор</p>
         <close-icon @click="val = false" class="g-popup__close" />
       </div>
-      
+
       <div class="g-new-dispute__block">
         <div class="g-new-dispute__img">
-          <img src="/images/dispute-1.svg" alt="">
+          <img src="/images/dispute-1.svg" alt="" />
         </div>
         <div class="g-new-dispute__text">
           <div class="g-new-dispute__info">
@@ -22,16 +22,21 @@
           </div>
         </div>
       </div>
-      
+
       <div class="g-new-dispute__textarea">
         <p class="area-title">Опишите проблему подробно:</p>
         <textarea class="input-reboot textarea"></textarea>
-        
+
         <div class="g-new-dispute__bottom">
-          <main-button full-width class="g-new-dispute__button" color="primary" label="Отправить" size="xl" />
+          <main-button
+            full-width
+            class="g-new-dispute__button"
+            color="primary"
+            label="Отправить"
+            size="xl"
+          />
         </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -40,7 +45,7 @@
 import icons from '~/mixins/icons'
 import Avatar from '~/components/Avatar'
 import MainButton from '~/components/buttons/MainButton'
-import {eventBus} from "~/plugins/event-bus";
+import { eventBus } from '~/plugins/event-bus'
 
 export default {
   name: 'GNewDispute',
@@ -48,10 +53,10 @@ export default {
   mixins: [icons],
   data: () => {
     return {
-      val: false
+      val: false,
     }
   },
-  created () {
+  created() {
     eventBus.$on('popupClose', () => {
       this.val = false
     })
@@ -59,13 +64,13 @@ export default {
     eventBus.$on('newDisputePopupOpen', () => {
       this.val = true
     })
-  }
+  },
 }
 </script>
 
 <style lang="sass">
 @import '../../theme/vars'
-@import '../../theme/mix' 
+@import '../../theme/mix'
 .g-new-dispute
   background: #282439
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25)

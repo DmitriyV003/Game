@@ -1,19 +1,16 @@
 <template>
   <div class="g-checkbox">
-    <label 
-        :for="val" 
-        class="g-checkbox__box"
-    >
-      <span 
-          class="g-checkbox__square" 
-          :class="{ 'g-checkbox__square_active': isChecked }"
+    <label :for="val" class="g-checkbox__box">
+      <span
+        class="g-checkbox__square"
+        :class="{ 'g-checkbox__square_active': isChecked }"
       >
-        <check-icon 
-            class="text-color-white g-checkbox__check" 
-            v-if="isChecked" 
+        <check-icon
+          class="text-color-white g-checkbox__check"
+          v-if="isChecked"
         />
       </span>
-      <span class="g-checkbox__label text-size-16 ">{{ label }}</span>
+      <span class="g-checkbox__label text-size-16">{{ label }}</span>
       <span class="g-checkbox__text text-color-gray">{{ count }}</span>
     </label>
     <input
@@ -22,7 +19,7 @@
       :id="val"
       class="g-checkbox__input"
       v-model="model"
-    >
+    />
   </div>
 </template>
 
@@ -32,22 +29,21 @@ import icons from '~/mixins/icons'
 export default {
   name: 'GCheckBox',
   mixins: [icons],
-  props: [ 'value', 'val', 'label', 'count' ],
+  props: ['value', 'val', 'label', 'count'],
   computed: {
     model: {
       get() {
-        return this.value;
+        return this.value
       },
       set(val) {
-        this.$emit('input', val);
-      }
+        this.$emit('input', val)
+      },
     },
-    isChecked () {
-      return this.model.includes(this.val);
-    }
+    isChecked() {
+      return this.model.includes(this.val)
+    },
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>
 

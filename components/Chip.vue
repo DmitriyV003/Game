@@ -1,6 +1,6 @@
 <template>
   <div class="chip">
-    <img :src="iconImage" alt="" class="chip__icon">
+    <img :src="iconImage" alt="" class="chip__icon" />
     <span class="chip__label">{{ label }}</span>
   </div>
 </template>
@@ -11,13 +11,13 @@ export default {
   props: {
     iconImage: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     label: {
       type: String,
-      default: () => ''
-    }
-  }
+      default: () => '',
+    },
+  },
 }
 </script>
 

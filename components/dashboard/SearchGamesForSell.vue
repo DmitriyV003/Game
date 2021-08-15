@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="g-product-search"
-  >
+  <div class="g-product-search">
     <div class="g-product-search__wrapper">
       <g-input
         class="g-product-search__input"
@@ -9,12 +7,9 @@
         v-model="form.search"
         @input="getSearchItems"
       />
-      
-      <div 
-        class="g-product-search__drop"
-        v-if="items.length > 0 && isDropShow"
-      >
-        <div 
+
+      <div class="g-product-search__drop" v-if="items.length > 0 && isDropShow">
+        <div
           class="g-product-search__line"
           v-for="item in items"
           :key="item.id"
@@ -43,47 +38,50 @@ import { mapState } from 'vuex'
 export default {
   name: 'GSearchGamesForSell',
   components: {
-    MainButton, 
-    GInput 
+    MainButton,
+    GInput,
   },
-  data () {
+  data() {
     return {
       form: {
         search: null,
-        id: null
+        id: null,
       },
-      isDropShow: false
+      isDropShow: false,
     }
   },
   computed: {
     ...mapState({
-      items: state => state.sales.searchItems
-    })
+      items: (state) => state.sales.searchItems,
+    }),
   },
   methods: {
-    setSaleItem ({ id, name }) {
+    setSaleItem({ id, name }) {
       this.form.search = name
       this.form.id = id
       this.isDropShow = false
     },
-    async getSaleItem () {
+    async getSaleItem() {
       try {
         await this.$store.dispatch('sales/getSaleItem', this.form.id)
-        
-        await this.$router.push({ path: '/dashboard/sales/add-new', query: { itemId: this.form.id }})
+
+        await this.$router.push({
+          path: '/dashboard/sales/add-new',
+          query: { itemId: this.form.id },
+        })
       } catch (e) {
         console.log(e)
       }
     },
-    async getSearchItems () {
+    async getSearchItems() {
       this.isDropShow = true
       try {
         await this.$store.dispatch('sales/getSearchItems', this.form.search)
       } catch (e) {
         console.log(e.response)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

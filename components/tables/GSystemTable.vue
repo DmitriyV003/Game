@@ -3,42 +3,72 @@
     <div class="g-system-table__top">
       <p class="text-size-24 text-color-white text-weight-600">Windows</p>
     </div>
-    
+
     <div class="g-system-table__body">
       <div class="g-system-table__line">
-        <g-info-block class="g-system-table__cell g-system-table__cell_emp" title="Минимальные:" />
-        <g-info-block class="g-system-table__cell g-system-table__cell_emp" title="Рекомендуемые:" />
+        <g-info-block
+          class="g-system-table__cell g-system-table__cell_emp"
+          title="Минимальные:"
+        />
+        <g-info-block
+          class="g-system-table__cell g-system-table__cell_emp"
+          title="Рекомендуемые:"
+        />
       </div>
 
       <div class="g-system-table__line">
-        <g-info-block class="g-system-table__cell" title="ОС Windows" text="ОС Windows 10 (64-разрядная)" />
-        <g-info-block class="g-system-table__cell" title="ОС Windows" text="ОС Windows 10 (64-разрядная)" />
+        <g-info-block
+          class="g-system-table__cell"
+          title="ОС Windows"
+          text="ОС Windows 10 (64-разрядная)"
+        />
+        <g-info-block
+          class="g-system-table__cell"
+          title="ОС Windows"
+          text="ОС Windows 10 (64-разрядная)"
+        />
       </div>
 
       <div class="g-system-table__line">
-        <g-info-block class="g-system-table__cell" title="Процессор Windows" text="Intel Core i5-2500K с частотой 3,3 ГГц / AMD CPU Phenom II X4 940" />
-        <g-info-block class="g-system-table__cell" title="Процессор Windows" text="Intel Core i7 4790 с частотой 4 ГГц" />
+        <g-info-block
+          class="g-system-table__cell"
+          title="Процессор Windows"
+          text="Intel Core i5-2500K с частотой 3,3 ГГц / AMD CPU Phenom II X4 940"
+        />
+        <g-info-block
+          class="g-system-table__cell"
+          title="Процессор Windows"
+          text="Intel Core i7 4790 с частотой 4 ГГц"
+        />
       </div>
 
       <div class="g-system-table__line">
-        <g-info-block class="g-system-table__cell" title="Память Windows" text="8 Gb" />
-        <g-info-block class="g-system-table__cell" title="Память Windows" text="16 Gb" />
+        <g-info-block
+          class="g-system-table__cell"
+          title="Память Windows"
+          text="8 Gb"
+        />
+        <g-info-block
+          class="g-system-table__cell"
+          title="Память Windows"
+          text="16 Gb"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import GInfoBlock from "~/components/GInfoBlock";
+import GInfoBlock from '~/components/GInfoBlock'
 export default {
   name: 'GSystemTable',
-  components: {GInfoBlock}
+  components: { GInfoBlock },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-system-table
   background: #282439
   border-radius: 10px

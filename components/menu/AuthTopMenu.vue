@@ -3,12 +3,24 @@
     <b-container>
       <div class="auth-header__main">
         <nuxt-link class="auth-header__logo" to="/">
-          <img src="/images/logo.svg" alt="">
+          <img src="/images/logo.svg" alt="" />
         </nuxt-link>
 
         <div v-if="!empty">
-          <main-button to="/sign-up" v-if="isSingIn" tag="a" color="primary" label="Регистрация" />
-          <main-button to="/sign-in" v-if="!isSingIn" tag="a" color="primary" label="Вход" />
+          <main-button
+            to="/sign-up"
+            v-if="isSingIn"
+            tag="a"
+            color="primary"
+            label="Регистрация"
+          />
+          <main-button
+            to="/sign-in"
+            v-if="!isSingIn"
+            tag="a"
+            color="primary"
+            label="Вход"
+          />
         </div>
       </div>
     </b-container>
@@ -23,29 +35,29 @@ export default {
   props: {
     isSingIn: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     empty: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 }
 </script>
 
 <style lang="sass">
-  @import '../../theme/vars'
-  @import '../../theme/mix'
-  .auth-header
-    background: rgba(41, 37, 56, 1)
-    &__main
-      display: flex
-      align-items: center
-      justify-content: space-between
-      padding: 22px 0
-    &__logo
-      +md
-        max-width: 103px
-      img
-        width: 100%
+@import '../../theme/vars'
+@import '../../theme/mix'
+.auth-header
+  background: rgba(41, 37, 56, 1)
+  &__main
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 22px 0
+  &__logo
+    +md
+      max-width: 103px
+    img
+      width: 100%
 </style>

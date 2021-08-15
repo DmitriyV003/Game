@@ -31,7 +31,7 @@
           <review-card class="reviews__review" />
           <review-card class="reviews__review" />
         </div>
-        
+
         <main-button color="gray" label="еще обзоры" size="xl" full-width />
       </b-container>
     </section>
@@ -39,19 +39,25 @@
 </template>
 <script>
 import BreadCrumb from '~/components/BreadCrumb'
-import ShowAll from "~/components/buttons/MainLink";
-import GReviewsPageSlider from "~/components/slider/ReviewsPageSlider";
-import ReviewCard from "~/components/cards/ReviewCard";
-import MainButton from "~/components/buttons/MainButton";
+import ShowAll from '~/components/buttons/MainLink'
+import GReviewsPageSlider from '~/components/slider/ReviewsPageSlider'
+import ReviewCard from '~/components/cards/ReviewCard'
+import MainButton from '~/components/buttons/MainButton'
 export default {
-  components: {MainButton, ReviewCard, GReviewsPageSlider, ShowAll, BreadCrumb},
+  components: {
+    MainButton,
+    ReviewCard,
+    GReviewsPageSlider,
+    ShowAll,
+    BreadCrumb,
+  },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/reviews', label: 'Обзоры' }
-      ]
+        { to: '/reviews', label: 'Обзоры' },
+      ],
     }
-  }
+  },
 }
 </script>

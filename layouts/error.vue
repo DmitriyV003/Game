@@ -6,12 +6,18 @@
           <h1 class="error-page__title">404</h1>
           <p class="error-page__caption">Что-то пошло не так...</p>
           <p class="error-page__caption_sm">Страница не найдена.</p>
-          
-          <main-button color="primary" size="xl" tag="a" to="/" label="на главную" />
+
+          <main-button
+            color="primary"
+            size="xl"
+            tag="a"
+            to="/"
+            label="на главную"
+          />
         </div>
-        
+
         <div class="error-page__img">
-          <img src="/images/error.png" alt="">
+          <img src="/images/error.png" alt="" />
         </div>
       </div>
     </b-container>
@@ -69,8 +75,8 @@
       height: 502px
 </style>
 <script>
-  import MainButton from "~/components/buttons/MainButton";
-  export default {
-    components: {MainButton}
-  }
+import MainButton from '~/components/buttons/MainButton'
+export default {
+  components: { MainButton },
+}
 </script>

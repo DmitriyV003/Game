@@ -2,10 +2,18 @@
   <div class="g-become-seller">
     <div class="g-become-seller__block">
       <h2 class="g-become-seller__title">Выгодное сотрудничество</h2>
-      <p class="g-become-seller__text">Вы обладатель игровых ключей или скинов? Будем рады видеть вас в качестве продавца, на нашем портале!</p>
-      <main-button class="g-become-seller__btn" color="white" size="xl" label="Стать продавцом" />
+      <p class="g-become-seller__text">
+        Вы обладатель игровых ключей или скинов? Будем рады видеть вас в
+        качестве продавца, на нашем портале!
+      </p>
+      <main-button
+        class="g-become-seller__btn"
+        color="white"
+        size="xl"
+        label="Стать продавцом"
+      />
     </div>
-    <img src="/images/seller.png" class="g-become-seller__image" alt="">
+    <img src="/images/seller.png" class="g-become-seller__image" alt="" />
   </div>
 </template>
 
@@ -13,7 +21,7 @@
 import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GBecomeSeller',
-  components: { MainButton }
+  components: { MainButton },
 }
 </script>
 

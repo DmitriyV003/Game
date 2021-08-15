@@ -1,16 +1,37 @@
 <template>
   <div>
     <div class="review-card">
-      <div class="review-card__game-info" :style="{ 'background-image': windowSize <= 992 ? 'url(/images/review-1.svg)' : '' }">
-        <img src="/images/review-bg.svg" alt="" class="review-card__bg">
+      <div
+        class="review-card__game-info"
+        :style="{
+          'background-image':
+            windowSize <= 992 ? 'url(/images/review-1.svg)' : '',
+        }"
+      >
+        <img src="/images/review-bg.svg" alt="" class="review-card__bg" />
         <div class="review-card__box-image">
-          <img src="/images/review-1.svg" alt="" class="review-card__image">
+          <img src="/images/review-1.svg" alt="" class="review-card__image" />
           <rating class="review-card__rating" :value="5.2" />
         </div>
 
         <div class="review-card__block">
-          <div class="review-card__title text-size-16 text-color-white text-weight-600 text-center text-uppercase">Hitman 3</div>
-          <div class="review-card__text text-center text-size-14 text-color-gray">O Interactive</div>
+          <div
+            class="
+              review-card__title
+              text-size-16
+              text-color-white
+              text-weight-600
+              text-center
+              text-uppercase
+            "
+          >
+            Hitman 3
+          </div>
+          <div
+            class="review-card__text text-center text-size-14 text-color-gray"
+          >
+            O Interactive
+          </div>
         </div>
       </div>
 
@@ -19,15 +40,33 @@
           <avatar class="review-card__avatar" size="xl" name="Blacktea" />
 
           <div class="review-card__metrics review-card__metrics_desktop">
-            <span class="review-card__date text-size-14 text-color-gray">22 января</span>
-            <chip class="review-card__icon" icon-image="/images/comment-icon.svg" label="8" />
-            <chip class="review-card__icon" icon-image="/images/eye.svg" label="82" />
+            <span class="review-card__date text-size-14 text-color-gray"
+              >22 января</span
+            >
+            <chip
+              class="review-card__icon"
+              icon-image="/images/comment-icon.svg"
+              label="8"
+            />
+            <chip
+              class="review-card__icon"
+              icon-image="/images/eye.svg"
+              label="82"
+            />
           </div>
         </div>
 
         <div class="review-card__main">
           <p class="review-card__review text-size-16">
-            После богатого на громкие премьеры конца года каждый январь развлекательная индустрия берёт выходной. Казалось бы, у народа послепраздничная хандра на грани с депрессией – самое время выпускать яркие (и тёплые!) новинки. Но нет, блокбастеров в это снежное время раз-два и обчёлся, зато всяких ремастеров да нишевых релизов хоть отбавляй. Как в таких условиях развлечь себя, как отвлечься от удушливой рутины, когда за окном серость и лёд? Да легко. Аккурат в разгар морозов у бравой команды IOI нашлось отличное средство от зимней апатии – симулятор наёмного убий...
+            После богатого на громкие премьеры конца года каждый январь
+            развлекательная индустрия берёт выходной. Казалось бы, у народа
+            послепраздничная хандра на грани с депрессией – самое время
+            выпускать яркие (и тёплые!) новинки. Но нет, блокбастеров в это
+            снежное время раз-два и обчёлся, зато всяких ремастеров да нишевых
+            релизов хоть отбавляй. Как в таких условиях развлечь себя, как
+            отвлечься от удушливой рутины, когда за окном серость и лёд? Да
+            легко. Аккурат в разгар морозов у бравой команды IOI нашлось
+            отличное средство от зимней апатии – симулятор наёмного убий...
           </p>
         </div>
 
@@ -40,9 +79,19 @@
 
         <div class="review-card__bottom-mobile">
           <div class="review-card__metrics">
-            <span class="review-card__date text-size-14 text-color-gray">22 января</span>
-            <chip class="review-card__icon" icon-image="/images/comment-icon.svg" label="8" />
-            <chip class="review-card__icon" icon-image="/images/eye.svg" label="82" />
+            <span class="review-card__date text-size-14 text-color-gray"
+              >22 января</span
+            >
+            <chip
+              class="review-card__icon"
+              icon-image="/images/comment-icon.svg"
+              label="8"
+            />
+            <chip
+              class="review-card__icon"
+              icon-image="/images/eye.svg"
+              label="82"
+            />
           </div>
         </div>
       </div>
@@ -62,9 +111,9 @@ export default {
   mixins: [icons],
   computed: {
     ...mapState({
-      windowSize: state => state.common.windowSize
-    })
-  }
+      windowSize: (state) => state.common.windowSize,
+    }),
+  },
 }
 </script>
 

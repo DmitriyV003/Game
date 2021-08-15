@@ -12,6 +12,6 @@
 import TopMenu from '~/components/menu/TopMenu'
 import GameInComeFooter from '~/components/footer/GameInComeFooter'
 export default {
-  components: { GameInComeFooter, TopMenu }
+  components: { GameInComeFooter, TopMenu },
 }
 </script>

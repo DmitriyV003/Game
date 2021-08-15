@@ -23,8 +23,16 @@
       />
     </vue-slick>
     <div class="g-slider__controls">
-      <arrow-button @click.native="prev($refs.proposalSlider)" class="g-slider__button g-slider__button_left" left />
-      <arrow-button @click.native="next($refs.proposalSlider)" class="g-slider__button g-slider__button_right" right />
+      <arrow-button
+        @click.native="prev($refs.proposalSlider)"
+        class="g-slider__button g-slider__button_left"
+        left
+      />
+      <arrow-button
+        @click.native="next($refs.proposalSlider)"
+        class="g-slider__button g-slider__button_right"
+        right
+      />
     </div>
   </div>
 </template>
@@ -34,7 +42,7 @@ import GProposalCard from '~/components/cards/ProposalCard'
 import ArrowButton from '~/components/slider/ArrowButton'
 export default {
   name: 'GProposalSlider',
-  components: {ArrowButton, GProposalCard },
+  components: { ArrowButton, GProposalCard },
   data: () => {
     return {
       settings: {
@@ -42,21 +50,21 @@ export default {
         slidesToScroll: 1,
         variableWidth: true,
         arrows: false,
-        dots: false
-      }
+        dots: false,
+      },
     }
   },
   props: {
     data: Array,
-    required: true
+    required: true,
   },
   methods: {
-    next (slider) {
+    next(slider) {
       slider.next()
     },
-    prev (slider) {
+    prev(slider) {
       slider.prev()
-    }
-  }
+    },
+  },
 }
 </script>

@@ -1,39 +1,48 @@
 <template>
-  <div 
-    class="g-drop-menu" 
-    :class="[{ 'g-drop-menu_active': open }, 'g-drop-menu_' + size, { 'g-drop-menu_active_sm': open && size === 'sm' }]"
+  <div
+    class="g-drop-menu"
+    :class="[
+      { 'g-drop-menu_active': open },
+      'g-drop-menu_' + size,
+      { 'g-drop-menu_active_sm': open && size === 'sm' },
+    ]"
   >
-    <div 
-      @click="open = !open" 
-      class="g-drop-menu__active" 
-      :class="[{ 'g-drop-menu__active_active': open }, { 'g-drop-menu__active_active_sm': open && size === 'sm' }, 'g-drop-menu__active_' + size]"
+    <div
+      @click="open = !open"
+      class="g-drop-menu__active"
+      :class="[
+        { 'g-drop-menu__active_active': open },
+        { 'g-drop-menu__active_active_sm': open && size === 'sm' },
+        'g-drop-menu__active_' + size,
+      ]"
     >
-      <span 
-        v-if="currentState === null" 
-        class="g-drop-menu__placeholder"
-      >{{ placeholder }}</span>
-      <span 
-        v-if="currentState !== null" 
-        class="text"
-      >{{ currentState[labelValue] }}</span>
-      <chevron-down-icon 
-        class="icon" 
-        :class="[{ 'icon_active': open }, 'icon_' + size]" 
+      <span v-if="currentState === null" class="g-drop-menu__placeholder">{{
+        placeholder
+      }}</span>
+      <span v-if="currentState !== null" class="text">{{
+        currentState[labelValue]
+      }}</span>
+      <chevron-down-icon
+        class="icon"
+        :class="[{ icon_active: open }, 'icon_' + size]"
       />
     </div>
-    
-    <div 
-      v-if="open" 
-      @mouseleave="open = false" 
-      class="g-drop-menu__drop" 
+
+    <div
+      v-if="open"
+      @mouseleave="open = false"
+      class="g-drop-menu__drop"
       :class="['g-drop-menu__drop_' + size]"
     >
       <div
-        v-for="link in links" 
-        @click="setActive(link[idValue])" 
+        v-for="link in links"
+        @click="setActive(link[idValue])"
         class="g-drop-menu__drop-link"
         :key="link[idValue]"
-        :class="{ 'g-drop-menu__drop-link_active': currentState !== null && currentState[idValue] === link[idValue] }"
+        :class="{
+          'g-drop-menu__drop-link_active':
+            currentState !== null && currentState[idValue] === link[idValue],
+        }"
       >
         <span class="text">{{ link[labelValue] }}</span>
       </div>
@@ -49,28 +58,28 @@ export default {
   mixins: [icons],
   methods: {
     setActive(value) {
-      this.currentState = this.links.find(x => x[this.idValue] === value)
+      this.currentState = this.links.find((x) => x[this.idValue] === value)
       this.open = false
-      
+
       this.$emit('input', this.currentState[this.idValue])
-    }
+    },
   },
   props: {
     placeholder: {
       type: String,
-      default: () => 'placeholder'
+      default: () => 'placeholder',
     },
     idValue: {
       type: String,
-      default: () => 'value'
+      default: () => 'value',
     },
     labelValue: {
       type: String,
-      default: () => 'label'
+      default: () => 'label',
     },
     size: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     links: {
       type: Array,
@@ -80,22 +89,22 @@ export default {
         { label: 'Активные продажи', value: 'active3' },
         { label: 'Неактивные продажи', value: 'nonActive4' },
         { label: 'Активные продажи', value: 'active5' },
-        { label: 'Неактивные продажи', value: 'nonActive6' }
-      ]
-    }
+        { label: 'Неактивные продажи', value: 'nonActive6' },
+      ],
+    },
   },
   data: () => {
     return {
       open: false,
-      currentState: null
+      currentState: null,
     }
-  }
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-drop-menu
   position: relative
   border-radius: 12px

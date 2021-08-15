@@ -6,11 +6,19 @@
         <h2 class="title">Восстановить пароль</h2>
         <close-icon @click="val = false" class="icon" />
       </div>
-      
-      <p class="text">Введите E-mail, указанный в профиле, чтобы восстановить пароль</p>
-      
+
+      <p class="text">
+        Введите E-mail, указанный в профиле, чтобы восстановить пароль
+      </p>
+
       <g-input placeholder="Адрес электронной почты *" />
-      <main-button class="g-password-recovery__btn" color="primary" label="восстановить" full-width size="xl" />
+      <main-button
+        class="g-password-recovery__btn"
+        color="primary"
+        label="восстановить"
+        full-width
+        size="xl"
+      />
     </div>
   </div>
 </template>
@@ -30,7 +38,7 @@ export default {
       val: false,
     }
   },
-  created () {
+  created() {
     eventBus.$on('popupClose', () => {
       this.val = false
     })
@@ -38,7 +46,7 @@ export default {
     eventBus.$on('passwordRecoveryPopupOpen', () => {
       this.val = true
     })
-  }    
+  },
 }
 </script>
 
@@ -51,7 +59,7 @@ export default {
   border-radius: 12px
   padding: 24px
   width: 472px
-  max-height: calc(100vh - 150px)  
+  max-height: calc(100vh - 150px)
   +md
     width: calc(100% - 32px)
     padding: 24px 16px

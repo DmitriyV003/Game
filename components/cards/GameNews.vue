@@ -1,7 +1,7 @@
 <template>
   <div class="g-game-news__wrapper">
     <div class="g-game-news">
-      <img class="g-game-news__image" :src="image" alt="">
+      <img class="g-game-news__image" :src="image" alt="" />
 
       <div class="g-game-news__block">
         <p class="g-game-news__title">{{ name }}</p>
@@ -23,25 +23,25 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
-      required: true
+      required: true,
     },
     id: {
       type: String,
-      required: true
+      required: true,
     },
     desc3: {
       type: String,
-      required: true
+      required: true,
     },
     desc: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

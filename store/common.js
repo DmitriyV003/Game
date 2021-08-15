@@ -1,9 +1,9 @@
 export const state = () => ({
-  windowSize: 0
+  windowSize: 0,
 })
 
 export const mutations = {
-  setWindowSize (state, windowsize) {
+  setWindowSize(state, windowsize) {
     state.windowSize = windowsize
-  }
+  },
 }

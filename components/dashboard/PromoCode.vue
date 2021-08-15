@@ -2,15 +2,33 @@
   <div class="g-promo">
     <span class="g-promo__bg-1"></span>
     <span class="g-promo__bg-2"></span>
-    <img src="/images/promo.png" alt="" class="g-promo__bg-3">
+    <img src="/images/promo.png" alt="" class="g-promo__bg-3" />
     <h5 class="g-promo__title">Подарочный код «GameinCome»</h5>
-    <p class="g-promo__text">Введите код с промо-карты GameinCome для пополнения баланса. Бонусный баланс можно использовать для покупок на Gameincome.ru</p>
+    <p class="g-promo__text">
+      Введите код с промо-карты GameinCome для пополнения баланса. Бонусный
+      баланс можно использовать для покупок на Gameincome.ru
+    </p>
     <div class="g-promo__wrapper">
-      <g-input class="g-promo__input" color="white" placeholder="Код c Gift Card" />
-      <main-button size="xl" class="g-promo__btn g-promo__btn_desktop" color="primary" label="Применить код" />
+      <g-input
+        class="g-promo__input"
+        color="white"
+        placeholder="Код c Gift Card"
+      />
+      <main-button
+        size="xl"
+        class="g-promo__btn g-promo__btn_desktop"
+        color="primary"
+        label="Применить код"
+      />
     </div>
 
-    <main-button full-width size="xl" class="g-promo__btn g-promo__btn_mobile" color="primary" label="Применить код" />
+    <main-button
+      full-width
+      size="xl"
+      class="g-promo__btn g-promo__btn_mobile"
+      color="primary"
+      label="Применить код"
+    />
   </div>
 </template>
 
@@ -19,7 +37,7 @@ import MainButton from '~/components/buttons/MainButton'
 import GInput from '~/components/form-elements/Input'
 export default {
   name: 'GPromo',
-  components: { GInput, MainButton }
+  components: { GInput, MainButton },
 }
 </script>
 
@@ -95,5 +113,5 @@ export default {
     +md
       max-width: 100%
   &__title
-    margin-bottom: 16px  
+    margin-bottom: 16px
 </style>

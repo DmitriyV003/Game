@@ -1,9 +1,5 @@
 <template>
-    <div 
-        v-if="show" 
-        class="g-toast"
-        :class="[`g-toast_${type}`]"
-    >{{ text }}</div>
+  <div v-if="show" class="g-toast" :class="[`g-toast_${type}`]">{{ text }}</div>
 </template>
 
 <style lang="sass">

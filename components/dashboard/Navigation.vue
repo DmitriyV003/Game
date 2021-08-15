@@ -1,9 +1,12 @@
 <template>
   <div>
-    
     <!-- Full sized dark background  -->
-    <div class="g-nav__bg" v-show="isMenuDropped" @click="isMenuDropped = false"></div>
-    
+    <div
+      class="g-nav__bg"
+      v-show="isMenuDropped"
+      @click="isMenuDropped = false"
+    ></div>
+
     <!-- Desktop dashboard navigation   -->
     <div class="g-nav g-nav_desktop">
       <nuxt-link
@@ -24,15 +27,31 @@
       <div class="g-nav__all">
         <div @click="isMenuDropped = !isMenuDropped" class="g-nav__current">
           <div class="left">
-            <span class="icon mdi" :class="[dashboardLinks.find(x => $route.name.includes(x.name)).icon]"></span>
-            <span class="text">{{ dashboardLinks.find(x => $route.name.includes(x.name)).label }}</span>
+            <span
+              class="icon mdi"
+              :class="[
+                dashboardLinks.find((x) => $route.name.includes(x.name)).icon,
+              ]"
+            ></span>
+            <span class="text">{{
+              dashboardLinks.find((x) => $route.name.includes(x.name)).label
+            }}</span>
           </div>
-          
-          <chevron-down-icon class="arrow-icon" :class="{ 'arrow-icon_active': isMenuDropped }" />
+
+          <chevron-down-icon
+            class="arrow-icon"
+            :class="{ 'arrow-icon_active': isMenuDropped }"
+          />
         </div>
-        
+
         <div class="g-nav__drop" v-show="isMenuDropped">
-          <nuxt-link active-class="g-nav__drop-link_active" class="g-nav__drop-link" v-for="item in dashboardLinks" :key="item.name" :to="item.to">
+          <nuxt-link
+            active-class="g-nav__drop-link_active"
+            class="g-nav__drop-link"
+            v-for="item in dashboardLinks"
+            :key="item.name"
+            :to="item.to"
+          >
             <span class="mdi icon" :class="item.icon"></span>
             <span class="text">{{ item.label }}</span>
           </nuxt-link>
@@ -49,22 +68,52 @@ import icons from '~/mixins/icons'
 export default {
   name: 'GDashboardNavigation',
   components: {
-    SlideUpDown
+    SlideUpDown,
   },
   mixins: [icons],
   data: () => {
     return {
       isMenuDropped: false,
       dashboardLinks: [
-        { label: 'Покупки', to: '/dashboard/purchases', name: 'dashboard-purchases', icon: 'mdi-cart-outline' },
-        { label: 'Продажи', to: '/dashboard/sales', name: 'dashboard-sales', icon: 'mdi-storefront-outline' },
-        { label: 'финансы', to: '/dashboard/finance', name: 'dashboard-finance', icon: 'mdi-currency-usd' },
-        { label: 'Профиль', to: '/dashboard/profile', name: 'dashboard-profile', icon: 'mdi-account-outline' },
-        { label: 'безопасность', to: '/dashboard/security', name: 'dashboard-security', icon: 'mdi-lock-outline' },
-        { label: 'обращения', to: '/dashboard/questions', name: 'dashboard-questions', icon: 'mdi-forum-outline' }
-      ]
+        {
+          label: 'Покупки',
+          to: '/dashboard/purchases',
+          name: 'dashboard-purchases',
+          icon: 'mdi-cart-outline',
+        },
+        {
+          label: 'Продажи',
+          to: '/dashboard/sales',
+          name: 'dashboard-sales',
+          icon: 'mdi-storefront-outline',
+        },
+        {
+          label: 'финансы',
+          to: '/dashboard/finance',
+          name: 'dashboard-finance',
+          icon: 'mdi-currency-usd',
+        },
+        {
+          label: 'Профиль',
+          to: '/dashboard/profile',
+          name: 'dashboard-profile',
+          icon: 'mdi-account-outline',
+        },
+        {
+          label: 'безопасность',
+          to: '/dashboard/security',
+          name: 'dashboard-security',
+          icon: 'mdi-lock-outline',
+        },
+        {
+          label: 'обращения',
+          to: '/dashboard/questions',
+          name: 'dashboard-questions',
+          icon: 'mdi-forum-outline',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

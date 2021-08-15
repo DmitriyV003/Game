@@ -3,20 +3,24 @@ import Cookie from 'cookie'
 import Cookies from 'js-cookie'
 
 export const state = () => ({
-  token: null
+  token: null,
 })
 
 export const mutations = {
-  setToken (state, token) {
+  setToken(state, token) {
     state.token = token
-  }
+  },
 }
 
 export const actions = {
-  async signInByEmail ({ commit, dispatch }, data) {
+  async signInByEmail({ commit, dispatch }, data) {
     try {
-      const res = await this.$axios.$get(this.$axios.defaults.baseURL + apiRoutes.signInByEmail + `?email=${data.email}&password=${data.password}`)
-      
+      const res = await this.$axios.$get(
+        this.$axios.defaults.baseURL +
+          apiRoutes.signInByEmail +
+          `?email=${data.email}&password=${data.password}`
+      )
+
       if (res.status === 200) {
         console.log(res)
         dispatch('user/setUser', res.data, { root: true })
@@ -27,7 +31,7 @@ export const actions = {
       throw e
     }
   },
-  autoLogin ({ dispatch, commit }) {
+  autoLogin({ dispatch, commit }) {
     const cookieStr = process.browser
       ? document.cookie
       : this.app.context.req.headers.cookie
@@ -45,34 +49,37 @@ export const actions = {
       console.log(e)
     }
   },
-  logOut ({ commit, dispatch }) {
+  logOut({ commit, dispatch }) {
     dispatch('setToken', null)
     commit('user/setUser', null, { root: true })
     Cookies.remove('token')
   },
-  setToken ({ commit }, token) {
+  setToken({ commit }, token) {
     this.$axios.setToken(token, 'Bearer')
     commit('setToken', token)
     Cookies.remove('token')
     Cookies.set('token', token, { expires: 1 })
   },
-  async forgetPassword (ctx, data) {
+  async forgetPassword(ctx, data) {
     try {
-      const res = await this.$axios.$get(this.$axios.defaults.baseURL + apiRoutes.forgetPassword + `?email=${data.email}`)
+      const res = await this.$axios.$get(
+        this.$axios.defaults.baseURL +
+          apiRoutes.forgetPassword +
+          `?email=${data.email}`
+      )
       console.log(res)
     } catch (e) {
       throw e
     }
   },
-  async renewPassword (ctx, data) {
+  async renewPassword(ctx, data) {
     try {
-      
     } catch (e) {
       throw e
     }
-  }
+  },
 }
 
 export const getters = {
-  getToken: state => state.token
+  getToken: (state) => state.token,
 }

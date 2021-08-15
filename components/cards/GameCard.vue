@@ -1,47 +1,44 @@
 <template>
   <nuxt-link :to="'/product/' + id" class="game-card">
-    <img 
-      :src="image"
-      alt="" 
-      class="game-card__img"
-    >
-    <p 
-      class="game-card__title" 
-      :class="{ 'game-card__title_sm': adaptiveSm }"
-    >{{ title }}</p>
-    <p 
-      class="game-card__text" 
-      :class="{ 'game-card__text_sm': adaptiveSm }"
-    >{{ developer }}</p>
+    <img :src="image" alt="" class="game-card__img" />
+    <p class="game-card__title" :class="{ 'game-card__title_sm': adaptiveSm }">
+      {{ title }}
+    </p>
+    <p class="game-card__text" :class="{ 'game-card__text_sm': adaptiveSm }">
+      {{ developer }}
+    </p>
 
-    <rating 
-      class="game-card__rating" 
-      :value="rating" 
+    <rating
+      class="game-card__rating"
+      :value="rating"
       v-if="rating !== null && rating !== 0"
     />
 
     <div class="game-card__prices">
-      <span 
-        class="game-card__sale" 
+      <span
+        class="game-card__sale"
         :class="{ 'game-card__sale_sm': adaptiveSm }"
         v-if="sale !== null"
-      >-{{ sale }}%</span>
-      <div 
-        class="game-card__price-block" 
-        :class="{ 
-        'game-card__price-block_sm': adaptiveSm, 
-        'game-card__price-block_pl': sale !== null 
-      }"
+        >-{{ sale }}%</span
       >
-        <span 
-          class="game-card__price game-card__price_old" 
+      <div
+        class="game-card__price-block"
+        :class="{
+          'game-card__price-block_sm': adaptiveSm,
+          'game-card__price-block_pl': sale !== null,
+        }"
+      >
+        <span
+          class="game-card__price game-card__price_old"
           :class="{ 'game-card__price_old_sm': adaptiveSm }"
-          v-if="(oldPrice !== null) && (newPrice !== null)"
-        >{{ oldPrice / 100 }} ₽</span>
-        <span 
-          class="game-card__price game-card__price_new" 
+          v-if="oldPrice !== null && newPrice !== null"
+          >{{ oldPrice / 100 }} ₽</span
+        >
+        <span
+          class="game-card__price game-card__price_new"
           :class="{ 'game-card__price_new_sm': adaptiveSm }"
-        >{{ newPrice === null ? oldPrice / 100 : newPrice / 100 }} ₽</span>
+          >{{ newPrice === null ? oldPrice / 100 : newPrice / 100 }} ₽</span
+        >
       </div>
     </div>
   </nuxt-link>
@@ -55,41 +52,41 @@ export default {
   props: {
     adaptiveSm: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     sale: {
       type: Number,
-      default: () => null
+      default: () => null,
     },
     rating: {
       type: Number,
-      default: () => null
+      default: () => null,
     },
     oldPrice: {
       type: Number,
-      default: () => null
+      default: () => null,
     },
     id: {
       type: String,
-      required: true
+      required: true,
     },
     newPrice: {
       type: Number,
-      default: () => null
+      default: () => null,
     },
     title: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     developer: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     image: {
       type: String,
-      default: () => ''
-    }
-  }
+      default: () => '',
+    },
+  },
 }
 </script>
 

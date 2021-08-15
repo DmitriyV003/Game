@@ -1,7 +1,14 @@
 <template>
-  <nuxt-link tag="a" :target="target" :to="to" :href="href" exact class="social-btn">
+  <nuxt-link
+    tag="a"
+    :target="target"
+    :to="to"
+    :href="href"
+    exact
+    class="social-btn"
+  >
     <span :style="{ background: iconColor }" class="social-btn__icon">
-      <img :src="icon" alt="">
+      <img :src="icon" alt="" />
     </span>
 
     <span class="social-btn__text">
@@ -16,29 +23,29 @@ export default {
   props: {
     label: {
       type: String,
-      required: true
+      required: true,
     },
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     target: {
       type: String,
-      default: () => '_blank'
+      default: () => '_blank',
     },
     href: {
       type: String,
-      default: () => ''
+      default: () => '',
     },
     iconColor: {
       type: String,
-      required: true
+      required: true,
     },
     to: {
       type: String,
-      default: () => ''
-    }
-  }
+      default: () => '',
+    },
+  },
 }
 </script>
 

@@ -15,98 +15,97 @@
     <section v-if="games !== null">
       <b-container>
         <div class="reviews__games-top">
-          <show-all 
-              label="Все жанры игр" 
-              to="/catalog" 
-          />
+          <show-all label="Все жанры игр" to="/catalog" />
         </div>
 
         <div class="reviews__cards">
-          <g-reviews-page-slider
-              :data="games"
-          />
+          <g-reviews-page-slider :data="games" />
         </div>
       </b-container>
     </section>
 
     <!-- Comments cards  adapted = true  -->
-    <section 
-        class="reviews__block"
-        v-if="comments !== null"
-    >
+    <section class="reviews__block" v-if="comments !== null">
       <b-container>
         <div class="reviews__comments">
-            <comment-card
-                v-for="item in comments"
-                class="reviews__comment"
-                :id="item.id"
-                :key="item.id"
-                :name="item.itemName"
-                :image="item.itemHeaderImage"
-                :rating="Number(item.itemRate)"
-                :avatar="item.userAvatar"
-                :nickname="item.userNickname"
-                :text="item.userFeedbackText"
-                :date="item.createdAt"
-            />
+          <comment-card
+            v-for="item in comments"
+            class="reviews__comment"
+            :id="item.id"
+            :key="item.id"
+            :name="item.itemName"
+            :image="item.itemHeaderImage"
+            :rating="Number(item.itemRate)"
+            :avatar="item.userAvatar"
+            :nickname="item.userNickname"
+            :text="item.userFeedbackText"
+            :date="item.createdAt"
+          />
         </div>
 
-        <main-button 
-            color="gray" 
-            label="больше отзывов" 
-            to="/comments"
-            size="xl" 
-            full-width 
+        <main-button
+          color="gray"
+          label="больше отзывов"
+          to="/comments"
+          size="xl"
+          full-width
         />
       </b-container>
     </section>
   </div>
 </template>
 <script>
-import BreadCrumb         from '~/components/BreadCrumb'
-import ShowAll            from '~/components/buttons/MainLink'
+import BreadCrumb from '~/components/BreadCrumb'
+import ShowAll from '~/components/buttons/MainLink'
 import GReviewsPageSlider from '~/components/slider/ReviewsPageSlider'
-import ReviewCard         from '~/components/cards/ReviewCard'
-import MainButton         from '~/components/buttons/MainButton'
-import CommentCard        from "~/components/cards/CommentCard";
-import { mapState }       from 'vuex'
+import ReviewCard from '~/components/cards/ReviewCard'
+import MainButton from '~/components/buttons/MainButton'
+import CommentCard from '~/components/cards/CommentCard'
+import { mapState } from 'vuex'
 export default {
-  components: {CommentCard, MainButton, ReviewCard, GReviewsPageSlider, ShowAll, BreadCrumb},
+  components: {
+    CommentCard,
+    MainButton,
+    ReviewCard,
+    GReviewsPageSlider,
+    ShowAll,
+    BreadCrumb,
+  },
   name: 'CommentsPage',
-    async mounted () {
-        try {
-            await this.$store.dispatch('comments/getComments')
-            await this.$store.dispatch('comments/getCommentRecommendedGames')
-        } catch (e) {
-            this.$bvToast.toast('Ошибка загрузки страницы!', {
-                title: 'Что-то пошло не так(',
-                variant: 'danger',
-                solid: true,
-                appendToast: true
-            })
-        }
-    },
-    computed: {
-        ...mapState({
-            comments: state => state.comments.comments,
-            games: state => state.comments.recommendedGames
-        })
-    },
+  async mounted() {
+    try {
+      await this.$store.dispatch('comments/getComments')
+      await this.$store.dispatch('comments/getCommentRecommendedGames')
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
+  },
+  computed: {
+    ...mapState({
+      comments: (state) => state.comments.comments,
+      games: (state) => state.comments.recommendedGames,
+    }),
+  },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
-        { to: '/comments', label: 'Отзывы' }
-      ]
+        { to: '/comments', label: 'Отзывы' },
+      ],
     }
-  }
-}  
+  },
+}
 </script>
 
 <style lang="sass">
 @import 'theme/_mix'
-@import 'theme/_vars'  
-.reviews  
+@import 'theme/_vars'
+.reviews
   &__comments
     display: flex
     justify-content: space-between

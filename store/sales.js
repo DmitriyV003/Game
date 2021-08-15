@@ -3,28 +3,30 @@ import apiRoutes from '~/plugins/apiRoutes'
 export const state = () => ({
   sales: null,
   searchItems: [],
-  saleItem: null
+  saleItem: null,
 })
 
 export const mutations = {
-  SET_SEARCH_ITEMS (state, items) {
+  SET_SEARCH_ITEMS(state, items) {
     state.searchItems = items
   },
-  SET_SALE_ITEM (state, item) {
+  SET_SALE_ITEM(state, item) {
     state.saleItem = item
-  }
+  },
 }
 
 export const actions = {
-  async getSearchItems ({ commit }, data) {
-      try {
-        const res = await this.$axios.$get(apiRoutes.getSearchItems('name=' + data))
-        commit('SET_SEARCH_ITEMS', res.items)
-      } catch (e) {
-        throw e
-      }
+  async getSearchItems({ commit }, data) {
+    try {
+      const res = await this.$axios.$get(
+        apiRoutes.getSearchItems('name=' + data)
+      )
+      commit('SET_SEARCH_ITEMS', res.items)
+    } catch (e) {
+      throw e
+    }
   },
-  async getSaleItem ({ commit }, id) {
+  async getSaleItem({ commit }, id) {
     try {
       const res = await this.$axios.$get(apiRoutes.getSaleItem('id=' + id))
       commit('SET_SALE_ITEM', res.data)
@@ -32,7 +34,7 @@ export const actions = {
       throw e
     }
   },
-  async postNewSale ({ commit, rootState }, data) {
+  async postNewSale({ commit, rootState }, data) {
     try {
       const copy = {}
       Object.assign(copy, data)
@@ -43,5 +45,5 @@ export const actions = {
     } catch (e) {
       throw e
     }
-  }
+  },
 }

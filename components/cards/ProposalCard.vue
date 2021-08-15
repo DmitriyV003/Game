@@ -4,34 +4,47 @@
       <div class="g-proposal-card__avatar">
         <div class="g-proposal-card__bg">
           <div class="g-proposal-card__image">
-            <img 
-              :src="avatar" 
-              alt=""
-              v-if="avatar !== null"
-            >
+            <img :src="avatar" alt="" v-if="avatar !== null" />
             <span v-else>{{ name.slice(0, 1) }}{{ surname.slice(0, 1) }}</span>
           </div>
         </div>
 
         <div class="g-proposal-card__text">
-          <p class="text-color-white text-size-16 text-weight-600">{{ name }} {{ surname }}</p>
+          <p class="text-color-white text-size-16 text-weight-600">
+            {{ name }} {{ surname }}
+          </p>
           <p class="g-proposal-card__caption text-uppercase">{{ nickname }}</p>
-          <p class="g-proposal-card__caption">{{ (likes + dislikes) === 0 ? 'Нет отзывов' : (likes / (likes + dislikes).toFixed(2)) +  ' положительных отзывов'}}</p>
+          <p class="g-proposal-card__caption">
+            {{
+              likes + dislikes === 0
+                ? 'Нет отзывов'
+                : likes / (likes + dislikes).toFixed(2) +
+                  ' положительных отзывов'
+            }}
+          </p>
         </div>
       </div>
 
       <div class="g-proposal-card__info">
-        <g-price 
-          class="g-proposal-card__price" 
+        <g-price
+          class="g-proposal-card__price"
           :show-current-price="false"
           :sale="sale"
           :old-price="oldPrice"
           :new-price="newPrice"
         />
 
-        <span class="g-proposal-card__new">{{ newPrice === 0 ? oldPrice : newPrice }} ₽</span>
+        <span class="g-proposal-card__new"
+          >{{ newPrice === 0 ? oldPrice : newPrice }} ₽</span
+        >
 
-        <main-button class="g-proposal-card__btn" full-width size="xl" color="primary" label="в корзину" />
+        <main-button
+          class="g-proposal-card__btn"
+          full-width
+          size="xl"
+          color="primary"
+          label="в корзину"
+        />
       </div>
     </div>
   </div>
@@ -39,55 +52,55 @@
 
 <script>
 import Avatar from '~/components/Avatar'
-import GPrice from "~/components/GPrice";
-import MainButton from "~/components/buttons/MainButton";
+import GPrice from '~/components/GPrice'
+import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GProposalCard',
-  components: {MainButton, GPrice, Avatar},
+  components: { MainButton, GPrice, Avatar },
   props: {
     nickname: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     name: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     surname: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     likes: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     dislikes: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     oldPrice: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     newPrice: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     sale: {
       type: Number,
-      default: () => 0
+      default: () => 0,
     },
     avatar: {
       type: String,
-      default: () => null
-    }
-  }
+      default: () => null,
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import 'theme/_vars'
-@import 'theme/_mix'  
+@import 'theme/_mix'
 .g-proposal-card
   padding: 20px
   background: rgba(100, 62, 255, 0.2)
@@ -175,4 +188,3 @@ export default {
       line-height: 24px
       color: white(1)
 </style>
-

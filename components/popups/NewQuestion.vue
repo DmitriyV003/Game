@@ -6,13 +6,13 @@
         <p class="g-popup__title">Новый вопрос</p>
         <close-icon @click="val = false" class="g-popup__close" />
       </div>
-      
+
       <div class="g-new-question__content">
         <div class="g-new-question__block">
           <span class="g-new-question__caption">Выберите тему</span>
           <g-drop-menu
-            class="g-new-question__category" 
-            placeholder="Выберите тему" 
+            class="g-new-question__category"
+            placeholder="Выберите тему"
             v-if="category !== null"
             :links="themes[category.label + 'QuestionThemes']"
             v-model="$v.form.theme.$model"
@@ -21,15 +21,21 @@
 
         <div class="g-new-question__block">
           <span class="g-new-question__caption">Текст сообщения:</span>
-          <textarea 
-            v-model="$v.form.text.$model" 
+          <textarea
+            v-model="$v.form.text.$model"
             class="input-reboot g-new-question__textarea"
           ></textarea>
         </div>
       </div>
-      
+
       <div class="g-new-question__bottom">
-        <main-button :disabled="disabled || $v.$invalid" type="submit" color="primary" size="xl" label="отправить" />
+        <main-button
+          :disabled="disabled || $v.$invalid"
+          type="submit"
+          color="primary"
+          size="xl"
+          label="отправить"
+        />
       </div>
     </div>
   </form>
@@ -40,8 +46,12 @@ import { eventBus } from '~/plugins/event-bus'
 import icons from '~/mixins/icons'
 import GDropMenu from '~/components/DropMenu'
 import MainButton from '~/components/buttons/MainButton'
-import { generalQuestionThemes, techQuestionThemes, partnershipQuestionThemes } from '~/types/questionThemes'
-import { maxLength, required} from 'vuelidate/lib/validators'
+import {
+  generalQuestionThemes,
+  techQuestionThemes,
+  partnershipQuestionThemes,
+} from '~/types/questionThemes'
+import { maxLength, required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'GNewQuestionPopup',
@@ -53,46 +63,58 @@ export default {
       themes: {
         generalQuestionThemes,
         techQuestionThemes,
-        partnershipQuestionThemes
+        partnershipQuestionThemes,
       },
       disabled: false,
       form: {
         theme: null,
-        text: null
-      }
+        text: null,
+      },
     }
   },
   props: {
     category: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   validations: {
     form: {
       theme: {
         required,
-        maxLength: maxLength(250)
+        maxLength: maxLength(250),
       },
       text: {
         required,
-        maxLength: maxLength(250)
-      }
-    }
+        maxLength: maxLength(250),
+      },
+    },
   },
   methods: {
-    async postCreateQuestion () {
+    clearForm () {
+      this.form.text = null
+      this.form.theme = null
+      this.$v.reset()
+    },
+    async postCreateQuestion() {
       try {
         this.disabled = true
         await this.$store.dispatch('questions/postCreateQuestion', this.form)
+        this.clearForm()
+        this.val = false
       } catch (e) {
-        console.log(e.response)
+        this.$bvToast.toast('Вопрос не создан, повторите попытку позже.', {
+          title: 'Ошибка',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
       } finally {
         this.disabled = false
       }
-    }
+    },
   },
-  created () {
+  created() {
     eventBus.$on('popupClose', () => {
       this.val = false
     })
@@ -100,7 +122,7 @@ export default {
     eventBus.$on('newQuestionPopupOpen', () => {
       this.val = true
     })
-  }
+  },
 }
 </script>
 
