@@ -13,11 +13,7 @@ export const mutations = {
 
 export const actions = {
   async getSearch({ commit }, data) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getSearch(data))
-      commit('SET_RESULT', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getSearch(data))
+    commit('SET_RESULT', res.data)
   },
 }

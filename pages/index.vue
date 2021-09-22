@@ -12,7 +12,7 @@
     <!-- Recommend slider  adapted = true // integrate = true   -->
     <section
       class="section recommend"
-      v-if="mainPage !== null"
+      v-if="mainPage !== null && mainPage.recommendations.length > 0"
     >
       <b-container>
         <section-header
@@ -50,7 +50,7 @@
     <!-- Fire Slider  adapted = true // integrate = false -->
     <section
       class="section"
-      v-if="mainPage !== null"
+      v-if="mainPage !== null && mainPage.hits.length > 0"
     >
       <b-container>
         <section-header
@@ -83,7 +83,10 @@
     </section>
 
     <!-- New Games Slider  adapted = true // integrate = true -->
-    <section class="section">
+    <section
+      class="section"
+      v-if="mainPage !== null && mainPage.novelties.length > 0"
+    >
       <b-container>
         <section-header
           link-label="Смотреть все"
@@ -92,7 +95,6 @@
           to="catalog"
         />
         <g-recommend-slider
-          v-if="mainPage !== null"
           :data="mainPage.novelties"
         />
       </b-container>
@@ -118,7 +120,10 @@
     </section>
 
     <!-- Sales Slider  adapted = true // integrate = true -->
-    <section class="section">
+    <section
+      class="section"
+      v-if="mainPage !== null && mainPage.saleOuts.length > 0"
+    >
       <b-container>
         <section-header
           link-label="Смотреть все"
@@ -127,7 +132,6 @@
           to="/catalog"
         />
         <g-recommend-slider
-          v-if="mainPage !== null"
           :data="mainPage.saleOuts"
         />
       </b-container>
@@ -199,7 +203,10 @@
     </section>
 
     <!-- Genres  adapted = true // integrate = true -->
-    <section class="section genres">
+    <section
+      class="section genres"
+      v-if="mainPage !== null && mainPage.categories.length > 0"
+    >
       <b-container>
         <section-header
           title="Игры по жанрам"
@@ -207,12 +214,15 @@
           to="/catalog"
         />
 
-        <g-genre-slider v-if="mainPage !== null" :data="mainPage.categories" />
+        <g-genre-slider :data="mainPage.categories" />
       </b-container>
     </section>
 
     <!-- Comments  adapted = true // integrate = false -->
-    <section class="section comments" v-if="comments !== null">
+    <section
+      class="section comments"
+      v-if="comments !== null"
+    >
       <b-container>
         <section-header title="Отзывы" link-label="Все отзывы" />
 
@@ -301,7 +311,6 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch('getMainPage')
-      await this.$store.dispatch('comments/getComments')
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',

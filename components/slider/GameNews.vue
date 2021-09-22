@@ -13,7 +13,7 @@
         :key="item.newsId"
         :id="item.newsId"
         :name="item.newsName"
-        :image="item.newsSmallBackground"
+        :image="item.newsBackground"
         :desc3="item.newsDescriptionOn3Words"
         :desc="item.newsSmallDescription"
       />

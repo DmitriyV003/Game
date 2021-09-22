@@ -15,37 +15,18 @@ export const mutations = {
 }
 
 export const actions = {
-  async getAll({ commit }) {
-    try {
-      const res = await this.$axios.$get(
-        this.$axios.defaults.baseURL + apiRoutes.purchasesAll
-      )
-      commit('setPurchases', res.data)
-    } catch (e) {
-      throw e
-    }
+  async getAll({ commit }, type) {
+    const res = await this.$axios.$get(apiRoutes.getAllPurchases(type))
+    commit('setPurchases', res.data)
   },
-  async fetchPurchase({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(
-        this.$axios.defaults.baseURL + apiRoutes.purchase(id)
-      )
-      commit('setPurchase', res.data)
-    } catch (e) {
-      throw e
-    }
+  async fetchPurchase({ commit }, { id, type }) {
+    const res = await this.$axios.$get(apiRoutes.getPurchase(id))
+    commit('setPurchase', res.data)
   },
   async postFeedback({ state }, data) {
-    try {
-      data.sellerId = state.purchase.sellerInfo.sellerId
-      data.keyId = state.purchase.keyId
-      const res = await this.$axios.$post(
-        this.$axios.defaults.baseURL + apiRoutes.postPurchaseFeedback,
-        JSON.stringify(data)
-      )
-    } catch (e) {
-      throw e
-    }
+    data.sellerId = state.purchase.sellerInfo.sellerId
+    data.keyId = state.purchase.keyId
+    const res = await this.$axios.$post(apiRoutes.postPurchaseFeedback, JSON.stringify(data))
   },
 }
 

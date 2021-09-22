@@ -12,12 +12,8 @@ export const mutations = {
 
 export const actions = {
   async getSellerGames({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getSellerGames(id))
-      commit('SET_SELLER_GAMES', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getSellerGames(id))
+    commit('SET_SELLER_GAMES', res.data)
   },
   async postBecomeSeller({ commit }) {
     try {

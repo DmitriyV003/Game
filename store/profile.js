@@ -21,14 +21,8 @@ export const mutations = {
 
 export const actions = {
   async getProfile({ commit }) {
-    try {
-      const res = await this.$axios.$get(
-        this.$axios.defaults.baseURL + apiRoutes.getProfile
-      )
-      commit('setProfile', res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getProfile)
+    commit('setProfile', res)
   },
   editProfileField({ commit }, payload) {
     commit('SET_PROFILE_FIELD', payload)
@@ -38,32 +32,25 @@ export const actions = {
     commit('user/SET_USER_AVATAR', avatar, { root: true })
   },
   async postEditProfile({ state }) {
-    try {
-      const res = await this.$axios.$post(
-        apiRoutes.postEditProfile,
-        JSON.stringify({
-          name: state.profile.data.name,
-          surname: state.profile.data.surname,
-          nickname: state.profile.data.nickname,
-        })
-      )
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$post(
+      apiRoutes.postEditProfile,
+      JSON.stringify({
+        name: state.profile.data.name,
+        surname: state.profile.data.surname,
+        nickname: state.profile.data.nickname,
+      })
+    )
   },
-  async postChangeAvatar(ctx, data) {
-    try {
-      await this.$axios.$post(
-        this.$axios.defaults.baseURL + apiRoutes.postChangeAvatar,
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      )
-    } catch (e) {
-      throw e
-    }
+  async postChangeAvatar({ dispatch }, data) {
+    await this.$axios.$post(
+      apiRoutes.postChangeAvatar,
+      data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
+    await dispatch('getProfile')
   },
 }

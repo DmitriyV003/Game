@@ -89,56 +89,44 @@ export const actions = {
     commit('SET_PRICE_FILTER', prices)
   },
   async getFilteredItems({ commit, state }) {
-    try {
-      const data = {
-        minPrice: state.acceptedFilters.minPrice,
-        maxPrice: state.acceptedFilters.maxPrice,
-        categories: state.acceptedFilters.categories.join(','),
-        services: state.acceptedFilters.services.join(','),
-        platforms: state.acceptedFilters.platforms.join(','),
-        genres: state.acceptedFilters.genres.join(','),
-      }
-      let query = ''
-
-      for (let item in data) {
-        if (data[item]) {
-          query += `${item}=${data[item]}&`
-        }
-      }
-
-      const res = await this.$axios.$get(
-        apiRoutes.getFilteredItemsCatalog(state.type, query)
-      )
-      commit('SET_ITEMS', res.data)
-      res.meta.links = res.links
-      commit('SET_META', res.meta)
-    } catch (e) {
-      throw e
+    const data = {
+      minPrice: state.acceptedFilters.minPrice,
+      maxPrice: state.acceptedFilters.maxPrice,
+      categories: state.acceptedFilters.categories.join(','),
+      services: state.acceptedFilters.services.join(','),
+      platforms: state.acceptedFilters.platforms.join(','),
+      genres: state.acceptedFilters.genres.join(','),
     }
+    let query = ''
+
+    for (let item in data) {
+      if (data[item]) {
+        query += `${item}=${data[item]}&`
+      }
+    }
+
+    const res = await this.$axios.$get(
+      apiRoutes.getFilteredItemsCatalog(state.type, query)
+    )
+    commit('SET_ITEMS', res.data)
+    res.meta.links = res.links
+    commit('SET_META', res.meta)
   },
   async getCatalogFilters({ commit, state }, type = null) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getCatalogFilters(state.type === null ? type : state.type))
-      commit('SET_FILTERS', res.data)
-      commit('SET_PRICE_FILTER', {
-        minPrice: res.data.price.minPrice,
-        maxPrice: res.data.price.maxPrice,
-      })
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getCatalogFilters(state.type === null ? type : state.type))
+    commit('SET_FILTERS', res.data)
+    commit('SET_PRICE_FILTER', {
+      minPrice: res.data.price.minPrice,
+      maxPrice: res.data.price.maxPrice,
+    })
   },
   async getCatalogGamesByPage({ commit }, page) {
-    try {
-      const res = await this.$axios.$get(
-        apiRoutes.getCatalogItems + `?page=${page}`
-      )
-      commit('SET_ITEMS', res.data)
-      res.meta.links = res.links
-      commit('SET_META', res.meta)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(
+      apiRoutes.getCatalogItems + `?page=${page}`
+    )
+    commit('SET_ITEMS', res.data)
+    res.meta.links = res.links
+    commit('SET_META', res.meta)
   },
 }
 

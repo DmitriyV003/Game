@@ -94,7 +94,7 @@ export default {
     try {
       await this.$store.dispatch(
         'purchases/fetchPurchase',
-        this.$route.params.id
+        { id: this.$route.params.id, type: 'game' }
       )
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {

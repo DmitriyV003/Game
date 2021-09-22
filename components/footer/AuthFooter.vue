@@ -6,11 +6,11 @@
         <nuxt-link class="footer-auth__text" to="/"
           >Политика конфиденциальности</nuxt-link
         >
-        <span class="footer-auth__text"
+        <a href="https://roob.in" target="_blank" class="footer-auth__text"
           >made by
           <span class="footer-auth__text footer-auth__text_white"
             >roob.in</span
-          ></span
+          ></a
         >
 
         <div class="footer-auth__socials">
@@ -88,6 +88,8 @@ export default {
     font-size: 14px
     line-height: 20px
     color: $gray
+    &:hover
+      color: $white
     +lg
       line-height: 18px
       &:not(:last-child)

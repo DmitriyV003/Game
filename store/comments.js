@@ -24,35 +24,19 @@ export const mutations = {
 
 export const actions = {
   async getComments({ commit }) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getComments)
-      commit('SET_COMMENTS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getComments)
+    commit('SET_COMMENTS', res.data)
   },
   async getCommentById({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getCommentById(id))
-      commit('SET_COMMENT', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getCommentById(id))
+    commit('SET_COMMENT', res.data)
   },
   async getCommentRecommendedGames({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getCommentRecommendedGames)
-      commit('SET_RECOMMENDED_GAMES', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getCommentRecommendedGames)
+    commit('SET_RECOMMENDED_GAMES', res.data)
   },
   async getAdditionalComments({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getAdditionalComments(id))
-      commit('SET_ADDITIONAL_COMMENTS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getAdditionalComments(id))
+    commit('SET_ADDITIONAL_COMMENTS', res.data)
   },
 }

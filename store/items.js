@@ -7,24 +7,14 @@ export const state = () => ({
 
 export const actions = {
   async getItemById({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getItem(id))
-      commit('SET_ITEM', res.data)
-      console.log(res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getItem(id))
+    commit('SET_ITEM', res.data)
+    console.log(res)
   },
   async getItemProposals({ commit }, { itemId, keyId }) {
-    try {
-      const res = await this.$axios.$get(
-        apiRoutes.getItemProposals(itemId, keyId)
-      )
-      commit('SET_ITEM_PROPOSALS', res.data)
-      console.log(res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getItemProposals(itemId, keyId))
+    commit('SET_ITEM_PROPOSALS', res.data)
+    console.log(res)
   },
 }
 

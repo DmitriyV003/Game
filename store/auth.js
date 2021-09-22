@@ -61,16 +61,8 @@ export const actions = {
     Cookies.set('token', token, { expires: 1 })
   },
   async forgetPassword(ctx, data) {
-    try {
-      const res = await this.$axios.$get(
-        this.$axios.defaults.baseURL +
-          apiRoutes.forgetPassword +
-          `?email=${data.email}`
-      )
-      console.log(res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.forgetPassword +`?email=${data.email}`)
+    console.log(res)
   },
   async renewPassword(ctx, data) {
     try {

@@ -126,9 +126,9 @@
         <nuxt-link class="footer__text" to="/legal"
           >Политика конфиденциальности</nuxt-link
         >
-        <span class="footer__made"
+        <a href="https://roob.in" target="_blank" class="footer__made"
           >made by
-          <span class="footer__text footer__roobin">roob.in</span></span
+          <span class="footer__text footer__roobin">roob.in</span></a
         >
 
         <div class="footer__payments">
@@ -162,6 +162,8 @@ export default {
     color: $gray
     font-size: 14px
     line-height: 20px
+    &:hover
+      color: $white
   &__roobin
     cursor: pointer
     color: $white !important

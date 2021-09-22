@@ -20,20 +20,12 @@ export const mutations = {
 
 export const actions = {
   async getSliderNews({ commit }) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getSliderNews)
-      commit('SET_SLIDER_NEWS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getSliderNews)
+    commit('SET_SLIDER_NEWS', res.data)
   },
   async getCardNews({ commit }) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getCardNews)
-      commit('SET_CARD_NEWS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getCardNews)
+    commit('SET_CARD_NEWS', res.data)
   },
   async makeCommentTree({ commit }, comments) {
     if (comments.length === 0) {
@@ -50,27 +42,13 @@ export const actions = {
       .filter((x) => x.parentId === null)
   },
   async getNewsById({ commit, dispatch }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getNewsById(id))
-      res.data.newsComments = await dispatch(
-        'makeCommentTree',
-        res.data.newsComments
-      )
-      commit('SET_NEWS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getNewsById(id))
+    res.data.newsComments = await dispatch('makeCommentTree', res.data.newsComments)
+    commit('SET_NEWS', res.data)
   },
   async postCreateNewsComment({ commit, dispatch }, data) {
-    try {
-      const res = await this.$axios.$post(apiRoutes.postCreateNewsComment, data)
-      res.data.newsComments = await dispatch(
-        'makeCommentTree',
-        res.data.newsComments
-      )
-      commit('SET_NEWS', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$post(apiRoutes.postCreateNewsComment, data)
+    res.data.newsComments = await dispatch('makeCommentTree', res.data.newsComments)
+    commit('SET_NEWS', res.data)
   },
 }

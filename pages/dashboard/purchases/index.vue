@@ -34,18 +34,18 @@
                   class="purchases__btn"
                   label="Софт"
                 />
-                <g-sort-button
-                  @click.native="activeFilter = 'skin'"
-                  :active="activeFilter === 'skin'"
-                  class="purchases__btn"
-                  label="Скины"
-                />
-                <g-sort-button
-                  @click.native="activeFilter = 'case'"
-                  :active="activeFilter === 'case'"
-                  class="purchases__btn"
-                  label="Кейсы"
-                />
+<!--                <g-sort-button-->
+<!--                  @click.native="activeFilter = 'skin'"-->
+<!--                  :active="activeFilter === 'skin'"-->
+<!--                  class="purchases__btn"-->
+<!--                  label="Скины"-->
+<!--                />-->
+<!--                <g-sort-button-->
+<!--                  @click.native="activeFilter = 'case'"-->
+<!--                  :active="activeFilter === 'case'"-->
+<!--                  class="purchases__btn"-->
+<!--                  label="Кейсы"-->
+<!--                />-->
               </vue-slick>
             </div>
 
@@ -90,7 +90,7 @@
               md="6"
               class="g-purchase-item__col"
               v-if="purchases.length > 0 || purchases !== null"
-              v-for="purchase in purchases(
+              v-for="getPurchase in purchases(
                 (el) => el.type.toLowerCase() === activeFilter.toLowerCase()
               )"
               :key="purchase.purchaseId"
@@ -151,7 +151,7 @@ export default {
   },
   async mounted() {
     try {
-      await this.$store.dispatch('purchases/getAll')
+      await this.$store.dispatch('purchases/getAll', this.activeFilter)
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',

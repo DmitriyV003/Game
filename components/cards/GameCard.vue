@@ -32,12 +32,12 @@
           class="game-card__price game-card__price_old"
           :class="{ 'game-card__price_old_sm': adaptiveSm }"
           v-if="oldPrice !== null && newPrice !== null"
-          >{{ oldPrice / 100 }} ₽</span
+          >{{ formatNumber(oldPrice / 100, 2) }} ₽</span
         >
         <span
           class="game-card__price game-card__price_new"
           :class="{ 'game-card__price_new_sm': adaptiveSm }"
-          >{{ newPrice === null ? oldPrice / 100 : newPrice / 100 }} ₽</span
+          >{{ newPrice === null ? formatNumber(oldPrice / 100, 2) : formatNumber(newPrice / 100, 2) }} ₽</span
         >
       </div>
     </div>
@@ -45,10 +45,16 @@
 </template>
 
 <script>
-import Rating from '~/components/cards/Rating'
+import Rating       from '~/components/cards/Rating'
+import formatNumber from '~/utils/formatNumber'
 export default {
   name: 'GameCard',
   components: { Rating },
+  data () {
+    return {
+      formatNumber
+    }
+  },
   props: {
     adaptiveSm: {
       type: Boolean,
@@ -137,6 +143,7 @@ export default {
     font-size: 16px
     line-height: 20px
     position: relative
+    color: rgba(0, 0, 0, 1)
     &_sm
       +sm
         padding: 4px 6px

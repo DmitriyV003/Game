@@ -18,15 +18,11 @@ export const mutations = {
 
 export const actions = {
   async postKeysFile({ commit }, file) {
-    try {
-      const res = await this.$axios.$post(apiRoutes.postKeysFile, file, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
-      commit('SET_KEYS', res.keys)
-      console.log(res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$post(apiRoutes.postKeysFile, file, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    commit('SET_KEYS', res.keys)
+    console.log(res)
   },
   deleteKey({ commit }, key) {
     commit('DELETE_KEY', key)

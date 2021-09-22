@@ -133,7 +133,9 @@
     <!-- Become partner  adapted = true -->
     <section class="section">
       <b-container>
-        <g-promo-banner @onButtonClicked="becomeSeller" />
+        <g-promo-banner
+          @onButtonClicked="becomeSeller"
+        />
       </b-container>
     </section>
   </div>

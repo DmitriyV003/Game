@@ -11,9 +11,9 @@
     <main-button
       color="primary"
       size="xl"
-      tag="a"
-      to="/catalog?type=games"
+      tag="button"
       label="стать продавцом"
+      @click.native="$emit('onButtonClicked')"
     />
   </div>
 </template>

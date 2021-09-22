@@ -8,14 +8,7 @@ export const mutations = {
 
 export const actions = {
   async changePassword(ctx, data) {
-    try {
-      const res = await this.$axios.$post(
-        this.$axios.defaults.baseURL + apiRoutes.changePassword,
-        JSON.stringify(data)
-      )
-      console.log(res)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$post(apiRoutes.changePassword, JSON.stringify(data))
+    console.log(res)
   },
 }

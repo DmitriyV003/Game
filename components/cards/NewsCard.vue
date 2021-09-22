@@ -1,6 +1,6 @@
 <template>
   <div class="g-news">
-    <img src="/images/news-2.png" alt="" class="g-news__image" />
+    <img :src="image" alt="" class="g-news__image" />
 
     <div class="g-news__block">
       <div class="g-news__top">

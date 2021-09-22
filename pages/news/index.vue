@@ -12,14 +12,16 @@
     </section>
 
     <!-- Games  adapted = true  -->
-    <section>
+    <section v-if="sliderNews !== null">
       <b-container>
         <div class="news__games-top">
           <show-all label="Все жанры игр" />
         </div>
 
         <div class="news__games">
-          <g-game-news-slider v-if="sliderNews !== null" :data="sliderNews" />
+          <g-game-news-slider
+            :data="sliderNews"
+          />
         </div>
       </b-container>
     </section>
@@ -27,7 +29,10 @@
     <!-- News  adapted = true  -->
     <section class="news__news">
       <b-container>
-        <div class="news__block" v-if="cardNews !== null">
+        <div
+          class="news__block"
+          v-if="cardNews !== null"
+        >
           <g-news-card
             v-for="item in cardNews"
             :key="item.newsId"
@@ -35,7 +40,7 @@
             :name="item.newsName"
             :desc="item.newsSmallDescription"
             :created-at="item.newsCreatedAt"
-            :image="item.newsSmallBackground"
+            :image="item.newsBackground"
           />
         </div>
 

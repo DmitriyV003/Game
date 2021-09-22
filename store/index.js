@@ -22,22 +22,17 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ dispatch }) {
-    dispatch('auth/autoLogin')
+    try {
+      dispatch('auth/autoLogin')
+    } catch (e) {
+    }
   },
   async getMainPage({ commit }) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getMainPage)
-      commit('SET_MAIN_PAGE', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getMainPage)
+    commit('SET_MAIN_PAGE', res.data)
   },
   async getSellerPage({ commit }, id) {
-    try {
-      const res = await this.$axios.$get(apiRoutes.getSellerPage(id))
-      commit('SET_SELLER_PAGE', res.data)
-    } catch (e) {
-      throw e
-    }
+    const res = await this.$axios.$get(apiRoutes.getSellerPage(id))
+    commit('SET_SELLER_PAGE', res.data)
   },
 }
