@@ -33,29 +33,32 @@
               <drop-items
                 title="Цена"
                 class="catalog__drop"
-                v-if="filters !== null"
+                v-if="filters !== null && filters.price !== null"
               >
                 <template v-slot:drop-items>
                   <div class="catalog__price">
-                    <vue-range-slider
-                      class="g-range-slider"
-                      v-model="prices"
-                      tooltip="always"
-                      :min="Number(filters.price.minPrice)"
-                      :max="Number(filters.price.maxPrice)"
-                      :height="1"
-                      :contained="true"
-                      :process-style="{
+                    <client-only>
+                      <vue-range-slider
+                        class="g-range-slider"
+                        v-model="prices"
+                        tooltip="always"
+                        :interval="0.01"
+                        :min="Number(filters.price.minPrice)"
+                        :max="Number(filters.price.maxPrice)"
+                        :height="1"
+                        :contained="true"
+                        :process-style="{
                         backgroundColor: 'rgba(100, 62, 255, 1)',
                       }"
-                      @drag-end="getFilteredItems"
-                    >
-                      <template v-slot:tooltip="{ value, focus }">
-                        <div :class="['g-range-slider__tooltip', { focus }]">
-                          {{ value / 100 }}
-                        </div>
-                      </template>
-                    </vue-range-slider>
+                        @drag-end="getFilteredItems"
+                      >
+                        <template v-slot:tooltip="{ value, focus }">
+                          <div :class="['g-range-slider__tooltip', { focus }]">
+                            {{ Number(formatNumber(value, 2)) }}
+                          </div>
+                        </template>
+                      </vue-range-slider>
+                    </client-only>
                   </div>
 
                   <div class="catalog-filters__range-inputs">
@@ -88,7 +91,7 @@
               <drop-items
                 class="catalog__drop"
                 title="Категории"
-                v-if="filters !== null"
+                v-if="filters !== null && filters.categories !== null"
               >
                 <template v-slot:drop-items>
                   <g-check-box
@@ -117,7 +120,7 @@
               <drop-items
                 class="catalog__drop"
                 title="Платформы"
-                v-if="filters !== null"
+                v-if="filters !== null && filters.platforms !== null"
               >
                 <template v-slot:drop-items>
                   <g-check-box
@@ -136,7 +139,7 @@
               <drop-items
                 class="catalog__drop"
                 title="Жанры"
-                v-if="filters !== null"
+                v-if="filters !== null && filters.genres !== null"
               >
                 <template v-slot:drop-items>
                   <g-check-box
@@ -162,7 +165,7 @@
               <drop-items
                 class="catalog__drop"
                 title="Сервисы"
-                v-if="filters !== null"
+                v-if="filters !== null  && filters.services !== null"
               >
                 <template v-slot:drop-items>
                   <g-check-box
@@ -285,6 +288,7 @@
                   :new-price="item.itemPrice.new"
                   :old-price="item.itemPrice.old"
                   :sale="item.itemPrice.sale"
+                  :type="type"
                   adaptive-sm
                 />
               </b-col>
@@ -320,7 +324,8 @@ import GTag from '~/components/Tag'
 import GPagination from '~/components/Pagination'
 import GCatalogSectionHeader from '~/components/catalog/CatalogSectionHeader'
 import GCatalogFiltersPopup from '~/components/popups/CatalogFiltersPopup'
-import Chip from '~/components/Chip'
+import Chip         from '~/components/Chip'
+import formatNumber from '~/utils/formatNumber'
 
 export default {
   components: {
@@ -452,29 +457,30 @@ export default {
     },
     minPrice: {
       get() {
-        return this.acceptedFilters.minPrice / 100
+        return this.acceptedFilters.minPrice
       },
       set(val) {
         this.$store.dispatch('catalog/changePriceFilter', {
-          minPrice: Number(val) * 100,
-          maxPrice: null,
+          minPrice: Number(val),
+          maxPrice: this.maxPrice,
         })
       },
     },
     maxPrice: {
       get() {
-        return this.acceptedFilters.maxPrice / 100
+        return this.acceptedFilters.maxPrice
       },
       set(val) {
         this.$store.dispatch('catalog/changePriceFilter', {
-          minPrice: null,
-          maxPrice: Number(val) * 100,
+          minPrice: this.minPrice,
+          maxPrice: Number(val),
         })
       },
     },
   },
   data: () => {
     return {
+      formatNumber,
       filtersStrings: [
         'minPrice',
         'maxPrice',
@@ -505,8 +511,7 @@ export default {
       const query = this.$route.query
 
       if (!query.type) {
-        await this.$router.push('/error')
-        return
+        query.type = 'games'
       }
 
       await this.$store.dispatch('catalog/setCatalogType', query.type)

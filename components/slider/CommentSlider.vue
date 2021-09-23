@@ -16,10 +16,10 @@
         :key="item.id"
         :name="item.itemName"
         :image="item.itemHeaderImage"
-        :rating="Number(item.itemRate)"
+        :rating="Number(item.itemRating)"
         :avatar="item.userAvatar"
-        :nickname="item.userNickname"
-        :text="item.userFeedbackText"
+        :nickname="item.nickname"
+        :text="item.comment"
         :date="item.createdAt"
       />
     </vue-slick>

@@ -38,6 +38,7 @@ export default {
     font-size: 16px
     line-height: 20px
     color: white(1)
+    word-break: break-all
   &__img
     width: 149px
     height: 149px

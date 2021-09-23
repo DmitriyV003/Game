@@ -6,8 +6,8 @@ export const state = () => ({
 })
 
 export const actions = {
-  async getItemById({ commit }, id) {
-    const res = await this.$axios.$get(apiRoutes.getItem(id))
+  async getItemById({ commit }, { id, type }) {
+    const res = await this.$axios.$get(apiRoutes.getItem(id, type))
     commit('SET_ITEM', res.data)
     console.log(res)
   },

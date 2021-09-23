@@ -46,12 +46,8 @@ export const mutations = {
     ].filter((x) => x !== filter)
   },
   SET_PRICE_FILTER(state, { minPrice, maxPrice }) {
-    if (minPrice) {
-      state.acceptedFilters.minPrice = minPrice
-    }
-    if (maxPrice) {
-      state.acceptedFilters.maxPrice = maxPrice
-    }
+    state.acceptedFilters.maxPrice = maxPrice
+    state.acceptedFilters.minPrice = minPrice
   },
 }
 
@@ -112,12 +108,14 @@ export const actions = {
     res.meta.links = res.links
     commit('SET_META', res.meta)
   },
-  async getCatalogFilters({ commit, state }, type = null) {
-    const res = await this.$axios.$get(apiRoutes.getCatalogFilters(state.type === null ? type : state.type))
-    commit('SET_FILTERS', res.data)
+  async getCatalogFilters({ commit, state }) {
+    const res = await this.$axios.$get(apiRoutes.getCatalogFilters(state.type))
+    res.price.minPrice = Number((res.price.minPrice / 100).toFixed(2))
+    res.price.maxPrice = Number((res.price.maxPrice / 100).toFixed(2))
+    commit('SET_FILTERS', res)
     commit('SET_PRICE_FILTER', {
-      minPrice: res.data.price.minPrice,
-      maxPrice: res.data.price.maxPrice,
+      minPrice: res.price.minPrice,
+      maxPrice: res.price.maxPrice,
     })
   },
   async getCatalogGamesByPage({ commit }, page) {

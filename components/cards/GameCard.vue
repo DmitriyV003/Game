@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/product/' + id" class="game-card">
+  <nuxt-link :to="'/product/' + id + '?type=' + type" class="game-card">
     <img :src="image" alt="" class="game-card__img" />
     <p class="game-card__title" :class="{ 'game-card__title_sm': adaptiveSm }">
       {{ title }}
@@ -91,6 +91,10 @@ export default {
     image: {
       type: String,
       default: () => '',
+    },
+    type: {
+      type: String,
+      required: true,
     },
   },
 }

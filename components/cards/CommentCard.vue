@@ -239,7 +239,7 @@ export default {
     &__rating
         position: absolute
         left: 0
-        top: 20px
+        top: 8px
 
         &_xl
             +xl

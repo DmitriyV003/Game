@@ -41,10 +41,8 @@ export const actions = {
       const token = cookies.token
       const user = cookies.user
 
-      console.log(user)
-
       dispatch('setToken', token)
-      dispatch('user/setUser', JSON.parse(user), { root: true })
+      dispatch('user/setUser', user ? JSON.parse(user) : null, { root: true })
     } catch (e) {
       console.log(e)
     }

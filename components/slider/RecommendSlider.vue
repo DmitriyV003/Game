@@ -21,6 +21,7 @@
         :new-price="item.itemPrice.new"
         :rating="Number(item.itemScore)"
         :id="item.itemId"
+        type="game"
       />
     </vue-slick>
     <div class="g-slider__controls">

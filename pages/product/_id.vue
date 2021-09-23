@@ -240,7 +240,7 @@ export default {
   layout: 'default',
   async mounted() {
     try {
-      await this.$store.dispatch('items/getItemById', this.$route.params.id)
+      await this.$store.dispatch('items/getItemById', { id: this.$route.params.id, type: 'game' })
       await this.$store.dispatch('comments/getComments')
       this.breadCrumbs.push({
         to: '/product/' + this.$route.params.id,

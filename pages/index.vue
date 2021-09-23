@@ -151,42 +151,42 @@
           <div class="sales-section__buttons">
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=10000"
+              to="/catalog?type=games&minPrice=0&maxPrice=10000"
               label="до 100 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=20000"
+              to="/catalog?type=games&minPrice=0&maxPrice=20000"
               label="до 200 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=30000"
+              to="/catalog?type=games&minPrice=0&maxPrice=30000"
               label="до 300 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none"
-              to="/catalog?minPrice=0&maxPrice=50000"
+              to="/catalog?type=games&minPrice=0&maxPrice=50000"
               label="до 500 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=60000"
+              to="/catalog?type=games&minPrice=0&maxPrice=60000"
               label="до 600 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=80000"
+              to="/catalog?type=games&minPrice=0&maxPrice=80000"
               label="до 800 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm"
-              to="/catalog?minPrice=0&maxPrice=90000"
+              to="/catalog?type=games&minPrice=0&maxPrice=90000"
               label="до 900 ₽"
             />
             <rounded-button
               class="sales-section__button g-pr-none-sm g-pl-none-sm g-mr-none"
-              to="/catalog?minPrice=0&maxPrice=100000"
+              to="/catalog?type=games&minPrice=0&maxPrice=100000"
               label="до 1000 ₽"
             />
           </div>
@@ -221,12 +221,12 @@
     <!-- Comments  adapted = true // integrate = false -->
     <section
       class="section comments"
-      v-if="comments !== null"
+      v-if="mainPage !== null && mainPage.sellersFeedbacks.length > 0"
     >
       <b-container>
         <section-header title="Отзывы" link-label="Все отзывы" />
 
-        <g-comment-slider :data="comments" />
+        <g-comment-slider :data="mainPage.sellersFeedbacks" />
       </b-container>
     </section>
 

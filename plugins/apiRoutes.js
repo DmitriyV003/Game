@@ -24,7 +24,7 @@ export default {
   getSearchItems: (query) =>
     '/personal-area/sale/add-key/search-items?' + query,
   getSaleItem: (query) => '/personal-area/sale/add-key/get-item?' + query,
-  getItem: (id) => '/to-item/' + id,
+  getItem: (id, type) => '/to-item/' + type + '/' + id,
   getItemProposals: (itemId, keyId) =>
     '/to-item/' + itemId + '/' + keyId + '/more-sellers',
   postKeysFile: '/personal-area/sale/add-key/download-keys',
@@ -32,8 +32,8 @@ export default {
   getSellerPage: (id) => '/seller/profile/' + id,
   getSellerGames: (id) => '/seller/profile/' + id + '/games',
   getSearch: (name) => '/search?name=' + name,
-  getCatalogItems: (type) => '/catalog/' + type,
-  getCatalogFilters: (type) => '/catalog/' + type + '/filters',
+  getCatalogItems: (type) => '/catalog/items/' + type,
+  getCatalogFilters: (type) => '/catalog/filter/' + type,
   getFilteredItemsCatalog: (type, query) => '/catalog/' + type + '/after-filters?' + query,
   getComments: '/seller/feedbacks',
   getCommentById: (id) => `/seller/feedbacks/${id}`,
