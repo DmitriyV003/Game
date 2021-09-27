@@ -169,7 +169,7 @@
         <div class="g-product-section g-product-section_block">
           <section-header size="xl" title="Отзывы" link-label="Все отзывы" />
 
-          <g-comment-slider :data="comments" />
+          <g-product-comment-slider :data="comments" />
         </div>
       </b-container>
     </section>
@@ -212,21 +212,23 @@
 
 <script>
 import BreadCrumb from '~/components/BreadCrumb'
-import Rating from '~/components/cards/Rating'
-import GPrice from '~/components/GPrice'
-import MainButton from '~/components/buttons/MainButton'
-import Avatar from '~/components/Avatar'
-import GInfoBlock from '~/components/GInfoBlock'
-import GSystemTable from '~/components/tables/GSystemTable'
-import SectionHeader from '~/components/SectionHeader'
-import GProposalCard from '~/components/cards/ProposalCard'
-import GProposalSlider from '~/components/slider/ProposalSlider'
-import GCommentSlider from '~/components/slider/CommentSlider'
-import { mapState } from 'vuex'
+import Rating                from '~/components/cards/Rating'
+import GPrice                from '~/components/GPrice'
+import MainButton            from '~/components/buttons/MainButton'
+import Avatar                from '~/components/Avatar'
+import GInfoBlock            from '~/components/GInfoBlock'
+import GSystemTable          from '~/components/tables/GSystemTable'
+import SectionHeader         from '~/components/SectionHeader'
+import GProposalCard         from '~/components/cards/ProposalCard'
+import GProposalSlider       from '~/components/slider/ProposalSlider'
+import GCommentSlider        from '~/components/slider/CommentSlider'
+import { mapState }          from 'vuex'
+import GProductCommentSlider from '~/components/slider/ProductCommentSlider'
 
 export default {
   name: 'Product',
   components: {
+    GProductCommentSlider,
     GCommentSlider,
     GProposalSlider,
     GProposalCard,
