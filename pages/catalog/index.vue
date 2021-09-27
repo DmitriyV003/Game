@@ -582,7 +582,11 @@ export default {
     },
     async toPage(page) {
       try {
-        await this.$store.dispatch('catalog/getCatalogGamesByPage', page)
+        await this.$router.push({
+          path: '/catalog',
+          query: { ...this.$route.query, page },
+        })
+        await this.$store.dispatch('catalog/getCatalogGamesByPage', { page, type: this.$route.query.type })
       } catch (e) {
         console.log(e)
       }

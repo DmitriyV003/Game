@@ -23,14 +23,14 @@
                 :infinite="false"
               >
                 <g-sort-button
-                  @click.native="activeFilter = 'game'"
-                  :active="activeFilter === 'game'"
+                  @click.native="changeFilter('games')"
+                  :active="activeFilter === 'games'"
                   class="purchases__btn"
                   label="Игры"
                 />
                 <g-sort-button
-                  @click.native="activeFilter = 'soft'"
-                  :active="activeFilter === 'soft'"
+                  @click.native="changeFilter('software')"
+                  :active="activeFilter === 'software'"
                   class="purchases__btn"
                   label="Софт"
                 />
@@ -90,16 +90,13 @@
               md="6"
               class="g-purchase-item__col"
               v-if="purchases.length > 0 || purchases !== null"
-              v-for="getPurchase in purchases(
-                (el) => el.type.toLowerCase() === activeFilter.toLowerCase()
-              )"
+              v-for="purchase in purchases"
               :key="purchase.purchaseId"
             >
               <g-purchase-item
-                :id="Number(purchase.purchaseId)"
+                :id="purchase.purchaseId"
                 :name="purchase.itemName"
                 :code="purchase.key"
-                :type="purchase.type"
                 :platform="purchase.itemPlatform"
                 :picture="purchase.itemBackground"
               />
@@ -117,17 +114,12 @@ import GPurchaseItem from '~/components/dashboard/PurchaseItem'
 import RoundedButton from '~/components/buttons/RoundedButton'
 import GSortButton from '~/components/dashboard/SortButton'
 import icons from '~/mixins/icons'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import GAddItem from '~/components/AddItem'
 
 export default {
   name: 'GDashboardPurchasesPage',
   mixins: [icons],
-  data: () => {
-    return {
-      activeFilter: 'game',
-    }
-  },
   components: {
     GAddItem,
     GSortButton,
@@ -136,11 +128,34 @@ export default {
     GDashboardNavigation,
   },
   computed: {
-    ...mapGetters({
-      purchases: 'purchases/getPurchases',
+    ...mapState({
+      purchases: (state) => state.purchases.purchases,
+      purchaseType: (state) => state.purchases.type,
     }),
+    activeFilter: {
+      get () {
+        return this.purchaseType
+      },
+      set (value) {
+        this.$store.commit('purchases/SET_TYPE', value)
+      }
+    }
   },
   methods: {
+    async changeFilter(filter) {
+      this.activeFilter = filter
+
+      try {
+        await this.$store.dispatch('purchases/getAll', filter)
+      } catch (e) {
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
+    },
     sortByDate(a, b) {
       return new Date(a.createdAt) > new Date(b.createdAt)
         ? 1

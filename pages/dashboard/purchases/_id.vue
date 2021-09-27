@@ -90,20 +90,22 @@ export default {
     GPurchaseItem,
     GDashboardNavigation,
   },
-  async mounted() {
-    try {
-      await this.$store.dispatch(
-        'purchases/fetchPurchase',
-        { id: this.$route.params.id, type: 'game' }
-      )
-    } catch (e) {
-      this.$bvToast.toast('Ошибка загрузки страницы!', {
-        title: 'Что-то пошло не так(',
-        variant: 'danger',
-        solid: true,
-        appendToast: true,
-      })
+  methods: {
+    async getPurchases () {
+      try {
+        await this.$store.dispatch('purchases/fetchPurchase', this.$route.params.id)
+      } catch (e) {
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
     }
+  },
+  async mounted() {
+    await   this.getPurchases()
   },
   computed: {
     ...mapState({

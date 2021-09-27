@@ -6,15 +6,15 @@ export const state = () => ({
 })
 
 export const actions = {
-  async getItemById({ commit }, { id, type }) {
-    const res = await this.$axios.$get(apiRoutes.getItem(id, type))
+  async getItemById({ commit, rootState }, id) {
+    // TODO Unified catalog/product type
+    const res = await this.$axios.$get(apiRoutes.getItem(id, rootState['catalog'].type === 'games' ? 'game' : 'software'))
     commit('SET_ITEM', res.data)
-    console.log(res)
   },
-  async getItemProposals({ commit }, { itemId, keyId }) {
-    const res = await this.$axios.$get(apiRoutes.getItemProposals(itemId, keyId))
+  async getItemProposals({ commit, state, rootState }, id) {
+    // TODO Unified catalog/product type
+    const res = await this.$axios.$get(apiRoutes.getItemProposals(rootState['catalog'].type === 'games' ? 'game' : 'software', id, state.item.sellerId))
     commit('SET_ITEM_PROPOSALS', res.data)
-    console.log(res)
   },
 }
 

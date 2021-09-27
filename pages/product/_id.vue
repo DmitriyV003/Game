@@ -20,7 +20,7 @@
           <div class="g-product-overview__info">
             <h1 class="title">{{ item.name }}</h1>
             <p class="text text-color-gray text-size-16 text-weight-400">
-              {{ item.detailedDescription.slice(0, 400) }}
+              {{ item.shortDescription }}
             </p>
 
             <div class="g-product-overview__wrapper">
@@ -28,8 +28,8 @@
                 <span class="current text-h1"
                   >{{
                     item.itemPrice.new === null
-                      ? item.itemPrice.old / 100
-                      : item.itemPrice.new / 100
+                      ? item.itemPrice.old
+                      : item.itemPrice.new
                   }}
                   ₽</span
                 >
@@ -131,7 +131,7 @@
 
           <div class="g-product-block">
             <div class="text text-color-gray text-size-16">
-              {{ item.detailedDescription.slice(0, 250) }}
+              {{ item.detailedDescription.slice(0, maxText) }}
             </div>
 
             <div class="g-product__video"></div>
@@ -140,6 +140,7 @@
               size="xl"
               color="gray"
               label="Показать больше"
+              @click.native="showMore"
               full-width
             />
           </div>
@@ -190,6 +191,7 @@
               :name="item.sellerName"
               :surname="item.sellerSurname"
               :avatar="item.sellerAvatar"
+              :seller-id="item.sellerId"
               :likes="Number(item.likes)"
               :dislikes="Number(item.dislikes)"
               :sale="Number(item.itemPrice.sale)"
@@ -239,18 +241,16 @@ export default {
   },
   layout: 'default',
   async mounted() {
+    const itemId = this.$route.params.id
     try {
-      await this.$store.dispatch('items/getItemById', { id: this.$route.params.id, type: 'game' })
+      await this.$store.dispatch('items/getItemById', itemId)
       await this.$store.dispatch('comments/getComments')
       this.breadCrumbs.push({
-        to: '/product/' + this.$route.params.id,
+        to: '/product/' + itemId,
         label: this.item.name,
       })
 
-      await this.$store.dispatch('items/getItemProposals', {
-        itemId: this.$route.params.id,
-        keyId: this.item.keyId,
-      })
+      await this.$store.dispatch('items/getItemProposals', itemId)
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',
@@ -258,6 +258,11 @@ export default {
         solid: true,
         appendToast: true,
       })
+    }
+  },
+  methods: {
+    showMore () {
+      this.maxText = this.item.detailedDescription.length
     }
   },
   computed: {
@@ -269,6 +274,7 @@ export default {
   },
   data: () => {
     return {
+      maxText: 250,
       breadCrumbs: [
         { to: '/', label: 'Главная' },
         { to: '/catalog', label: 'Игры' },

@@ -25,8 +25,8 @@ export default {
     '/personal-area/sale/add-key/search-items?' + query,
   getSaleItem: (query) => '/personal-area/sale/add-key/get-item?' + query,
   getItem: (id, type) => '/to-item/' + type + '/' + id,
-  getItemProposals: (itemId, keyId) =>
-    '/to-item/' + itemId + '/' + keyId + '/more-sellers',
+  getItemProposals: (type, itemId, sellerId) =>
+    `/to-item/${type}/${itemId}/${sellerId}/more-sellers`,
   postKeysFile: '/personal-area/sale/add-key/download-keys',
   postNewSale: '/personal-area/sale/add-key',
   getSellerPage: (id) => '/seller/profile/' + id,

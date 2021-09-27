@@ -32,12 +32,12 @@
           class="game-card__price game-card__price_old"
           :class="{ 'game-card__price_old_sm': adaptiveSm }"
           v-if="oldPrice !== null && newPrice !== null"
-          >{{ formatNumber(oldPrice / 100, 2) }} ₽</span
+          >{{ formatNumber(oldPrice, 2) }} ₽</span
         >
         <span
           class="game-card__price game-card__price_new"
           :class="{ 'game-card__price_new_sm': adaptiveSm }"
-          >{{ newPrice === null ? formatNumber(oldPrice / 100, 2) : formatNumber(newPrice / 100, 2) }} ₽</span
+          >{{ newPrice === null ? formatNumber(oldPrice, 2) : formatNumber(newPrice, 2) }} ₽</span
         >
       </div>
     </div>

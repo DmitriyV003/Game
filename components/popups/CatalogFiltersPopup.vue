@@ -16,13 +16,14 @@
           :tooltip="'always'"
           :min="Number(filters.price.minPrice)"
           :max="Number(filters.price.maxPrice)"
+          :interval="0.01"
           :height="1"
           :contained="true"
           :process-style="{ backgroundColor: 'rgba(100, 62, 255, 1)' }"
         >
           <template v-slot:tooltip="{ value, focus }">
             <div :class="['g-range-slider__tooltip', { focus }]">
-              {{ value / 100 }}
+              {{ Number(formatNumber(value, 2)) }}
             </div>
           </template>
         </vue-range-slider>

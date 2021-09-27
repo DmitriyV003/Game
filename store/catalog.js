@@ -110,18 +110,14 @@ export const actions = {
   },
   async getCatalogFilters({ commit, state }) {
     const res = await this.$axios.$get(apiRoutes.getCatalogFilters(state.type))
-    res.price.minPrice = Number((res.price.minPrice / 100).toFixed(2))
-    res.price.maxPrice = Number((res.price.maxPrice / 100).toFixed(2))
     commit('SET_FILTERS', res)
     commit('SET_PRICE_FILTER', {
       minPrice: res.price.minPrice,
       maxPrice: res.price.maxPrice,
     })
   },
-  async getCatalogGamesByPage({ commit }, page) {
-    const res = await this.$axios.$get(
-      apiRoutes.getCatalogItems + `?page=${page}`
-    )
+  async getCatalogGamesByPage({ commit }, { page, type }) {
+    const res = await this.$axios.$get(`${apiRoutes.getCatalogItems(type)}?page=${page}`)
     commit('SET_ITEMS', res.data)
     res.meta.links = res.links
     commit('SET_META', res.meta)

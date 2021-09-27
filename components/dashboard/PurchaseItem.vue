@@ -29,7 +29,7 @@
       class="g-purchase-item__key g-purchase-item__key_mobile"
     >
       <p class="g-purchase-item__value">{{ code }}</p>
-      <button @click="copy" class="button-reboot g-purchase-item__button">
+      <button @click.stop="copy" class="button-reboot g-purchase-item__button">
         <copy-icon class="icon" />
       </button>
     </div>
@@ -50,7 +50,7 @@ export default {
   },
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true,
     },
     name: {
@@ -58,10 +58,6 @@ export default {
       required: true,
     },
     code: {
-      type: String,
-      required: true,
-    },
-    type: {
       type: String,
       required: true,
     },

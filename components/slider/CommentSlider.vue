@@ -17,7 +17,7 @@
         :name="item.itemName"
         :image="item.itemHeaderImage"
         :rating="Number(item.itemRating)"
-        :avatar="item.userAvatar"
+        :avatar="item.avatar"
         :nickname="item.nickname"
         :text="item.comment"
         :date="item.createdAt"

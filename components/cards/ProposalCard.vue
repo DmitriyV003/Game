@@ -1,7 +1,10 @@
 <template>
   <div class="g-proposal-card_mobile">
     <div class="g-proposal-card">
-      <div class="g-proposal-card__avatar">
+      <nuxt-link
+        :to="`/seller/${sellerId}`"
+        class="g-proposal-card__avatar"
+      >
         <div class="g-proposal-card__bg">
           <div class="g-proposal-card__image">
             <img :src="avatar" alt="" v-if="avatar !== null" />
@@ -23,7 +26,7 @@
             }}
           </p>
         </div>
-      </div>
+      </nuxt-link>
 
       <div class="g-proposal-card__info">
         <g-price
@@ -51,14 +54,18 @@
 </template>
 
 <script>
-import Avatar from '~/components/Avatar'
-import GPrice from '~/components/GPrice'
+import Avatar     from '~/components/Avatar'
+import GPrice     from '~/components/GPrice'
 import MainButton from '~/components/buttons/MainButton'
 export default {
   name: 'GProposalCard',
   components: { MainButton, GPrice, Avatar },
   props: {
     nickname: {
+      type: String,
+      default: () => null,
+    },
+    sellerId: {
       type: String,
       default: () => null,
     },
