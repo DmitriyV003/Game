@@ -12,10 +12,18 @@
           >Оценить продавца:</span
         >
         <div class="g-like__actions">
-          <button @click="$emit('like')" class="g-like__action">
+          <button
+            @click="$emit('input', 1)"
+            class="g-like__action"
+            type="button"
+          >
             <like-icon />
           </button>
-          <button @click="$emit('dislike')" class="g-like__action">
+          <button
+            @click="$emit('input', 0)"
+            class="g-like__action"
+            type="button"
+          >
             <dislike-icon />
           </button>
         </div>

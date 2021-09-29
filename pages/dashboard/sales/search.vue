@@ -57,6 +57,7 @@ export default {
     GDashboardNavigation,
   },
   mixins: [icons],
+  middleware: ['auth'],
   data() {
     return {
       form: {

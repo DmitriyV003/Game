@@ -11,7 +11,7 @@
       <genre-card
         v-for="item in data"
         class="genres__card"
-        :name="item.name"
+        :name="item.name.slice(0, 12) + '...'"
         :key="item.name"
         :image="item.background"
       />

@@ -27,7 +27,7 @@
         {{ price }} ₽
       </p>
 
-      <g-key adaptive="xl" :value="code" />
+      <g-key class="g-purchased__key" adaptive="xl" :value="code" />
     </div>
   </div>
 </template>
@@ -82,6 +82,8 @@ export default {
   +md
     flex-direction: column
     padding: 16px
+  &__key
+    margin-top: 86px
   &__price
     font-size: 20px
     line-height: 28px

@@ -23,13 +23,8 @@ export const actions = {
     const res = await this.$axios.$get(apiRoutes.getAllPurchases(state.type))
     commit('SET_PURCHASES', res.data)
   },
-  async fetchPurchase({ commit, state }, id) {
+  async getPurchase({ commit, state }, id) {
     const res = await this.$axios.$get(apiRoutes.getPurchase(id, state.type === 'games' ? 'game' : 'software'))
     commit('SET_PURCHASE', res.data)
-  },
-  async postFeedback({ state }, data) {
-    data.sellerId = state.purchase.sellerInfo.sellerId
-    data.keyId = state.purchase.keyId
-    const res = await this.$axios.$post(apiRoutes.postPurchaseFeedback, JSON.stringify(data))
   },
 }

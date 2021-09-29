@@ -52,6 +52,7 @@
                         label="Добавить ключи"
                         color="secondary"
                         full-width
+                        type="button"
                         size="xl"
                         @click.native="eventBus.$emit('addKeysPopupOpen')"
                       />
@@ -253,6 +254,7 @@ export default {
     GDashboardNavigation,
   },
   mixins: [icons],
+  middleware: ['auth'],
   computed: {
     ...mapState({
       item: (state) => state.sales.saleItem,
@@ -260,9 +262,17 @@ export default {
     }),
   },
   methods: {
+    clearData () {
+      for (const key in this.form) {
+        this.form[key] = null
+        console.log(key)
+      }
+    },
     async postNewSale() {
       try {
         await this.$store.dispatch('sales/postNewSale', this.form)
+
+        this.clearData()
       } catch (e) {
         this.$bvToast.toast('Ошибка создания новой продажи!', {
           title: 'Что-то пошло не так(',
@@ -278,6 +288,7 @@ export default {
       }
 
       try {
+        this.$store.commit('sales/SET_TYPE', query.type)
         await this.$store.dispatch('sales/getSaleItem', query.itemId)
       } catch (e) {
         this.$bvToast.toast('Ошибка загрузки страницы!', {

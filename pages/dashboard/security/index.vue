@@ -183,6 +183,7 @@ export default {
   },
   mixins: [icons],
   name: 'ProfilePage',
+  middleware: ['auth'],
   data: () => {
     return {
       eventBus,

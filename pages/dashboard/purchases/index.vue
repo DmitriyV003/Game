@@ -94,7 +94,7 @@
               :key="purchase.purchaseId"
             >
               <g-purchase-item
-                :id="purchase.purchaseId"
+                :id="purchase.keyId"
                 :name="purchase.itemName"
                 :code="purchase.key"
                 :platform="purchase.itemPlatform"
@@ -120,6 +120,7 @@ import GAddItem from '~/components/AddItem'
 export default {
   name: 'GDashboardPurchasesPage',
   mixins: [icons],
+  middleware: ['auth'],
   components: {
     GAddItem,
     GSortButton,

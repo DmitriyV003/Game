@@ -10,8 +10,8 @@
     >
       <g-another-comment-card
         v-for="item in data"
-        :key="item.itemName"
-        :id="item.itemName"
+        :key="item.id"
+        :id="item.id"
         :item-name="item.itemName"
         :user-nickname="item.userNickname"
         :text="item.userFeedbackText"

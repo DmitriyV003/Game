@@ -12,10 +12,10 @@
         <div
           class="g-product-search__line"
           v-for="item in items"
-          :key="item.id"
-          @click="setSaleItem({ id: item.id, name: item.name })"
+          :key="item.itemId"
+          @click="setSaleItem({ id: item.itemId, name: item.itemName, type: item.itemType })"
         >
-          {{ item.name }}
+          {{ item.itemName }}
         </div>
       </div>
     </div>
@@ -46,6 +46,7 @@ export default {
       form: {
         search: null,
         id: null,
+        type: null
       },
       isDropShow: false,
     }
@@ -56,18 +57,19 @@ export default {
     }),
   },
   methods: {
-    setSaleItem({ id, name }) {
+    setSaleItem({ id, name, type }) {
       this.form.search = name
       this.form.id = id
+      this.form.type = type
       this.isDropShow = false
     },
     async getSaleItem() {
       try {
-        await this.$store.dispatch('sales/getSaleItem', this.form.id)
+        await this.$store.dispatch('sales/getSaleItem', { id: this.form.id, type: this.form.type })
 
         await this.$router.push({
           path: '/dashboard/sales/add-new',
-          query: { itemId: this.form.id },
+          query: { itemId: this.form.id, type: this.form.type },
         })
       } catch (e) {
         console.log(e)

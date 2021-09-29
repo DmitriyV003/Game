@@ -46,8 +46,9 @@
         <main-button
           color="gray"
           label="больше отзывов"
-          to="/comments"
+          @click.native="getMoreComments"
           size="xl"
+          v-if="lastPage !== currentPage"
           full-width
         />
       </b-container>
@@ -76,6 +77,7 @@ export default {
     try {
       await this.$store.dispatch('comments/getComments')
       await this.$store.dispatch('comments/getCommentRecommendedGames')
+      this.$store.commit('comments/SET_CURRENT_PAGE', Number(this.$route.query.page) || 1)
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',
@@ -85,10 +87,25 @@ export default {
       })
     }
   },
+  methods: {
+    async getMoreComments () {
+      try {
+        await this.$store.dispatch('comments/getMoreComments')
+        await this.$router.push({
+          path: '/comments',
+          query: { ...this.$route.query, page: this.currentPage },
+        })
+      } catch (e) {
+
+      }
+    }
+  },
   computed: {
     ...mapState({
       comments: (state) => state.comments.comments,
       games: (state) => state.comments.recommendedGames,
+      currentPage: (state) => state.comments.currentPage,
+      lastPage: (state) => state.comments.lastPage,
     }),
   },
   data: () => {

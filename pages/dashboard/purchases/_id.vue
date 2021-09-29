@@ -25,13 +25,16 @@
           <!-- Item info adapted = true -->
           <g-purchased
             class="purchase__purchased"
-            :name="purchase.itemInfo.itemName"
-            :price="Number(purchase.keyPrice)"
+            :name="purchase.itemName"
+            :price="Number(purchase.price)"
             :code="purchase.key"
-            :image="purchase.itemInfo.itemBackground"
+            :image="purchase.itemBackground"
           />
 
-          <b-row tag="form">
+          <b-row
+            tag="form"
+            @submit.prevent="postFeedback"
+          >
             <!-- Comment form adapted = true -->
             <b-col
               xl="8"
@@ -43,17 +46,19 @@
             >
               <g-comment-form
                 class="purchase__comment"
-                :name="purchase.sellerInfo.sellerName"
-                :surname="purchase.sellerInfo.sellerSurname"
+                :name="purchase.sellerName"
+                :surname="purchase.sellerSurname"
+                v-model="form.comment"
               />
             </b-col>
 
             <!-- Like/Dislike adapted = true -->
             <b-col xl="4">
               <g-like-dislike
-                :name="purchase.sellerInfo.sellerName"
-                :nickname="purchase.sellerInfo.sellerNickname"
-                :surname="purchase.sellerInfo.sellerSurname"
+                :name="purchase.sellerName"
+                :nickname="purchase.sellerNickname"
+                :surname="purchase.sellerSurname"
+                v-model="form.rate"
               />
             </b-col>
           </b-row>
@@ -79,6 +84,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'GDashboardPurchasePage',
   mixins: [icons],
+  middleware: ['auth'],
   components: {
     GNewDispute,
     GLikeDislike,
@@ -90,10 +96,35 @@ export default {
     GPurchaseItem,
     GDashboardNavigation,
   },
+  data () {
+    return {
+      disabled: false,
+      form: {
+        comment: null,
+        rate: null
+      }
+    }
+  },
   methods: {
+    async postFeedback () {
+      this.disabled = true
+      try {
+        await this.$store.dispatch('feedback/postFeedback', this.form)
+      } catch (e) {
+        console.log(e)
+        this.$bvToast.toast('Не удалось оставить отзыв!(', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      } finally {
+        this.disabled = false
+      }
+    },
     async getPurchases () {
       try {
-        await this.$store.dispatch('purchases/fetchPurchase', this.$route.params.id)
+        await this.$store.dispatch('purchases/getPurchase', this.$route.params.id)
       } catch (e) {
         this.$bvToast.toast('Ошибка загрузки страницы!', {
           title: 'Что-то пошло не так(',
@@ -105,7 +136,7 @@ export default {
     }
   },
   async mounted() {
-    await   this.getPurchases()
+    await this.getPurchases()
   },
   computed: {
     ...mapState({

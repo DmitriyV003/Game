@@ -15,9 +15,9 @@
         <h1 class="news-card__h1">{{ comment.itemName }}</h1>
         <div class="news-card__content">
           <div class="news-card__image">
-            <img class="news-card__img" src="/images/news-4.png" alt="" />
+            <img class="news-card__img" :src="comment.itemBackground" alt="" />
             <h1 class="news-card__title">{{ comment.itemName }}</h1>
-            <p class="news-card__text">O Interactive</p>
+<!--            <p class="news-card__text">O Interactive</p>-->
 
             <rating
               size="sm"
@@ -33,16 +33,16 @@
                 :image="comment.userAvatar"
               />
 
-              <div class="news-card__stats">
-                <div class="news-card__stat">
-                  <eye-icon class="icon" />
-                  <span class="text">8</span>
-                </div>
-                <div class="news-card__stat">
-                  <message-icon class="icon" />
-                  <span class="text">24</span>
-                </div>
-              </div>
+<!--              <div class="news-card__stats">-->
+<!--                <div class="news-card__stat">-->
+<!--                  <eye-icon class="icon" />-->
+<!--                  <span class="text">8</span>-->
+<!--                </div>-->
+<!--                <div class="news-card__stat">-->
+<!--                  <message-icon class="icon" />-->
+<!--                  <span class="text">24</span>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
 
             <div>

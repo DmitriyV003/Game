@@ -46,18 +46,16 @@
 
         <div class="header__line">
           <div class="header__links">
-            <nuxt-link
-              exact
-              to="/catalog?type=games"
+            <a
+              href="/catalog?type=games"
               class="header__link header__link_bold"
               >Игры
-            </nuxt-link>
-            <nuxt-link
-              exact
-              to="/catalog?type=software"
+            </a>
+            <a
+              href="/catalog?type=software"
               class="header__link header__link_bold"
               >Софт
-            </nuxt-link>
+            </a>
             <nuxt-link exact to="/skin" class="header__link header__link_bold"
               >Скины
             </nuxt-link>

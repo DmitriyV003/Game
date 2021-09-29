@@ -1,7 +1,14 @@
 <template>
   <!-- Adapted = true  -->
-  <div class="g-popup" v-show="val">
-    <div class="g-new-dispute">
+  <div
+    class="g-popup"
+    v-show="val"
+    v-if="purchase !== null"
+  >
+    <form
+      @submit.prevent="postNewDispute"
+      class="g-new-dispute"
+    >
       <div class="g-popup__top">
         <p class="g-popup-title">Новый спор</p>
         <close-icon @click="val = false" class="g-popup__close" />
@@ -9,23 +16,25 @@
 
       <div class="g-new-dispute__block">
         <div class="g-new-dispute__img">
-          <img src="/images/dispute-1.svg" alt="" />
+          <img :src="purchase.itemBackground" alt="" />
         </div>
         <div class="g-new-dispute__text">
           <div class="g-new-dispute__info">
-            <span class="g-new-dispute__name">HITMAN 3</span>
-            <span class="g-new-dispute__price">2 230 ₽</span>
+            <span class="g-new-dispute__name">{{ purchase.itemName }}</span>
+            <span class="g-new-dispute__price">{{ purchase.price }} ₽</span>
           </div>
           <div class="g-new-dispute__avatar">
             <p class="g-popup__caption">Продавец:</p>
-            <avatar />
+            <avatar
+              :nickname="purchase.sellerNickname"
+            />
           </div>
         </div>
       </div>
 
       <div class="g-new-dispute__textarea">
         <p class="area-title">Опишите проблему подробно:</p>
-        <textarea class="input-reboot textarea"></textarea>
+        <textarea v-model="$v.form.text.$model" class="input-reboot textarea"></textarea>
 
         <div class="g-new-dispute__bottom">
           <main-button
@@ -34,18 +43,22 @@
             color="primary"
             label="Отправить"
             size="xl"
+            :disabled="disabled || $v.$invalid"
+            type="submit"
           />
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
-import icons from '~/mixins/icons'
-import Avatar from '~/components/Avatar'
-import MainButton from '~/components/buttons/MainButton'
-import { eventBus } from '~/plugins/event-bus'
+import icons               from '~/mixins/icons'
+import Avatar              from '~/components/Avatar'
+import MainButton          from '~/components/buttons/MainButton'
+import { eventBus }        from '~/plugins/event-bus'
+import { mapState }                   from 'vuex'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'GNewDispute',
@@ -54,6 +67,37 @@ export default {
   data: () => {
     return {
       val: false,
+      disabled: false,
+      form: {
+        text: null
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      purchase: (state) => state.purchases.purchase,
+    }),
+  },
+  validations: {
+    form: {
+      text: {
+        required,
+      }
+    },
+  },
+  methods: {
+    async postNewDispute () {
+      this.disabled = true
+      try {
+        await this.$store.dispatch('dispute/postDispute', this.form)
+        this.form.text = null
+
+        this.form.text = null
+      } catch (e) {
+
+      } finally {
+        this.disabled = false
+      }
     }
   },
   created() {

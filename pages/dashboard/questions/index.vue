@@ -1,7 +1,7 @@
 <template>
   <div class="g-page">
-    <g-new-question-popup 
-      :category="category" 
+    <g-new-question-popup
+      :category="category"
     />
     <g-question-details />
 
@@ -124,6 +124,7 @@ export default {
     GDashboardNavigation,
   },
   mixins: [icons, detectStatus],
+  middleware: ['auth'],
   name: 'QuestionsPage',
   data: () => {
     return {

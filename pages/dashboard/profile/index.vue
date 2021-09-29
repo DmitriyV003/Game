@@ -120,6 +120,7 @@ export default {
     GDashboardNavigation,
   },
   mixins: [icons],
+  middleware: ['auth'],
   name: 'ProfilePage',
   data: () => {
     return {

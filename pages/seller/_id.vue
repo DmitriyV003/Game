@@ -143,7 +143,7 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch('getSellerPage', this.$route.params.id)
-      await this.$store.dispatch('seller/getSellerGames', this.$route.params.id)
+      await this.$store.dispatch('seller/getSellerItems', this.$route.params.id)
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',

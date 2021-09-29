@@ -15,7 +15,7 @@
     <section v-if="sliderNews !== null">
       <b-container>
         <div class="news__games-top">
-          <show-all label="Все жанры игр" />
+          <show-all label="Все категории игр" />
         </div>
 
         <div class="news__games">

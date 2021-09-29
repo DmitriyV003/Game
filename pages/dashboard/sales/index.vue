@@ -91,6 +91,7 @@ export default {
     GDashboardNavigation,
   },
   mixins: [icons],
+  middleware: ['auth'],
   methods: {
     async goTo() {
       try {

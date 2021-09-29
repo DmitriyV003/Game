@@ -47,13 +47,12 @@ export const actions = {
       console.log(e)
     }
   },
-  logOut({ commit, dispatch }) {
-    dispatch('setToken', null)
+  logOut({ commit }) {
+    commit('setToken', null)
     commit('user/setUser', null, { root: true })
     Cookies.remove('token')
   },
   setToken({ commit }, token) {
-    this.$axios.setToken(token, 'Bearer')
     commit('setToken', token)
     Cookies.remove('token')
     Cookies.set('token', token, { expires: 1 })

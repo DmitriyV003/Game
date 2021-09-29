@@ -1,10 +1,15 @@
 <template>
   <div class="g-game-news__wrapper">
     <div class="g-game-news">
-      <img class="g-game-news__image" :src="image" alt="" />
+      <div
+        class="g-game-news__image"
+        :style="{ 'background-image': `url(${image})` }"
+      >
+      </div>
+<!--      <img class="g-game-news__image" :src="image" alt="" />-->
 
       <div class="g-game-news__block">
-        <p class="g-game-news__title">{{ name }}</p>
+        <p class="g-game-news__title">{{ name.slice(0, 24) + '...' }}</p>
         <div>
           <p class="g-game-news__text">{{ desc3 }}</p>
           <p class="g-game-news__text">{{ desc }}</p>
@@ -73,7 +78,9 @@ export default {
   &__block
     padding: 12px 16px
   &__image
-    display: block
     width: 100%
     border-radius: 12px 12px 0 0
+    height: 150px
+    background-position: center center
+    background-size: cover
 </style>

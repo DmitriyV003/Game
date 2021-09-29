@@ -38,8 +38,8 @@
   </div>
 </template>
 <script>
-import CommentCard from '~/components/cards/CommentCard'
-import ArrowButton from '~/components/slider/ArrowButton'
+import CommentCard  from '~/components/cards/CommentCard'
+import ArrowButton  from '~/components/slider/ArrowButton'
 
 export default {
   name: 'GCommentSlider',

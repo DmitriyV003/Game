@@ -209,9 +209,9 @@
     >
       <b-container>
         <section-header
-          title="Игры по жанрам"
-          link-label="Все жанры"
-          to="/catalog"
+          title="Игры по категориям"
+          link-label="Все категории"
+          to="/catalog?page=1"
         />
 
         <g-genre-slider :data="mainPage.categories" />

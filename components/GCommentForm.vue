@@ -10,7 +10,7 @@
         class="input-reboot g-comment-form__textarea"
         name="comment"
         id="comment"
-        v-model="form.comment"
+        @input="$emit('input', $event.target.value)"
       ></textarea>
     </div>
 
@@ -38,23 +38,6 @@ export default {
       type: String,
       required: true,
     },
-  },
-  methods: {
-    async postFeedback() {
-      try {
-        await this.$store.dispatch('purchases/postFeedback', this.form)
-      } catch (e) {
-        console.log(e)
-      }
-    },
-  },
-  data: () => {
-    return {
-      form: {
-        comment: null,
-        rate: null,
-      },
-    }
   },
 }
 </script>

@@ -22,16 +22,24 @@
             </div>
           </div>
         </div>
+
+        <show-all
+          :to="`/comments/${id}`"
+          class="button-reboot g-another-comment-card__read text-weight-500"
+          label="Читать "
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import icons from '~/mixins/icons'
+import icons   from '~/mixins/icons'
+import ShowAll from '~/components/buttons/MainLink'
 
 export default {
   name: 'GAnotherCommentCard',
+  components: { ShowAll },
   mixins: [icons],
   props: {
     id: {
@@ -68,6 +76,8 @@ export default {
     flex-direction: column
     width: 270px
     margin-right: 14px
+    &__read
+      margin-top: 12px
     &__text
         font-size: 14px
         line-height: 20px

@@ -5,6 +5,7 @@
         <div
           class="comment-card__game"
           :class="'comment-card__game_' + adaptiveSize"
+          :style="{ 'background-image': windowSize <= 1200 ? `url(${image})` : '' }"
         >
           <div
             class="comment-card__img"
@@ -76,14 +77,20 @@
 </template>
 
 <script>
-import Rating from '~/components/cards/Rating'
-import Avatar from '~/components/Avatar'
-import icons from '~/mixins/icons'
-import ShowAll from '~/components/buttons/MainLink'
+import Rating       from '~/components/cards/Rating'
+import Avatar       from '~/components/Avatar'
+import icons        from '~/mixins/icons'
+import ShowAll      from '~/components/buttons/MainLink'
+import { mapState } from 'vuex'
 
 export default {
   components: { ShowAll, Avatar, Rating },
   mixins: [icons],
+  computed: {
+    ...mapState({
+      windowSize: (state) => state.common.windowSize,
+    }),
+  },
   props: {
     id: {
       type: String,
