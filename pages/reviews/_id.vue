@@ -10,7 +10,7 @@
     </section>
 
     <!-- News card  adapted =  true  -->
-    <section>
+    <section v-if="false">
       <b-container>
         <div class="news-card__content">
           <div class="news-card__image">
@@ -103,23 +103,47 @@
 </template>
 
 <script>
-import BreadCrumb from '~/components/BreadCrumb'
-import icons from '~/mixins/icons'
-import GMessage from '~/components/Message'
-import Avatar from '~/components/Avatar'
-import GInput from '~/components/form-elements/Input'
-import MainButton from '~/components/buttons/MainButton'
-import Rating from '~/components/cards/Rating'
+import BreadCrumb   from '~/components/BreadCrumb'
+import icons        from '~/mixins/icons'
+import GMessage     from '~/components/Message'
+import Avatar       from '~/components/Avatar'
+import GInput       from '~/components/form-elements/Input'
+import MainButton   from '~/components/buttons/MainButton'
+import Rating       from '~/components/cards/Rating'
+import { mapState } from 'vuex'
 export default {
   name: 'GReviewPage',
   mixins: [icons],
   components: { Rating, MainButton, GInput, Avatar, GMessage, BreadCrumb },
+  async mounted() {
+    try {
+      await this.$store.dispatch('reviews/getReviewById', this.$route.params.id)
+      // await this.$store.dispatch('comments/getAdditionalComments', this.$route.params.id)
+
+      // this.links.push({
+      //   to: `/reviews/${this.$route.params.id}`,
+      //   // label: this.comment.itemName,
+      // })
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
+  },
+  computed: {
+    ...mapState({
+      review: (state) => state.reviews.review,
+      additionalComments: (state) => state.comments.additionalComments,
+    }),
+  },
   data: () => {
     return {
       links: [
         { to: '/', label: 'Главная' },
         { to: '/reviews', label: 'Обзоры' },
-        { to: '/reviews/fghjkl', label: 'Blacktea. Hitman 3' },
       ],
     }
   },

@@ -13,14 +13,17 @@
 
         <b-col xl="9" lg="9">
           <!--  Manage balance  adapted = true  -->
-          <div class="g-balance-change">
+          <div
+            class="g-balance-change"
+            v-if="balance !== null"
+          >
             <div class="g-balance-change__line g-balance-change__line_current">
               <div class="g-balance-change__text">
                 <span class="text-color-white text-weight-600 caption"
                   >Ваш баланс:</span
                 >
                 <span class="text-color-white text-weight-600 value"
-                  >$ 500 000</span
+                  >$ {{ balance.overallBalance }}</span
                 >
               </div>
               <main-button
@@ -40,7 +43,7 @@
                   >Заморожено:</span
                 >
                 <span class="text-color-gray text-weight-600 value_small"
-                  >$ 12 450</span
+                  >$ {{ balance.pendingBalance }}</span
                 >
               </div>
               <main-button
@@ -62,7 +65,7 @@
                   >Доступно к выводу:</span
                 >
                 <span class="text-color-white text-weight-600 value_small"
-                  >$ 450 000</span
+                  >$ {{ balance.availableBalance }}</span
                 >
               </div>
               <main-button
@@ -78,7 +81,9 @@
           </div>
 
           <!--  Promo code  adapted = true  -->
-          <g-promo />
+          <g-promo
+
+          />
 
           <!--  Transactions  adapted = true -->
           <section>
@@ -112,15 +117,22 @@
                 >
               </div>
 
-              <div class="g-transactions__content">
-                <div class="g-transactions__line">
+              <div
+                class="g-transactions__content"
+                v-if="transactions.length > 0"
+              >
+                <div
+                  class="g-transactions__line"
+                  v-for="item in transactions"
+                  :key="item.created_at"
+                >
                   <span
                     class="
                       g-transactions__cell
                       g-transactions__cell_14
                       g-transactions__cell_date
                     "
-                    >06.04.2021</span
+                    >{{ new Date(item.created_at).toLocaleDateString() }}</span
                   >
                   <span
                     class="
@@ -128,8 +140,7 @@
                       g-transactions__cell_long
                       g-transactions__cell_name
                     "
-                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
-                    sgsgdsf</span
+                    >{{ item.product }}</span
                   >
                   <span
                     class="
@@ -137,7 +148,7 @@
                       g-transactions__cell_14
                       g-transactions__cell_action
                     "
-                    >Покупка игры
+                    >{{ item.action === 1 ? 'пополнение' : 'списание' }}
                   </span>
                   <span
                     class="
@@ -145,177 +156,42 @@
                       g-transactions__cell_right
                       g-transactions__cell_price
                     "
-                    >- $80</span
-                  >
-                </div>
-
-                <div class="g-transactions__line">
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_date
-                    "
-                    >06.04.2021</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_long
-                      g-transactions__cell_name
-                    "
-                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
-                    sgsgdsf</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_action
-                    "
-                    >Покупка игры
-                  </span>
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_right
-                      g-transactions__cell_price
-                    "
-                    >- $80</span
-                  >
-                </div>
-
-                <div class="g-transactions__line">
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_date
-                    "
-                    >06.04.2021</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_long
-                      g-transactions__cell_name
-                    "
-                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
-                    sgsgdsf</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_action
-                    "
-                    >Покупка игры
-                  </span>
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_right
-                      g-transactions__cell_price
-                    "
-                    >- $80</span
-                  >
-                </div>
-
-                <div class="g-transactions__line">
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_date
-                    "
-                    >06.04.2021</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_long
-                      g-transactions__cell_name
-                    "
-                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
-                    sgsgdsf</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_action
-                    "
-                    >Покупка игры
-                  </span>
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_right
-                      g-transactions__cell_price
-                    "
-                    >- $80</span
-                  >
-                </div>
-
-                <div class="g-transactions__line">
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_date
-                    "
-                    >06.04.2021</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_long
-                      g-transactions__cell_name
-                    "
-                    >GTA 5cdsv dfvbd bgsdfbgfdbhsdf hbsfg ngsggggsgdsf hfdsh
-                    sgsgdsf</span
-                  >
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_14
-                      g-transactions__cell_action
-                    "
-                    >Покупка игры
-                  </span>
-                  <span
-                    class="
-                      g-transactions__cell
-                      g-transactions__cell_right
-                      g-transactions__cell_price
-                    "
-                    >- $80</span
+                    > ${{ (item.action === 1 ? '+' : '-') + item.amount }}</span
                   >
                 </div>
               </div>
 
               <div class="g-transactions__bottom">
-                <div class="g-transactions__per-page">
-                  <span class="caption">Rows per page:</span>
-                  <g-drop-menu
-                    :links="[
-                      { label: 10, value: 10 },
-                      { label: 20, value: 20 },
-                    ]"
-                    placeholder=""
-                    size="sm"
-                  />
-                </div>
+<!--                <div class="g-transactions__per-page">-->
+<!--                  <span class="caption">Rows per page:</span>-->
+<!--                  <g-drop-menu-->
+<!--                    :links="[-->
+<!--                      { label: 10, value: 10 },-->
+<!--                      { label: 20, value: 20 },-->
+<!--                    ]"-->
+<!--                    placeholder=""-->
+<!--                    size="sm"-->
+<!--                  />-->
+<!--                </div>-->
 
-                <div class="g-transactions__nav">
-                  <span class="text"><span>1</span> of 5</span>
+                <div
+                  class="g-transactions__nav"
+                  v-if="meta !== null && links !== null"
+                >
+                  <span class="text"><span>{{ meta.from }}</span> of {{ meta.last_page }}</span>
                   <div
-                    class="
-                      g-transactions__arrows g-transactions__arrows_desktop
-                    "
+                    class="g-transactions__arrows g-transactions__arrows_desktop"
                   >
-                    <chevron-left-icon class="icon" />
-                    <chevron-right-icon class="icon" />
+                    <chevron-left-icon
+                      class="icon"
+                      :class="{ 'icon_disable': links.prev === null }"
+                      @click.native="links.prev === null ? '' : goToPage(meta.current_page - 1)"
+                    />
+                    <chevron-right-icon
+                      class="icon"
+                      :class="{ 'icon_disable': links.next === null }"
+                      @click.native="links.next === null ? '' : goToPage(meta.current_page + 1)"
+                    />
                   </div>
                 </div>
 
@@ -336,13 +212,14 @@
 
 <script>
 import GDashboardNavigation from '~/components/dashboard/Navigation'
-import MainButton from '~/components/buttons/MainButton'
-import GInput from '~/components/form-elements/Input'
-import GPromo from '~/components/dashboard/PromoCode'
-import GDropMenu from '~/components/DropMenu'
-import icons from '~/mixins/icons'
-import GChangeBalancePopup from '~/components/popups/ChangeBalance'
-import { eventBus } from '~/plugins/event-bus'
+import MainButton           from '~/components/buttons/MainButton'
+import GInput               from '~/components/form-elements/Input'
+import GPromo               from '~/components/dashboard/PromoCode'
+import GDropMenu            from '~/components/DropMenu'
+import icons                from '~/mixins/icons'
+import GChangeBalancePopup  from '~/components/popups/ChangeBalance'
+import { eventBus }         from '~/plugins/event-bus'
+import { mapState }                   from 'vuex'
 export default {
   components: {
     GChangeBalancePopup,
@@ -352,11 +229,46 @@ export default {
     MainButton,
     GDashboardNavigation,
   },
+  computed: {
+    ...mapState({
+      balance: (state) => state.finance.balance,
+      transactions: (state) => state.finance.transactions.data,
+      links: (state) => state.finance.transactions.links,
+      meta: (state) => state.finance.transactions.meta
+    }),
+  },
+  methods: {
+    async goToPage (page) {
+      try {
+        await this.$store.dispatch('finance/getTransactions', page)
+      } catch (e) {
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
+    },
+  },
+  async mounted() {
+    try {
+      await this.$store.dispatch('finance/getBalance')
+      await this.$store.dispatch('finance/getTransactions')
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
+  },
   mixins: [icons],
   middleware: ['auth'],
   data: () => {
     return {
-      eventBus,
+      eventBus
     }
   },
 }
@@ -403,6 +315,9 @@ export default {
       color: rgba(100, 62, 255, 1)
       cursor: pointer
       font-size: 30px
+      &_disable
+        opacity: 0.5
+        cursor: initial
   &__per-page
     display: flex
     align-items: center

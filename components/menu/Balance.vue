@@ -4,7 +4,7 @@
       <div class="balance__icon">
         <img src="/images/wallet.svg" alt="" />
       </div>
-      <span class="balance__label">$ {{ balance }}</span>
+      <span class="balance__label">$ {{ overallBalance }}</span>
     </div>
 
     <div
@@ -14,12 +14,12 @@
     >
       <div class="balance__block">
         <div class="balance__text">Доступный баланс</div>
-        <div class="balance__text balance__text_white-and-big">$ 500 000</div>
+        <div class="balance__text balance__text_white-and-big">$ {{ availableBalance }}</div>
       </div>
 
       <div class="balance__block balance__block_last">
         <div class="balance__text">Заморожено</div>
-        <div class="balance__text balance__text_big">$ 12 000</div>
+        <div class="balance__text balance__text_big">$ {{ pendingBalance }}</div>
       </div>
 
       <div class="balance__btns">
@@ -46,9 +46,18 @@ export default {
   name: 'Balance',
   components: { MainButton },
   props: {
-    balance: {
+    overallBalance: {
       type: Number,
+      required: true
     },
+    pendingBalance: {
+      type: Number,
+      required: true
+    },
+    availableBalance: {
+      type: Number,
+      required: true
+    }
   },
   data: () => {
     return {

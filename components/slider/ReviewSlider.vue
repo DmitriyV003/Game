@@ -8,11 +8,12 @@
       :dots="true"
       :responsive="reviewSliderSettings.responsive"
     >
-      <review-card class="review-section__card" />
-      <review-card class="review-section__card" />
-      <review-card class="review-section__card" />
-      <review-card class="review-section__card" />
-      <review-card class="review-section__card" />
+      <review-card
+        v-for="item in data"
+        :key="item.id"
+        class="review-section__card"
+        v-bind="item"
+      />
 
       <template #customPaging="page">
         <dot />
@@ -40,6 +41,12 @@ import Dot from '~/components/slider/Dot'
 export default {
   name: 'GReviewSlider',
   components: { ArrowButton, ReviewCard, Dot },
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  },
   data: () => {
     return {
       reviewSliderSettings: {

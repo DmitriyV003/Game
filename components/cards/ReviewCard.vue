@@ -5,13 +5,21 @@
         class="review-card__game-info"
         :style="{
           'background-image':
-            windowSize <= 992 ? 'url(/images/review-1.svg)' : '',
+            windowSize <= 992 ? `url(${itemBackground})` : '',
         }"
       >
         <img src="/images/review-bg.svg" alt="" class="review-card__bg" />
         <div class="review-card__box-image">
-          <img src="/images/review-1.svg" alt="" class="review-card__image" />
-          <rating class="review-card__rating" :value="5.2" />
+          <img
+            :src="itemBackground"
+            alt=""
+            class="review-card__image"
+          />
+          <rating
+            v-if="itemRate"
+            class="review-card__rating"
+            :value="Number(itemRate)"
+          />
         </div>
 
         <div class="review-card__block">
@@ -25,19 +33,24 @@
               text-uppercase
             "
           >
-            Hitman 3
+            {{ itemName }}
           </div>
           <div
             class="review-card__text text-center text-size-14 text-color-gray"
           >
-            O Interactive
+            {{ itemDeveloper }}
           </div>
         </div>
       </div>
 
       <div class="review-card__body">
         <div class="review-card__top">
-          <avatar class="review-card__avatar" size="xl" name="Blacktea" />
+          <avatar
+            class="review-card__avatar"
+            size="xl"
+            :nickname="adminName"
+            :image="adminImage"
+          />
 
           <div class="review-card__metrics review-card__metrics_desktop">
             <span class="review-card__date text-size-14 text-color-gray"
@@ -46,32 +59,24 @@
             <chip
               class="review-card__icon"
               icon-image="/images/comment-icon.svg"
-              label="8"
+              :label="reviewCommentsCount"
             />
             <chip
               class="review-card__icon"
               icon-image="/images/eye.svg"
-              label="82"
+              :label="reviewViewsCount"
             />
           </div>
         </div>
 
         <div class="review-card__main">
           <p class="review-card__review text-size-16">
-            После богатого на громкие премьеры конца года каждый январь
-            развлекательная индустрия берёт выходной. Казалось бы, у народа
-            послепраздничная хандра на грани с депрессией – самое время
-            выпускать яркие (и тёплые!) новинки. Но нет, блокбастеров в это
-            снежное время раз-два и обчёлся, зато всяких ремастеров да нишевых
-            релизов хоть отбавляй. Как в таких условиях развлечь себя, как
-            отвлечься от удушливой рутины, когда за окном серость и лёд? Да
-            легко. Аккурат в разгар морозов у бравой команды IOI нашлось
-            отличное средство от зимней апатии – симулятор наёмного убий...
+            {{ description.slice(0, 250) }}
           </p>
         </div>
 
         <div class="review-card__bottom">
-          <nuxt-link to="/" tag="div" class="review-card__link">
+          <nuxt-link :to="'/reviews/' + id" tag="div" class="review-card__link">
             <span class="label">Читать обзор</span>
             <chevron-right-icon />
           </nuxt-link>
@@ -85,12 +90,12 @@
             <chip
               class="review-card__icon"
               icon-image="/images/comment-icon.svg"
-              label="8"
+              :label="reviewCommentsCount"
             />
             <chip
               class="review-card__icon"
               icon-image="/images/eye.svg"
-              label="82"
+              :label="reviewViewsCount"
             />
           </div>
         </div>
@@ -109,6 +114,52 @@ export default {
   name: 'ReviewCard',
   components: { Chip, Avatar, Rating },
   mixins: [icons],
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    itemName: {
+      type: String,
+      required: true
+    },
+    itemRate: {
+      type: String,
+      default: () => 0
+    },
+    itemBackground: {
+      type: String,
+      required: true
+    },
+    itemDeveloper: {
+      type: String,
+      required: true
+    },
+    reviewCommentsCount: {
+      type: Number,
+      default: () => 0
+    },
+    reviewViewsCount: {
+      type: Number,
+      default: () => 0
+    },
+    adminName: {
+      type: String,
+      required: true
+    },
+    adminImage: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     ...mapState({
       windowSize: (state) => state.common.windowSize,
@@ -232,6 +283,9 @@ export default {
     padding: 28px 78px 16px 78px
     background: dark-blue(0.15)
     position: relative
+    display: flex
+    flex-direction: column
+    justify-content: space-between
     +xl
       display: flex
       justify-content: center

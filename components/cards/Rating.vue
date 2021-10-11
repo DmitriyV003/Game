@@ -1,9 +1,9 @@
 <template>
   <div class="rating">
     <img src="/images/star.svg" alt="" class="rating__img" />
-    <span class="rating__value" :class="'rating__value_' + size">{{
-      value
-    }}</span>
+    <span class="rating__value" :class="'rating__value_' + size">
+      {{ value }}
+    </span>
   </div>
 </template>
 

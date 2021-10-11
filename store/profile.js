@@ -41,7 +41,7 @@ export const actions = {
       })
     )
   },
-  async postChangeAvatar({ dispatch }, data) {
+  async postChangeAvatar({ dispatch, rootState }, data) {
     await this.$axios.$post(
       apiRoutes.postChangeAvatar,
       data,
@@ -52,5 +52,6 @@ export const actions = {
       }
     )
     await dispatch('getProfile')
+    await dispatch('user/setUser', rootState.profile.profile.data, { root: true })
   },
 }

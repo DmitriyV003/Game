@@ -1,5 +1,5 @@
 <template>
-  <div class="g-promo">
+  <form class="g-promo" @submit.prevent="onSubmit">
     <span class="g-promo__bg-1"></span>
     <span class="g-promo__bg-2"></span>
     <img src="/images/promo.png" alt="" class="g-promo__bg-3" />
@@ -13,12 +13,35 @@
         class="g-promo__input"
         color="white"
         placeholder="Код c Gift Card"
-      />
+        v-model.trim="$v.form.name.$model"
+        :error="$v.form.name.$error"
+      >
+        <template v-slot:error>
+          <span
+            v-if="!$v.form.name.required && $v.form.name.$error"
+            >Поле обязательно</span
+          >
+          <span
+            v-if="!$v.form.name.minLength && $v.form.name.$error"
+            >Минимальная длина
+            {{ $v.form.name.$params.minLength.min }}
+            символов</span
+          >
+          <span
+            v-if="!$v.form.name.maxLength && $v.form.name.$error"
+            >Максимальная длина
+            {{ $v.form.name.$params.maxLength.min }}
+            символов</span
+          >
+        </template>
+      </g-input>
       <main-button
         size="xl"
         class="g-promo__btn g-promo__btn_desktop"
         color="primary"
         label="Применить код"
+        type="submit"
+        :disabled="disabled || $v.$invalid"
       />
     </div>
 
@@ -28,16 +51,62 @@
       class="g-promo__btn g-promo__btn_mobile"
       color="primary"
       label="Применить код"
+      type="submit"
+      :disabled="disabled || $v.$invalid"
     />
-  </div>
+  </form>
 </template>
 
 <script>
 import MainButton from '~/components/buttons/MainButton'
 import GInput from '~/components/form-elements/Input'
+import { maxLength, minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: 'GPromo',
   components: { GInput, MainButton },
+  data () {
+    return {
+      disabled: false,
+      form: {
+        name: null
+      }
+    }
+  },
+  validations: {
+    form: {
+      name: {
+        required,
+        maxLength: maxLength(50),
+        minLength: minLength(3),
+      },
+    },
+  },
+  methods: {
+    async onSubmit() {
+      this.disabled = true
+      try {
+        await this.$store.dispatch('finance/activatePromoCode', this.form)
+      } catch (e) {
+        this.$bvToast.toast('Промокод не активирован!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+
+        return 0
+      } finally {
+        this.disabled = false
+      }
+
+      this.$bvToast.toast('Промокод успешно активирован!', {
+        title: 'Уведомление',
+        variant: 'primary',
+        solid: true,
+        appendToast: true,
+      })
+    },
+  },
 }
 </script>
 

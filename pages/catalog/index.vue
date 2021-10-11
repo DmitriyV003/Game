@@ -345,6 +345,7 @@ export default {
   layout: 'default',
   async mounted() {
     try {
+
       await this.setCatalogTypeFromQueryString()
       await this.$store.dispatch('catalog/getCatalogFilters')
       const query = await this.fillFiltersFromQueryString()

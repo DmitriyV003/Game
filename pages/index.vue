@@ -19,7 +19,7 @@
           link-label="Смотреть все"
           icon="/images/recommend.svg"
           title="Рекомендуем"
-          to="/catalog"
+          to="/catalog?type=games"
         />
 
         <g-recommend-slider
@@ -57,7 +57,7 @@
           link-label="Смотреть все"
           icon="/images/fire.svg"
           title="Хиты продаж"
-          to="/catalog"
+          to="/catalog?type=games&page=1"
         />
         <g-recommend-slider :data="mainPage.hits" />
       </b-container>
@@ -92,7 +92,7 @@
           link-label="Смотреть все"
           icon="/images/icons/new-items.svg"
           title="Новинки"
-          to="catalog"
+          to="/catalog?type=games"
         />
         <g-recommend-slider
           :data="mainPage.novelties"
@@ -129,7 +129,7 @@
           link-label="Смотреть все"
           icon="/images/icons/sale.svg"
           title="Распродажа"
-          to="/catalog"
+          to="/catalog?type=games"
         />
         <g-recommend-slider
           :data="mainPage.saleOuts"
@@ -195,10 +195,17 @@
     </section>
 
     <!-- Reviews  adapted = true -->
-    <section class="section review-section">
+    <section
+      class="section review-section"
+      v-if="mainPage !== null && mainPage.reviews.length > 0"
+    >
       <b-container>
-        <section-header title="Обзоры" link-label="Все обзоры" />
-        <g-review-slider />
+        <section-header
+          title="Обзоры"
+          link-label="Все обзоры"
+          to="/reviews"
+        />
+        <g-review-slider :data="mainPage.reviews" />
       </b-container>
     </section>
 
@@ -211,7 +218,7 @@
         <section-header
           title="Игры по категориям"
           link-label="Все категории"
-          to="/catalog?page=1"
+          to="/catalog?type=games&page=1"
         />
 
         <g-genre-slider :data="mainPage.categories" />
@@ -224,7 +231,11 @@
       v-if="mainPage !== null && mainPage.sellersFeedbacks.length > 0"
     >
       <b-container>
-        <section-header title="Отзывы" link-label="Все отзывы" />
+        <section-header
+          title="Отзывы"
+          link-label="Все отзывы"
+          to="/comments"
+        />
 
         <g-comment-slider :data="mainPage.sellersFeedbacks" />
       </b-container>

@@ -92,6 +92,7 @@ export const actions = {
       services: state.acceptedFilters.services.join(','),
       platforms: state.acceptedFilters.platforms.join(','),
       genres: state.acceptedFilters.genres.join(','),
+      itemType: state.type
     }
     let query = ''
 
@@ -102,7 +103,7 @@ export const actions = {
     }
 
     const res = await this.$axios.$get(
-      apiRoutes.getFilteredItemsCatalog(state.type, query)
+      apiRoutes.getFilteredItemsCatalog(query)
     )
     commit('SET_ITEMS', res.data)
     res.meta.links = res.links

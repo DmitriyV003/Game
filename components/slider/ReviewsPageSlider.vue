@@ -11,7 +11,7 @@
       <g-review-page-card
         v-for="item in data"
         :key="item.itemId"
-        :image="item.itemHeaderImage"
+        :image="item.itemHeaderImage[0]"
         :id="item.itemId"
       />
     </vue-slick>

@@ -38,7 +38,7 @@ export const actions = {
 
     try {
       const cookies = Cookie.parse(cookieStr || '') || {}
-      const token = cookies.token
+      const token = cookies.gameInComeToken
       const user = cookies.user
 
       dispatch('setToken', token)
@@ -50,12 +50,12 @@ export const actions = {
   logOut({ commit }) {
     commit('setToken', null)
     commit('user/setUser', null, { root: true })
-    Cookies.remove('token')
+    Cookies.remove('gameInComeToken')
   },
   setToken({ commit }, token) {
     commit('setToken', token)
-    Cookies.remove('token')
-    Cookies.set('token', token, { expires: 1 })
+    Cookies.remove('gameInComeToken')
+    Cookies.set('gameInComeToken', token, { expires: 1 })
   },
   async forgetPassword(ctx, data) {
     const res = await this.$axios.$get(apiRoutes.forgetPassword +`?email=${data.email}`)

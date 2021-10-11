@@ -30,7 +30,7 @@ export default {
   getSearch: (name) => '/search?name=' + name,
   getCatalogItems: (type) => '/catalog/items/' + type,
   getCatalogFilters: (type) => '/catalog/filter/' + type,
-  getFilteredItemsCatalog: (type, query) => '/catalog/' + type + '/after-filters?' + query,
+  getFilteredItemsCatalog: (query) => '/catalog/after-filters?' + query,
   getComments: '/seller/feedbacks',
   getCommentById: (id) => `/seller/feedbacks/${id}`,
   getCommentRecommendedGames: '/seller/feedbacks/recommendations',
@@ -38,5 +38,10 @@ export default {
   postCreateNewsComment: '/news/create-comment',
   postBecomeSeller: '/seller/be-seller',
   postDispute: (id, type) => `/personal-area/appeals/dispute/create/${type}/${id}`,
-  postFeedback: '/seller/feedbacks/create-feedback'
+  postFeedback: '/seller/feedbacks/create-feedback',
+  getReviews: '/reviews',
+  getReviewById: (id) => `/reviews/${id}`,
+  getBalance: '/personal-area/finance/get-balance',
+  getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
+  postActivatePromoCode: '/personal-area/finance/activate-promo-code'
 }

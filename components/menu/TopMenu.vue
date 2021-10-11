@@ -26,11 +26,11 @@
               </div>
             </div>
 
-            <div class="action header__action">
-              <div class="action__icon">
-                <img src="/images/notification.svg" alt="" />
-              </div>
-            </div>
+<!--            <div class="action header__action">-->
+<!--              <div class="action__icon">-->
+<!--                <img src="/images/notification.svg" alt="" />-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
 
           <Profile :user="user" class="header__user" />
@@ -62,8 +62,8 @@
             <nuxt-link exact to="/" class="header__link header__link_bold"
               >Кейсы
             </nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold"
-              >GiftCard
+            <nuxt-link exact to="/reviews" class="header__link header__link_bold"
+              >Обзоры
             </nuxt-link>
             <nuxt-link exact to="/news" class="header__link header__link_bold"
               >Новости
@@ -83,9 +83,11 @@
           />
 
           <Balance
-            v-if="user !== null"
+            v-if="user !== null && balance !== null"
             class="header__balance"
-            :balance="500000"
+            :overall-balance="balance.overallBalance"
+            :pending-balance="balance.pendingBalance"
+            :available-balance="balance.availableBalance"
           />
 
           <nuxt-link to="/cart" tag="div" class="custom-icon">
@@ -168,6 +170,7 @@ export default {
     ...mapState({
       token: (state) => state.auth.token,
       user: (state) => state.user.user,
+      balance: (state) => state.finance.balance,
     }),
   },
   data() {
@@ -189,9 +192,9 @@ export default {
     })
 
     // TODO Delete this shit
-    if (this.token !== null) {
-      await this.$store.dispatch('questions/getRetry')
-    }
+    // if (this.token !== null) {
+    //   await this.$store.dispatch('questions/getRetry')
+    // }
   },
   created () {
     // TODO Delete this shit

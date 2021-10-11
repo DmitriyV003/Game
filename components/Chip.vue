@@ -14,7 +14,7 @@ export default {
       default: () => '',
     },
     label: {
-      type: String,
+      type: null,
       default: () => '',
     },
   },

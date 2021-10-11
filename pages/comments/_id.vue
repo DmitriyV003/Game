@@ -22,6 +22,7 @@
             <rating
               size="sm"
               class="news-card__rating"
+              v-if="comment.itemRate !== null"
               :value="Number(comment.itemRate)"
             />
           </div>
@@ -96,14 +97,8 @@ export default {
   },
   async mounted() {
     try {
-      await this.$store.dispatch(
-        'comments/getCommentById',
-        this.$route.params.id
-      )
-      await this.$store.dispatch(
-        'comments/getAdditionalComments',
-        this.$route.params.id
-      )
+      await this.$store.dispatch('comments/getCommentById', this.$route.params.id)
+      await this.$store.dispatch('comments/getAdditionalComments', this.$route.params.id)
 
       this.links.push({
         to: `/comments/${this.$route.params.id}`,

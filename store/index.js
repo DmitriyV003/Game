@@ -21,9 +21,12 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit({ dispatch }) {
+  async nuxtServerInit({ dispatch, rootState }) {
     try {
-      dispatch('auth/autoLogin')
+      await dispatch('auth/autoLogin')
+      if (rootState.auth.token) {
+        await dispatch('finance/getBalance')
+      }
     } catch (e) {
     }
   },
