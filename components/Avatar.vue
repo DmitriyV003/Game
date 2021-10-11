@@ -4,15 +4,19 @@
       <img :src="image" v-if="image !== null" alt="" />
       <user-icon v-else class="g-avatar__icon" />
     </div>
-    <div v-if="nickname !== null || caption !== null" class="g-avatar__block">
+    <div
+      v-if="nickname !== null || caption !== null"
+      class="g-avatar__block"
+    >
       <span
         v-if="nickname !== null"
         class="text-white text-normal text-weight-600"
         >{{ nickname }}</span
       >
-      <span v-if="caption !== null" class="caption text-color-gray">{{
-        caption
-      }}</span>
+      <span
+        v-if="caption !== null"
+        class="caption text-color-gray"
+      >{{ caption }}</span>
     </div>
   </div>
 </template>

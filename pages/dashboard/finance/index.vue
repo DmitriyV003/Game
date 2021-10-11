@@ -198,8 +198,16 @@
                 <div
                   class="g-transactions__arrows g-transactions__arrows_mobile"
                 >
-                  <chevron-left-icon class="icon" />
-                  <chevron-right-icon class="icon" />
+                  <chevron-left-icon
+                    class="icon"
+                    :class="{ 'icon_disable': links.prev === null }"
+                    @click.native="links.prev === null ? '' : goToPage(meta.current_page - 1)"
+                  />
+                  <chevron-right-icon
+                    class="icon"
+                    :class="{ 'icon_disable': links.next === null }"
+                    @click.native="links.next === null ? '' : goToPage(meta.current_page + 1)"
+                  />
                 </div>
               </div>
             </div>

@@ -10,53 +10,44 @@
     </section>
 
     <!-- News card  adapted =  true  -->
-    <section v-if="false">
+    <section v-if="review !== null">
       <b-container>
         <div class="news-card__content">
           <div class="news-card__image">
-            <img class="news-card__img" src="/images/news-4.png" alt="" />
-            <h1 class="news-card__title">HITMAN 3</h1>
-            <p class="news-card__text">O Interactive</p>
+            <img class="news-card__img" :src="review.itemBackground" alt="" />
+            <h1 class="news-card__title">{{ review.name }}</h1>
+            <p class="news-card__text">{{ review.itemDeveloper }}</p>
 
-            <rating size="sm" class="news-card__rating" :value="4.6" />
+            <rating
+              size="sm"
+              class="news-card__rating"
+              v-if="review.itemRate !== null"
+              :value="review.itemRate"
+            />
           </div>
 
           <div class="news-card__block">
             <div class="news-card__views">
-              <avatar name="Blacktea" />
+              <avatar
+                :nickname="review.adminName"
+                :image="review.adminImage"
+              />
 
               <div class="news-card__stats">
                 <div class="news-card__stat">
                   <eye-icon class="icon" />
-                  <span class="text">8</span>
+                  <span class="text">{{ review.reviewViewsCount }}</span>
                 </div>
                 <div class="news-card__stat">
                   <message-icon class="icon" />
-                  <span class="text">24</span>
+                  <span class="text">{{ review.reviewCommentsCount }}</span>
                 </div>
               </div>
             </div>
 
             <div>
               <p class="news-card__text">
-                Команды BIG и Renegades выбыли из борьбы за чемпионский титул
-                ESL Pro League Season 13 по CS:GO. Они заняли пятое и шестое
-                места в группе А и лишились шансов на выход в плей-офф.
-              </p>
-
-              <p class="news-card__text">
-                Обе команды провели по четыре матча. BIG победила Complexity
-                Gaming, но уступила OG, Heroic и FPX Esports, а Renegades
-                проиграли четыре серии подряд против Heroic, FPX Esports, OG и
-                Complexity Gaming. В последнем туре BIG и Renegades сыграют друг
-                с другом. Встреча начнется 12 марта в 17:30 мск.
-              </p>
-
-              <p class="news-card__text">
-                ESL Pro League Season 13 проходит с 8 марта по 11 апреля в
-                онлайне. 24 коллектива сражаются за призовой фонд в размере $750
-                тыс. С 13 по 18 марта пройдут матчи в группе В. Следить за
-                детальным расписанием лиги можно на странице репортажа
+                {{ review.description }}
               </p>
             </div>
 
@@ -76,25 +67,48 @@
               <span class="news-card__caption">Опубликовано 2 часа назад</span>
             </div>
 
-            <div class="news-card__messages">
-              <g-message />
-              <g-message />
-              <g-message />
+            <div
+              class="news-card__messages"
+              v-if="review.reviewComments.length > 0"
+            >
+              <g-message-tree
+                :data="review.reviewComments"
+                store-action="reviews/setParentId"
+              />
+<!--              <g-message-->
+<!--                v-for="item in "-->
+<!--                :key="item.id"-->
+<!--                :data="item"-->
+<!--                @onAnswer="answer(item.id)"-->
+<!--              />-->
             </div>
 
-            <div class="news-card__bottom">
-              <avatar :name="null" :caption="null" />
+            <form class="news-card__bottom" @submit.prevent="onSubmit">
+              <avatar :image="review.adminImage" />
 
               <g-input
                 class="news-card__input"
                 placeholder="Оставьте комментарий"
-              />
+                v-model.trim="$v.form.text.$model"
+                :error="$v.form.text.$error"
+              >
+                <template v-slot:error>
+                  <span v-if="!$v.form.text.required && $v.form.text.$error"
+                    >Поле обязательно</span
+                  >
+                </template>
+              </g-input>
 
-              <button class="button-reboot news-card__btn button_primary">
+              <button
+                class="button-reboot news-card__btn button_primary"
+                type="submit"
+                :disabled="disabled || $v.$invalid"
+                :class="{ button_disabled: disabled || $v.$invalid }"
+              >
                 <span class="text">отправить</span>
                 <img class="icon" src="/images/icons/arrow-up.svg" alt="" />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </b-container>
@@ -111,19 +125,50 @@ import GInput       from '~/components/form-elements/Input'
 import MainButton   from '~/components/buttons/MainButton'
 import Rating       from '~/components/cards/Rating'
 import { mapState } from 'vuex'
+import { required } from 'vuelidate/lib/validators'
+import GMessageTree from '~/components/messages/MessageTree'
 export default {
   name: 'GReviewPage',
   mixins: [icons],
-  components: { Rating, MainButton, GInput, Avatar, GMessage, BreadCrumb },
+  components: { GMessageTree, Rating, MainButton, GInput, Avatar, GMessage, BreadCrumb },
+  validations: {
+    form: {
+      text: {
+        required,
+      },
+    },
+  },
+  methods: {
+    async onSubmit() {
+      this.disabled = true
+      try {
+        await this.$store.dispatch('reviews/postCreateComments', this.form)
+        await this.$store.dispatch('reviews/getReviewById', this.$route.params.id)
+
+        this.form.text = null
+        this.$v.$reset()
+      } catch (e) {
+        console.log(e)
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      } finally {
+        this.disabled = false
+      }
+    },
+  },
   async mounted() {
     try {
       await this.$store.dispatch('reviews/getReviewById', this.$route.params.id)
       // await this.$store.dispatch('comments/getAdditionalComments', this.$route.params.id)
-
-      // this.links.push({
-      //   to: `/reviews/${this.$route.params.id}`,
-      //   // label: this.comment.itemName,
-      // })
+      //
+      this.links.push({
+        to: `/reviews/${this.$route.params.id}`,
+        label: this.review.itemName,
+      })
     } catch (e) {
       this.$bvToast.toast('Ошибка загрузки страницы!', {
         title: 'Что-то пошло не так(',
@@ -141,6 +186,10 @@ export default {
   },
   data: () => {
     return {
+      disabled: false,
+      form: {
+        text: null
+      },
       links: [
         { to: '/', label: 'Главная' },
         { to: '/reviews', label: 'Обзоры' },

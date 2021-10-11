@@ -46,14 +46,19 @@
               class="news-card__messages"
               v-if="news.newsComments.length > 0"
             >
-              <g-message-tree :data="news.newsComments" />
+              <g-message-tree
+                :data="news.newsComments"
+                store-action="news/setParentId"
+              />
             </div>
 
             <form
               @submit.prevent="postCreateNewsComment"
               class="news-card__bottom"
             >
-              <avatar :image="user === null ? null : user.avatar" />
+              <avatar
+                :image="user === null ? null : user.avatar"
+              />
 
               <g-input
                 class="news-card__input"
@@ -136,9 +141,11 @@ export default {
           data.parentId = this.form.parentId
         }
         await this.$store.dispatch('news/postCreateNewsComment', data)
+        await this.$store.dispatch('news/getNewsById', this.$route.params.id)
 
         this.form.text = null
         this.form.parentId = null
+        this.$v.$reset()
       } catch (e) {
         // TODO notification
       } finally {

@@ -1,7 +1,10 @@
 <template>
   <div class="g-message__wrapper">
     <div class="g-message">
-      <img class="g-message__img" src="" alt="" />
+      <avatar
+        :image="data.avatar"
+        class="g-message__img"
+      />
 
       <div class="g-message__block">
         <p class="g-message__name">{{ data.nickname }}</p>
@@ -9,12 +12,12 @@
 
         <div class="g-message__bottom">
           <span class="g-message__date">{{
-            new Date(data.createdAt).toUTCString()
+            new Date(data.createdAt).toDateString()
           }}</span>
           <show-all
             :icon="false"
             label="Ответить"
-            @click.native="eventBus.$emit('onAnswer', data.id)"
+            @click.native="$emit('onAnswer')"
           />
         </div>
       </div>
@@ -32,12 +35,13 @@
 </template>
 
 <script>
-import ShowAll from '~/components/buttons/MainLink'
+import ShowAll      from '~/components/buttons/MainLink'
 import { eventBus } from '~/plugins/event-bus'
+import Avatar       from '~/components/Avatar'
 
 export default {
   name: 'GMessage',
-  components: { ShowAll },
+  components: { Avatar, ShowAll },
   data() {
     return {
       eventBus,

@@ -5,7 +5,10 @@
     </b-container>
 
     <!-- Overview game section adapted = true   -->
-    <section class="g-product-overview" v-if="item !== null">
+    <section
+      class="g-product-overview"
+      v-if="item !== null"
+    >
       <b-container>
         <div class="g-product-overview__main">
           <div class="g-product-overview__image">
@@ -122,7 +125,10 @@
     </section>
 
     <!-- Game description section adapted = true TODO Add video -->
-    <section class="g-product-description" v-if="item !== null">
+    <section
+      class="g-product-description"
+      v-if="item !== null"
+    >
       <b-container>
         <div class="g-product-section">
           <div class="g-product-title">

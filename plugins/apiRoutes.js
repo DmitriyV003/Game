@@ -43,5 +43,6 @@ export default {
   getReviewById: (id) => `/reviews/${id}`,
   getBalance: '/personal-area/finance/get-balance',
   getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
-  postActivatePromoCode: '/personal-area/finance/activate-promo-code'
+  postActivatePromoCode: '/personal-area/finance/activate-promo-code',
+  postCreateReviewComment: '/reviews/create-comment'
 }

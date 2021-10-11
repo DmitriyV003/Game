@@ -4,7 +4,7 @@
       v-for="item in data"
       :key="item.id"
       :data="item"
-      @onAnswer="$store.dispatch('news/postCreateNewsComment')"
+      @onAnswer="$store.dispatch(storeAction, item.id)"
     />
     />
   </div>
@@ -20,6 +20,10 @@ export default {
       type: Array,
       required: true,
     },
+    storeAction: {
+      type: String,
+      required: true,
+    }
   },
 }
 </script>
