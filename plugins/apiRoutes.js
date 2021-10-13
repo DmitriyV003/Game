@@ -39,10 +39,11 @@ export default {
   postBecomeSeller: '/seller/be-seller',
   postDispute: (id, type) => `/personal-area/appeals/dispute/create/${type}/${id}`,
   postFeedback: '/seller/feedbacks/create-feedback',
-  getReviews: '/reviews',
+  getReviews: (page = 1) => `/reviews?page=${page}`,
   getReviewById: (id) => `/reviews/${id}`,
   getBalance: '/personal-area/finance/get-balance',
   getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
   postActivatePromoCode: '/personal-area/finance/activate-promo-code',
-  postCreateReviewComment: '/reviews/create-comment'
+  postCreateReviewComment: '/reviews/create-comment',
+  getCheckItemsInCart: '/cart/check-items-in-cart'
 }

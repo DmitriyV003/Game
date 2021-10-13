@@ -8,9 +8,10 @@
         class="banner__button"
         size="xl"
         color="primary"
-        tag="button"
+        tag="a"
         :label="buttonLabel"
         v-if="buttonLabel !== null"
+        :to="to"
       />
     </div>
     <div class="banner__gradient">
@@ -39,6 +40,10 @@ export default {
     image: {
       type: String,
       required: true,
+    },
+    to: {
+      type: String,
+      default: () => '/'
     },
     buttonLabel: {
       type: String,

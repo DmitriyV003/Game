@@ -42,6 +42,7 @@
           :title="mainPage.inserts[0].smallDescription"
           :text="mainPage.inserts[0].description"
           :image="mainPage.inserts[0].background"
+          :to="mainPage.inserts[0].link"
           :button-label="mainPage.inserts[0].textOnButton"
         />
       </b-container>
@@ -77,6 +78,7 @@
           :title="mainPage.inserts[1].smallDescription"
           :text="mainPage.inserts[1].description"
           :image="mainPage.inserts[1].background"
+          :to="mainPage.inserts[1].link"
           :button-label="mainPage.inserts[1].textOnButton"
         />
       </b-container>
@@ -114,6 +116,7 @@
           :title="mainPage.inserts[1].smallDescription"
           :text="mainPage.inserts[1].description"
           :image="mainPage.inserts[1].background"
+          :to="mainPage.inserts[1].link"
           :button-label="mainPage.inserts[1].textOnButton"
         />
       </b-container>

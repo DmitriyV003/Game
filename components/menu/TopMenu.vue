@@ -91,6 +91,10 @@
           />
 
           <nuxt-link to="/cart" tag="div" class="custom-icon">
+            <span
+              class="custom-icon__indicator"
+              v-if="cartItems.length > 0"
+            ></span>
             <div class="custom-icon__main">
               <img src="/images/bag.svg" alt="" class="custom-icon__img" />
             </div>
@@ -171,6 +175,7 @@ export default {
       token: (state) => state.auth.token,
       user: (state) => state.user.user,
       balance: (state) => state.finance.balance,
+      cartItems: (state) => state.cart.items,
     }),
   },
   data() {

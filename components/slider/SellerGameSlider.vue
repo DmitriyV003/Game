@@ -13,6 +13,7 @@
         :name="item.name"
         :key="item.name"
         :image="item.background"
+        :rating="Number(item.rate)"
       />
     </vue-slick>
     <div class="g-slider__controls">

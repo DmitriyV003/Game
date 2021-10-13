@@ -45,6 +45,16 @@ export default {
 @import 'theme/_mix'
 .custom-icon
   flex-shrink: 0
+  position: relative
+  &__indicator
+    position: absolute
+    z-index: 10
+    top: 2px
+    right: 2px
+    width: 8px
+    height: 8px
+    border-radius: 50%
+    background: rgba(255, 153, 0, 1)
   &__main
     display: flex
     align-items: center

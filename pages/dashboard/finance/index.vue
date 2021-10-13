@@ -124,7 +124,7 @@
                 <div
                   class="g-transactions__line"
                   v-for="item in transactions"
-                  :key="item.created_at"
+                  :key="item.id"
                 >
                   <span
                     class="
@@ -197,6 +197,7 @@
 
                 <div
                   class="g-transactions__arrows g-transactions__arrows_mobile"
+                  v-if="meta !== null && links !== null"
                 >
                   <chevron-left-icon
                     class="icon"

@@ -16,7 +16,6 @@ export const actions = {
   async signInByEmail({ commit, dispatch }, data) {
     try {
       const res = await this.$axios.$get(
-        this.$axios.defaults.baseURL +
           apiRoutes.signInByEmail +
           `?email=${data.email}&password=${data.password}`
       )

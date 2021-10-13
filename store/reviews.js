@@ -4,27 +4,41 @@ export const state = () => ({
   reviews: [],
   review: null,
   parentId: null,
+  links: null,
+  meta: null,
+  currentPage: 1
 })
 
 export const mutations = {
   SET_REVIEWS(state, reviews) {
-    state.reviews = reviews
+    state.reviews = [...state.reviews, ...reviews]
   },
   SET_REVIEW(state, review) {
     state.review = review
   },
+  SET_META(state, data) {
+    state.links = data.links
+    state.meta = data.meta
+  },
   SET_PARENT_ID(state, parentId) {
     state.parentId = parentId
+  },
+  SET_CURRENT_PAGE(state, page) {
+    state.currentPage = page
   },
 }
 
 export const actions = {
-  async getReviews({ commit, dispatch }) {
-    const res = await this.$axios.$get(apiRoutes.getReviews)
+  async getReviews({ commit, state }) {
+    const res = await this.$axios.$get(apiRoutes.getReviews(state.currentPage))
     commit('SET_REVIEWS', res.data)
+    commit('SET_META', { links: res.links, meta: res.meta })
   },
   async setParentId({ commit }, parentId) {
     commit('SET_PARENT_ID', parentId)
+  },
+  async nextPage({ commit, state }) {
+    commit('SET_CURRENT_PAGE', state.currentPage + 1)
   },
   async makeCommentTree({ commit }, comments) {
     if (comments.length === 0) {

@@ -47,6 +47,7 @@
         <main-button
           color="gray"
           label="еще обзоры"
+          @click.native.prevent="nextPage"
           size="xl"
           full-width
         />
@@ -69,7 +70,19 @@ export default {
     ShowAll,
     BreadCrumb,
   },
+  methods: {
+    async nextPage() {
+      if (this.currentPage < this.meta.last_page) {
+        await this.$store.dispatch('reviews/nextPage')
+        await this.$store.dispatch('reviews/getReviews')
+        await this.$router.push(`/reviews?page=${this.currentPage}`)
+      }
+    }
+  },
   async mounted() {
+    const page = this.$route.query.page || 1
+    await this.$router.push(`/reviews?page=${page}`)
+
     try {
       await this.$store.dispatch('comments/getCommentRecommendedGames')
       await this.$store.dispatch('reviews/getReviews')
@@ -86,6 +99,8 @@ export default {
     ...mapState({
       reviews: (state) => state.reviews.reviews,
       games: (state) => state.comments.recommendedGames,
+      currentPage: (state) => state.reviews.currentPage,
+      meta: (state) => state.reviews.meta,
     }),
   },
   data: () => {

@@ -35,44 +35,66 @@
     <!-- Order adapted =  true  -->
     <section v-if="step === 1" class="cart-main">
       <b-container>
-        <div class="cart__title">
+        <div
+          class="cart__title"
+          v-if="items.length > 0"
+        >
           <h1>Ваш заказ</h1>
-          <span> (3 товара)</span>
+          <span> ({{ items.length }} товара)</span>
         </div>
 
-        <b-row>
-          <b-col xl="8" lg="7" md="10" class="m-xl-0 m-lg-0 m-md-auto">
-            <div class="g-background g-seller">
+        <b-row v-if="items">
+          <b-col
+            xl="8"
+            lg="7"
+            md="10"
+            class="m-xl-0 m-lg-0 m-md-auto"
+          >
+            <div
+              class="g-background g-seller"
+              v-for="(seller, index) in items"
+            >
               <div class="g-seller__top">
                 <div class="g-seller__name">
-                  Продавец: <span>Kgamestrade</span>
+                  Продавец: <span>{{ index }}</span>
                 </div>
                 <show-all
-                  to="/catalog?seller=someseller"
+                  to="/catalog?type=games"
                   label="Больше товаров этого продавца"
                   :icon="false"
                 />
               </div>
 
-              <g-cart-item />
-              <g-cart-item />
+              <g-cart-item
+                v-for="item in seller"
+                :key="item.keyId"
+                :key-id="item.keyId"
+                :name="item.name"
+                :image="item.image"
+                :item-price="item.itemPrice"
+              />
             </div>
           </b-col>
 
-          <b-col xl="4" lg="5" md="10" class="m-xl-0 m-lg-0 m-md-auto">
+          <b-col
+            xl="4"
+            lg="5"
+            md="10"
+            class="m-xl-0 m-lg-0 m-md-auto"
+          >
             <div class="g-background g-cart-total">
               <div class="g-cart-total__line">
                 <span>Товары</span>
-                <span>8 965 ₽</span>
+                <span>{{ getCartTotalSum }} ₽</span>
               </div>
-              <div class="g-cart-total__line">
-                <span>Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+<!--              <div class="g-cart-total__line">-->
+<!--                <span>Сумма скидок</span>-->
+<!--                <span class="sale">- 1 100 ₽</span>-->
+<!--              </div>-->
 
               <div class="g-cart-total__sum">
                 <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">7 865 ₽</span>
+                <span class="text-weight-600 text-size-24">{{ getCartTotalSum }} ₽</span>
               </div>
 
               <main-button
@@ -129,16 +151,16 @@
             <div class="g-wrapper g-cart-total">
               <div class="g-cart-total__line">
                 <span>Товары</span>
-                <span>8 965 ₽</span>
+                <span>{{ getCartTotalSum }} ₽</span>
               </div>
-              <div class="g-cart-total__line">
-                <span>Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+<!--              <div class="g-cart-total__line">-->
+<!--                <span>Сумма скидок</span>-->
+<!--                <span class="sale">- 1 100 ₽</span>-->
+<!--              </div>-->
 
               <div class="g-cart-total__sum">
                 <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">7 865 ₽</span>
+                <span class="text-weight-600 text-size-24">{{ getCartTotalSum }} ₽</span>
               </div>
 
               <main-button
@@ -158,44 +180,60 @@
     <!-- Receive Order adapted = true -->
     <section v-if="step === 3" class="cart-main">
       <b-container>
-        <div class="cart__title">
+        <div
+          class="cart__title"
+          v-if="items.length > 0"
+        >
           <h1>Ваш заказ</h1>
-          <span> (3 товара)</span>
+          <span> ({{ items.length }} товара)</span>
         </div>
 
-        <b-row>
-          <b-col xl="8" lg="7" md="10" class="m-xl-0 m-lg-0 m-md-auto">
-            <div class="g-wrapper g-seller">
+        <b-row v-if="items">
+          <b-col
+            xl="8"
+            lg="7"
+            md="10"
+            class="m-xl-0 m-lg-0 m-md-auto"
+          >
+            <div
+              class="g-wrapper g-seller"
+              v-for="(seller, index) in items"
+            >
               <div class="g-seller__top">
                 <div class="g-seller__name">
-                  Продавец: <span>Kgamestrade</span>
+                  Продавец: <span>{{ index }}</span>
                 </div>
               </div>
 
-              <g-receive-cart-item />
-              <g-receive-cart-item />
+              <g-receive-cart-item
+                v-for="item in seller"
+                :key="item.keyId"
+                :name="item.name"
+                :image="item.image"
+                :key-id="item.keyId"
+              />
             </div>
           </b-col>
           <b-col xl="4" lg="5" md="10" class="m-xl-0 m-lg-0 m-md-auto">
             <div class="g-wrapper g-cart-total">
               <div class="g-cart-total__line">
                 <span class="name">Товары</span>
-                <span>8 965 ₽</span>
+                <span>{{ getCartTotalSum }} ₽</span>
               </div>
-              <div class="g-cart-total__line">
-                <span class="name">Сумма скидок</span>
-                <span class="sale">- 1 100 ₽</span>
-              </div>
-              <div class="g-cart-total__line">
-                <span class="name"
-                  >McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span
-                >
-                <span class="sale">- 1 100 ₽</span>
-              </div>
+<!--              <div class="g-cart-total__line">-->
+<!--                <span class="name">Сумма скидок</span>-->
+<!--                <span class="sale">- 1 100 ₽</span>-->
+<!--              </div>-->
+<!--              <div class="g-cart-total__line">-->
+<!--                <span class="name"-->
+<!--                  >McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span-->
+<!--                >-->
+<!--                <span class="sale">- 1 100 ₽</span>-->
+<!--              </div>-->
 
               <div class="g-cart-total__line g-cart-total__line_total">
                 <span class="name">Итого</span>
-                <span>7 965 ₽</span>
+                <span>{{ getCartTotalSum }} ₽</span>
               </div>
             </div>
           </b-col>
@@ -206,11 +244,12 @@
 </template>
 
 <script>
-import ShowAll from '~/components/buttons/MainLink'
-import GCartItem from '~/components/cart/Item'
-import MainButton from '~/components/buttons/MainButton'
-import GPaymentMethod from '~/components/cart/PaymetMethod'
+import ShowAll          from '~/components/buttons/MainLink'
+import GCartItem        from '~/components/cart/Item'
+import MainButton       from '~/components/buttons/MainButton'
+import GPaymentMethod   from '~/components/cart/PaymetMethod'
 import GReceiveCartItem from '~/components/cart/ReceiveItem'
+import { mapGetters }     from 'vuex'
 
 export default {
   components: {
@@ -219,6 +258,19 @@ export default {
     MainButton,
     GCartItem,
     ShowAll,
+  },
+  // async mounted() {
+  //   try {
+  //     await this.$store.dispatch('cart/checkItemsInCart')
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // },
+  computed: {
+    ...mapGetters({
+      items: 'cart/getItems',
+      getCartTotalSum: 'cart/getCartTotalSum',
+    }),
   },
   layout: 'default',
   data() {
@@ -287,6 +339,8 @@ export default {
             flex-shrink: 0
 
 .g-seller
+    &:not(:last-child)
+        margin-bottom: 20px
     &__more
         color: dark-blue(1)
         font-size: 14px

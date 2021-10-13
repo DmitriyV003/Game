@@ -21,7 +21,7 @@
     <!-- Seller comments  adapted = true -->
     <section
       class="section"
-      v-if="sellerPage !== null && sellerPage.feedbacks.userComments.length > 0"
+      v-if="sellerPage !== null && sellerPage.feedbacks.userComments !== null"
     >
       <b-container>
         <section-header title="Отзывы о продавце" />
@@ -56,15 +56,15 @@
 
         <div class="g-seller-games">
           <b-row>
-            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-              <game-card adaptive-sm />
-            </b-col>
-            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-              <game-card adaptive-sm />
-            </b-col>
-            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">
-              <game-card adaptive-sm />
-            </b-col>
+<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
+<!--              <game-card adaptive-sm />-->
+<!--            </b-col>-->
+<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
+<!--              <game-card adaptive-sm />-->
+<!--            </b-col>-->
+<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
+<!--              <game-card adaptive-sm />-->
+<!--            </b-col>-->
           </b-row>
 
           <button class="button-reboot g-seller-games__all">все игры</button>
@@ -84,11 +84,16 @@
     </section>
 
     <!-- Seller games  adapted = true -->
-    <section class="section">
+    <section
+      class="section"
+      v-if="sellerGames !== null"
+    >
       <b-container>
         <section-header title="Игры" />
 
-        <g-seller-game-slider v-if="sellerGames !== null" :data="sellerGames" />
+        <g-seller-game-slider
+          :data="sellerGames"
+        />
       </b-container>
     </section>
 

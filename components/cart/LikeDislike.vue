@@ -4,7 +4,8 @@
       <avatar
         class="g-like__avatar"
         :caption="nickname"
-        :name="name + ' ' + surname"
+        :nickname="name + ' ' + surname"
+        :image="image"
       />
 
       <div class="g-like__bottom">
@@ -47,6 +48,10 @@ export default {
     nickname: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
+      default: () => null,
     },
     surname: {
       type: String,

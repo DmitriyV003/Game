@@ -1,4 +1,5 @@
 import apiRoutes from '~/plugins/apiRoutes'
+import Cookies   from 'js-cookie'
 
 export const state = () => ({
   profile: null,
@@ -40,6 +41,8 @@ export const actions = {
         nickname: state.profile.data.nickname,
       })
     )
+
+    Cookies.remove('user')
   },
   async postChangeAvatar({ dispatch, rootState }, data) {
     await this.$axios.$post(

@@ -44,7 +44,7 @@
                 />
               </div>
 
-              <nuxt-link to="/">
+              <nuxt-link :to="`/seller/${item.sellerId}`">
                 <avatar
                   :caption="item.sellerName + ' ' + item.sellerSurname"
                   :nickname="item.sellerNickname"
@@ -60,6 +60,7 @@
                 size="xl"
                 color="primary"
                 label="купить сейчас"
+                @click.native.prevent="addToCart"
               />
               <main-button
                 full-width
@@ -271,6 +272,9 @@ export default {
   methods: {
     showMore () {
       this.maxText = this.item.detailedDescription.length
+    },
+    async addToCart () {
+      await this.$store.dispatch('cart/addItem')
     }
   },
   computed: {

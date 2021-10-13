@@ -2,7 +2,7 @@
   <div>
     <div class="g-item">
       <div class="g-item__img">
-        <img src="/images/cart-item.png" alt="" />
+        <img :src="image" alt="" />
       </div>
 
       <div class="g-item__content g-item__content_desktop">
@@ -10,7 +10,7 @@
           <div
             class="g-item__name text-size-20 text-color-white text-weight-600"
           >
-            HITMAN 3
+            {{ name }}
           </div>
         </div>
 
@@ -26,7 +26,7 @@
           <div
             class="g-item__name text-size-20 text-color-white text-weight-600"
           >
-            HITMAN 3
+            {{ name }}
           </div>
           <div class="g-item__counter">
             <show-all :icon="false" label="Открыть спор" />
@@ -36,7 +36,7 @@
     </div>
 
     <div class="g-keys">
-      <g-key value="4QA26-BTDKE-XKL43M" />
+      <g-key :value="keyId" />
     </div>
   </div>
 </template>
@@ -56,6 +56,18 @@ export default {
       type: Number,
       default: () => 1,
     },
+    keyId: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     changeQuantity(number) {},
