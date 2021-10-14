@@ -27,20 +27,20 @@
 </template>
 
 <script>
-import MainButton   from '~/components/buttons/MainButton'
+import MainButton from '~/components/buttons/MainButton'
 import { mapState } from 'vuex'
 export default {
-  name: 'GCommentForm',
+  name: 'GCommentFormDashboard',
   components: { MainButton },
   computed: {
     ...mapState({
-      form: (state) => state.items.form,
+      form: (state) => state.purchases.form,
     }),
   },
   methods: {
     async postComment() {
       try {
-        await this.$store.dispatch('items/postComment', this.keyId)
+        await this.$store.dispatch('purchases/postComment', this.keyId)
       } catch (e) {
         this.$bvToast.toast('Ошибка загрузки страницы!', {
           title: 'Что-то пошло не так(',
@@ -49,7 +49,7 @@ export default {
           appendToast: true,
         })
       }
-    }
+    },
   },
   props: {
     name: {

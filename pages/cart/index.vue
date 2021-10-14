@@ -35,25 +35,14 @@
     <!-- Order adapted =  true  -->
     <section v-if="step === 1" class="cart-main">
       <b-container>
-        <div
-          class="cart__title"
-          v-if="items.length > 0"
-        >
+        <div class="cart__title" v-if="items.length > 0">
           <h1>Ваш заказ</h1>
           <span> ({{ items.length }} товара)</span>
         </div>
 
         <b-row v-if="items">
-          <b-col
-            xl="8"
-            lg="7"
-            md="10"
-            class="m-xl-0 m-lg-0 m-md-auto"
-          >
-            <div
-              class="g-background g-seller"
-              v-for="(seller, index) in items"
-            >
+          <b-col xl="8" lg="7" md="10" class="m-xl-0 m-lg-0 m-md-auto">
+            <div class="g-background g-seller" v-for="(seller, index) in items">
               <div class="g-seller__top">
                 <div class="g-seller__name">
                   Продавец: <span>{{ index }}</span>
@@ -76,29 +65,27 @@
             </div>
           </b-col>
 
-          <b-col
-            xl="4"
-            lg="5"
-            md="10"
-            class="m-xl-0 m-lg-0 m-md-auto"
-          >
+          <b-col xl="4" lg="5" md="10" class="m-xl-0 m-lg-0 m-md-auto">
             <div class="g-background g-cart-total">
               <div class="g-cart-total__line">
                 <span>Товары</span>
                 <span>{{ getCartTotalSum }} ₽</span>
               </div>
-<!--              <div class="g-cart-total__line">-->
-<!--                <span>Сумма скидок</span>-->
-<!--                <span class="sale">- 1 100 ₽</span>-->
-<!--              </div>-->
+              <!--              <div class="g-cart-total__line">-->
+              <!--                <span>Сумма скидок</span>-->
+              <!--                <span class="sale">- 1 100 ₽</span>-->
+              <!--              </div>-->
 
               <div class="g-cart-total__sum">
                 <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">{{ getCartTotalSum }} ₽</span>
+                <span class="text-weight-600 text-size-24"
+                  >{{ getCartTotalSum }} ₽</span
+                >
               </div>
 
               <main-button
                 @click.native="step = 2"
+                :disabled="items.length === 0"
                 class="g-cart-total__btn"
                 color="primary"
                 label="перейти к оплате"
@@ -130,19 +117,7 @@
               <g-payment-method
                 :id="2"
                 image="/images/payment-1.svg"
-                name="Сбербанк Онлайн"
-                class="g-payments__method"
-              />
-              <g-payment-method
-                :id="3"
-                image="/images/payment-1.svg"
-                name="Qiwi"
-                class="g-payments__method"
-              />
-              <g-payment-method
-                :id="4"
-                image="/images/payment-1.svg"
-                name="Мобильные платежи"
+                name="Счет"
                 class="g-payments__method"
               />
             </div>
@@ -153,18 +128,21 @@
                 <span>Товары</span>
                 <span>{{ getCartTotalSum }} ₽</span>
               </div>
-<!--              <div class="g-cart-total__line">-->
-<!--                <span>Сумма скидок</span>-->
-<!--                <span class="sale">- 1 100 ₽</span>-->
-<!--              </div>-->
+              <!--              <div class="g-cart-total__line">-->
+              <!--                <span>Сумма скидок</span>-->
+              <!--                <span class="sale">- 1 100 ₽</span>-->
+              <!--              </div>-->
 
               <div class="g-cart-total__sum">
                 <span class="text-weight-600">Итого к оплате</span>
-                <span class="text-weight-600 text-size-24">{{ getCartTotalSum }} ₽</span>
+                <span class="text-weight-600 text-size-24"
+                  >{{ getCartTotalSum }} ₽</span
+                >
               </div>
 
               <main-button
-                @click.native="step = 3"
+                @click.native="buy"
+                :disabled="Object.keys(paymentMethod).length === 0"
                 class="g-cart-total__btn"
                 color="primary"
                 label="перейти к оплате"
@@ -180,25 +158,14 @@
     <!-- Receive Order adapted = true -->
     <section v-if="step === 3" class="cart-main">
       <b-container>
-        <div
-          class="cart__title"
-          v-if="items.length > 0"
-        >
+        <div class="cart__title" v-if="items.length > 0">
           <h1>Ваш заказ</h1>
           <span> ({{ items.length }} товара)</span>
         </div>
 
         <b-row v-if="items">
-          <b-col
-            xl="8"
-            lg="7"
-            md="10"
-            class="m-xl-0 m-lg-0 m-md-auto"
-          >
-            <div
-              class="g-wrapper g-seller"
-              v-for="(seller, index) in items"
-            >
+          <b-col xl="8" lg="7" md="10" class="m-xl-0 m-lg-0 m-md-auto">
+            <div class="g-wrapper g-seller" v-for="(seller, index) in items">
               <div class="g-seller__top">
                 <div class="g-seller__name">
                   Продавец: <span>{{ index }}</span>
@@ -220,16 +187,16 @@
                 <span class="name">Товары</span>
                 <span>{{ getCartTotalSum }} ₽</span>
               </div>
-<!--              <div class="g-cart-total__line">-->
-<!--                <span class="name">Сумма скидок</span>-->
-<!--                <span class="sale">- 1 100 ₽</span>-->
-<!--              </div>-->
-<!--              <div class="g-cart-total__line">-->
-<!--                <span class="name"-->
-<!--                  >McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span-->
-<!--                >-->
-<!--                <span class="sale">- 1 100 ₽</span>-->
-<!--              </div>-->
+              <!--              <div class="g-cart-total__line">-->
+              <!--                <span class="name">Сумма скидок</span>-->
+              <!--                <span class="sale">- 1 100 ₽</span>-->
+              <!--              </div>-->
+              <!--              <div class="g-cart-total__line">-->
+              <!--                <span class="name"-->
+              <!--                  >McAfee AntiVirus PC 1 Device 3 Years McAfee Key GLOBAL</span-->
+              <!--                >-->
+              <!--                <span class="sale">- 1 100 ₽</span>-->
+              <!--              </div>-->
 
               <div class="g-cart-total__line g-cart-total__line_total">
                 <span class="name">Итого</span>
@@ -244,12 +211,12 @@
 </template>
 
 <script>
-import ShowAll          from '~/components/buttons/MainLink'
-import GCartItem        from '~/components/cart/Item'
-import MainButton       from '~/components/buttons/MainButton'
-import GPaymentMethod   from '~/components/cart/PaymetMethod'
-import GReceiveCartItem from '~/components/cart/ReceiveItem'
-import { mapGetters }     from 'vuex'
+import ShowAll from '~/components/buttons/MainLink'
+import GCartItem from '~/components/cart/Item'
+import MainButton from '~/components/buttons/MainButton'
+import GPaymentMethod from '~/components/cart/PaymetMethod'
+import GReceiveCartItem         from '~/components/cart/ReceiveItem'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   components: {
@@ -266,11 +233,28 @@ export default {
   //     console.log(e)
   //   }
   // },
+  methods: {
+    buy() {
+      this.step = 3
+      this.$store.dispatch('cart/buy')
+    }
+  },
   computed: {
     ...mapGetters({
       items: 'cart/getItems',
       getCartTotalSum: 'cart/getCartTotalSum',
     }),
+    ...mapState({
+      isPaid: (state) => state.cart.isPaid,
+      paymentMethod: (state) => state.cart.paymentMethod
+    }),
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.step === 3 && to.name !== 'cart-product-key-key' && this.isPaid) {
+      this.$store.dispatch('cart/deleteAllItems')
+    }
+
+    next()
   },
   layout: 'default',
   data() {

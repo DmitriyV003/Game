@@ -5,7 +5,7 @@ export default {
   forgetPassword: '/authorization/send-link-for-change-password',
   getAllPurchases: (type) => '/personal-area/purchases/' + type,
   getPurchase: (id, type) => '/personal-area/purchases/show-key-card/' + type + '/' + id,
-  postPurchaseFeedback: '/seller/create-feedback',
+  postPurchaseFeedback: '/seller/feedbacks/create-feedback',
   getProfile: '/personal-area/profile',
   changePassword: '/personal-area/security',
   postChangeAvatar: '/personal-area/profile/edit/avatar',
@@ -45,5 +45,6 @@ export default {
   getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
   postActivatePromoCode: '/personal-area/finance/activate-promo-code',
   postCreateReviewComment: '/reviews/create-comment',
-  getCheckItemsInCart: '/cart/check-items-in-cart'
+  getCheckItemsInCart: '/cart/check-items-in-cart',
+  getBuyCartItems: (items, method) => `/buy?items=${items}&method=${method}`
 }

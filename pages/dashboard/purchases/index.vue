@@ -97,7 +97,7 @@
                 :id="purchase.keyId"
                 :name="purchase.itemName"
                 :code="purchase.key"
-                :platform="purchase.itemPlatform"
+                :platform="purchase.itemPlatform.join(', ')"
                 :picture="purchase.itemBackground"
               />
             </b-col>

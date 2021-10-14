@@ -44,11 +44,12 @@
               order-sm="5"
               order="5"
             >
-              <g-comment-form
+              <g-comment-form-dashboard
                 class="purchase__comment"
                 :name="purchase.sellerName"
                 :surname="purchase.sellerSurname"
-                v-model="form.comment"
+                v-model="comment"
+                :key-id="purchase.key"
               />
             </b-col>
 
@@ -58,7 +59,7 @@
                 :name="purchase.sellerName"
                 :nickname="purchase.sellerNickname"
                 :surname="purchase.sellerSurname"
-                v-model="form.rate"
+                v-model="rating"
               />
             </b-col>
           </b-row>
@@ -69,23 +70,25 @@
 </template>
 
 <script>
-import GDashboardNavigation from '~/components/dashboard/Navigation'
-import GPurchaseItem from '~/components/dashboard/PurchaseItem'
-import RoundedButton from '~/components/buttons/RoundedButton'
-import GSortButton from '~/components/dashboard/SortButton'
-import icons from '~/mixins/icons'
-import ShowAll from '~/components/buttons/MainLink'
-import GPurchased from '~/components/dashboard/GPurchased'
-import GCommentForm from '~/components/GCommentForm'
-import GLikeDislike from '~/components/cart/LikeDislike'
-import GNewDispute from '~/components/popups/NewDispute'
-import { mapState } from 'vuex'
+import GDashboardNavigation  from '~/components/dashboard/Navigation'
+import GPurchaseItem         from '~/components/dashboard/PurchaseItem'
+import RoundedButton         from '~/components/buttons/RoundedButton'
+import GSortButton           from '~/components/dashboard/SortButton'
+import icons                 from '~/mixins/icons'
+import ShowAll               from '~/components/buttons/MainLink'
+import GPurchased            from '~/components/dashboard/GPurchased'
+import GCommentForm          from '~/components/GCommentForm'
+import GLikeDislike          from '~/components/cart/LikeDislike'
+import GNewDispute           from '~/components/popups/NewDispute'
+import { mapState }          from 'vuex'
+import GCommentFormDashboard from '~/components/GCommentFormDashboard'
 
 export default {
   name: 'GDashboardPurchasePage',
   mixins: [icons],
   middleware: ['auth'],
   components: {
+    GCommentFormDashboard,
     GNewDispute,
     GLikeDislike,
     GCommentForm,
@@ -99,10 +102,6 @@ export default {
   data () {
     return {
       disabled: false,
-      form: {
-        comment: null,
-        rate: null
-      }
     }
   },
   methods: {
@@ -142,6 +141,22 @@ export default {
     ...mapState({
       purchase: (state) => state.purchases.purchase,
     }),
+    rating: {
+      get() {
+        return this.$store.state.items.form.rating
+      },
+      set(val) {
+        this.$store.commit('purchases/SET_FORM_FIELD', { field: 'rating', value: val })
+      }
+    },
+    comment: {
+      get() {
+        return this.$store.state.items.form.comment
+      },
+      set(val) {
+        this.$store.commit('purchases/SET_FORM_FIELD', { field: 'comment', value: val })
+      }
+    }
   },
 }
 </script>

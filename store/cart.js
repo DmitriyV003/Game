@@ -5,6 +5,7 @@ const _ = require('lodash');
 export const state = () => ({
   paymentMethod: {},
   items: [],
+  isPaid: false
 })
 
 export const mutations = {
@@ -16,6 +17,9 @@ export const mutations = {
   },
   SET_ITEMS(state, items) {
     state.items = items
+  },
+  SET_PAY_STATUS(state, status) {
+    state.isPaid = status
   }
 }
 
@@ -34,8 +38,6 @@ export const actions = {
       sellerAvatar: rootState['items'].item.sellerAvatar
     }
 
-    if (state.items.find(x => x.keyId !== item.keyId)) {
-    }
     if (!_.findKey(state.items, function (i) {
         return i.keyId === item.keyId
     })) {
@@ -49,12 +51,23 @@ export const actions = {
       commit('SET_ITEMS', items)
     }
   },
+  // TODO: buy action doesn't work
+  async buy({ commit, state }) {
+    // await this.$axios.$get(apiRoutes.getBuyCartItems(JSON.stringify(state.items), state.paymentMethod.name))
+
+    commit('SET_PAY_STATUS', true)
+  },
   deleteItem({ commit, state }, keyId) {
     commit('SET_ITEMS', _.filter(state.items, function (i) {
       return i.keyId !== keyId
     }))
     this.$cookiz.set('gameInComeCart', state.items)
   },
+  deleteAllItems({ commit, state }) {
+    commit('SET_ITEMS', [])
+    this.$cookiz.set('gameInComeCart', state.items)
+  },
+  // TODO: cannot check items in cart
   async checkItemsInCart({ state }) {
     const res = await this.$axios.$post(apiRoutes.getCheckItemsInCart, state.items)
     console.log(res)
@@ -74,5 +87,5 @@ export const getters = {
     return _.find(state.items, function (item) {
       return item.keyId === keyId
     })
-  }
+  },
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="g-product-key"
-    v-if="item !== null"
+    v-if="item != null"
   >
     <section class="g-product-key__top">
       <b-container>
@@ -38,6 +38,7 @@
                 :surname="item.sellerSurname"
                 :image="item.sellerAvatar"
                 class="g-product-key__like_mobile"
+                v-model="rating"
               />
             </section>
 
@@ -46,6 +47,8 @@
               <g-comment-form
                 :name="item.sellerName"
                 :surname="item.sellerSurname"
+                v-model="comment"
+                :key-id="item.keyId"
               />
             </section>
           </b-col>
@@ -60,6 +63,7 @@
               :name="item.sellerName"
               :surname="item.sellerSurname"
               :image="item.sellerAvatar"
+              v-model="rating"
             />
           </b-col>
         </b-row>
@@ -82,13 +86,28 @@ export default {
     ...mapGetters({
       getItemByKey: 'cart/getItemByKey',
     }),
+    rating: {
+      get() {
+        return this.$store.state.items.form.rating
+      },
+      set(val) {
+        this.$store.commit('items/SET_FORM_FIELD', { field: 'rating', value: val })
+      }
+    },
+    comment: {
+      get() {
+        return this.$store.state.items.form.comment
+      },
+      set(val) {
+        this.$store.commit('items/SET_FORM_FIELD', { field: 'comment', value: val })
+      }
+    }
   },
   mounted () {
     this.item = this.getItemByKey(this.$route.params.key)
   },
   data: () => {
     return {
-      rating: 0,
       item: null
     }
   },

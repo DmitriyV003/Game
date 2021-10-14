@@ -61,6 +61,7 @@
                 color="primary"
                 label="купить сейчас"
                 @click.native.prevent="addToCart"
+                :disabled="getItemByKey(item.keyId) !== undefined"
               />
               <main-button
                 full-width
@@ -228,9 +229,9 @@ import GSystemTable          from '~/components/tables/GSystemTable'
 import SectionHeader         from '~/components/SectionHeader'
 import GProposalCard         from '~/components/cards/ProposalCard'
 import GProposalSlider       from '~/components/slider/ProposalSlider'
-import GCommentSlider        from '~/components/slider/CommentSlider'
-import { mapState }          from 'vuex'
-import GProductCommentSlider from '~/components/slider/ProductCommentSlider'
+import GCommentSlider           from '~/components/slider/CommentSlider'
+import { mapGetters, mapState } from 'vuex'
+import GProductCommentSlider    from '~/components/slider/ProductCommentSlider'
 
 export default {
   name: 'Product',
@@ -282,6 +283,9 @@ export default {
       item: (state) => state.items.item,
       proposals: (state) => state.items.proposals,
       comments: (state) => state.comments.comments,
+    }),
+    ...mapGetters({
+      getItemByKey: 'cart/getItemByKey',
     }),
   },
   data: () => {
