@@ -55,8 +55,7 @@ export const actions = {
   },
   async postCreateNewsComment({ commit, dispatch, state }, data) {
     state.parentId !== null ? data.parentId = state.parentId : null
-    const res = await this.$axios.$post(apiRoutes.postCreateNewsComment, data)
-    res.data.newsComments = await dispatch('makeCommentTree', res.data.newsComments)
-    commit('SET_NEWS', res.data)
+    await this.$axios.$post(apiRoutes.postCreateNewsComment, data)
+    dispatch('getNewsById', data.newsId)
   },
 }

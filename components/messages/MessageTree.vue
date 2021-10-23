@@ -4,14 +4,15 @@
       v-for="item in data"
       :key="item.id"
       :data="item"
-      @onAnswer="$store.dispatch(storeAction, item.id)"
+      :store-action="storeAction"
     />
     />
   </div>
 </template>
 
 <script>
-import GMessage from '~/components/Message'
+import GMessage     from '~/components/Message'
+
 export default {
   name: 'GMessageTree',
   components: { GMessage },

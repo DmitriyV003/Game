@@ -1,5 +1,6 @@
 export default function({ store, redirect }) {
-  if (store.getters['auth/token'] === null) {
+  console.log(store.getters['auth/getToken'])
+  if (store.getters['auth/getToken'] == null) {
     redirect('/sign-in?error=login')
   }
 }

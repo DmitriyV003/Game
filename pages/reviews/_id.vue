@@ -143,7 +143,7 @@ export default {
       this.disabled = true
       try {
         await this.$store.dispatch('reviews/postCreateComments', this.form)
-        await this.$store.dispatch('reviews/getReviewById', this.$route.params.id)
+        // await this.$store.dispatch('reviews/getReviewById', this.$route.params.id)
 
         this.form.text = null
         this.$v.$reset()

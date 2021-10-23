@@ -19,12 +19,18 @@
             <nuxt-link to="/" class="header__link">Стать партнером</nuxt-link>
           </div>
 
-          <div v-if="user !== null" class="header__actions">
-            <div class="action header__action">
+          <div
+            v-if="token !== null"
+            class="header__actions"
+          >
+            <nuxt-link
+              to="/dashboard/questions"
+              class="action header__action"
+            >
               <div class="action__icon">
                 <img src="/images/email.svg" alt="" />
               </div>
-            </div>
+            </nuxt-link>
 
 <!--            <div class="action header__action">-->
 <!--              <div class="action__icon">-->

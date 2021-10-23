@@ -48,40 +48,50 @@
     </section>
 
     <!-- Seller catalog  adapted = true -->
-    <section class="section">
-      <b-container>
-        <div class="catalog-top-section__content">
-          <g-catalog-section-header title="Игры" caption="16786 продуктов" />
-        </div>
+<!--    <section-->
+<!--      class="section"-->
+<!--      v-if="sellerGames !== null"-->
+<!--    >-->
+<!--      <b-container>-->
+<!--        <div class="catalog-top-section__content">-->
+<!--          <g-catalog-section-header title="Игры" caption="16786 продуктов" />-->
+<!--        </div>-->
 
-        <div class="g-seller-games">
-          <b-row>
-<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
-<!--              <game-card adaptive-sm />-->
+<!--        <div class="g-seller-games">-->
+<!--          <b-row>-->
+<!--            <b-col-->
+<!--              class="catalog__card"-->
+<!--              xl="4"-->
+<!--              lg="4"-->
+<!--              md="4"-->
+<!--              sm="6"-->
+<!--              v-for="item in sellerGames"-->
+<!--            >-->
+<!--              <game-card-->
+<!--                adaptive-sm-->
+<!--                :image="item.background"-->
+<!--                :title="item.name"-->
+<!--                :rating="item.rate"-->
+<!--                type="game"-->
+<!--              />-->
 <!--            </b-col>-->
-<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
-<!--              <game-card adaptive-sm />-->
-<!--            </b-col>-->
-<!--            <b-col class="catalog__card" xl="4" lg="4" md="4" sm="6">-->
-<!--              <game-card adaptive-sm />-->
-<!--            </b-col>-->
-          </b-row>
+<!--          </b-row>-->
 
-          <button class="button-reboot g-seller-games__all">все игры</button>
-        </div>
-      </b-container>
-    </section>
+<!--          <button class="button-reboot g-seller-games__all">все игры</button>-->
+<!--        </div>-->
+<!--      </b-container>-->
+<!--    </section>-->
 
     <!-- Achievements  adapted = true -->
-    <section class="section">
-      <b-container>
-        <section-header title="Достижения" />
+<!--    <section class="section">-->
+<!--      <b-container>-->
+<!--        <section-header title="Достижения" />-->
 
-        <div class="g-comments">
-          <g-achievement-slider :data="[{}]" />
-        </div>
-      </b-container>
-    </section>
+<!--        <div class="g-comments">-->
+<!--          <g-achievement-slider :data="[{}]" />-->
+<!--        </div>-->
+<!--      </b-container>-->
+<!--    </section>-->
 
     <!-- Seller games  adapted = true -->
     <section
@@ -89,7 +99,7 @@
       v-if="sellerGames !== null"
     >
       <b-container>
-        <section-header title="Игры" />
+        <section-header title="Рекомендации" />
 
         <g-seller-game-slider
           :data="sellerGames"
@@ -98,13 +108,13 @@
     </section>
 
     <!-- Seller reviews  adapted = true -->
-    <section class="section">
-      <b-container>
-        <section-header title="Обзоры" />
+<!--    <section class="section">-->
+<!--      <b-container>-->
+<!--        <section-header title="Обзоры" />-->
 
-        <g-seller-review-slider :data="[{}]" />
-      </b-container>
-    </section>
+<!--        <g-seller-review-slider :data="[{}]" />-->
+<!--      </b-container>-->
+<!--    </section>-->
   </div>
 </template>
 

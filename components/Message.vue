@@ -17,7 +17,7 @@
           <show-all
             :icon="false"
             label="Ответить"
-            @click.native="$emit('onAnswer')"
+            @click.native="$store.dispatch(storeAction, data.id)"
           />
         </div>
       </div>
@@ -29,6 +29,7 @@
         :key="item.id"
         :data="item"
         class="g-message_child"
+        :store-action="storeAction"
       />
     </div>
   </div>
@@ -52,6 +53,10 @@ export default {
       type: Object,
       required: true,
     },
+    storeAction: {
+      type: String,
+      required: true,
+    }
   },
 }
 </script>

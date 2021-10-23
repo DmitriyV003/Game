@@ -59,9 +59,10 @@ export const actions = {
     res.data.reviewComments = await dispatch('makeCommentTree', res.data.reviewComments)
     commit('SET_REVIEW', res.data)
   },
-  async postCreateComments ({ state }, data) {
+  async postCreateComments ({ state, dispatch }, data) {
     data.reviewId = state.review.id
     state.parentId !== null ? data.parentId = state.parentId : null
     await this.$axios.$post(apiRoutes.postCreateReviewComment, data)
+    dispatch('getReviewById', data.reviewId)
   }
 }

@@ -106,7 +106,7 @@ export default {
     GMessage,
     BreadCrumb,
   },
-  data: () => {
+  data () {
     return {
       links: [
         { to: '/', label: 'Главная' },
@@ -141,7 +141,6 @@ export default {
           data.parentId = this.form.parentId
         }
         await this.$store.dispatch('news/postCreateNewsComment', data)
-        await this.$store.dispatch('news/getNewsById', this.$route.params.id)
 
         this.form.text = null
         this.form.parentId = null

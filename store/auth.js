@@ -21,7 +21,6 @@ export const actions = {
       )
 
       if (res.status === 200) {
-        console.log(res)
         dispatch('user/setUser', res.data, { root: true })
         dispatch('setToken', res.token)
         await this.$router.push('/')
