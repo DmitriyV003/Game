@@ -14,9 +14,9 @@
             <nuxt-link to="/for-customers" class="header__link"
               >Покупателям</nuxt-link
             >
-            <nuxt-link to="/" class="header__link">Оплата</nuxt-link>
+<!--            <nuxt-link to="/" class="header__link">Оплата</nuxt-link>-->
             <nuxt-link to="/legal" class="header__link">Гарантии</nuxt-link>
-            <nuxt-link to="/" class="header__link">Стать партнером</nuxt-link>
+            <nuxt-link to="/for-sellers" class="header__link">Стать партнером</nuxt-link>
           </div>
 
           <div
@@ -65,9 +65,9 @@
             <nuxt-link exact to="/skin" class="header__link header__link_bold"
               >Скины
             </nuxt-link>
-            <nuxt-link exact to="/" class="header__link header__link_bold"
-              >Кейсы
-            </nuxt-link>
+<!--            <nuxt-link exact to="/" class="header__link header__link_bold"-->
+<!--              >Кейсы-->
+<!--            </nuxt-link>-->
             <nuxt-link exact to="/reviews" class="header__link header__link_bold"
               >Обзоры
             </nuxt-link>

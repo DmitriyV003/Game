@@ -11,7 +11,7 @@
     </div>
     <input
       @input="$emit('input', $event.target.value)"
-      :type="originType"
+      :type="inputType"
       class="input-reboot g-input__input"
       :class="[
         'g-input__input_' + color,
@@ -26,13 +26,13 @@
       <slot name="error"></slot>
     </span>
     <eye-icon
-      @click="originType = 'text'"
-      v-if="eye && originType === 'password'"
+      @click="inputType = 'text'"
+      v-if="eye && inputType === 'password'"
       class="g-input__eye"
     />
     <eye-off-icon
-      @click="originType = 'password'"
-      v-if="eye && originType === 'text'"
+      @click="inputType = 'password'"
+      v-if="eye && inputType === 'text'"
       class="g-input__eye"
     />
   </div>
@@ -48,16 +48,6 @@ export default {
     return {
       inputType: this.type,
     }
-  },
-  computed: {
-    originType: {
-      get() {
-        return this.type
-      },
-      set(value) {
-        this.inputType = value
-      },
-    },
   },
   props: {
     placeholder: {

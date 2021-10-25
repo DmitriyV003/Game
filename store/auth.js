@@ -29,7 +29,7 @@ export const actions = {
       throw e
     }
   },
-  autoLogin({ dispatch, commit }) {
+  autoLogin({ dispatch }) {
     const cookieStr = process.browser
       ? document.cookie
       : this.app.context.req.headers.cookie
@@ -45,10 +45,11 @@ export const actions = {
       console.log(e)
     }
   },
-  logOut({ commit }) {
+  async logOut({ commit }) {
     commit('setToken', null)
     commit('user/setUser', null, { root: true })
     Cookies.remove('gameInComeToken')
+    await this.$router.push('/')
   },
   setToken({ commit }, token) {
     commit('setToken', token)

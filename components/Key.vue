@@ -47,6 +47,12 @@ export default {
   methods: {
     async copy() {
       await navigator.clipboard.writeText(this.value)
+      this.$bvToast.toast('Ключ скопирован в буфер обмена', {
+        title: 'Уведомление',
+        variant: 'primary',
+        solid: true,
+        appendToast: true,
+      })
     },
   },
 }

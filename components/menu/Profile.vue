@@ -53,8 +53,8 @@ export default {
     },
   },
   methods: {
-    logOut() {
-      this.$store.dispatch('auth/logOut')
+    async logOut() {
+      await this.$store.dispatch('auth/logOut')
     },
   },
   data: () => {

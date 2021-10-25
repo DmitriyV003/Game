@@ -2,7 +2,7 @@
   <footer class="footer">
     <b-container>
       <div class="footer__wrapper">
-        <div class="footer__column">
+        <div class="footer__column footer__column_fsh0">
           <nuxt-link to="/" class="footer__logo">
             <img src="/images/logo.svg" alt="" />
           </nuxt-link>
@@ -43,13 +43,13 @@
           </div>
         </div>
 
-        <div class="footer__column">
+        <div class="footer__column footer__column_w100">
           <div class="footer__links">
             <nuxt-link class="footer__link" to="/catalog">Игры</nuxt-link>
             <nuxt-link class="footer__link" to="/soft">Софт</nuxt-link>
             <nuxt-link class="footer__link" to="/skin">СКИНЫ</nuxt-link>
-            <nuxt-link class="footer__link" to="/">КЕЙСЫ</nuxt-link>
-            <nuxt-link class="footer__link" to="/">GiftCard</nuxt-link>
+<!--            <nuxt-link class="footer__link" to="/">КЕЙСЫ</nuxt-link>-->
+<!--            <nuxt-link class="footer__link" to="/">GiftCard</nuxt-link>-->
             <nuxt-link class="footer__link" to="/legal">Region free</nuxt-link>
             <nuxt-link class="footer__link" to="/reviews">обзоры</nuxt-link>
             <nuxt-link class="footer__link" to="/comments">Отзывы</nuxt-link>
@@ -66,19 +66,19 @@
                 >
               </div>
               <div class="footer__block footer__block_order-10">
-                <nuxt-link class="footer__item" to="/">Оплата</nuxt-link>
+<!--                <nuxt-link class="footer__item" to="/">Оплата</nuxt-link>-->
                 <nuxt-link class="footer__item" to="/legal">Гарантии</nuxt-link>
+                <nuxt-link class="footer__item" to="/for-sellers"
+                >Стать партнером</nuxt-link
+                >
               </div>
               <div class="footer__block footer__block_order-10 no-md-margin">
                 <nuxt-link class="footer__item" to="/news">Новости</nuxt-link>
-                <nuxt-link class="footer__item" to="/"
-                  >Стать партнером</nuxt-link
-                >
               </div>
               <div class="footer__block">
                 <nuxt-link
                   class="footer__item footer__item_white"
-                  to="/dashboard/profile/dfgh"
+                  to="/dashboard/profile"
                   >Личный кабинет</nuxt-link
                 >
               </div>
@@ -311,6 +311,14 @@ export default {
   &__column
     display: flex
     flex-direction: column
+    &_fsh0
+      flex-shrink: 0
+    &_w100
+      width: 100%
+    &:not(:last-child)
+      margin-right: 20px
+      +lg
+        margin-right: 0
     +md
       flex-direction: row
       width: 100%

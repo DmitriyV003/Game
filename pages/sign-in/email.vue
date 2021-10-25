@@ -16,7 +16,7 @@
             v-model.trim="$v.form.email.$model"
             class="auth-structure__input"
             placeholder="E-mail *"
-            :error="$v.form.email.$error || 'email' in apiErrors"
+            :error="$v.form.email.$error || apiErrors !== null"
           >
             <template v-slot:error>
               <span v-if="!$v.form.email.required && $v.form.email.$error"
@@ -29,13 +29,16 @@
                 >Максимальная длина Email
                 {{ $v.form.email.$params.maxLength.max }} символов</span
               >
+              <span
+                v-if="apiErrors !== null"
+              >{{ apiErrors }}</span>
             </template>
           </g-input>
           <g-input
             v-model.trim="$v.form.password.$model"
             class="auth-structure__input"
             placeholder="Пароль *"
-            :error="$v.form.password.$error || 'password' in apiErrors"
+            :error="$v.form.password.$error || apiErrors !== null"
             type="password"
           >
             <template v-slot:error>
@@ -46,6 +49,10 @@
                 v-if="!$v.form.password.maxLength && $v.form.password.$error"
                 >Максимальная длина пароля
                 {{ $v.form.password.$params.maxLength.max }} символов</span
+              >
+              <span
+                v-if="apiErrors !== null"
+              >{{ apiErrors }}</span
               >
             </template>
           </g-input>
@@ -91,7 +98,7 @@ export default {
         password: null,
       },
       disabled: false,
-      apiErrors: {},
+      apiErrors: null,
       error: false,
     }
   },
@@ -115,8 +122,8 @@ export default {
         await this.$store.dispatch('auth/signInByEmail', this.form)
         await this.$router.push('/')
       } catch (e) {
-        if (e.response.status === 422) {
-          this.apiErrors = e.response.data.errors
+        if (e.response.status === 422 || e.response.status === 400) {
+          this.apiErrors = e.response.data.warning
 
           this.$bvToast.toast('Проверьте введенные данные еще раз', {
             title: 'Ошибка в заполнении данных!',
@@ -124,6 +131,7 @@ export default {
             solid: true,
             appendToast: true,
           })
+
         }
       } finally {
         this.disabled = false

@@ -12,27 +12,27 @@
           icon="/images/gameInComeBtn.svg"
           label="Через E-mail и пароль"
         />
-        <social-btn
-          to="/auth/email"
-          class="sign-up__social"
-          icon-color="#3F619E"
-          icon="/images/fb.svg"
-          label="Facebook"
-        />
-        <social-btn
-          :href="$axios.defaults.baseURL + vkRoute"
-          class="sign-up__social"
-          icon-color="#5580BD"
-          icon="/images/vk.svg"
-          label="Вконтакте"
-        />
-        <social-btn
-          to="/auth/email"
-          class="sign-up__social"
-          icon-color="#FFFFFF"
-          icon="/images/google.svg"
-          label="Google"
-        />
+<!--        <social-btn-->
+<!--          to="/auth/email"-->
+<!--          class="sign-up__social"-->
+<!--          icon-color="#3F619E"-->
+<!--          icon="/images/fb.svg"-->
+<!--          label="Facebook"-->
+<!--        />-->
+<!--        <social-btn-->
+<!--          :href="$axios.defaults.baseURL + vkRoute"-->
+<!--          class="sign-up__social"-->
+<!--          icon-color="#5580BD"-->
+<!--          icon="/images/vk.svg"-->
+<!--          label="Вконтакте"-->
+<!--        />-->
+<!--        <social-btn-->
+<!--          to="/auth/email"-->
+<!--          class="sign-up__social"-->
+<!--          icon-color="#FFFFFF"-->
+<!--          icon="/images/google.svg"-->
+<!--          label="Google"-->
+<!--        />-->
       </div>
     </div>
   </b-container>
