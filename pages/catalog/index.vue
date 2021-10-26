@@ -588,6 +588,11 @@ export default {
           query: { ...this.$route.query, page },
         })
         await this.$store.dispatch('catalog/getCatalogGamesByPage', { page, type: this.$route.query.type })
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
       } catch (e) {
         console.log(e)
       }

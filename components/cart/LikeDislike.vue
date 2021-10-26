@@ -15,6 +15,7 @@
         <div class="g-like__actions">
           <button
             @click="$emit('input', 1)"
+            :class="{ 'g-like__action_active': form.rating === 1 }"
             class="g-like__action"
             type="button"
           >
@@ -22,6 +23,7 @@
           </button>
           <button
             @click="$emit('input', 0)"
+            :class="{ 'g-like__action_active': form.rating === 0 }"
             class="g-like__action"
             type="button"
           >
@@ -34,12 +36,18 @@
 </template>
 
 <script>
-import Avatar from '~/components/Avatar'
-import icons from '~/mixins/icons'
+import Avatar       from '~/components/Avatar'
+import icons        from '~/mixins/icons'
+import { mapState } from 'vuex'
 export default {
   name: 'GLikeDislike',
   components: { Avatar },
   mixins: [icons],
+  computed: {
+    ...mapState({
+      form: (state) => state.items.form,
+    }),
+  },
   props: {
     name: {
       type: String,
@@ -75,6 +83,9 @@ export default {
     height: 44px
     border-radius: 50%
     color: $white
+    &_active
+      background: #643EFF
+      border: transparent
     &:not(:last-child)
       margin-right: 32px
       +md

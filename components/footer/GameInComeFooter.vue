@@ -1,5 +1,7 @@
 <template>
   <footer class="footer">
+    <g-new-question-popup-main />
+
     <b-container>
       <div class="footer__wrapper">
         <div class="footer__column footer__column_fsh0">
@@ -88,6 +90,7 @@
               color="primary"
               class="footer__btn lg-none"
               label="Задать вопрос"
+              @click.native="openPopup"
             />
           </div>
         </div>
@@ -118,7 +121,12 @@
           </CustomIcon>
         </div>
 
-        <MainButton color="primary" class="footer__btn" label="Задать вопрос" />
+        <MainButton
+          color="primary"
+          class="footer__btn"
+          label="Задать вопрос"
+          @click.native="openPopup"
+        />
       </div>
 
       <div class="footer__wrapper footer__wrapper_padding-top">
@@ -143,11 +151,23 @@
 </template>
 
 <script>
-import CustomIcon from '~/components/CustomIcon'
-import MainButton from '~/components/buttons/MainButton'
+import CustomIcon            from '~/components/CustomIcon'
+import MainButton            from '~/components/buttons/MainButton'
+import GNewQuestionPopupMain from '~/components/popups/NewQuestionMainPopup'
+import { eventBus }          from '~/plugins/event-bus'
 export default {
   name: 'GameInComeFooter',
-  components: { MainButton, CustomIcon },
+  components: { GNewQuestionPopupMain, MainButton, CustomIcon },
+  data () {
+    return {
+      eventBus
+    }
+  },
+  methods: {
+    openPopup () {
+      this.eventBus.$emit('newQuestionMainPopupOpen')
+    }
+  }
 }
 </script>
 
