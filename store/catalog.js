@@ -82,8 +82,8 @@ export const actions = {
   addFilter({ commit, dispatch }, filterData) {
     commit('SET_FILTER_BY_TYPE', filterData)
   },
-  async changeOrder({ commit, dispatch }, order) {
-    commit('CHANGE_ORDER', order)
+  async changeOrder({ commit, dispatch, state }) {
+    commit('CHANGE_ORDER', state.order === 'desc' ? 'asc' : 'desc')
     await dispatch('getCatalogItems')
   },
   addFilterToArray({ commit, dispatch }, filterData) {

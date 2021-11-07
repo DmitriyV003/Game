@@ -16,15 +16,19 @@
           class="text-size-14"
           @click="changeOrder"
         >Сначала популярные</span>
-        <img src="/images/icons/filter.svg" alt="" />
+        <img
+          src="/images/icons/filter.svg" alt=""
+          :class="{ 'catalog-top-section__sort_rotate': sortDirection === 'asc' }"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import icons from '~/mixins/icons'
+import icons        from '~/mixins/icons'
 import { eventBus } from '~/plugins/event-bus'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GCatalogSectionHeader',
@@ -34,10 +38,15 @@ export default {
       eventBus,
     }
   },
+  computed: {
+    ...mapState({
+      sortDirection: (state) => state.catalog.order
+    }),
+  },
   methods: {
     async changeOrder () {
       try {
-        await this.$store.dispatch('catalog/changeOrder', 'asc')
+        await this.$store.dispatch('catalog/changeOrder')
       } catch (e) {
         this.$bvToast.toast('Что-то пошло не так(', {
           title: 'Ошибка!',
@@ -83,6 +92,10 @@ export default {
         display: flex
         align-items: center
         color: white(1)
+        img
+            transition: all 0.1s
+        &_rotate
+            transform: rotate(180deg)
         span
             color: inherit
             margin-right: 12px
