@@ -12,8 +12,6 @@ export default function ({ $axios, redirect, store }) {
     if (error.response) {
       if (error.response.status === 401) {
         redirect('/sign-in?message=error')
-      } else if(error.response.status === 500) {
-        redirect('error')
       }
     }
   })

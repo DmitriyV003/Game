@@ -195,19 +195,19 @@
     </section>
 
     <!-- Reviews  adapted = true -->
-    <section class="section">
-      <b-container>
-        <section-header title="Полезные обзоры" />
-        <div class="for-customers__clients" v-if="windowSize >= 1200">
-          <review-card class="for-customers__review" />
-          <review-card class="for-customers__review" />
-          <review-card class="for-customers__review" />
-        </div>
-        <div class="for-customers__clients" v-else>
-          <g-review-slider />
-        </div>
-      </b-container>
-    </section>
+<!--    <section class="section">-->
+<!--      <b-container>-->
+<!--        <section-header title="Полезные обзоры" />-->
+<!--        <div class="for-customers__clients" v-if="windowSize >= 1200">-->
+<!--          <review-card class="for-customers__review" />-->
+<!--          <review-card class="for-customers__review" />-->
+<!--          <review-card class="for-customers__review" />-->
+<!--        </div>-->
+<!--        <div class="for-customers__clients" v-else>-->
+<!--          <g-review-slider />-->
+<!--        </div>-->
+<!--      </b-container>-->
+<!--    </section>-->
 
     <!-- Who  adapted = true -->
     <section class="section for-customers__who">

@@ -62,26 +62,26 @@
                   </div>
 
                   <div class="catalog-filters__range-inputs">
-                    <div class="catalog-filters__input g-input">
+                    <div class="catalog-filters__input g-input-filter">
                       <input
                         v-model="minPrice"
                         type="text"
-                        class="input-reboot g-input__input"
+                        class="input-reboot g-input-filter__input"
                       />
-                      <span class="g-input__right-label">₽</span>
+                      <span class="g-input-filter__right-label">₽</span>
                     </div>
 
                     <span class="text-color-gray text-weight-600 text-size-14"
                       >-</span
                     >
 
-                    <div class="catalog-filters__input g-input">
+                    <div class="catalog-filters__input g-input-filter">
                       <input
                         v-model="maxPrice"
                         type="text"
-                        class="input-reboot g-input__input"
+                        class="input-reboot g-input-filter__input"
                       />
-                      <span class="g-input__right-label">₽</span>
+                      <span class="g-input-filter__right-label">₽</span>
                     </div>
                   </div>
                 </template>
@@ -592,7 +592,7 @@ export default {
           top: 0,
           left: 0,
           behavior: 'smooth'
-        });
+        })
       } catch (e) {
         console.log(e)
       }

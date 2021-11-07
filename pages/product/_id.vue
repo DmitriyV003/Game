@@ -80,7 +80,7 @@
       <b-container>
         <div class="g-product-section">
           <div class="g-product-title">
-            <h4>Об игре Hitman 3</h4>
+            <h4>Об игре {{ item.name }}</h4>
           </div>
 
           <div class="g-product-block">
@@ -138,8 +138,10 @@
           </div>
 
           <div class="g-product-block">
-            <div class="text text-color-gray text-size-16">
-              {{ item.detailedDescription.slice(0, maxText) }}
+            <div
+              class="text text-color-gray text-size-16"
+              v-html="item.detailedDescription.slice(0, maxText)"
+            >
             </div>
 
             <div class="g-product__video"></div>

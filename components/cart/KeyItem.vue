@@ -16,7 +16,11 @@
 
         <div>
           <div class="g-item__counter">
-            <show-all :icon="false" label="Открыть спор" />
+            <show-all
+              :icon="false"
+              label="Открыть спор"
+              @click.native="eventBus.$emit('newDisputePopupOpen')"
+            />
           </div>
         </div>
       </div>
@@ -42,15 +46,22 @@
 </template>
 
 <script>
-import icons from '~/mixins/icons'
-import GPrice from '~/components/GPrice'
-import ShowAll from '~/components/buttons/MainLink'
-import MainButton from '~/components/buttons/MainButton'
-import GKey from '~/components/Key'
+import icons        from '~/mixins/icons'
+import GPrice       from '~/components/GPrice'
+import ShowAll      from '~/components/buttons/MainLink'
+import MainButton   from '~/components/buttons/MainButton'
+import GKey         from '~/components/Key'
+import { eventBus } from '~/plugins/event-bus'
+
 export default {
   name: 'GKeyItem',
   components: { GKey, MainButton, ShowAll, GPrice },
   mixins: [icons],
+  data: () => {
+    return {
+      eventBus
+    }
+  },
   props: {
     quantity: {
       type: Number,

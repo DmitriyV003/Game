@@ -48,39 +48,40 @@
     </section>
 
     <!-- Seller catalog  adapted = true -->
-<!--    <section-->
-<!--      class="section"-->
-<!--      v-if="sellerGames !== null"-->
-<!--    >-->
-<!--      <b-container>-->
-<!--        <div class="catalog-top-section__content">-->
-<!--          <g-catalog-section-header title="Игры" caption="16786 продуктов" />-->
-<!--        </div>-->
+    <section
+      class="section"
+      v-if="sellerGames !== null"
+      id="catalog"
+    >
+      <b-container>
+        <div class="catalog-top-section__content">
+          <g-catalog-section-header title="Каталог" :caption="`${sellerGames.length} продуктов`" />
+        </div>
 
-<!--        <div class="g-seller-games">-->
-<!--          <b-row>-->
-<!--            <b-col-->
-<!--              class="catalog__card"-->
-<!--              xl="4"-->
-<!--              lg="4"-->
-<!--              md="4"-->
-<!--              sm="6"-->
-<!--              v-for="item in sellerGames"-->
-<!--            >-->
-<!--              <game-card-->
-<!--                adaptive-sm-->
-<!--                :image="item.background"-->
-<!--                :title="item.name"-->
-<!--                :rating="item.rate"-->
-<!--                type="game"-->
-<!--              />-->
-<!--            </b-col>-->
-<!--          </b-row>-->
+        <div class="g-seller-games">
+          <b-row>
+            <b-col
+              class="catalog__card"
+              xl="4"
+              lg="4"
+              md="4"
+              sm="6"
+              v-for="item in sellerGames"
+            >
+              <game-card
+                adaptive-sm
+                :image="item.background"
+                :title="item.name"
+                :rating="Number(item.rate)"
+                type="game"
+              />
+            </b-col>
+          </b-row>
 
 <!--          <button class="button-reboot g-seller-games__all">все игры</button>-->
-<!--        </div>-->
-<!--      </b-container>-->
-<!--    </section>-->
+        </div>
+      </b-container>
+    </section>
 
     <!-- Achievements  adapted = true -->
 <!--    <section class="section">-->
@@ -177,7 +178,7 @@ export default {
 .g-seller-games
     margin-top: 24px
     &__all
-        margin-top: 40px
+        margin-top: 20px
         padding: 14px
         display: flex
         align-items: center

@@ -102,8 +102,8 @@
               <button
                 class="button-reboot news-card__btn button_primary"
                 type="submit"
-                :disabled="disabled || $v.$invalid"
-                :class="{ button_disabled: disabled || $v.$invalid }"
+                :disabled="disabled || $v.$invalid || token == null"
+                :class="{ button_disabled: disabled || $v.$invalid || token == null }"
               >
                 <span class="text">отправить</span>
                 <img class="icon" src="/images/icons/arrow-up.svg" alt="" />
@@ -181,6 +181,7 @@ export default {
   computed: {
     ...mapState({
       review: (state) => state.reviews.review,
+      token: (state) => state.auth.token,
       additionalComments: (state) => state.comments.additionalComments,
     }),
   },

@@ -3,6 +3,9 @@
     class="g-product-key"
     v-if="item != null"
   >
+    <g-new-dispute
+    />
+
     <section class="g-product-key__top">
       <b-container>
         <show-all
@@ -79,9 +82,11 @@ import MainButton     from '~/components/buttons/MainButton'
 import GLikeDislike   from '~/components/cart/LikeDislike'
 import GCommentForm   from '~/components/GCommentForm'
 import { mapGetters } from 'vuex'
+import GNewDispute    from '~/components/popups/NewDispute'
+
 export default {
   name: 'ProductKeyPage',
-  components: { GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
+  components: { GNewDispute, GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
   computed: {
     ...mapGetters({
       getItemByKey: 'cart/getItemByKey',

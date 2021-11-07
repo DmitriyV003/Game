@@ -5,6 +5,7 @@ export const state = () => ({
   meta: null,
   filters: null,
   type: 'games',
+  order: 'desc',
   acceptedFilters: {
     categories: [],
     services: [],
@@ -24,6 +25,9 @@ export const mutations = {
   },
   SET_TYPE(state, type) {
     state.type = type
+  },
+  CHANGE_ORDER(state, order) {
+    state.order = order
   },
   SET_FILTERS(state, filters) {
     state.filters = filters
@@ -67,7 +71,7 @@ export const actions = {
   },
   async getCatalogItems({ commit, state }) {
     try {
-      const res = await this.$axios.$get(apiRoutes.getCatalogItems(state.type))
+      const res = await this.$axios.$get(apiRoutes.getCatalogItems(state.type, state.order))
       commit('SET_ITEMS', res.data)
       res.meta.links = res.links
       commit('SET_META', res.meta)
@@ -77,6 +81,10 @@ export const actions = {
   },
   addFilter({ commit, dispatch }, filterData) {
     commit('SET_FILTER_BY_TYPE', filterData)
+  },
+  async changeOrder({ commit, dispatch }, order) {
+    commit('CHANGE_ORDER', order)
+    await dispatch('getCatalogItems')
   },
   addFilterToArray({ commit, dispatch }, filterData) {
     commit('ADD_FILTER_TO_ARRAY', filterData)

@@ -12,7 +12,10 @@
       />
 
       <div class="catalog-top-section__sort">
-        <span class="text-size-14">Сначала популярные</span>
+        <span
+          class="text-size-14"
+          @click="changeOrder"
+        >Сначала популярные</span>
         <img src="/images/icons/filter.svg" alt="" />
       </div>
     </div>
@@ -29,6 +32,20 @@ export default {
   data() {
     return {
       eventBus,
+    }
+  },
+  methods: {
+    async changeOrder () {
+      try {
+        await this.$store.dispatch('catalog/changeOrder', 'asc')
+      } catch (e) {
+        this.$bvToast.toast('Что-то пошло не так(', {
+          title: 'Ошибка!',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
     }
   },
   props: {

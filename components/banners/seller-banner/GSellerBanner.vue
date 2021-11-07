@@ -10,12 +10,13 @@
         :dislikes="dislikes"
       />
 
-      <main-button
-        color="primary"
-        label="Смотреть каталог"
-        size="xl"
-        class="g-seller-info__btn g-seller-info__btn_desktop"
-      />
+      <a
+        href="#"
+        v-scroll-to="'#catalog'"
+        class="button button_primary button_xl g-seller-info__btn g-seller-info__btn_desktop"
+      >
+        Смотреть каталог
+      </a>
     </div>
     <div class="g-seller-info__block">
       <g-banner-statistics :number="purchases" text="Товара куплено" />
@@ -27,13 +28,13 @@
       <g-banner-statistics :number="4" text="Обзор оставлен" />
     </div>
 
-    <main-button
-      color="primary"
-      label="Смотреть каталог"
-      full-width
-      size="xl"
-      class="g-seller-info__btn g-seller-info__btn_mobile"
-    />
+    <a
+      href="#"
+      v-scroll-to="'#catalog'"
+      class="button button_primary button_xl g-seller-info__btn g-seller-info__btn_mobile"
+    >
+      Смотреть каталог
+    </a>
   </div>
 </template>
 <script>

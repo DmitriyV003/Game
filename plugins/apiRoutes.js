@@ -28,7 +28,7 @@ export default {
   getSellerPage: (id) => '/seller/profile/' + id,
   getSellerItems: (id) => '/seller/profile/' + id + '/items',
   getSearch: (name) => '/search?name=' + name,
-  getCatalogItems: (type) => '/catalog/items/' + type,
+  getCatalogItems: (type, order = 'desc') => '/catalog/items/' + type + '/' + order,
   getCatalogFilters: (type) => '/catalog/filter/' + type,
   getFilteredItemsCatalog: (query) => '/catalog/after-filters?' + query,
   getComments: '/seller/feedbacks',
