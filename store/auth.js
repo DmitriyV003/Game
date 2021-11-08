@@ -14,19 +14,11 @@ export const mutations = {
 
 export const actions = {
   async signInByEmail({ commit, dispatch }, data) {
-    try {
-      const res = await this.$axios.$get(
-          apiRoutes.signInByEmail +
-          `?email=${data.email}&password=${data.password}`
-      )
-
-      if (res.status === 200) {
-        dispatch('user/setUser', res.data, { root: true })
-        dispatch('setToken', res.token)
-        await this.$router.push('/')
-      }
-    } catch (e) {
-      throw e
+    const res = await this.$axios.$get(apiRoutes.signInByEmail +`?email=${data.email}&password=${data.password}`)
+    if (res.status === 200) {
+      dispatch('user/setUser', res.data, { root: true })
+      dispatch('setToken', res.token)
+      await this.$router.push('/')
     }
   },
   autoLogin({ dispatch }) {

@@ -122,16 +122,32 @@ export default {
         await this.$store.dispatch('auth/signInByEmail', this.form)
         await this.$router.push('/')
       } catch (e) {
-        if (e.response.status === 422 || e.response.status === 400) {
-          this.apiErrors = e.response.data.warning
+        if (e.response) {
+          if (e.response.status === 422 || e.response.status === 400) {
+            this.apiErrors = e.response.data.warning
 
-          this.$bvToast.toast('Проверьте введенные данные еще раз', {
-            title: 'Ошибка в заполнении данных!',
+            this.$bvToast.toast('Проверьте введенные данные еще раз', {
+              title: 'Ошибка в заполнении данных!',
+              variant: 'danger',
+              solid: true,
+              appendToast: true,
+            })
+
+          } else {
+            this.$bvToast.toast('Произошла ошибка на сервере!', {
+              title: 'Ошибка сервера!',
+              variant: 'danger',
+              solid: true,
+              appendToast: true,
+            })
+          }
+        } else {
+          this.$bvToast.toast('Произошла ошибка на сервере!', {
+            title: 'Ошибка сервера!',
             variant: 'danger',
             solid: true,
             appendToast: true,
           })
-
         }
       } finally {
         this.disabled = false
