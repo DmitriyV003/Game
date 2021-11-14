@@ -2,15 +2,14 @@
   <!-- Adapted = true  -->
   <div
     class="g-popup"
-    v-show="val"
-    v-if="purchase !== null"
+    v-if="purchase !== null && val"
   >
     <form
       @submit.prevent="postNewDispute"
       class="g-new-dispute"
     >
       <div class="g-popup__top">
-        <p class="g-popup-title">Новый спор</p>
+        <p class="g-popup__title">Новый спор</p>
         <close-icon @click="val = false" class="g-popup__close" />
       </div>
 

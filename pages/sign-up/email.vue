@@ -163,11 +163,18 @@ export default {
       try {
         const data = this.form
         this.disabled = true
-        await this.$store.dispatch('registration/signUpByEmail', data)
+        const result = await this.$store.dispatch('registration/signUpByEmail', data)
+        await this.$router.push(`/auth/confirm-registration?email=${data.email}&hash=${result.hash}`)
       } catch (e) {
         if (e.response.status === 422) {
           this.apiErrors = e.response.data.errors
         }
+        this.$bvToast.toast('Ошибка регистрации пользователя!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
       } finally {
         this.disabled = false
       }

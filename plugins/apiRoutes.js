@@ -12,7 +12,7 @@ export default {
   getAppeals: (category) => '/personal-area/appeals/' + category,
   getQuestionMessages: (category, id) => '/personal-area/appeals/' + category + '/to/' + id,
   postCreateQuestion: (category) => '/personal-area/appeals/' + category + '/create',
-  postCreateMessage: (id) => '/personal-area/appeals/general/create-message/' + id,
+  postCreateMessage: (type, id) => `/personal-area/appeals/${type}/create-message/${id}`,
   getSliderNews: '/news/small',
   getCardNews: '/news/big',
   getNewsById: (id) => '/news/' + id,
@@ -46,5 +46,10 @@ export default {
   postActivatePromoCode: '/personal-area/finance/activate-promo-code',
   postCreateReviewComment: '/reviews/create-comment',
   getCheckItemsInCart: '/cart/check-items-in-cart',
-  getBuyCartItems: (items, method) => `/buy?items=${items}&method=${method}`
+  getBuyCartItems: (items, method) => `/buy?items=${items}&method=${method}`,
+  postConfirmEmail: '/authorization/registration/accept-email',
+  getSales: (type) => `/personal-area/sales/${type}`,
+  postCreateSale: (type, id) => `/personal-area/sales/${type}/${id}`,
+  putArchiveSale: (type, id) => `/personal-area/sales/${type}/${id}`,
+  deleteSale: (type, id) => `/personal-area/sales/${type}/${id}`
 }

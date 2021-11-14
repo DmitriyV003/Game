@@ -3,8 +3,7 @@
     class="g-product-key"
     v-if="item != null"
   >
-    <g-new-dispute
-    />
+<!--    <g-new-dispute />-->
 
     <section class="g-product-key__top">
       <b-container>
@@ -110,6 +109,13 @@ export default {
   },
   mounted () {
     this.item = this.getItemByKey(this.$route.params.key)
+    this.$store.commit('purchases/SET_PURCHASE', {
+      itemBackground: this.item.image,
+      itemName: this.item.name,
+      sellerNickname: this.item.sellerNickname,
+      price: this.item.itemPrice.old ? this.item.itemPrice.old : this.item.itemPrice.new
+    })
+    this.$store.commit('purchases/SET_TYPE', this.item.itemType)
   },
   data: () => {
     return {

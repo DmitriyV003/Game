@@ -58,13 +58,12 @@ export const actions = {
     )
     commit('SET_QUESTIONS', res.data)
   },
-  async postCreateQuestion({ commit, state }, data) {
+  async postCreateQuestion({ commit, state, dispatch }, data) {
     const res = await this.$axios.$post(
       apiRoutes.postCreateQuestion(state.category.value),
       JSON.stringify(data)
     )
-    //commit('ADD_QUESTION', res.data)
-    console.log(res.data)
+    await dispatch('getQuestions', state.category)
   },
 }
 

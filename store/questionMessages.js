@@ -20,11 +20,9 @@ export const actions = {
     )
     commit('SET_MESSAGES', res.data)
   },
-  async postCreateMessage({ commit }, { id, data }) {
-    const res = await this.$axios.$post(
-      apiRoutes.postCreateMessage(id),
-      JSON.stringify(data)
-    )
+  async postCreateMessage({ commit, rootGetters }, { id, data }) {
+    const type = rootGetters['questions/getQuestionCategory'].value
+    const res = await this.$axios.$post(apiRoutes.postCreateMessage(type, id), JSON.stringify(data))
     commit('SET_MESSAGES', res.data)
   },
 }

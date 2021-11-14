@@ -1,5 +1,7 @@
 <template>
   <div>
+    <g-new-dispute />
+
     <div class="g-item">
       <div class="g-item__img">
         <img :src="image" alt="" />
@@ -33,7 +35,11 @@
             {{ name }}
           </div>
           <div class="g-item__counter">
-            <show-all :icon="false" label="Открыть спор" />
+            <show-all
+              :icon="false"
+              label="Открыть спор"
+              @click.native="eventBus.$emit('newDisputePopupOpen')"
+            />
           </div>
         </div>
       </div>
@@ -52,10 +58,11 @@ import ShowAll      from '~/components/buttons/MainLink'
 import MainButton   from '~/components/buttons/MainButton'
 import GKey         from '~/components/Key'
 import { eventBus } from '~/plugins/event-bus'
+import GNewDispute  from '~/components/popups/NewDispute'
 
 export default {
   name: 'GKeyItem',
-  components: { GKey, MainButton, ShowAll, GPrice },
+  components: { GNewDispute, GKey, MainButton, ShowAll, GPrice },
   mixins: [icons],
   data: () => {
     return {

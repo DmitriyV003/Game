@@ -1,6 +1,10 @@
 <template>
   <!-- Adapted = true  -->
-  <form @submit.prevent="postCreateQuestion" class="g-popup" v-show="val">
+  <form
+    @submit.prevent="postCreateQuestion"
+    class="g-popup"
+    v-if="val"
+  >
     <div class="g-new-question">
       <div class="g-popup__top">
         <p class="g-popup__title">Новый вопрос</p>
@@ -22,6 +26,7 @@
         <div class="g-new-question__block">
           <span class="g-new-question__caption">Текст сообщения:</span>
           <textarea
+            id="message-text"
             v-model="$v.form.text.$model"
             class="input-reboot g-new-question__textarea"
           ></textarea>
@@ -94,15 +99,16 @@ export default {
     clearForm () {
       this.form.text = null
       this.form.theme = null
-      this.$v.reset()
+      this.$v.$reset()
     },
     async postCreateQuestion() {
+      this.disabled = true
       try {
-        this.disabled = true
         await this.$store.dispatch('questions/postCreateQuestion', this.form)
         this.clearForm()
         this.val = false
       } catch (e) {
+        console.log(e)
         this.$bvToast.toast('Вопрос не создан, повторите попытку позже.', {
           title: 'Ошибка',
           variant: 'danger',
@@ -117,6 +123,7 @@ export default {
   created() {
     eventBus.$on('popupClose', () => {
       this.val = false
+      this.form.theme = null
     })
 
     eventBus.$on('newQuestionPopupOpen', () => {

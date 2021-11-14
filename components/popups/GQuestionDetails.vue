@@ -137,10 +137,7 @@ export default {
   methods: {
     async getQuestionMessages(questionId) {
       try {
-        await this.$store.dispatch(
-          'questionMessages/getQuestionMessages',
-          questionId
-        )
+        await this.$store.dispatch('questionMessages/getQuestionMessages', questionId)
       } catch (e) {
         console.log(e.response)
       }
