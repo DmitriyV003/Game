@@ -7,10 +7,12 @@
     <section class="catalog-top-section">
       <b-container>
         <div class="catalog-top-section__content">
-          <bread-crumb />
+          <bread-crumb
+            :links="headerLinks"
+          />
 
           <g-catalog-section-header
-            title="Игры"
+            :title="pageTitle"
             v-if="meta !== null"
             :caption="meta.total + ' продуктов'"
           />
@@ -350,6 +352,8 @@ export default {
       await this.$store.dispatch('catalog/getCatalogFilters')
       const query = await this.fillFiltersFromQueryString()
 
+      this.pageTitle = this.checkCatalogType(this.$route.query)
+
       if (query) {
         await this.getFilteredItems()
       } else {
@@ -490,11 +494,15 @@ export default {
         'platforms',
         'services',
       ],
+      pageTitle: '',
       showPopup: false,
       priceRange: [0, 0],
       categoriesToShow: 2,
       genresToShow: 5,
       tagsToShow: 13,
+      headerLinks: [
+        { to: '/', label: 'Главная' },
+      ],
       tags: [
         { val: 'val1', label: 'Серии' },
         { val: 'val2', label: 'онлайн' },
@@ -521,6 +529,15 @@ export default {
         path: '/catalog',
         query: { ...this.$route.query, type: this.type },
       })
+    },
+    checkCatalogType (query) {
+      const type = query.type === 'software' ? 'Софт' : 'Игры'
+      this.headerLinks.push({
+        to: `/catalog?page=1&type=${query.type}`,
+        label: type
+      })
+
+      return type
     },
     async getFilteredItems() {
       try {

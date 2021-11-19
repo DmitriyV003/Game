@@ -86,12 +86,19 @@ export default {
       this.disabled = true
       try {
         await this.$store.dispatch('auth/forgetPassword', this.form)
+        this.$bvToast.toast('Ссылка для сброса пароля выслана на почту!', {
+          title: 'Успех!',
+          variant: 'primary',
+          solid: true,
+          appendToast: true,
+        })
       } catch (e) {
-        if (e.response.status === 422) {
-          this.apiErrors = e.response.data.errors
-        } else if (e.response.status === 400) {
-          this.warning = e.response.data.warning
-        }
+        this.$bvToast.toast(e.response.data.warning, {
+          title: 'Ошибка!',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
       } finally {
         this.disabled = false
       }
