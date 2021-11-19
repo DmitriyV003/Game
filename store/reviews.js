@@ -4,6 +4,7 @@ export const state = () => ({
   reviews: [],
   review: null,
   parentId: null,
+  parentNickname: null,
   links: null,
   meta: null,
   currentPage: 1
@@ -23,6 +24,9 @@ export const mutations = {
   SET_PARENT_ID(state, parentId) {
     state.parentId = parentId
   },
+  SET_PARENT_NICKNAME(state, parentNickname) {
+    state.parentNickname = parentNickname
+  },
   SET_CURRENT_PAGE(state, page) {
     state.currentPage = page
   },
@@ -34,8 +38,13 @@ export const actions = {
     commit('SET_REVIEWS', res.data)
     commit('SET_META', { links: res.links, meta: res.meta })
   },
-  async setParentId({ commit }, parentId) {
-    commit('SET_PARENT_ID', parentId)
+  async setParentId({ commit }, data) {
+    commit('SET_PARENT_ID', data.id)
+    commit('SET_PARENT_NICKNAME', data.nickname)
+  },
+  async clearParentComment({ commit }) {
+    commit('SET_PARENT_ID', null)
+    commit('SET_PARENT_NICKNAME', null)
   },
   async nextPage({ commit, state }) {
     commit('SET_CURRENT_PAGE', state.currentPage + 1)

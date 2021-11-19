@@ -60,11 +60,25 @@
                 :image="user === null ? null : user.avatar"
               />
 
-              <g-input
-                class="news-card__input"
-                placeholder="Оставьте комментарий"
-                v-model="$v.form.text.$model"
-              />
+              <div class="news-card__center-block">
+                <g-input
+                  class="news-card__input"
+                  placeholder="Оставьте комментарий"
+                  v-model.trim="$v.form.text.$model"
+                  :error="$v.form.text.$error"
+                >
+                  <template v-slot:error>
+                  <span v-if="!$v.form.text.required && $v.form.text.$error"
+                  >Поле обязательно</span
+                  >
+                  </template>
+                </g-input>
+
+                <p
+                  class="news-card__answer-to"
+                  v-if="parentNickname !== null"
+                >Ответить <span></span> <span class="nickname">{{ parentNickname }}<close-icon class="close" @click="clearParentNickname" /></span></p>
+              </div>
 
               <button
                 class="button-reboot news-card__btn button_primary"
@@ -129,6 +143,9 @@ export default {
     },
   },
   methods: {
+    clearParentNickname () {
+      this.$store.dispatch('news/clearParentComment')
+    },
     async postCreateNewsComment() {
       this.disabled = true
       try {
@@ -157,6 +174,7 @@ export default {
       news: (state) => state.news.news,
       user: (state) => state.user.user,
       token: (state) => state.auth.token,
+      parentNickname: (state) => state.news.parentNickname,
     }),
   },
   async mounted() {

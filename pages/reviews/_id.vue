@@ -84,20 +84,29 @@
             </div>
 
             <form class="news-card__bottom" @submit.prevent="onSubmit">
-              <avatar :image="review.adminImage" />
+              <avatar
+                :image="user === null ? null : user.avatar"
+              />
 
-              <g-input
-                class="news-card__input"
-                placeholder="Оставьте комментарий"
-                v-model.trim="$v.form.text.$model"
-                :error="$v.form.text.$error"
-              >
-                <template v-slot:error>
+              <div class="news-card__center-block">
+                <g-input
+                  class="news-card__input"
+                  placeholder="Оставьте комментарий"
+                  v-model.trim="$v.form.text.$model"
+                  :error="$v.form.text.$error"
+                >
+                  <template v-slot:error>
                   <span v-if="!$v.form.text.required && $v.form.text.$error"
-                    >Поле обязательно</span
+                  >Поле обязательно</span
                   >
-                </template>
-              </g-input>
+                  </template>
+                </g-input>
+
+                <p
+                  class="news-card__answer-to"
+                  v-if="parentNickname !== null"
+                >Ответить <span></span> <span class="nickname">{{ parentNickname }}<close-icon class="close" @click="clearParentNickname" /></span></p>
+              </div>
 
               <button
                 class="button-reboot news-card__btn button_primary"
@@ -139,6 +148,9 @@ export default {
     },
   },
   methods: {
+    clearParentNickname () {
+      this.$store.dispatch('reviews/clearParentComment')
+    },
     async onSubmit() {
       this.disabled = true
       try {
@@ -183,6 +195,8 @@ export default {
       review: (state) => state.reviews.review,
       token: (state) => state.auth.token,
       additionalComments: (state) => state.comments.additionalComments,
+      parentNickname: (state) => state.reviews.parentNickname,
+      user: (state) => state.user.user,
     }),
   },
   data: () => {

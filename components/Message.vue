@@ -17,7 +17,7 @@
           <show-all
             :icon="false"
             label="Ответить"
-            @click.native="$store.dispatch(storeAction, data.id)"
+            @click.native="$store.dispatch(storeAction, { id: data.id, nickname: data.nickname })"
           />
         </div>
       </div>

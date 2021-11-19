@@ -5,6 +5,7 @@ export const state = () => ({
   cardNews: null,
   news: null,
   parentId: null,
+  parentNickname: null,
 })
 
 export const mutations = {
@@ -20,15 +21,23 @@ export const mutations = {
   SET_PARENT_ID(state, parentId) {
     state.parentId = parentId
   },
+  SET_PARENT_NICKNAME(state, parentNickname) {
+    state.parentNickname = parentNickname
+  },
 }
 
 export const actions = {
+  async clearParentComment({ commit }) {
+    commit('SET_PARENT_ID', null)
+    commit('SET_PARENT_NICKNAME', null)
+  },
   async getSliderNews({ commit }) {
     const res = await this.$axios.$get(apiRoutes.getSliderNews)
     commit('SET_SLIDER_NEWS', res.data)
   },
-  async setParentId({ commit }, parentId) {
-    commit('SET_PARENT_ID', parentId)
+  async setParentId({ commit }, data) {
+    commit('SET_PARENT_ID', data.id)
+    commit('SET_PARENT_NICKNAME', data.nickname)
   },
   async getCardNews({ commit }) {
     const res = await this.$axios.$get(apiRoutes.getCardNews)
