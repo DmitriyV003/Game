@@ -1,13 +1,13 @@
 export default {
-  signUpByEmail: '/authorization/registration',
-  signInByEmail: '/authorization/login',
-  signInByVk: '/authorization/login/socialite/vk',
-  forgetPassword: '/authorization/send-link-for-change-password',
+  signUpByEmail: '/authorization/registration',//
+  signInByEmail: '/authorization/login',//
+  signInByVk: '/authorization/login/socialite/vk',//
+  forgetPassword: '/authorization/send-link-for-change-password',//
   getAllPurchases: (type) => '/personal-area/purchases/' + type,
   getPurchase: (id, type) => '/personal-area/purchases/show-key-card/' + type + '/' + id,
   postPurchaseFeedback: '/seller/feedbacks/create-feedback',
-  getProfile: '/personal-area/profile',
-  changePassword: '/personal-area/security',
+  getProfile: '/personal-area/profile',//
+  changePassword: '/personal-area/security',//
   postChangeAvatar: '/personal-area/profile/edit/avatar',
   getAppeals: (category) => '/personal-area/appeals/' + category,
   getQuestionMessages: (category, id) => '/personal-area/appeals/' + category + '/to/' + id,
@@ -41,7 +41,7 @@ export default {
   postFeedback: '/seller/feedbacks/create-feedback',
   getReviews: (page = 1) => `/reviews?page=${page}`,
   getReviewById: (id) => `/reviews/${id}`,
-  getBalance: '/personal-area/finance/get-balance',
+  getBalance: '/v1/personal-area/finance/balance',
   getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
   postActivatePromoCode: '/personal-area/finance/activate-promo-code',
   postCreateReviewComment: '/reviews/create-comment',
@@ -49,7 +49,7 @@ export default {
   getBuyCartItems: (items, method) => `/buy?items=${items}&method=${method}`,
   postConfirmEmail: '/authorization/registration/accept-email',
   getSales: (type) => `/personal-area/sales/${type}`,
-  postCreateSale: (type, id) => `/personal-area/sales/${type}/${id}`,
+  postCreateSale: (type) => `/personal-area/sales/${type}`,
   putArchiveSale: (type, id) => `/personal-area/sales/${type}/${id}`,
   deleteSale: (type, id) => `/personal-area/sales/${type}/${id}`
 }

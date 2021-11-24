@@ -59,7 +59,6 @@ module.exports = {
         { src: '@/plugins/rating', ssr: false },
         '@/plugins/axios',
         '@/plugins/vuelidate',
-        { src: '@/plugins/g-toast', ssr: false },
         { src: '@/plugins/scroll-to', ssr: false }
     ],
     /*

@@ -1,11 +1,13 @@
 import apiRoutes from '~/plugins/apiRoutes'
+import cart      from '~/apiRoutes/cart'
 
 const _ = require('lodash');
 
 export const state = () => ({
   paymentMethod: {},
   items: [],
-  isPaid: false
+  isPaid: false,
+  step: 1,
 })
 
 export const mutations = {
@@ -51,11 +53,24 @@ export const actions = {
       commit('SET_ITEMS', items)
     }
   },
-  // TODO: buy action doesn't work
   async buy({ commit, state }) {
-    // await this.$axios.$get(apiRoutes.getBuyCartItems(JSON.stringify(state.items), state.paymentMethod.name))
+    const data = {
+      paymentMethod: state.paymentMethod.id,
+      items: state.items
+    }
+    const result = await this.$axios.$post(cart.postBuyFromCart, data)
+    console.log(result)
 
     commit('SET_PAY_STATUS', true)
+  },
+  async postNewDisputeFromCart({ commit, rootState }) {
+    const data = {
+      text: rootState.items.form.comment,
+      image: 'iamge'
+    }
+    const result = await this.$axios.$post(cart.postDisputeFromCart(rootState.purchases.purchase.keyId, rootState.purchases.type), data)
+    console.log(result)
+
   },
   deleteItem({ commit, state }, keyId) {
     commit('SET_ITEMS', _.filter(state.items, function (i) {

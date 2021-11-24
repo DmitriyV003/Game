@@ -84,12 +84,8 @@ export default {
     links: {
       type: Array,
       default: () => [
-        { label: 'Активные продажи', value: 'active1' },
-        { label: 'Неактивные продажи', value: 'nonActive2' },
-        { label: 'Активные продажи', value: 'active3' },
-        { label: 'Неактивные продажи', value: 'nonActive4' },
-        { label: 'Активные продажи', value: 'active5' },
-        { label: 'Неактивные продажи', value: 'nonActive6' },
+        { label: 'Активные продажи', value: 'bought' },
+        { label: 'Неактивные продажи', value: 'archived' },
       ],
     },
   },

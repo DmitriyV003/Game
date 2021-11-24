@@ -21,10 +21,27 @@
                 :dots="false"
                 :infinite="false"
               >
-                <g-sort-button active class="g-sales__btn" label="Игры (5)" />
-                <g-sort-button class="g-sales__btn" label="Софт (10)" />
-                <g-sort-button class="g-sales__btn" label="Скины (2)" />
-                <g-sort-button class="g-sales__btn" label="Кейсы (0)" />
+                <g-sort-button
+                  active
+                  class="g-sales__btn"
+                  label="Игры (5)"
+                  @click.native="changeSaleType('games')"
+                />
+                <g-sort-button
+                  class="g-sales__btn"
+                  label="Софт (10)"
+                  @click.native="changeSaleType('software')"
+                />
+                <g-sort-button
+                  class="g-sales__btn"
+                  label="Скины (2)"
+                  @click.native="changeSaleType('swiches')"
+                />
+                <g-sort-button
+                  class="g-sales__btn"
+                  label="Кейсы (0)"
+                  @click.native="changeSaleType('cases')"
+                />
               </vue-slick>
             </div>
           </div>
@@ -33,7 +50,12 @@
             <b-row class="align-items-end">
               <b-col xl="4" lg="5" md="6">
                 <div class="g-sales__box">
-                  <g-drop-menu class="g-sales__drop" />
+                  <g-drop-menu
+                    class="g-sales__drop"
+                    placeholder="Статус продаж"
+                    :links="salesStatuses"
+                    @input="changeSalesStatus"
+                  />
 
                   <button class="button-reboot g-sales__add">
                     <plus-icon />
@@ -90,9 +112,35 @@ export default {
     GSortButton,
     GDashboardNavigation,
   },
+  data () {
+    return {
+      salesStatuses: [
+        { label: 'Активные продажи', value: 'bought' },
+        { label: 'Неактивные продажи', value: 'archived' },
+      ]
+    }
+  },
   mixins: [icons],
   middleware: ['auth'],
+  async mounted () {
+    try {
+      await this.$store.dispatch('sales/getSales')
+    } catch (e) {
+      this.$bvToast.toast('Ошибка загрузки страницы!', {
+        title: 'Что-то пошло не так(',
+        variant: 'danger',
+        solid: true,
+        appendToast: true,
+      })
+    }
+  },
   methods: {
+    changeSalesStatus (status) {
+      this.$store.dispatch('sales/changeSaleType', status)
+    },
+    changeSaleType(saleType) {
+      this.$store.dispatch('sales/changeSaleType', saleType)
+    },
     async goTo() {
       try {
         await this.$router.push('/dashboard/sales/add-new')
@@ -109,7 +157,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'theme/_vars'
 @import 'theme/_mix'
 .g-sales

@@ -46,11 +46,12 @@
 
             <!-- Leave comment adapted = true -->
             <section class="g-comment-section">
-              <g-comment-form
+              <g-cart-comment-form
                 :name="item.sellerName"
                 :surname="item.sellerSurname"
                 v-model="comment"
                 :key-id="item.keyId"
+                @click="postComment"
               />
             </section>
           </b-col>
@@ -75,17 +76,18 @@
 </template>
 
 <script>
-import ShowAll        from '~/components/buttons/MainLink'
-import GKeyItem       from '~/components/cart/KeyItem'
-import MainButton     from '~/components/buttons/MainButton'
-import GLikeDislike   from '~/components/cart/LikeDislike'
-import GCommentForm   from '~/components/GCommentForm'
-import { mapGetters } from 'vuex'
-import GNewDispute    from '~/components/popups/NewDispute'
+import ShowAll          from '~/components/buttons/MainLink'
+import GKeyItem         from '~/components/cart/KeyItem'
+import MainButton       from '~/components/buttons/MainButton'
+import GLikeDislike     from '~/components/cart/LikeDislike'
+import GCommentForm     from '~/components/GCommentForm'
+import { mapGetters }   from 'vuex'
+import GNewDispute      from '~/components/popups/NewDispute'
+import GCartCommentForm from '~/components/forms/CartCommentForm'
 
 export default {
   name: 'ProductKeyPage',
-  components: { GNewDispute, GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
+  components: { GCartCommentForm, GNewDispute, GCommentForm, GLikeDislike, MainButton, GKeyItem, ShowAll },
   computed: {
     ...mapGetters({
       getItemByKey: 'cart/getItemByKey',
@@ -107,13 +109,28 @@ export default {
       }
     }
   },
+  methods: {
+    async postComment() {
+      try {
+        await this.$store.dispatch('cart/postNewDisputeFromCart')
+      } catch (e) {
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
+    }
+  },
   mounted () {
     this.item = this.getItemByKey(this.$route.params.key)
     this.$store.commit('purchases/SET_PURCHASE', {
       itemBackground: this.item.image,
       itemName: this.item.name,
       sellerNickname: this.item.sellerNickname,
-      price: this.item.itemPrice.old ? this.item.itemPrice.old : this.item.itemPrice.new
+      price: this.item.itemPrice.old ? this.item.itemPrice.old : this.item.itemPrice.new,
+      keyId: this.item.keyId
     })
     this.$store.commit('purchases/SET_TYPE', this.item.itemType)
   },

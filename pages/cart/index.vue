@@ -109,13 +109,13 @@
           <b-col xl="8" lg="7" md="10" class="m-xl-0 m-lg-0 m-md-auto">
             <div class="g-payments">
               <g-payment-method
-                :id="1"
+                id="card"
                 image="/images/payment-1.svg"
                 name="Банковская карта"
                 class="g-payments__method"
               />
               <g-payment-method
-                :id="2"
+                id="balance"
                 image="/images/payment-1.svg"
                 name="Счет"
                 class="g-payments__method"
@@ -234,9 +234,14 @@ export default {
   //   }
   // },
   methods: {
-    buy() {
-      this.step = 3
-      this.$store.dispatch('cart/buy')
+    async buy() {
+      try {
+        // await this.$store.dispatch('cart/buy')
+        this.step = 3
+      } catch (e) {
+
+      }
+
     }
   },
   computed: {

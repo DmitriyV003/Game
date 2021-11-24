@@ -1,10 +1,11 @@
 import apiRoutes from '~/plugins/apiRoutes'
 
 export const state = () => ({
-  sales: null,
+  sales: [],
   searchItems: [],
   saleItem: null,
-  type: null
+  type: 'games',
+  status: 'bought'
 })
 
 export const mutations = {
@@ -14,15 +15,31 @@ export const mutations = {
   SET_SALE_ITEM(state, item) {
     state.saleItem = item
   },
+  SET_SALES_STATUS(state, status) {
+    state.status = status
+  },
   SET_TYPE(state, type) {
     state.type = type
+  },
+  SET_SALES(state, sales) {
+    state.sales = sales
   },
 }
 
 export const actions = {
+  changeSaleType({commit}, type) {
+    commit('SET_TYPE', type)
+  },
+  changeSalesStatus({commit}, status) {
+    commit('SET_SALES_STATUS', status)
+  },
   async getSearchItems({ commit }, data) {
     const res = await this.$axios.$get(apiRoutes.getSearchItems('name=' + data))
     commit('SET_SEARCH_ITEMS', res.data)
+  },
+  async getSales({ commit, state }) {
+    const res = await this.$axios.$get(apiRoutes.getSales(state.type))
+    commit('SET_SALES', res.data)
   },
   async getSaleItem({ commit, state }, id) {
     const res = await this.$axios.$get(apiRoutes.getSaleItem(`id=${id}&itemType=${state.type}`))
