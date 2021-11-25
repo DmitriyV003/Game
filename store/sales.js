@@ -41,6 +41,14 @@ export const actions = {
     const res = await this.$axios.$get(apiRoutes.getSales(state.type))
     commit('SET_SALES', res.data)
   },
+  async changeArchiveStatus({ commit, state }, data) {
+    const res = await this.$axios.$put(apiRoutes.putChangeArchiveStatus(data.itemId, state.type), {
+      archive: data.archive
+    })
+  },
+  async deleteSaleItem({ commit, state }, data) {
+    const res = await this.$axios.$delete(apiRoutes.putChangeArchiveStatus(data.itemId, state.type))
+  },
   async getSaleItem({ commit, state }, id) {
     const res = await this.$axios.$get(apiRoutes.getSaleItem(`id=${id}&itemType=${state.type}`))
     commit('SET_SALE_ITEM', res.data)

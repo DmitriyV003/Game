@@ -42,14 +42,14 @@ export default {
   getReviews: (page = 1) => `/reviews?page=${page}`,
   getReviewById: (id) => `/reviews/${id}`,
   getBalance: '/v1/personal-area/finance/balance',
-  getTransactions: (page = 1) => `/personal-area/finance/get-transactions?page=${page}`,
-  postActivatePromoCode: '/personal-area/finance/activate-promo-code',
+  getTransactions: (page = 1) => `/v1/personal-area/finance/transactions?page=${page}`,
+  postActivatePromoCode: (name) => `/v1/personal-area/finance/promo-code/${name}/activate`,
   postCreateReviewComment: '/reviews/create-comment',
   getCheckItemsInCart: '/cart/check-items-in-cart',
   getBuyCartItems: (items, method) => `/buy?items=${items}&method=${method}`,
   postConfirmEmail: '/authorization/registration/accept-email',
-  getSales: (type) => `/personal-area/sales/${type}`,
+  getSales: (type) => `/v1/personal-area/sales/${type}`,
   postCreateSale: (type) => `/personal-area/sales/${type}`,
-  putArchiveSale: (type, id) => `/personal-area/sales/${type}/${id}`,
-  deleteSale: (type, id) => `/personal-area/sales/${type}/${id}`
+  deleteSale: (itemId, itemType) => `/v1/personal-area/sales/${itemType}/${itemId}`,
+  putChangeArchiveStatus: (itemId, itemType) => `/v1/personal-area/sales/${itemType}/${itemId}`
 }

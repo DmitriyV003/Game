@@ -11,17 +11,28 @@
         <span class="text">Редактировать</span>
       </div>
 
-      <div v-if="archived" class="g-sale-item__action">
+      <div
+        v-if="archived"
+        class="g-sale-item__action"
+        @click="changeArchiveStatus(false)"
+      >
         <store-icon class="icon" />
         <span class="text">Выставить на продажу</span>
       </div>
 
-      <div v-if="!archived" class="g-sale-item__action">
+      <div
+        v-if="!archived"
+        class="g-sale-item__action"
+        @click="changeArchiveStatus(true)"
+      >
         <archive-icon class="icon" />
         <span class="text">Убрать в Архив</span>
       </div>
 
-      <div class="g-sale-item__action">
+      <div
+        class="g-sale-item__action"
+        @click="deleteSaleItem"
+      >
         <trash-icon class="icon" />
         <span class="text">Удалить</span>
       </div>
@@ -55,7 +66,11 @@
         >
           <span class="text-color-white">2 ключа</span>
         </p>
-        <settings-icon v-if="!disabled" @click="settings = true" class="icon" />
+        <settings-icon
+          v-if="!disabled"
+          @click="settings = true"
+          class="icon"
+        />
       </div>
     </div>
   </div>
@@ -73,6 +88,22 @@ export default {
       settings: false,
     }
   },
+  methods: {
+    async changeArchiveStatus (archive) {
+      try {
+        await this.$store.dispatch('sales/changeArchiveStatus', { archive, itemId: this.itemId })
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async deleteSaleItem () {
+      try {
+        await this.$store.dispatch('sales/deleteSaleItem', { itemId: this.itemId })
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  },
   props: {
     disabled: {
       type: Boolean,
@@ -81,6 +112,10 @@ export default {
     archived: {
       type: Boolean,
       default: () => false,
+    },
+    itemId: {
+      type: String,
+      default: () => 'ff',
     },
   },
 }

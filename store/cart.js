@@ -59,7 +59,6 @@ export const actions = {
       items: state.items
     }
     const result = await this.$axios.$post(cart.postBuyFromCart, data)
-    console.log(result)
 
     commit('SET_PAY_STATUS', true)
   },
@@ -81,11 +80,6 @@ export const actions = {
   deleteAllItems({ commit, state }) {
     commit('SET_ITEMS', [])
     this.$cookiz.set('gameInComeCart', state.items)
-  },
-  // TODO: cannot check items in cart
-  async checkItemsInCart({ state }) {
-    const res = await this.$axios.$post(apiRoutes.getCheckItemsInCart, state.items)
-    console.log(res)
   }
 }
 

@@ -32,6 +32,6 @@ export const actions = {
     })
   },
   async activatePromoCode({ commit }, data) {
-    const res = await this.$axios.$post(apiRoutes.postActivatePromoCode, data)
+    const res = await this.$axios.$post(apiRoutes.postActivatePromoCode(data.name))
   },
 }

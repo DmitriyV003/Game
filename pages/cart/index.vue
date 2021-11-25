@@ -236,12 +236,11 @@ export default {
   methods: {
     async buy() {
       try {
-        // await this.$store.dispatch('cart/buy')
+        await this.$store.dispatch('cart/buy')
         this.step = 3
       } catch (e) {
-
+        console.log(e)
       }
-
     }
   },
   computed: {

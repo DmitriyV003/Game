@@ -22,22 +22,25 @@
                 :infinite="false"
               >
                 <g-sort-button
-                  active
+                  :active="type === 'games'"
                   class="g-sales__btn"
                   label="Игры (5)"
                   @click.native="changeSaleType('games')"
                 />
                 <g-sort-button
+                  :active="type === 'software'"
                   class="g-sales__btn"
                   label="Софт (10)"
                   @click.native="changeSaleType('software')"
                 />
                 <g-sort-button
+                  :active="type === 'swiches'"
                   class="g-sales__btn"
                   label="Скины (2)"
                   @click.native="changeSaleType('swiches')"
                 />
                 <g-sort-button
+                  :active="type === 'cases'"
                   class="g-sales__btn"
                   label="Кейсы (0)"
                   @click.native="changeSaleType('cases')"
@@ -96,12 +99,13 @@
 
 <script>
 import GDashboardNavigation from '~/components/dashboard/Navigation'
-import GSortButton from '~/components/dashboard/SortButton'
-import GDropMenu from '~/components/DropMenu'
-import icons from '~/mixins/icons'
-import GSaleItem from '~/components/dashboard/SaleItem'
-import GAddItem from '~/components/AddItem'
-import GAddKeysPopup from '~/components/popups/AddKeysPopup'
+import GSortButton          from '~/components/dashboard/SortButton'
+import GDropMenu            from '~/components/DropMenu'
+import icons                from '~/mixins/icons'
+import GSaleItem            from '~/components/dashboard/SaleItem'
+import GAddItem             from '~/components/AddItem'
+import GAddKeysPopup        from '~/components/popups/AddKeysPopup'
+import { mapState }         from 'vuex'
 
 export default {
   components: {
@@ -119,6 +123,11 @@ export default {
         { label: 'Неактивные продажи', value: 'archived' },
       ]
     }
+  },
+  computed: {
+    ...mapState({
+      type: (state) => state.sales.type,
+    }),
   },
   mixins: [icons],
   middleware: ['auth'],
@@ -138,8 +147,18 @@ export default {
     changeSalesStatus (status) {
       this.$store.dispatch('sales/changeSaleType', status)
     },
-    changeSaleType(saleType) {
-      this.$store.dispatch('sales/changeSaleType', saleType)
+    async changeSaleType(saleType) {
+      try {
+        await this.$store.dispatch('sales/changeSaleType', saleType)
+        await this.$store.dispatch('sales/getSales')
+      } catch (e) {
+        this.$bvToast.toast('Ошибка загрузки страницы!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
+      }
     },
     async goTo() {
       try {
@@ -157,7 +176,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import 'theme/_vars'
 @import 'theme/_mix'
 .g-sales

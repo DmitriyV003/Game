@@ -8,7 +8,7 @@
         @input="getSearchItems"
       />
 
-      <div class="g-product-search__drop" v-if="items.length > 0 && isDropShow">
+      <div class="g-product-search__drop" v-if="items != null && isDropShow">
         <div
           class="g-product-search__line"
           v-for="item in items"
@@ -78,7 +78,9 @@ export default {
     async getSearchItems() {
       this.isDropShow = true
       try {
-        await this.$store.dispatch('sales/getSearchItems', this.form.search)
+        if (this.form.search) {
+          await this.$store.dispatch('sales/getSearchItems', this.form.search)
+        }
       } catch (e) {
         console.log(e.response)
       }
