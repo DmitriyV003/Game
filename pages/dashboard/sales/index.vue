@@ -83,12 +83,29 @@
               />
             </b-col>
 
-            <b-col class="g-sales__item" xl="4" lg="4" md="4">
-              <g-sale-item />
+            <b-col
+              class="g-sales__item"
+              xl="4"
+              lg="4"
+              md="4"
+              v-if="Object.keys(sales).length > 0"
+              v-for="item in sales"
+              :key="item.keyId"
+            >
+              <g-sale-item
+                :item-id="item.itemId"
+                :image="item.itemHeaderImage"
+                :name="item.itemName"
+              />
             </b-col>
 
-            <b-col class="g-sales__item" xl="4" lg="4" md="4">
-              <g-sale-item disabled />
+            <b-col
+              class="g-sales__item"
+              xl="4"
+              lg="4"
+              md="4"
+            >
+<!--              <g-sale-item disabled />-->
             </b-col>
           </b-row>
         </b-col>
@@ -127,6 +144,7 @@ export default {
   computed: {
     ...mapState({
       type: (state) => state.sales.type,
+      sales: (state) => state.sales.sales,
     }),
   },
   mixins: [icons],

@@ -73,17 +73,17 @@
           </div>
 
           <b-row>
-            <b-col
-              xl="4"
-              lg="4"
-              md="6"
-              class="
-                g-purchase-item__col
-                d-xl-block d-lg-block d-md-none d-sm-none
-              "
-            >
-              <g-add-item />
-            </b-col>
+<!--            <b-col-->
+<!--              xl="4"-->
+<!--              lg="4"-->
+<!--              md="6"-->
+<!--              class="-->
+<!--                g-purchase-item__col-->
+<!--                d-xl-block d-lg-block d-md-none d-sm-none-->
+<!--              "-->
+<!--            >-->
+<!--              <g-add-item />-->
+<!--            </b-col>-->
             <b-col
               xl="4"
               lg="4"

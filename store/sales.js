@@ -1,4 +1,5 @@
 import apiRoutes from '~/plugins/apiRoutes'
+import _ from 'lodash'
 
 export const state = () => ({
   sales: [],
@@ -39,7 +40,10 @@ export const actions = {
   },
   async getSales({ commit, state }) {
     const res = await this.$axios.$get(apiRoutes.getSales(state.type))
-    commit('SET_SALES', res.data)
+    const sales = _.flattenDeep(_.map(res.data, (el) => {
+      return Object.values(el)
+    }))
+    commit('SET_SALES', sales)
   },
   async changeArchiveStatus({ commit, state }, data) {
     const res = await this.$axios.$put(apiRoutes.putChangeArchiveStatus(data.itemId, state.type), {

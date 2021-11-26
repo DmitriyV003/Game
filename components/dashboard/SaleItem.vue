@@ -42,7 +42,7 @@
       class="g-sale-item__img"
       :class="{ 'g-sale-item__img_disabled': disabled }"
     >
-      <img src="/images/sale-item-1.svg" alt="" />
+      <img :src="image" alt="" />
     </div>
 
     <div class="g-sale-item__block">
@@ -50,7 +50,7 @@
         class="g-sale-item__name"
         :class="{ 'g-sale-item__name_disabled': disabled }"
       >
-        Grand Theft Auto V: Premium Online Editiodf dsg sdfgdfgdf dfg dfh gdr
+        {{ name }}
       </p>
 
       <g-price class="g-sale-item__price" :disabled="disabled" />
@@ -92,15 +92,29 @@ export default {
     async changeArchiveStatus (archive) {
       try {
         await this.$store.dispatch('sales/changeArchiveStatus', { archive, itemId: this.itemId })
+        await this.$store.dispatch('sales/getSales')
+        this.settings = true
       } catch (e) {
-        console.log(e)
+        this.$bvToast.toast('Ошибка изменения статуса продажи!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
       }
     },
     async deleteSaleItem () {
       try {
         await this.$store.dispatch('sales/deleteSaleItem', { itemId: this.itemId })
+        await this.$store.dispatch('sales/getSales')
+        this.settings = true
       } catch (e) {
-        console.log(e)
+        this.$bvToast.toast('Ошибка изменения статуса продажи!', {
+          title: 'Что-то пошло не так(',
+          variant: 'danger',
+          solid: true,
+          appendToast: true,
+        })
       }
     }
   },
@@ -115,7 +129,15 @@ export default {
     },
     itemId: {
       type: String,
-      default: () => 'ff',
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
     },
   },
 }
