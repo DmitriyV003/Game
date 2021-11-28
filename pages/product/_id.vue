@@ -278,6 +278,12 @@ export default {
     },
     async addToCart () {
       await this.$store.dispatch('cart/addItem')
+      this.$bvToast.toast('Товар добавлен в корзину!', {
+        title: 'Уведомление',
+        variant: 'primary',
+        solid: true,
+        appendToast: true,
+      })
     }
   },
   computed: {

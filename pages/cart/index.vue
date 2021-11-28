@@ -85,7 +85,7 @@
 
               <main-button
                 @click.native="step = 2"
-                :disabled="items.length === 0"
+                :disabled="items.length === 0 || token === null"
                 class="g-cart-total__btn"
                 color="primary"
                 label="перейти к оплате"
@@ -142,7 +142,7 @@
 
               <main-button
                 @click.native="buy"
-                :disabled="Object.keys(paymentMethod).length === 0"
+                :disabled="Object.keys(paymentMethod).length === 0 || token === null"
                 class="g-cart-total__btn"
                 color="primary"
                 label="перейти к оплате"
@@ -239,7 +239,14 @@ export default {
         await this.$store.dispatch('cart/buy')
         this.step = 3
       } catch (e) {
-        console.log(e)
+        if (e.response) {
+          this.$bvToast.toast(e.response.data.warning, {
+            title: 'Ошибка сервера!',
+            variant: 'danger',
+            solid: true,
+            appendToast: true,
+          })
+        }
       }
     }
   },
@@ -250,7 +257,8 @@ export default {
     }),
     ...mapState({
       isPaid: (state) => state.cart.isPaid,
-      paymentMethod: (state) => state.cart.paymentMethod
+      paymentMethod: (state) => state.cart.paymentMethod,
+      token: (state) => state.auth.token
     }),
   },
   beforeRouteLeave(to, from, next) {

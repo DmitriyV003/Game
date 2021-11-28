@@ -1,6 +1,6 @@
 export default {
-  signUpByEmail: '/authorization/registration',//
-  signInByEmail: '/authorization/login',//
+  postSignUpByEmail: '/v1/auth/registration',//
+  postSignInByEmail: '/v1/auth/login',//
   signInByVk: '/authorization/login/socialite/vk',//
   forgetPassword: '/authorization/send-link-for-change-password',//
   getAllPurchases: (type) => '/personal-area/purchases/' + type,

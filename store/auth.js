@@ -1,6 +1,4 @@
 import apiRoutes from '~/plugins/apiRoutes'
-import Cookie from 'cookie'
-import Cookies from 'js-cookie'
 
 export const state = () => ({
   token: null,
@@ -17,36 +15,32 @@ export const actions = {
     const res = await this.$axios.$get(apiRoutes.signInByEmail +`?email=${data.email}&password=${data.password}`)
     if (res.status === 200) {
       dispatch('user/setUser', res.data, { root: true })
-      dispatch('setToken', res.token)
       await this.$router.push('/')
     }
   },
   autoLogin({ dispatch }) {
-    const cookieStr = process.browser
-      ? document.cookie
-      : this.app.context.req.headers.cookie
+    const token = this.$cookiz.get('gameInComeToken')
+    const user = this.$cookiz.get('user')
 
-    try {
-      const cookies = Cookie.parse(cookieStr || '') || {}
-      const token = cookies.gameInComeToken
-      const user = cookies.user
+    if (user) {
+      dispatch('user/setUser', user, { root: true })
+    }
 
+    if (token) {
       dispatch('setToken', token)
-      dispatch('user/setUser', user ? JSON.parse(user) : null, { root: true })
-    } catch (e) {
-      console.log(e)
     }
   },
   async logOut({ commit }) {
     commit('setToken', null)
     commit('user/setUser', null, { root: true })
-    Cookies.remove('gameInComeToken')
+    this.$cookiz.remove('gameInComeToken')
+    this.$cookiz.remove('user')
     await this.$router.push('/')
   },
   setToken({ commit }, token) {
     commit('setToken', token)
-    Cookies.remove('gameInComeToken')
-    Cookies.set('gameInComeToken', token, { expires: 1 })
+    this.$cookiz.remove('gameInComeToken')
+    this.$cookiz.set('gameInComeToken', token)
   },
   async forgetPassword(ctx, data) {
     const res = await this.$axios.$get(apiRoutes.forgetPassword +`?email=${data.email}`)

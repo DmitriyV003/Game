@@ -50,29 +50,29 @@
           </div>
 
           <div class="g-sales__sales">
-            <b-row class="align-items-end">
-              <b-col xl="4" lg="5" md="6">
-                <div class="g-sales__box">
-                  <g-drop-menu
-                    class="g-sales__drop"
-                    placeholder="Статус продаж"
-                    :links="salesStatuses"
-                    @input="changeSalesStatus"
-                  />
+<!--            <b-row class="align-items-end">-->
+<!--              <b-col xl="4" lg="5" md="6">-->
+<!--                <div class="g-sales__box">-->
+<!--                  <g-drop-menu-->
+<!--                    class="g-sales__drop"-->
+<!--                    placeholder="Статус продаж"-->
+<!--                    :links="salesStatuses"-->
+<!--                    @input="changeSalesStatus"-->
+<!--                  />-->
 
-                  <button class="button-reboot g-sales__add">
-                    <plus-icon />
-                  </button>
-                </div>
-              </b-col>
+<!--                  <button class="button-reboot g-sales__add">-->
+<!--                    <plus-icon />-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </b-col>-->
 
-              <b-col xl="4" offset-xl="4" offset-lg="3" lg="4" md="6">
-                <div class="g-sales__first">
-                  <span class="text">Сначала новые</span>
-                  <filter-icon class="icon" />
-                </div>
-              </b-col>
-            </b-row>
+<!--              <b-col xl="4" offset-xl="4" offset-lg="3" lg="4" md="6">-->
+<!--                <div class="g-sales__first">-->
+<!--                  <span class="text">Сначала новые</span>-->
+<!--                  <filter-icon class="icon" />-->
+<!--                </div>-->
+<!--              </b-col>-->
+<!--            </b-row>-->
           </div>
 
           <b-row>

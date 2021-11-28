@@ -143,8 +143,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../../theme/vars'
-@import '../../../theme/mix'
+@import '@/theme/vars'
+@import '@/theme/mix'
 .g-comment
   &-section
     margin-top: 20px

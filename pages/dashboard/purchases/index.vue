@@ -66,10 +66,10 @@
               </button>
             </div>
 
-            <div class="purchases__sort purchases__sort_desktop">
-              <span>Сначала новые</span>
-              <img src="/images/filter.svg" alt="" />
-            </div>
+<!--            <div class="purchases__sort purchases__sort_desktop">-->
+<!--              <span>Сначала новые</span>-->
+<!--              <img src="/images/filter.svg" alt="" />-->
+<!--            </div>-->
           </div>
 
           <b-row>

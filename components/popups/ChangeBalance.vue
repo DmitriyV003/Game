@@ -34,28 +34,7 @@
               bg="light"
               class="g-change-balance__method"
               name="Банковская карта"
-              :id="1"
-              image="dd"
-            />
-            <g-payment-method
-              bg="light"
-              class="g-change-balance__method"
-              name="Банковская карта"
-              :id="2"
-              image="dd"
-            />
-            <g-payment-method
-              bg="light"
-              class="g-change-balance__method"
-              name="Банковская карта"
-              :id="3"
-              image="dd"
-            />
-            <g-payment-method
-              bg="light"
-              class="g-change-balance__method"
-              name="Банковская карта"
-              :id="4"
+              id="card"
               image="dd"
             />
           </div>
@@ -97,8 +76,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../theme/vars'
-@import '../../theme/mix'
+@import '@/theme/vars'
+@import '@/theme/mix'
 .g-change-balance
   background: #282439
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25)

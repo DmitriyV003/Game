@@ -122,6 +122,7 @@ export default {
         await this.$store.dispatch('auth/signInByEmail', this.form)
         await this.$router.push('/')
       } catch (e) {
+        console.log(e)
         if (e.response) {
           if (e.response.status === 422 || e.response.status === 400) {
             this.apiErrors = e.response.data.warning

@@ -1,7 +1,5 @@
-import apiRoutes from '~/plugins/apiRoutes'
 import cart      from '~/apiRoutes/cart'
-
-const _ = require('lodash');
+import _ from 'lodash'
 
 export const state = () => ({
   paymentMethod: {},
@@ -65,11 +63,11 @@ export const actions = {
   async postNewDisputeFromCart({ commit, rootState }) {
     const data = {
       text: rootState.items.form.comment,
-      image: 'iamge'
+      image: null,
+      itemType: rootState.purchases.type,
+      keyId: rootState.purchases.purchase.keyId
     }
-    const result = await this.$axios.$post(cart.postDisputeFromCart(rootState.purchases.purchase.keyId, rootState.purchases.type), data)
-    console.log(result)
-
+    const result = await this.$axios.$post(cart.postDisputeFromCart, data)
   },
   deleteItem({ commit, state }, keyId) {
     commit('SET_ITEMS', _.filter(state.items, function (i) {

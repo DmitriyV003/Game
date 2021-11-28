@@ -1,6 +1,3 @@
-import Cookie from 'cookie'
-import Cookies from 'js-cookie'
-
 export const state = () => ({
   user: null,
 })
@@ -18,8 +15,8 @@ export const mutations = {
 
 export const actions = {
   setUser({ commit }, user) {
-    Cookies.remove('user')
-    Cookies.set('user', user, { expires: 1 })
+    this.$cookiz.remove('user')
+    this.$cookiz.set('user', user)
 
     commit('setUser', user)
   },
