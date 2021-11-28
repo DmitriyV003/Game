@@ -12,22 +12,20 @@ export const mutations = {
 
 export const actions = {
   async signInByEmail({ commit, dispatch }, data) {
-    const res = await this.$axios.$get(apiRoutes.signInByEmail +`?email=${data.email}&password=${data.password}`)
+    const res = await this.$axios.$post(apiRoutes.postSignInByEmail, data)
     if (res.status === 200) {
       dispatch('user/setUser', res.data, { root: true })
+      dispatch('setToken', res.token)
       await this.$router.push('/')
     }
   },
-  autoLogin({ dispatch }) {
+  async autoLogin({ dispatch }) {
     const token = this.$cookiz.get('gameInComeToken')
-    const user = this.$cookiz.get('user')
-
-    if (user) {
-      dispatch('user/setUser', user, { root: true })
-    }
 
     if (token) {
       dispatch('setToken', token)
+      const user = await this.$axios.$get(apiRoutes.getProfile)
+      dispatch('user/setUser', user.data, { root: true })
     }
   },
   async logOut({ commit }) {

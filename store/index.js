@@ -25,10 +25,8 @@ export const actions = {
     try {
       await dispatch('auth/autoLogin')
       await dispatch('cart/getItemsFromCookies', app)
-      if (rootState.auth.token) {
-        await dispatch('finance/getBalance')
-      }
     } catch (e) {
+      console.log(e)
     }
   },
   async getMainPage({ commit }) {

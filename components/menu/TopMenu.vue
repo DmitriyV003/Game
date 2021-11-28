@@ -89,7 +89,7 @@
           />
 
           <Balance
-            v-if="user !== null && balance !== null"
+            v-if="user !== null"
             class="header__balance"
             :overall-balance="user.balance.overall"
             :pending-balance="user.balance.pending"
