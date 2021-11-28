@@ -63,6 +63,7 @@
               <h2 class="g-questions__title">Общие вопросы по сервису</h2>
               <main-button
                 @click.native="eventBus.$emit('newQuestionPopupOpen')"
+                v-if="category.label !== questionsCategories.dispute.label"
                 class="g-questions__btn_desktop"
                 size="xl"
                 label="новый вопрос"
@@ -79,9 +80,7 @@
             <div class="g-questions__lines">
               <div
                 class="g-questions__line"
-                @click="
-                  eventBus.$emit('questionDetailsPopupOpen', item.appealId)
-                "
+                @click="eventBus.$emit('questionDetailsPopupOpen', item.appealId)"
                 v-for="item in questions"
                 :key="item.appealNumber"
               >
