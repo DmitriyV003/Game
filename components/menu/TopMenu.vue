@@ -89,11 +89,11 @@
           />
 
           <Balance
-            v-if="user !== null"
+            v-if="balance !== null"
             class="header__balance"
-            :overall-balance="user.balance.overall"
-            :pending-balance="user.balance.pending"
-            :available-balance="user.balance.available"
+            :overall-balance="balance.overallBalance"
+            :pending-balance="balance.pendingBalance"
+            :available-balance="balance.availableBalance"
           />
 
           <nuxt-link to="/cart" tag="div" class="custom-icon">

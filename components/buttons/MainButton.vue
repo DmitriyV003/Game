@@ -105,6 +105,7 @@ export default {
     transition: all 0.1s
     &:hover
       border: 1px solid #8875FF
+      color: $white
       background: rgba(37, 34, 48, 1)
   &_gray
     background: rgba(255, 255, 255, 0.04)

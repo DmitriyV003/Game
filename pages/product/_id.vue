@@ -65,6 +65,8 @@
               />
               <main-button
                 full-width
+                :to="`/seller/${item.sellerId}`"
+                tag="a"
                 size="xl"
                 color="secondary"
                 label="Другие предложения"

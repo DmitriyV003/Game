@@ -26,6 +26,7 @@ export const actions = {
       dispatch('setToken', token)
       const user = await this.$axios.$get(apiRoutes.getProfile)
       dispatch('user/setUser', user.data, { root: true })
+      await dispatch('finance/getBalance', {}, { root: true })
     }
   },
   async logOut({ commit }) {

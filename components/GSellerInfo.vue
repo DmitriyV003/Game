@@ -1,6 +1,6 @@
 <template>
   <div class="g-seller-avatar">
-    <img src="" alt="" class="g-seller-avatar__image" />
+    <img :src="avatar" alt="" class="g-seller-avatar__image" />
     <div class="g-seller-avatar__text">
       <p class="g-seller-avatar__name">{{ nickname }}</p>
       <p class="g-seller-avatar__caption">{{ name }} {{ surname }}</p>
@@ -41,6 +41,10 @@ export default {
     nickname: {
       type: String,
       default: () => 'nickname',
+    },
+    avatar: {
+      type: String,
+      default: () => '',
     },
     likes: {
       type: Number,

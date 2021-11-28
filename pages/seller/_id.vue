@@ -13,6 +13,7 @@
           :dislikes="sellerPage.feedbacks.dislikes"
           :items="sellerPage.items"
           :purchases="sellerPage.purchases"
+          :avatar="sellerPage.avatar"
           :feedback="sellerPage.feedbacks.countFeedbacks"
         />
       </b-container>
@@ -69,6 +70,7 @@
               v-for="item in sellerGames"
             >
               <game-card
+                :id="item.name"
                 adaptive-sm
                 :image="item.background"
                 :title="item.name"

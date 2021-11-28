@@ -14,7 +14,10 @@
       v-if="rating !== null && rating !== 0"
     />
 
-    <div class="game-card__prices">
+    <div
+      class="game-card__prices"
+      v-if="oldPrice !== null || newPrice !== null"
+    >
       <span
         class="game-card__sale"
         :class="{ 'game-card__sale_sm': adaptiveSm }"

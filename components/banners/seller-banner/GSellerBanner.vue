@@ -8,6 +8,7 @@
         :nickname="nickname"
         :likes="likes"
         :dislikes="dislikes"
+        :avatar="avatar"
       />
 
       <a
@@ -77,6 +78,10 @@ export default {
     feedback: {
       type: Number,
       default: () => 0,
+    },
+    avatar: {
+      type: String,
+      default: () => '',
     },
   },
 }
