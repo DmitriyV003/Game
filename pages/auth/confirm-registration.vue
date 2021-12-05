@@ -40,7 +40,7 @@
         <div class="confirm-registration__bottom">
           <p>Не получили письмо с кодом подтверждения?</p>
           <p>Проверьте в спаме.</p>
-          <p>Отправить повторно или изменить E-mail адрес</p>
+          <p><span @click="resendCode">Отправить повторно</span> или <span>изменить E-mail адрес</span></p>
         </div>
       </div>
     </form>
@@ -88,6 +88,20 @@
       }
     },
     methods: {
+      async resendCode () {
+        try {
+          await this.$store.dispatch('registration/resendCode', {
+            email: this.$route.query.email,
+          })
+        } catch (e) {
+          this.$bvToast.toast('The given data was invalid.', {
+            title: 'Что-то пошло не так(',
+            variant: 'danger',
+            solid: true,
+            appendToast: true,
+          })
+        }
+      },
       changeFocus (number, val) {
         const value = this.$refs[`codeNumber${number}`][0].value.trim()
 
@@ -138,6 +152,7 @@
       text-align: center
       span
         color: white
+        cursor: pointer
     &__inputs
       display: flex
       align-items: center

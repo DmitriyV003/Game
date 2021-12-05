@@ -9,7 +9,7 @@ export const mutations = {
 
 export const actions = {
   async postDispute({ rootState }, data) {
-    const type = rootState.purchases.purchase.type === 'games' ? 'game' : 'software'
+    const type = rootState.purchases.type === 'game' ? 'game' : 'software'
     await this.$axios.$post(apiRoutes.postDispute(rootState.purchases.purchase.keyId, type), JSON.stringify(data))
   },
 }

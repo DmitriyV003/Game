@@ -51,5 +51,6 @@ export default {
   getSales: (type) => `/v1/personal-area/sales/${type}`,
   postCreateSale: (type) => `/personal-area/sales/${type}`,
   deleteSale: (itemId, itemType) => `/v1/personal-area/sales/${itemType}/${itemId}`,
-  putChangeArchiveStatus: (itemId, itemType) => `/v1/personal-area/sales/${itemType}/${itemId}`
+  putChangeArchiveStatus: (itemId, itemType) => `/v1/personal-area/sales/${itemType}/${itemId}`,
+  postResendCode: (email) => `/v1/auth/change-password/hash-send?email=${email}`
 }

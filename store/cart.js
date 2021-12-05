@@ -64,7 +64,7 @@ export const actions = {
     const data = {
       text: rootState.items.form.comment,
       image: null,
-      itemType: rootState.purchases.type,
+      itemType: rootState.purchases.type === 'game' ? 'games' : 'software',
       keyId: rootState.purchases.purchase.keyId
     }
     const result = await this.$axios.$post(cart.postDisputeFromCart, data)

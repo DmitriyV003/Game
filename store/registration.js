@@ -6,5 +6,8 @@ export const actions = {
   },
   async submitEmail(ctx, data) {
     await this.$axios.$post(apiRoutes.postConfirmEmail, data)
+  },
+  async resendCode(ctx, data) {
+    await this.$axios.$post(apiRoutes.postResendCode(data.email))
   }
 }

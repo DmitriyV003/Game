@@ -9,7 +9,13 @@
         <p class="g-tabs__text text-size-16">
           {{ currentTab.smallDescription }}.
         </p>
-        <main-button size="xl" color="primary" label="Подробнее" />
+        <main-button
+          size="xl"
+          color="primary"
+          tag="a"
+          label="Подробнее"
+          :to="currentTab.link"
+        />
       </div>
     </div>
 

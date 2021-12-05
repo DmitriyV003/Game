@@ -485,7 +485,6 @@ export default {
   },
   data: () => {
     return {
-      formatNumber,
       filtersStrings: [
         'minPrice',
         'maxPrice',
@@ -516,6 +515,7 @@ export default {
     }
   },
   methods: {
+    formatNumber,
     async setCatalogTypeFromQueryString() {
       const query = this.$route.query
 
